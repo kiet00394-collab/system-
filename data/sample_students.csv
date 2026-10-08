@@ -1,0 +1,21 @@
+id,name,group,sleep,wake,tidy,study,noise,smoke,guests,hobbies,top
+0,SV000,A,21.5,6.5,4,thuvien,3,0,2,game;nhac,sleep
+1,SV001,B,25.2,9.1,2,phong,4,0,5,doc sach;nau an,noise
+2,SV002,A,22.0,7.0,5,it,1,0,1,phim;the thao,tidy
+3,SV003,B,24.8,8.8,3,phong,3,1,4,game;phim,smoke
+4,SV004,A,21.0,6.0,4,thuvien,2,0,2,doc sach,study
+5,SV005,B,26.0,10.0,1,it,5,0,5,game;nhac;the thao,hobbies
+6,SV006,A,22.5,7.2,3,phong,3,0,3,nau an;phim,sleep
+7,SV007,B,21.8,6.8,4,thuvien,2,0,1,doc sach,tidy
+8,SV008,A,25.5,9.5,2,it,4,1,4,game;nhac,noise
+9,SV009,B,22.1,7.1,5,phong,1,0,2,nau an;the thao,study
+10,SV010,A,21.2,6.2,4,thuvien,2,0,1,doc sach;nau an,sleep
+11,SV011,B,24.9,9.0,3,phong,4,0,3,game;phim,noise
+12,SV012,A,25.8,9.8,1,it,5,0,5,nhac;the thao,hobbies
+13,SV013,B,22.0,7.0,5,thuvien,1,0,1,doc sach,tidy
+14,SV014,A,21.7,6.7,3,phong,3,0,2,nau an;phim,sleep
+15,SV015,B,25.0,9.2,2,it,4,1,4,game,smoke
+16,SV016,A,22.3,7.3,4,thuvien,2,0,2,doc sach;nau an,study
+17,SV017,B,21.9,6.9,4,phong,2,0,1,the thao,tidy
+18,SV018,A,25.1,9.1,2,phong,4,0,4,game;nhac,noise
+19,SV019,B,22.4,7.4,5,thuvien,1,0,2,doc sach;nau an,sleep
