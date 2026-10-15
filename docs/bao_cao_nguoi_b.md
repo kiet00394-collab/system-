@@ -44,3 +44,25 @@ Trong đó:
   $$w_{x.top} = \text{WEIGHTS}[x.top] \times 1.5$$
 * **Tính chất bất đối xứng cốt lõi ($M[x][y] \neq M[y][x]$)**:
   Do mỗi sinh viên có tiêu chí ưu tiên $top$ khác nhau, người $x$ có thể thấy rất hợp với $y$, nhưng người $y$ lại thấy người $x$ không đáp ứng kỳ vọng quan trọng nhất của mình. Điều này phản ánh hoàn hảo tâm lý thực tế và tạo tiền đề để thuật toán Gale-Shapley (hai phía) phát huy tác dụng.
+
+---
+
+## 4. CƠ CHẾ SINH DỮ LIỆU GIẢ LẬP ĐA PHÂN PHỐI (`generate_students`)
+
+Dữ liệu giả lập không sinh ngẫu nhiên hoàn toàn mà mô phỏng theo hành vi thực tế của sinh viên KTX:
+* **Tạo 2 cụm sinh học rõ rệt**:
+  - Nhóm "Cú đêm" (tỷ lệ 40%): Giờ đi ngủ trung bình khoảng 1h sáng ($25.0$), phân phối chuẩn $\mathcal{N}(25, 0.8^2)$.
+  - Nhóm "Ngủ sớm" (tỷ lệ 60%): Giờ đi ngủ trung bình khoảng 22h đêm ($22.0$), phân phối chuẩn $\mathcal{N}(22, 0.8^2)$.
+* **Tương quan sinh học**: Giờ thức dậy được sinh phụ thuộc vào giờ đi ngủ $\text{wake} \approx \text{sleep} - 15 + \mathcal{N}(0, 0.7^2)$ (đảm bảo ngủ đủ 7-8 tiếng).
+* **Phân bổ đều hai phía**: Sử dụng `i % 2 == 0` để chia chính xác $50\%$ sinh viên thuộc nhóm A và $50\%$ thuộc nhóm B.
+* **Tái lập kết quả (Reproducibility)**: Cố định bằng tham số `seed`, giúp việc kiểm thử và chạy thực nghiệm đối chứng luôn đồng nhất.
+
+---
+
+## 5. KẾT QUẢ KIỂM THỬ XỬ LÝ DỮ LIỆU LỖI (NFR-04)
+
+Để đảm bảo hệ thống không bị crash khi người dùng tải lên file CSV không chuẩn, nhóm B đã xây dựng bộ kiểm thử tự động với các kịch bản lỗi:
+1. **Thiếu cột bắt buộc (`error_missing_cols.csv`)**: Bắt lỗi và thông báo chính xác danh sách các cột bị thiếu.
+2. **Sai định dạng kiểu dữ liệu (`error_invalid_types.csv`)**: Báo lỗi cụ thể dòng và tên trường (ví dụ: dòng 2 trường `sleep` phải là số thực).
+3. **File rỗng (`error_empty.csv`)**: Báo lỗi file không chứa dữ liệu sinh viên.
+4. **Lệch sĩ số giữa hai nhóm A và B**: Hệ thống vẫn tính toán ma trận điểm bình thường; người thừa ở nhóm nhiều hơn sẽ hiển thị chưa ghép phòng.
