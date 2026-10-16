@@ -400,6 +400,13 @@ def usecase_diagram():
     with open(html_path, "r", encoding="utf-8") as f:
         return HTMLResponse(content=f.read())
 
+@app.get("/wireframe", response_class=HTMLResponse)
+@app.get("/wireframes", response_class=HTMLResponse)
+def wireframe_page():
+    html_path = os.path.join(os.path.dirname(__file__), "ui", "wireframe_view.html")
+    with open(html_path, "r", encoding="utf-8") as f:
+        return HTMLResponse(content=f.read())
+
 @app.post("/api/rank")
 def rank_roommates(user: UserProfileInput, request: Request):
     auth_user = get_current_user_from_request(request)
@@ -761,6 +768,11 @@ def get_dashboard_html(user: dict) -> str:
                         <p class="text-[10px] text-slate-400 truncate max-w-[170px]">{user_school}</p>
                     </div>
                 </div>
+
+                <a href="/wireframe" target="_blank" class="px-3 py-1.5 text-xs font-semibold rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-200 border border-slate-700 transition flex items-center gap-1.5">
+                    <span>📐</span>
+                    <span class="hidden sm:inline">Wireframe UI</span>
+                </a>
 
                 <a href="/usecase" target="_blank" class="px-3 py-1.5 text-xs font-semibold rounded-xl bg-indigo-950/40 hover:bg-indigo-900/60 text-indigo-300 border border-indigo-800/60 transition flex items-center gap-1.5">
                     <span>📊</span>

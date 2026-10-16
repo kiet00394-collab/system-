@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wireframe UI Design - KTX Roommate Matching System</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+        .blueprint-grid {
+            background-size: 20px 20px;
+            background-image: 
+                linear-gradient(to right, rgba(203, 213, 225, 0.4) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(203, 213, 225, 0.4) 1px, transparent 1px);
+        }
+    </style>
+</head>
+<body class="bg-slate-100 text-slate-800 min-h-screen">
+
+    <!-- Top Navigation Header -->
+    <header class="bg-white border-b border-slate-300 sticky top-0 z-50 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-9 h-9 rounded-xl bg-slate-900 text-white flex items-center justify-center font-bold text-lg">
+                    📐
+                </div>
+                <div>
+                    <h1 class="text-base font-extrabold text-slate-900 tracking-tight">
+                        WIREFRAME UI SPECIFICATION – HỆ THỐNG GHÉP PHÒNG KTX
+                    </h1>
+                    <p class="text-xs text-slate-500">Thiết kế bản vẽ giao diện tương tác (UI Wireframe) phục vụ Use Case Specification</p>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-2">
+                <a href="/" class="px-3 py-1.5 rounded-lg bg-indigo-50 text-indigo-700 hover:bg-indigo-100 border border-indigo-200 text-xs font-semibold transition">
+                    ← Trở lại App Demo
+                </a>
+                <a href="/usecase" class="px-3 py-1.5 rounded-lg bg-slate-100 text-slate-700 hover:bg-slate-200 border border-slate-300 text-xs font-semibold transition">
+                    📊 Xem Sơ đồ Use Case
+                </a>
+                <button onclick="window.print()" class="px-3 py-1.5 rounded-lg bg-slate-900 text-white hover:bg-slate-800 text-xs font-semibold shadow transition">
+                    🖨️ In Wireframe
+                </button>
+            </div>
+        </div>
+
+        <!-- Wireframe Tabs -->
+        <div class="max-w-7xl mx-auto px-4 flex gap-2 border-t border-slate-200 overflow-x-auto text-xs font-bold py-2">
+            <button onclick="switchTab('wf-login')" id="tab-btn-wf-login" class="tab-btn px-3 py-1.5 rounded-lg bg-slate-900 text-white transition flex items-center gap-1.5">
+                <span>WF-01</span> Đăng nhập KTX
+            </button>
+            <button onclick="switchTab('wf-survey')" id="tab-btn-wf-survey" class="tab-btn px-3 py-1.5 rounded-lg bg-slate-200 text-slate-700 hover:bg-slate-300 transition flex items-center gap-1.5">
+                <span>WF-02</span> Khai báo Thói quen (8 Tiêu chí)
+            </button>
+            <button onclick="switchTab('wf-ranking')" id="tab-btn-wf-ranking" class="tab-btn px-3 py-1.5 rounded-lg bg-slate-200 text-slate-700 hover:bg-slate-300 transition flex items-center gap-1.5">
+                <span>WF-03</span> Bảng Xếp hạng Top 1 - 8
+            </button>
+            <button onclick="switchTab('wf-admin')" id="tab-btn-wf-admin" class="tab-btn px-3 py-1.5 rounded-lg bg-slate-200 text-slate-700 hover:bg-slate-300 transition flex items-center gap-1.5">
+                <span>WF-04</span> Quản lý KTX & Gale-Shapley
+            </button>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 py-8 space-y-8">
+
+        <!-- ==================== TAB 1: WF-01 LOGIN ==================== -->
+        <div id="wf-login" class="tab-pane space-y-6">
+            <div class="bg-white border border-slate-300 rounded-2xl p-5 shadow-sm flex flex-col md:flex-row justify-between gap-4">
+                <div>
+                    <span class="text-[11px] font-mono font-bold px-2.5 py-1 rounded bg-indigo-100 text-indigo-800 uppercase">Wireframe WF-01</span>
+                    <h2 class="text-lg font-bold text-slate-900 mt-2">Màn hình Đăng nhập & Xác thực thông tin sinh viên</h2>
+                    <p class="text-xs text-slate-600 mt-0.5">Ánh xạ Use Case: <strong>UC-01 (Đăng ký)</strong>, <strong>UC-02 (Đăng nhập)</strong>, <strong>UC-03 (Xác thực thông tin)</strong></p>
+                </div>
+                <div class="text-xs text-slate-500 space-y-1">
+                    <p>• <strong>Mục đích:</strong> Xác thực danh tính sinh viên trước khi truy cập hệ thống.</p>
+                    <p>• <strong>Cơ chế:</strong> Hỗ trợ đăng nhập thủ công và nạp nhanh tài khoản Persona mẫu.</p>
+                </div>
+            </div>
+
+            <!-- Wireframe Canvas -->
+            <div class="bg-white border-2 border-dashed border-slate-300 rounded-3xl p-6 md:p-10 blueprint-grid relative">
+                <!-- Watermark Label -->
+                <div class="absolute top-4 right-4 bg-slate-900/80 text-white text-[10px] font-mono px-3 py-1 rounded-full">
+                    LOW-FI TO HIGH-FI WIREFRAME SPEC
+                </div>
+
+                <div class="max-w-3xl mx-auto bg-slate-50 border-2 border-slate-400 rounded-2xl shadow-xl overflow-hidden">
+                    <!-- Browser Window Header Mockup -->
+                    <div class="bg-slate-200 border-b border-slate-300 px-4 py-2.5 flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            <span class="w-3 h-3 rounded-full bg-rose-400 inline-block"></span>
+                            <span class="w-3 h-3 rounded-full bg-amber-400 inline-block"></span>
+                            <span class="w-3 h-3 rounded-full bg-emerald-400 inline-block"></span>
+                            <span class="ml-2 text-xs font-mono text-slate-600 bg-white px-3 py-0.5 rounded border border-slate-300">
+                                https://ktx.udn.vn/login
+                            </span>
+                        </div>
+                        <span class="text-[11px] font-bold text-slate-500 uppercase">Cổng Sinh Viên</span>
+                    </div>
+
+                    <!-- Inner Mockup Body -->
+                    <div class="p-6 md:p-8 space-y-6 bg-white">
+                        <div class="text-center space-y-1">
+                            <div class="w-12 h-12 mx-auto rounded-xl bg-slate-800 text-white flex items-center justify-center font-bold text-xl">
+                                🏢
+                            </div>
+                            <h3 class="text-base font-extrabold text-slate-900">CỔNG THÔNG TIN KÝ TÚC XÁ ĐẠI HỌC ĐÀ NẴNG</h3>
+                            <p class="text-xs text-slate-500">Hệ thống ghép phòng thông minh • Đăng nhập để sử dụng</p>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
+                            <!-- Left: 1-Click Persona Login -->
+                            <div class="border border-indigo-200 bg-indigo-50/40 rounded-xl p-4 space-y-3 relative">
+                                <span class="absolute -top-2.5 left-3 px-2 py-0.5 bg-indigo-600 text-white text-[10px] font-bold rounded">
+                                    [CALLOUT 1] 1-Click Persona Login
+                                </span>
+                                <h4 class="text-xs font-bold text-indigo-950 uppercase">Đăng nhập nhanh (Persona mẫu)</h4>
+                                <div class="space-y-2 text-xs">
+                                    <div class="border border-slate-300 bg-white p-2.5 rounded-lg flex items-center justify-between cursor-pointer hover:border-indigo-500">
+                                        <div>
+                                            <p class="font-bold text-slate-800">Nguyễn Duy Thái Bảo</p>
+                                            <p class="text-[10px] text-slate-500">VNUK • Ngủ 22:00 • Học thư viện</p>
+                                        </div>
+                                        <span class="px-2 py-1 bg-indigo-600 text-white rounded text-[10px] font-bold">Chọn →</span>
+                                    </div>
+                                    <div class="border border-slate-300 bg-white p-2.5 rounded-lg flex items-center justify-between cursor-pointer hover:border-amber-500">
+                                        <div>
+                                            <p class="font-bold text-slate-800">Lê Văn Việt</p>
+                                            <p class="text-[10px] text-slate-500">SPKT • Cú đêm 02:00 • Cơ điện tử</p>
+                                        </div>
+                                        <span class="px-2 py-1 bg-amber-600 text-white rounded text-[10px] font-bold">Chọn →</span>
+                                    </div>
+                                    <div class="border border-slate-300 bg-white p-2.5 rounded-lg flex items-center justify-between cursor-pointer hover:border-emerald-500">
+                                        <div>
+                                            <p class="font-bold text-slate-800">Lê Minh Quân</p>
+                                            <p class="text-[10px] text-slate-500">DUE • Healthy • Dị ứng khói thuốc</p>
+                                        </div>
+                                        <span class="px-2 py-1 bg-emerald-600 text-white rounded text-[10px] font-bold">Chọn →</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Right: Form Input -->
+                            <div class="border border-slate-300 bg-slate-50 rounded-xl p-4 space-y-3 relative">
+                                <span class="absolute -top-2.5 left-3 px-2 py-0.5 bg-slate-700 text-white text-[10px] font-bold rounded">
+                                    [CALLOUT 2] Input Form & Validation
+                                </span>
+                                <h4 class="text-xs font-bold text-slate-900 uppercase">Tài khoản Sinh viên</h4>
+                                
+                                <div class="space-y-2.5 text-xs">
+                                    <div>
+                                        <label class="block font-semibold text-slate-700 mb-1">Mã sinh viên / Tên đăng nhập:</label>
+                                        <input type="text" placeholder="VD: 22VNUK0101" class="w-full bg-white border border-slate-300 rounded-lg px-3 py-1.5 text-slate-800 text-xs">
+                                    </div>
+                                    <div>
+                                        <label class="block font-semibold text-slate-700 mb-1">Mật khẩu:</label>
+                                        <input type="password" value="••••••••" class="w-full bg-white border border-slate-300 rounded-lg px-3 py-1.5 text-slate-800 text-xs">
+                                    </div>
+                                    <div>
+                                        <label class="block font-semibold text-slate-700 mb-1">Trường thành viên:</label>
+                                        <select class="w-full bg-white border border-slate-300 rounded-lg px-3 py-1.5 text-slate-800 text-xs">
+                                            <option>Viện NC & ĐT Việt - Anh (VNUK)</option>
+                                            <option>ĐH Sư phạm Kỹ thuật (SPKT)</option>
+                                            <option>Trường ĐH Kinh tế (DUE)</option>
+                                        </select>
+                                    </div>
+                                    <button class="w-full py-2 bg-slate-900 text-white font-bold rounded-lg text-xs hover:bg-slate-800 shadow">
+                                        ĐĂNG NHẬP HỆ THỐNG
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Wireframe Specs Notes -->
+                <div class="max-w-3xl mx-auto mt-6 bg-slate-900 text-slate-200 rounded-xl p-4 text-xs space-y-2 font-mono">
+                    <div class="text-amber-400 font-bold uppercase">📐 Wireframe Specifications & Validation Rules:</div>
+                    <p>• <strong>BF-1:</strong> Sinh viên nhập Mã sinh viên và Mật khẩu hợp lệ &rarr; Cấp session & điều hướng về màn hình Dashboard.</p>
+                    <p>• <strong>AF-A:</strong> Sinh viên nhấp nút Persona mẫu &rarr; Nạp nhanh thông tin và đăng nhập tức thì.</p>
+                    <p>• <strong>EF-A:</strong> Để trống trường hoặc sai mật khẩu &rarr; Hiển thị thông báo lỗi màu đỏ (Validation Alert) ngay dưới form.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== TAB 2: WF-02 SURVEY ==================== -->
+        <div id="wf-survey" class="tab-pane hidden space-y-6">
+            <div class="bg-white border border-slate-300 rounded-2xl p-5 shadow-sm flex flex-col md:flex-row justify-between gap-4">
+                <div>
+                    <span class="text-[11px] font-mono font-bold px-2.5 py-1 rounded bg-indigo-100 text-indigo-800 uppercase">Wireframe WF-02</span>
+                    <h2 class="text-lg font-bold text-slate-900 mt-2">Màn hình Khảo sát Khai báo 8 Tiêu chí Sinh hoạt</h2>
+                    <p class="text-xs text-slate-600 mt-0.5">Ánh xạ Use Case: <strong>UC-04 (Khai báo thói quen)</strong>, <strong>UC-05 (Nạp mẫu Persona)</strong></p>
+                </div>
+                <div class="text-xs text-slate-500 space-y-1">
+                    <p>• <strong>Mục đích:</strong> Thu thập chính xác nếp sống sinh hoạt và tiêu chí ưu tiên cá nhân.</p>
+                    <p>• <strong>Yếu tố UI:</strong> Thanh trượt 24h, bộ chọn số, danh sách sở thích và dropdown ưu tiên.</p>
+                </div>
+            </div>
+
+            <!-- Wireframe Canvas -->
+            <div class="bg-white border-2 border-dashed border-slate-300 rounded-3xl p-6 md:p-10 blueprint-grid relative">
+                <div class="max-w-3xl mx-auto bg-slate-50 border-2 border-slate-400 rounded-2xl shadow-xl p-6 space-y-5">
+                    <div class="border-b border-slate-300 pb-3 flex justify-between items-center">
+                        <div>
+                            <h3 class="text-sm font-extrabold text-slate-900 uppercase">Bản vẽ Form Khảo sát 8 Tiêu chí</h3>
+                            <p class="text-xs text-slate-500">Tự động chuẩn hóa thành vector dữ liệu đầu vào cho Gale-Shapley</p>
+                        </div>
+                        <span class="px-2.5 py-1 bg-amber-100 border border-amber-300 text-amber-800 rounded font-mono text-[10px] font-bold">
+                            Top Weight: 1.5x
+                        </span>
+                    </div>
+
+                    <!-- Form Controls Mockup -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                        <!-- Group & Priority -->
+                        <div class="bg-white p-3 rounded-xl border border-slate-300 space-y-1">
+                            <label class="font-bold text-slate-700">Phân nhóm KTX:</label>
+                            <div class="flex gap-4 pt-1">
+                                <label class="flex items-center gap-1.5"><input type="radio" checked name="wf-grp"> Nhóm A (Sinh viên cũ)</label>
+                                <label class="flex items-center gap-1.5"><input type="radio" name="wf-grp"> Nhóm B (Tân sinh viên)</label>
+                            </div>
+                        </div>
+
+                        <div class="bg-amber-50/60 p-3 rounded-xl border border-amber-300 space-y-1">
+                            <label class="font-bold text-amber-900">Tiêu chí ưu tiên số 1 (Hệ số 1.5x):</label>
+                            <select class="w-full bg-white border border-amber-400 rounded px-2 py-1 text-xs text-amber-900 font-bold">
+                                <option>Giờ đi ngủ (sleep) - Cần phòng yên tĩnh</option>
+                                <option>Độ gọn gàng (tidy)</option>
+                                <option>Không hút thuốc (smoke)</option>
+                                <option>Chịu tiếng ồn (noise)</option>
+                            </select>
+                        </div>
+
+                        <!-- Sliders -->
+                        <div class="md:col-span-2 bg-white p-4 rounded-xl border border-slate-300 space-y-4">
+                            <div>
+                                <div class="flex justify-between font-bold text-slate-700 mb-1">
+                                    <span>🌙 Giờ đi ngủ (sleep):</span>
+                                    <span class="text-indigo-600 font-mono">22:00 (10:00 PM)</span>
+                                </div>
+                                <input type="range" class="w-full accent-indigo-600" value="22" min="20" max="28">
+                                <div class="flex justify-between text-[10px] text-slate-400 font-mono mt-0.5">
+                                    <span>20:00 (Ngủ sớm)</span>
+                                    <span>24:00 (Nửa đêm)</span>
+                                    <span>04:00 sáng hôm sau</span>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="flex justify-between font-bold text-slate-700 mb-1">
+                                    <span>⏰ Giờ thức dậy (wake):</span>
+                                    <span class="text-indigo-600 font-mono">06:00 AM</span>
+                                </div>
+                                <input type="range" class="w-full accent-indigo-600" value="6" min="5" max="11">
+                                <div class="flex justify-between text-[10px] text-slate-400 font-mono mt-0.5">
+                                    <span>05:00 AM</span>
+                                    <span>08:00 AM</span>
+                                    <span>11:00 AM</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 4 Dropdowns -->
+                        <div class="bg-white p-3 rounded-xl border border-slate-300">
+                            <label class="font-bold text-slate-700 block mb-1">🧹 Độ gọn gàng (tidy):</label>
+                            <select class="w-full border border-slate-300 rounded px-2 py-1">
+                                <option>5/5 - Cực kỳ ngăn nắp</option>
+                                <option selected>4/5 - Gọn gàng sạch sẽ</option>
+                                <option>2/5 - Hơi bừa bộn</option>
+                            </select>
+                        </div>
+
+                        <div class="bg-white p-3 rounded-xl border border-slate-300">
+                            <label class="font-bold text-slate-700 block mb-1">🎧 Chịu tiếng ồn (noise):</label>
+                            <select class="w-full border border-slate-300 rounded px-2 py-1">
+                                <option>1/5 - Rất nhạy cảm với ồn</option>
+                                <option selected>2/5 - Nhạy cảm vừa</option>
+                                <option>4/5 - Chịu ồn tốt</option>
+                            </select>
+                        </div>
+
+                        <div class="bg-white p-3 rounded-xl border border-slate-300">
+                            <label class="font-bold text-slate-700 block mb-1">📖 Thói quen học (study):</label>
+                            <select class="w-full border border-slate-300 rounded px-2 py-1">
+                                <option selected>Lên thư viện học</option>
+                                <option>Học tại phòng</option>
+                            </select>
+                        </div>
+
+                        <div class="bg-white p-3 rounded-xl border border-slate-300">
+                            <label class="font-bold text-slate-700 block mb-1">🚭 Hút thuốc lá (smoke):</label>
+                            <select class="w-full border border-slate-300 rounded px-2 py-1">
+                                <option selected>0 - Không hút thuốc</option>
+                                <option>1 - Có hút thuốc</option>
+                            </select>
+                        </div>
+
+                        <!-- Hobbies Checkboxes -->
+                        <div class="md:col-span-2 bg-white p-3 rounded-xl border border-slate-300 space-y-2">
+                            <label class="font-bold text-slate-700 block">🎨 Sở thích chung (hobbies):</label>
+                            <div class="grid grid-cols-3 gap-2">
+                                <label class="flex items-center gap-1.5"><input type="checkbox" checked> 📚 Đọc sách</label>
+                                <label class="flex items-center gap-1.5"><input type="checkbox" checked> ⚽ Thể thao</label>
+                                <label class="flex items-center gap-1.5"><input type="checkbox"> 🎮 Chơi game</label>
+                                <label class="flex items-center gap-1.5"><input type="checkbox" checked> 🎵 Nghe nhạc</label>
+                                <label class="flex items-center gap-1.5"><input type="checkbox"> 🍳 Nấu ăn</label>
+                                <label class="flex items-center gap-1.5"><input type="checkbox"> 🎬 Xem phim</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="w-full py-2.5 bg-indigo-600 text-white font-bold rounded-xl text-xs shadow hover:bg-indigo-700">
+                        🔍 CẬP NHẬT VÀ XẾP HẠNG BẠN CÙNG PHÒNG
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== TAB 3: WF-03 RANKING ==================== -->
+        <div id="wf-ranking" class="tab-pane hidden space-y-6">
+            <div class="bg-white border border-slate-300 rounded-2xl p-5 shadow-sm flex flex-col md:flex-row justify-between gap-4">
+                <div>
+                    <span class="text-[11px] font-mono font-bold px-2.5 py-1 rounded bg-indigo-100 text-indigo-800 uppercase">Wireframe WF-03</span>
+                    <h2 class="text-lg font-bold text-slate-900 mt-2">Màn hình Bảng xếp hạng Bạn cùng phòng (Top 1 đến Top 8)</h2>
+                    <p class="text-xs text-slate-600 mt-0.5">Ánh xạ Use Case: <strong>UC-06 (Xem xếp hạng)</strong>, <strong>UC-07 (Tính điểm 2 chiều)</strong>, <strong>UC-08 (Giải thích chi tiết)</strong></p>
+                </div>
+                <div class="text-xs text-slate-500 space-y-1">
+                    <p>• <strong>Mục đích:</strong> Minh bạch lý do ghép phòng, hiển thị độ tương thích từ cao xuống thấp.</p>
+                    <p>• <strong>Tính năng:</strong> Huy hiệu Hạng 1-3, điểm %, accordion mở rộng điểm cộng/lưu ý.</p>
+                </div>
+            </div>
+
+            <!-- Wireframe Canvas -->
+            <div class="bg-white border-2 border-dashed border-slate-300 rounded-3xl p-6 md:p-10 blueprint-grid relative">
+                <div class="max-w-3xl mx-auto space-y-4">
+                    
+                    <!-- Header of List -->
+                    <div class="bg-white border border-slate-300 rounded-xl p-3 flex justify-between items-center text-xs">
+                        <span class="font-bold text-slate-800">DANH SÁCH ỨNG VIÊN HÒA HỢP NHẤT (ĐÃ ĐỐI CHIẾU 2 CHIỀU)</span>
+                        <span class="font-mono bg-slate-100 px-2 py-0.5 rounded text-slate-600">Hiển thị 8 kết quả</span>
+                    </div>
+
+                    <!-- CARD 1: RANK #1 (GOLD HIGHLIGHT) -->
+                    <div class="border-2 border-amber-400 bg-amber-50/30 rounded-2xl p-4 shadow-sm space-y-3 relative">
+                        <span class="absolute -top-2.5 right-4 bg-amber-500 text-slate-950 font-black text-[10px] px-2.5 py-0.5 rounded-full shadow">
+                            🥇 HẠNG 1 (TƯƠNG THÍCH CAO NHẤT)
+                        </span>
+
+                        <div class="flex items-start justify-between gap-3">
+                            <div class="flex items-center gap-3">
+                                <div class="w-12 h-12 rounded-xl bg-slate-800 border border-slate-300 flex items-center justify-center text-white font-bold text-sm">
+                                    SV01
+                                </div>
+                                <div>
+                                    <div class="flex items-center gap-2">
+                                        <h4 class="font-bold text-slate-900 text-sm">Nguyễn Duy Thái Bảo</h4>
+                                        <span class="text-[10px] bg-sky-100 text-sky-800 font-bold px-1.5 py-0.2 rounded border border-sky-200">VNUK</span>
+                                    </div>
+                                    <p class="text-xs text-slate-600 mt-0.5">Khoa học Máy tính • Thích yên tĩnh • Ngủ trước 23h</p>
+                                </div>
+                            </div>
+
+                            <div class="text-right">
+                                <div class="text-xl font-black text-emerald-600 font-mono">88.5%</div>
+                                <span class="text-[10px] bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded-full">Siêu hòa hợp</span>
+                            </div>
+                        </div>
+
+                        <!-- Mini metrics -->
+                        <div class="flex flex-wrap gap-2 text-[11px] text-slate-600 border-t border-slate-200 pt-2 font-mono">
+                            <span class="bg-white px-2 py-0.5 rounded border border-slate-200">🌙 Ngủ: 22:00</span>
+                            <span class="bg-white px-2 py-0.5 rounded border border-slate-200">⏰ Dậy: 06:00</span>
+                            <span class="bg-white px-2 py-0.5 rounded border border-slate-200">🧹 Gọn: 5/5</span>
+                            <span class="bg-white px-2 py-0.5 rounded border border-slate-200">🚭 Không thuốc</span>
+                        </div>
+
+                        <!-- Accordion Detail Expansion (UC-08) -->
+                        <div class="bg-white border border-slate-300 rounded-xl p-3 text-xs space-y-2">
+                            <div class="font-bold text-slate-700 flex justify-between items-center">
+                                <span>Phân tích chi tiết mức độ tương thích tiêu chí:</span>
+                                <span class="text-indigo-600 text-[11px]">Đang mở ▼</span>
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-[11px]">
+                                <div class="bg-emerald-50 border border-emerald-200 p-2 rounded-lg text-emerald-800">
+                                    <strong>✅ Điểm cộng tương thích (&ge; 75%):</strong><br>
+                                    Giờ đi ngủ, Giờ thức dậy, Độ gọn gàng, Không khói thuốc, Sở thích đọc sách.
+                                </div>
+                                <div class="bg-slate-50 border border-slate-200 p-2 rounded-lg text-slate-600">
+                                    <strong>⚠️ Điểm cần lưu ý (&le; 40%):</strong><br>
+                                    Không có xung đột lớn về nhịp sinh học.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CARD 2: RANK #2 -->
+                    <div class="border border-slate-300 bg-white rounded-2xl p-4 shadow-sm space-y-2">
+                        <div class="flex items-start justify-between gap-3">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-xl bg-slate-700 text-white flex items-center justify-center font-bold text-xs">
+                                    SV02
+                                </div>
+                                <div>
+                                    <div class="flex items-center gap-2">
+                                        <span class="text-xs font-bold text-slate-500">🥈 HẠNG 2</span>
+                                        <h4 class="font-bold text-slate-900 text-sm">Lê Minh Quân</h4>
+                                        <span class="text-[10px] bg-emerald-100 text-emerald-800 font-bold px-1.5 py-0.2 rounded border border-emerald-200">DUE</span>
+                                    </div>
+                                    <p class="text-xs text-slate-600">Quản trị Kinh doanh • Lối sống healthy • Thể thao</p>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-lg font-black text-sky-600 font-mono">79.2%</div>
+                                <span class="text-[10px] bg-sky-100 text-sky-800 font-bold px-2 py-0.5 rounded-full">Hòa hợp tốt</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CARD 3: RANK #8 (LOWEST MATCH) -->
+                    <div class="border border-slate-200 bg-slate-50/60 rounded-2xl p-4 space-y-2 opacity-80">
+                        <div class="flex items-start justify-between gap-3">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-xl bg-slate-400 text-white flex items-center justify-center font-bold text-xs">
+                                    SV08
+                                </div>
+                                <div>
+                                    <div class="flex items-center gap-2">
+                                        <span class="text-xs font-bold text-slate-400">#8</span>
+                                        <h4 class="font-bold text-slate-700 text-sm">Lê Văn Việt</h4>
+                                        <span class="text-[10px] bg-amber-100 text-amber-800 font-bold px-1.5 py-0.2 rounded border border-amber-200">SPKT</span>
+                                    </div>
+                                    <p class="text-xs text-slate-500">Cơ điện tử • Ngủ 02:00 AM • Hay làm mạch khuya</p>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-lg font-black text-rose-500 font-mono">42.1%</div>
+                                <span class="text-[10px] bg-rose-100 text-rose-800 font-bold px-2 py-0.5 rounded-full">Cần thỏa hiệp</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== TAB 4: WF-04 ADMIN ==================== -->
+        <div id="wf-admin" class="tab-pane hidden space-y-6">
+            <div class="bg-white border border-slate-300 rounded-2xl p-5 shadow-sm flex flex-col md:flex-row justify-between gap-4">
+                <div>
+                    <span class="text-[11px] font-mono font-bold px-2.5 py-1 rounded bg-indigo-100 text-indigo-800 uppercase">Wireframe WF-04</span>
+                    <h2 class="text-lg font-bold text-slate-900 mt-2">Bảng điều khiển Quản lý KTX: Ghép phòng Gale-Shapley & Đối sánh</h2>
+                    <p class="text-xs text-slate-600 mt-0.5">Ánh xạ Use Case: <strong>UC-09 (Quản lý)</strong>, <strong>UC-12 (Ghép tự động)</strong>, <strong>UC-13 (Gale-Shapley)</strong>, <strong>UC-14 (Cặp chặn)</strong>, <strong>UC-15 (Báo cáo)</strong>, <strong>UC-16 (Xuất CSV)</strong></p>
+                </div>
+                <div class="text-xs text-slate-500 space-y-1">
+                    <p>• <strong>Mục đích:</strong> Vận hành ghép cặp ổn định hàng loạt cho Ban quản lý KTX.</p>
+                    <p>• <strong>Chỉ tiêu:</strong> Cặp chặn = 0, tăng điểm hài lòng trung bình so với ngẫu nhiên &ge; 20%.</p>
+                </div>
+            </div>
+
+            <!-- Wireframe Canvas -->
+            <div class="bg-white border-2 border-dashed border-slate-300 rounded-3xl p-6 md:p-10 blueprint-grid relative">
+                <div class="max-w-4xl mx-auto space-y-6">
+                    
+                    <!-- Top Action Bar -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+                        <div class="bg-white p-4 rounded-xl border border-slate-300 space-y-2">
+                            <span class="font-bold text-slate-700 block">📥 Nạp dữ liệu sinh viên:</span>
+                            <div class="flex gap-2">
+                                <button class="flex-1 py-1.5 bg-slate-100 hover:bg-slate-200 border border-slate-300 rounded font-semibold text-slate-700">
+                                    Upload CSV
+                                </button>
+                                <button class="flex-1 py-1.5 bg-slate-100 hover:bg-slate-200 border border-slate-300 rounded font-semibold text-slate-700">
+                                    Sinh Seed (N=50)
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-4 rounded-xl border border-slate-300 space-y-2">
+                            <span class="font-bold text-slate-700 block">⚙️ Động cơ Gale-Shapley:</span>
+                            <button class="w-full py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded shadow">
+                                ▶ KHỞI CHẠY GHÉP PHÒNG
+                            </button>
+                        </div>
+
+                        <div class="bg-emerald-50 border border-emerald-300 p-4 rounded-xl text-center space-y-1">
+                            <span class="text-[10px] font-bold text-emerald-800 uppercase block">Độ ổn định hệ thống:</span>
+                            <div class="text-2xl font-black text-emerald-700 font-mono">0 CẶP CHẶN</div>
+                            <span class="text-[10px] text-emerald-600 font-semibold">Blocking Pairs = 0 (Tối ưu)</span>
+                        </div>
+                    </div>
+
+                    <!-- Comparison Chart Mockup -->
+                    <div class="bg-white border border-slate-300 rounded-xl p-5 space-y-4">
+                        <div class="flex justify-between items-center border-b border-slate-200 pb-2">
+                            <h4 class="font-bold text-slate-800 text-xs uppercase">Báo cáo đối chứng: Gale-Shapley vs Ghép ngẫu nhiên (Quy mô N=20, 50, 100, 200)</h4>
+                            <button class="px-3 py-1 bg-slate-800 text-white text-[10px] font-bold rounded hover:bg-slate-700">
+                                📥 Xuất file CSV
+                            </button>
+                        </div>
+
+                        <!-- Bar chart simulation -->
+                        <div class="grid grid-cols-4 gap-4 pt-4 text-center text-xs font-mono">
+                            <!-- N=20 -->
+                            <div class="space-y-2">
+                                <div class="h-32 flex items-end justify-center gap-1.5 border-b border-slate-300 pb-1">
+                                    <div class="w-6 bg-indigo-600 rounded-t h-[82%] relative group">
+                                        <span class="absolute -top-5 left-1/2 -translate-x-1/2 text-[9px] font-bold">82%</span>
+                                    </div>
+                                    <div class="w-6 bg-slate-300 rounded-t h-[58%] relative group">
+                                        <span class="absolute -top-5 left-1/2 -translate-x-1/2 text-[9px] font-bold">58%</span>
+                                    </div>
+                                </div>
+                                <span class="font-bold text-slate-700 block text-[11px]">N = 20 SV</span>
+                            </div>
+
+                            <!-- N=50 -->
+                            <div class="space-y-2">
+                                <div class="h-32 flex items-end justify-center gap-1.5 border-b border-slate-300 pb-1">
+                                    <div class="w-6 bg-indigo-600 rounded-t h-[84%] relative group">
+                                        <span class="absolute -top-5 left-1/2 -translate-x-1/2 text-[9px] font-bold">84%</span>
+                                    </div>
+                                    <div class="w-6 bg-slate-300 rounded-t h-[57%] relative group">
+                                        <span class="absolute -top-5 left-1/2 -translate-x-1/2 text-[9px] font-bold">57%</span>
+                                    </div>
+                                </div>
+                                <span class="font-bold text-slate-700 block text-[11px]">N = 50 SV</span>
+                            </div>
+
+                            <!-- N=100 -->
+                            <div class="space-y-2">
+                                <div class="h-32 flex items-end justify-center gap-1.5 border-b border-slate-300 pb-1">
+                                    <div class="w-6 bg-indigo-600 rounded-t h-[85%] relative group">
+                                        <span class="absolute -top-5 left-1/2 -translate-x-1/2 text-[9px] font-bold">85%</span>
+                                    </div>
+                                    <div class="w-6 bg-slate-300 rounded-t h-[55%] relative group">
+                                        <span class="absolute -top-5 left-1/2 -translate-x-1/2 text-[9px] font-bold">55%</span>
+                                    </div>
+                                </div>
+                                <span class="font-bold text-slate-700 block text-[11px]">N = 100 SV</span>
+                            </div>
+
+                            <!-- N=200 -->
+                            <div class="space-y-2">
+                                <div class="h-32 flex items-end justify-center gap-1.5 border-b border-slate-300 pb-1">
+                                    <div class="w-6 bg-indigo-600 rounded-t h-[86%] relative group">
+                                        <span class="absolute -top-5 left-1/2 -translate-x-1/2 text-[9px] font-bold">86%</span>
+                                    </div>
+                                    <div class="w-6 bg-slate-300 rounded-t h-[54%] relative group">
+                                        <span class="absolute -top-5 left-1/2 -translate-x-1/2 text-[9px] font-bold">54%</span>
+                                    </div>
+                                </div>
+                                <span class="font-bold text-slate-700 block text-[11px]">N = 200 SV</span>
+                            </div>
+                        </div>
+
+                        <!-- Legend -->
+                        <div class="flex justify-center gap-6 pt-2 text-[11px]">
+                            <span class="flex items-center gap-1.5"><span class="w-3 h-3 bg-indigo-600 rounded inline-block"></span> Thuật toán Gale-Shapley (TB: ~84.5%)</span>
+                            <span class="flex items-center gap-1.5"><span class="w-3 h-3 bg-slate-300 rounded inline-block"></span> Phân phòng Ngẫu nhiên (TB: ~56.0%)</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-500">
+        Hệ thống Ghép phòng KTX • Wireframe UI Specification chuẩn IEEE/UML • Nhóm 3 (2026)
+    </footer>
+
+    <script>
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-pane').forEach(el => el.classList.add('hidden'));
+            const target = document.getElementById(tabId);
+            if (target) target.classList.remove('hidden');
+
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('bg-slate-900', 'text-white');
+                btn.classList.add('bg-slate-200', 'text-slate-700');
+            });
+            const activeBtn = document.getElementById('tab-btn-' + tabId);
+            if (activeBtn) {
+                activeBtn.classList.remove('bg-slate-200', 'text-slate-700');
+                activeBtn.classList.add('bg-slate-900', 'text-white');
+            }
+        }
+    </script>
+</body>
+</html>
