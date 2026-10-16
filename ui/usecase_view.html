@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biểu Đồ Use Case - Hệ Thống Ghép Bạn Cùng Phòng KTX</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-100 text-slate-800 p-4 md:p-8 min-h-screen">
+    <!-- Outer Slide Container -->
+    <div class="max-w-7xl mx-auto bg-white border border-slate-300 rounded-3xl shadow-2xl p-6 md:p-8 space-y-6">
+        
+        <!-- Header -->
+        <div class="border-b border-slate-200 pb-4 flex flex-wrap items-center justify-between gap-4">
+            <div>
+                <span class="text-xs font-bold text-indigo-600 bg-indigo-50 border border-indigo-200 px-3 py-1 rounded-full uppercase tracking-wider">
+                    Đồ Án Trí Tuệ Nhân Tạo & Ghép Cặp Ổn Định 2026
+                </span>
+                <h1 class="text-xl md:text-2xl font-extrabold text-slate-900 mt-2">
+                    Biểu đồ Use Case – Hệ thống Ghép Bạn Cùng Phòng KTX (KTX Smart Matching)
+                </h1>
+                <p class="text-xs text-slate-500 mt-0.5">Mô hình hóa yêu cầu chức năng (FR) & tương tác giữa các tác nhân theo chuẩn UML</p>
+            </div>
+            <div class="flex items-center gap-2">
+                <a href="/" class="px-3.5 py-1.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold shadow transition">
+                    ← Trở lại Dashboard
+                </a>
+                <button onclick="window.print()" class="px-3.5 py-1.5 rounded-xl bg-indigo-50 hover:bg-indigo-100 text-indigo-700 border border-indigo-200 text-xs font-semibold transition">
+                    🖨️ In / Lưu PDF
+                </button>
+            </div>
+        </div>
+
+        <!-- 2 Columns: Left = Diagram, Right = Explanations -->
+        <div class="grid grid-cols-1 xl:grid-cols-12 gap-8 items-start">
+            
+            <!-- LEFT COLUMN: SVG DIAGRAM (8 cols) -->
+            <div class="xl:col-span-8 bg-slate-50 border border-slate-200 rounded-2xl p-4 shadow-inner overflow-x-auto">
+                <div class="min-w-[760px]">
+                    <svg viewBox="0 0 880 730" class="w-full h-auto select-none" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <!-- Arrowhead marker for include -->
+                            <marker id="arrow-include" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                                <path d="M 0 1 L 10 5 L 0 9 z" fill="#0284c7" />
+                            </marker>
+                            <!-- Arrowhead marker for extend -->
+                            <marker id="arrow-extend" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                                <path d="M 0 1 L 10 5 L 0 9 z" fill="#e11d48" />
+                            </marker>
+                            <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+                                <feDropShadow dx="1" dy="2" stdDeviation="1.5" flood-opacity="0.08" />
+                            </filter>
+                        </defs>
+
+                        <!-- SYSTEM BOUNDARY -->
+                        <rect x="115" y="20" width="650" height="635" rx="18" fill="#ffffff" stroke="#94a3b8" stroke-width="2" />
+                        <text x="440" y="48" text-anchor="middle" font-size="14" font-weight="800" fill="#1e293b" letter-spacing="0.5">
+                            Hệ thống Ghép Bạn Cùng Phòng KTX
+                        </text>
+
+                        <!-- ================= ACTOR 1: SINH VIÊN (LEFT) ================= -->
+                        <g transform="translate(55, 230)">
+                            <!-- Head -->
+                            <circle cx="0" cy="0" r="14" fill="#ffffff" stroke="#1e293b" stroke-width="2.5" />
+                            <!-- Body -->
+                            <line x1="0" y1="14" x2="0" y2="52" stroke="#1e293b" stroke-width="2.5" />
+                            <!-- Arms -->
+                            <line x1="-22" y1="28" x2="22" y2="28" stroke="#1e293b" stroke-width="2.5" />
+                            <!-- Legs -->
+                            <line x1="0" y1="52" x2="-18" y2="88" stroke="#1e293b" stroke-width="2.5" />
+                            <line x1="0" y1="52" x2="18" y2="88" stroke="#1e293b" stroke-width="2.5" />
+                            <text x="0" y="108" text-anchor="middle" font-size="13" font-weight="800" fill="#0f172a">Sinh viên</text>
+                            <text x="0" y="122" text-anchor="middle" font-size="10" fill="#64748b">(Người dùng)</text>
+                        </g>
+
+                        <!-- ================= ACTOR 2: BAN QUẢN LÝ KTX (RIGHT) ================= -->
+                        <g transform="translate(825, 410)">
+                            <!-- Head -->
+                            <circle cx="0" cy="0" r="14" fill="#ffffff" stroke="#1e293b" stroke-width="2.5" />
+                            <!-- Body -->
+                            <line x1="0" y1="14" x2="0" y2="52" stroke="#1e293b" stroke-width="2.5" />
+                            <!-- Arms -->
+                            <line x1="-22" y1="28" x2="22" y2="28" stroke="#1e293b" stroke-width="2.5" />
+                            <!-- Legs -->
+                            <line x1="0" y1="52" x2="-18" y2="88" stroke="#1e293b" stroke-width="2.5" />
+                            <line x1="0" y1="52" x2="18" y2="88" stroke="#1e293b" stroke-width="2.5" />
+                            <text x="0" y="108" text-anchor="middle" font-size="13" font-weight="800" fill="#0f172a">Ban quản lý KTX</text>
+                            <text x="0" y="122" text-anchor="middle" font-size="10" fill="#64748b">(Quản trị viên)</text>
+                        </g>
+
+                        <!-- ================= SOLID ASSOCIATION LINES (ACTORS -> UC) ================= -->
+                        <!-- Sinh viên -> Đăng ký tài khoản -->
+                        <line x1="75" y1="230" x2="175" y2="90" stroke="#64748b" stroke-width="1.8" />
+                        <!-- Sinh viên -> Đăng nhập -->
+                        <line x1="75" y1="240" x2="175" y2="155" stroke="#64748b" stroke-width="1.8" />
+                        <!-- Sinh viên -> Khai báo thói quen -->
+                        <line x1="75" y1="260" x2="160" y2="225" stroke="#64748b" stroke-width="1.8" />
+                        <!-- Sinh viên -> Xem bảng xếp hạng -->
+                        <line x1="75" y1="280" x2="170" y2="310" stroke="#64748b" stroke-width="1.8" />
+
+                        <!-- Ban quản lý KTX -> Quản lý dữ liệu sinh viên -->
+                        <line x1="805" y1="410" x2="715" y2="420" stroke="#64748b" stroke-width="1.8" />
+                        <!-- Ban quản lý KTX -> Thực hiện ghép phòng tự động -->
+                        <line x1="805" y1="430" x2="710" y2="515" stroke="#64748b" stroke-width="1.8" />
+                        <!-- Ban quản lý KTX -> Xem báo cáo & so sánh -->
+                        <line x1="805" y1="450" x2="715" y2="605" stroke="#64748b" stroke-width="1.8" />
+
+                        <!-- ================= DASHED RELATIONSHIPS (INCLUDE / EXTEND) ================= -->
+                        <!-- Đăng ký -> Xác thực (include) -->
+                        <path d="M 315 90 L 450 115" stroke="#0284c7" stroke-width="1.5" stroke-dasharray="5,4" marker-end="url(#arrow-include)" />
+                        <rect x="350" y="88" width="64" height="16" rx="4" fill="#ffffff" />
+                        <text x="382" y="100" text-anchor="middle" font-size="10" font-weight="700" fill="#0284c7">&laquo;include&raquo;</text>
+
+                        <!-- Đăng nhập -> Xác thực (include) -->
+                        <path d="M 290 155 L 450 135" stroke="#0284c7" stroke-width="1.5" stroke-dasharray="5,4" marker-end="url(#arrow-include)" />
+                        <rect x="340" y="145" width="64" height="16" rx="4" fill="#ffffff" />
+                        <text x="372" y="157" text-anchor="middle" font-size="10" font-weight="700" fill="#0284c7">&laquo;include&raquo;</text>
+
+                        <!-- Nạp mẫu Persona -> Khai báo thói quen (extend) -->
+                        <path d="M 450 225 L 340 225" stroke="#e11d48" stroke-width="1.5" stroke-dasharray="5,4" marker-end="url(#arrow-extend)" />
+                        <rect x="365" y="217" width="62" height="16" rx="4" fill="#ffffff" />
+                        <text x="396" y="229" text-anchor="middle" font-size="10" font-weight="700" fill="#e11d48">&laquo;extend&raquo;</text>
+
+                        <!-- Xem xếp hạng -> Tính điểm tương thích 2 chiều (include) -->
+                        <path d="M 355 305 L 455 295" stroke="#0284c7" stroke-width="1.5" stroke-dasharray="5,4" marker-end="url(#arrow-include)" />
+                        <rect x="378" y="287" width="64" height="16" rx="4" fill="#ffffff" />
+                        <text x="410" y="299" text-anchor="middle" font-size="10" font-weight="700" fill="#0284c7">&laquo;include&raquo;</text>
+
+                        <!-- Xem giải thích chi tiết -> Xem xếp hạng (extend) -->
+                        <path d="M 460 355 L 350 330" stroke="#e11d48" stroke-width="1.5" stroke-dasharray="5,4" marker-end="url(#arrow-extend)" />
+                        <rect x="375" y="340" width="62" height="16" rx="4" fill="#ffffff" />
+                        <text x="406" y="352" text-anchor="middle" font-size="10" font-weight="700" fill="#e11d48">&laquo;extend&raquo;</text>
+
+                        <!-- Nạp dữ liệu CSV -> Quản lý dữ liệu sinh viên (extend) -->
+                        <path d="M 380 415 L 480 420" stroke="#e11d48" stroke-width="1.5" stroke-dasharray="5,4" marker-end="url(#arrow-extend)" />
+                        <rect x="402" y="407" width="62" height="16" rx="4" fill="#ffffff" />
+                        <text x="433" y="419" text-anchor="middle" font-size="10" font-weight="700" fill="#e11d48">&laquo;extend&raquo;</text>
+
+                        <!-- Sinh dữ liệu giả lập -> Quản lý dữ liệu sinh viên (extend) -->
+                        <path d="M 385 455 L 485 435" stroke="#e11d48" stroke-width="1.5" stroke-dasharray="5,4" marker-end="url(#arrow-extend)" />
+                        <rect x="408" y="445" width="62" height="16" rx="4" fill="#ffffff" />
+                        <text x="439" y="457" text-anchor="middle" font-size="10" font-weight="700" fill="#e11d48">&laquo;extend&raquo;</text>
+
+                        <!-- Ghép phòng tự động -> Thuật toán Gale-Shapley (include) -->
+                        <path d="M 480 505 L 380 500" stroke="#0284c7" stroke-width="1.5" stroke-dasharray="5,4" marker-end="url(#arrow-include)" />
+                        <rect x="402" y="492" width="64" height="16" rx="4" fill="#ffffff" />
+                        <text x="434" y="504" text-anchor="middle" font-size="10" font-weight="700" fill="#0284c7">&laquo;include&raquo;</text>
+
+                        <!-- Ghép phòng tự động -> Kiểm tra cặp chặn (include) -->
+                        <path d="M 480 525 L 385 545" stroke="#0284c7" stroke-width="1.5" stroke-dasharray="5,4" marker-end="url(#arrow-include)" />
+                        <rect x="406" y="535" width="64" height="16" rx="4" fill="#ffffff" />
+                        <text x="438" y="547" text-anchor="middle" font-size="10" font-weight="700" fill="#0284c7">&laquo;include&raquo;</text>
+
+                        <!-- Xuất kết quả CSV -> Xem báo cáo (extend) -->
+                        <path d="M 390 605 L 485 605" stroke="#e11d48" stroke-width="1.5" stroke-dasharray="5,4" marker-end="url(#arrow-extend)" />
+                        <rect x="410" y="597" width="62" height="16" rx="4" fill="#ffffff" />
+                        <text x="441" y="609" text-anchor="middle" font-size="10" font-weight="700" fill="#e11d48">&laquo;extend&raquo;</text>
+
+                        <!-- ================= USE CASES (CIRCLES / OVALS) ================= -->
+                        
+                        <!-- 1. Đăng ký tài khoản (Main) -->
+                        <g filter="url(#shadow)">
+                            <ellipse cx="240" cy="90" rx="75" ry="22" fill="#e0f2fe" stroke="#0284c7" stroke-width="2" />
+                            <text x="240" y="94" text-anchor="middle" font-size="12" font-weight="700" fill="#0369a1">Đăng ký tài khoản</text>
+                        </g>
+
+                        <!-- 2. Đăng nhập (Main) -->
+                        <g filter="url(#shadow)">
+                            <ellipse cx="230" cy="155" rx="60" ry="22" fill="#e0f2fe" stroke="#0284c7" stroke-width="2" />
+                            <text x="230" y="159" text-anchor="middle" font-size="12" font-weight="700" fill="#0369a1">Đăng nhập</text>
+                        </g>
+
+                        <!-- 3. Xác thực thông tin sinh viên (Include) -->
+                        <g filter="url(#shadow)">
+                            <ellipse cx="545" cy="125" rx="95" ry="23" fill="#dcfce7" stroke="#16a34a" stroke-width="2" />
+                            <text x="545" y="129" text-anchor="middle" font-size="11" font-weight="700" fill="#15803d">Xác thực thông tin sinh viên</text>
+                        </g>
+
+                        <!-- 4. Khai báo thói quen sinh hoạt (Main) -->
+                        <g filter="url(#shadow)">
+                            <ellipse cx="245" cy="225" rx="95" ry="23" fill="#e0f2fe" stroke="#0284c7" stroke-width="2" />
+                            <text x="245" y="229" text-anchor="middle" font-size="11.5" font-weight="700" fill="#0369a1">Khai báo thói quen sinh hoạt</text>
+                        </g>
+
+                        <!-- 5. Nạp hồ sơ mẫu Persona (Extend) -->
+                        <g filter="url(#shadow)">
+                            <ellipse cx="545" cy="225" rx="90" ry="23" fill="#f3e8ff" stroke="#9333ea" stroke-width="2" />
+                            <text x="545" y="229" text-anchor="middle" font-size="11" font-weight="700" fill="#7e22ce">Nạp hồ sơ mẫu Persona</text>
+                        </g>
+
+                        <!-- 6. Xem bảng xếp hạng bạn cùng phòng (Main) -->
+                        <g filter="url(#shadow)">
+                            <ellipse cx="245" cy="315" rx="110" ry="25" fill="#e0f2fe" stroke="#0284c7" stroke-width="2" />
+                            <text x="245" y="319" text-anchor="middle" font-size="11" font-weight="700" fill="#0369a1">Xem Bảng xếp hạng bạn cùng phòng</text>
+                        </g>
+
+                        <!-- 7. Tính điểm tương thích 2 chiều (Include) -->
+                        <g filter="url(#shadow)">
+                            <ellipse cx="550" cy="295" rx="95" ry="23" fill="#dcfce7" stroke="#16a34a" stroke-width="2" />
+                            <text x="550" y="299" text-anchor="middle" font-size="11" font-weight="700" fill="#15803d">Tính điểm tương thích 2 chiều</text>
+                        </g>
+
+                        <!-- 8. Xem chi tiết giải thích tiêu chí (Extend) -->
+                        <g filter="url(#shadow)">
+                            <ellipse cx="555" cy="365" rx="100" ry="23" fill="#f3e8ff" stroke="#9333ea" stroke-width="2" />
+                            <text x="555" y="369" text-anchor="middle" font-size="11" font-weight="700" fill="#7e22ce">Xem chi tiết giải thích tiêu chí</text>
+                        </g>
+
+                        <!-- 9. Quản lý dữ liệu sinh viên KTX (Main - Admin) -->
+                        <g filter="url(#shadow)">
+                            <ellipse cx="595" cy="425" rx="105" ry="24" fill="#e0f2fe" stroke="#0284c7" stroke-width="2" />
+                            <text x="595" y="429" text-anchor="middle" font-size="11" font-weight="700" fill="#0369a1">Quản lý dữ liệu sinh viên KTX</text>
+                        </g>
+
+                        <!-- 10. Nạp dữ liệu từ file CSV (Extend) -->
+                        <g filter="url(#shadow)">
+                            <ellipse cx="295" cy="415" rx="85" ry="21" fill="#f3e8ff" stroke="#9333ea" stroke-width="2" />
+                            <text x="295" y="419" text-anchor="middle" font-size="11" font-weight="700" fill="#7e22ce">Nạp dữ liệu từ file CSV</text>
+                        </g>
+
+                        <!-- 11. Sinh dữ liệu giả lập Seed (Extend) -->
+                        <g filter="url(#shadow)">
+                            <ellipse cx="295" cy="460" rx="90" ry="21" fill="#f3e8ff" stroke="#9333ea" stroke-width="2" />
+                            <text x="295" y="464" text-anchor="middle" font-size="11" font-weight="700" fill="#7e22ce">Sinh dữ liệu giả lập (Seed)</text>
+                        </g>
+
+                        <!-- 12. Thực hiện ghép phòng tự động (Main - Admin) -->
+                        <g filter="url(#shadow)">
+                            <ellipse cx="595" cy="515" rx="105" ry="24" fill="#e0f2fe" stroke="#0284c7" stroke-width="2" />
+                            <text x="595" y="519" text-anchor="middle" font-size="11" font-weight="700" fill="#0369a1">Thực hiện ghép phòng tự động</text>
+                        </g>
+
+                        <!-- 13. Chạy thuật toán Gale-Shapley (Include) -->
+                        <g filter="url(#shadow)">
+                            <ellipse cx="285" cy="500" rx="95" ry="21" fill="#dcfce7" stroke="#16a34a" stroke-width="2" />
+                            <text x="285" y="504" text-anchor="middle" font-size="11" font-weight="700" fill="#15803d">Thuật toán Gale-Shapley</text>
+                        </g>
+
+                        <!-- 14. Kiểm tra cặp chặn (Include) -->
+                        <g filter="url(#shadow)">
+                            <ellipse cx="285" cy="550" rx="100" ry="21" fill="#dcfce7" stroke="#16a34a" stroke-width="2" />
+                            <text x="285" y="554" text-anchor="middle" font-size="10.5" font-weight="700" fill="#15803d">Đếm cặp chặn (Blocking Pairs)</text>
+                        </g>
+
+                        <!-- 15. Xem báo cáo & so sánh thực nghiệm (Main - Admin) -->
+                        <g filter="url(#shadow)">
+                            <ellipse cx="600" cy="605" rx="110" ry="24" fill="#e0f2fe" stroke="#0284c7" stroke-width="2" />
+                            <text x="600" y="609" text-anchor="middle" font-size="11" font-weight="700" fill="#0369a1">Xem báo cáo & so sánh đối chứng</text>
+                        </g>
+
+                        <!-- 16. Xuất kết quả file CSV (Extend) -->
+                        <g filter="url(#shadow)">
+                            <ellipse cx="295" cy="605" rx="95" ry="21" fill="#f3e8ff" stroke="#9333ea" stroke-width="2" />
+                            <text x="295" y="609" text-anchor="middle" font-size="11" font-weight="700" fill="#7e22ce">Xuất kết quả phân phòng (CSV)</text>
+                        </g>
+
+                        <!-- ================= LEGEND / CHÚ THÍCH (BOTTOM) ================= -->
+                        <g transform="translate(15, 675)">
+                            <rect x="0" y="0" width="850" height="45" rx="10" fill="#f8fafc" stroke="#cbd5e1" />
+                            
+                            <text x="15" y="27" font-size="11" font-weight="800" fill="#0f172a">Chú thích:</text>
+
+                            <!-- Stick figure icon -->
+                            <circle cx="85" cy="18" r="5" fill="none" stroke="#1e293b" stroke-width="1.5" />
+                            <line x1="85" y1="23" x2="85" y2="34" stroke="#1e293b" stroke-width="1.5" />
+                            <text x="96" y="27" font-size="10.5" fill="#334155">: Tác nhân (Actor)</text>
+
+                            <!-- Main UC -->
+                            <ellipse cx="205" cy="22" rx="14" ry="9" fill="#e0f2fe" stroke="#0284c7" stroke-width="1.5" />
+                            <text x="225" y="26" font-size="10.5" fill="#334155">: Use case chính</text>
+
+                            <!-- Include UC -->
+                            <ellipse cx="325" cy="22" rx="14" ry="9" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5" />
+                            <text x="345" y="26" font-size="10.5" fill="#334155">: Use case được include</text>
+
+                            <!-- Extend UC -->
+                            <ellipse cx="480" cy="22" rx="14" ry="9" fill="#f3e8ff" stroke="#9333ea" stroke-width="1.5" />
+                            <text x="500" y="26" font-size="10.5" fill="#334155">: Use case được extend</text>
+
+                            <!-- Include Arrow -->
+                            <path d="M 640 22 L 675 22" stroke="#0284c7" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrow-include)" />
+                            <text x="685" y="26" font-size="10.5" font-weight="700" fill="#0284c7">: &laquo;include&raquo;</text>
+
+                            <!-- Extend Arrow -->
+                            <path d="M 750 22 L 785 22" stroke="#e11d48" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrow-extend)" />
+                            <text x="795" y="26" font-size="10.5" font-weight="700" fill="#e11d48">: &laquo;extend&raquo;</text>
+                        </g>
+
+                    </svg>
+                </div>
+            </div>
+
+            <!-- RIGHT COLUMN: DETAILED SPECIFICATION & EXPLANATIONS (4 cols) -->
+            <div class="xl:col-span-4 space-y-4 text-xs">
+                
+                <!-- Box 1: Giải thích quan hệ <<include>> -->
+                <div class="bg-sky-50 border border-sky-200 rounded-2xl p-4 space-y-2">
+                    <div class="flex items-center gap-2">
+                        <span class="px-2 py-0.5 rounded bg-sky-600 text-white font-mono font-bold text-[11px]">&laquo;include&raquo;</span>
+                        <h3 class="font-bold text-sky-900 text-sm">Bắt buộc dùng chung</h3>
+                    </div>
+                    <ul class="list-disc list-inside space-y-1.5 text-slate-700 leading-relaxed text-[11.5px]">
+                        <li>Use case A luôn cần thực hiện hành vi của Use case B như <strong>một phần cốt lõi</strong> của quy trình.</li>
+                        <li>Mũi tên nét đứt hướng về phía Use case được include (B).</li>
+                        <li><strong>Ví dụ trong KTX:</strong>
+                            <div class="mt-1 pl-2 text-sky-800 space-y-0.5">
+                                • <em>Đăng ký / Đăng nhập</em> &rarr; (&laquo;include&raquo;) <strong>Xác thực thông tin sinh viên</strong>.<br>
+                                • <em>Xem Bảng xếp hạng</em> &rarr; (&laquo;include&raquo;) <strong>Tính điểm tương thích 2 chiều</strong>.<br>
+                                • <em>Thực hiện ghép phòng tự động</em> &rarr; (&laquo;include&raquo;) <strong>Thuật toán Gale-Shapley</strong> & <strong>Đếm cặp chặn</strong>.
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Box 2: Giải thích quan hệ <<extend>> -->
+                <div class="bg-purple-50 border border-purple-200 rounded-2xl p-4 space-y-2">
+                    <div class="flex items-center gap-2">
+                        <span class="px-2 py-0.5 rounded bg-purple-600 text-white font-mono font-bold text-[11px]">&laquo;extend&raquo;</span>
+                        <h3 class="font-bold text-purple-900 text-sm">Mở rộng tùy điều kiện</h3>
+                    </div>
+                    <ul class="list-disc list-inside space-y-1.5 text-slate-700 leading-relaxed text-[11.5px]">
+                        <li>Use case B bổ sung hành vi cho Use case A khi <strong>thỏa mãn điều kiện nhất định</strong> (extension point). A vẫn có thể hoạt động độc lập mà không cần B.</li>
+                        <li>Mũi tên nét đứt hướng về phía Use case gốc (A).</li>
+                        <li><strong>Ví dụ trong KTX:</strong>
+                            <div class="mt-1 pl-2 text-purple-800 space-y-0.5">
+                                • <strong>Nạp hồ sơ mẫu Persona</strong> &rarr; (&laquo;extend&raquo;) <em>Khai báo thói quen sinh hoạt</em> (chỉ khi sinh viên muốn test nhanh mẫu Thái Bảo/Việt/Quân).<br>
+                                • <strong>Xem chi tiết giải thích tiêu chí</strong> &rarr; (&laquo;extend&raquo;) <em>Xem Bảng xếp hạng</em> (chỉ khi click "Chi tiết tiêu chí").<br>
+                                • <strong>Nạp file CSV / Sinh dữ liệu Seed</strong> &rarr; (&laquo;extend&raquo;) <em>Quản lý dữ liệu sinh viên</em>.<br>
+                                • <strong>Xuất kết quả file CSV</strong> &rarr; (&laquo;extend&raquo;) <em>Xem báo cáo</em>.
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Box 3: Không có <<exclude>> trong UML -->
+                <div class="bg-emerald-50 border border-emerald-200 rounded-2xl p-4 space-y-2">
+                    <div class="flex items-center gap-2">
+                        <span class="w-5 h-5 rounded-full bg-emerald-600 text-white flex items-center justify-center font-bold text-xs">✓</span>
+                        <h3 class="font-bold text-emerald-950 text-sm">Không có &laquo;exclude&raquo; trong UML</h3>
+                    </div>
+                    <p class="text-slate-700 leading-relaxed text-[11.5px]">
+                        Tiêu chuẩn UML Use Case Diagram không có quan hệ chuẩn tên là <code>&laquo;exclude&raquo;</code>. Để mô hình hóa một chức năng bị loại trừ hoặc điều kiện tiên quyết, ta dùng:
+                    </p>
+                    <ul class="list-disc list-inside space-y-1 text-slate-700 text-[11.5px]">
+                        <li><strong>Constraint (Ràng buộc):</strong> Ví dụ sinh viên dị ứng khói thuốc thiết lập tiêu chí <code>smoke = 0</code> là bộ lọc cứng.</li>
+                        <li><strong>Precondition (Tiền điều kiện):</strong> Phải có tài khoản đã xác thực trước khi khai báo và xem xếp hạng.</li>
+                        <li><strong>Ghi chú nghiệp vụ (Note):</strong> Đính kèm ghi chú logic Gale-Shapley không tạo blocking pair.</li>
+                    </ul>
+                </div>
+
+                <!-- Box 4: Tóm lại -->
+                <div class="bg-amber-50 border border-amber-200 rounded-2xl p-4 space-y-1.5">
+                    <div class="flex items-center gap-2 text-amber-900 font-bold text-sm">
+                        <span>💡</span>
+                        <h4>Tóm lại cho báo cáo nhóm</h4>
+                    </div>
+                    <p class="text-slate-700 text-[11.5px] leading-relaxed">
+                        • Biểu đồ Use Case chỉ dùng <strong>&laquo;include&raquo;</strong> (bắt buộc) và <strong>&laquo;extend&raquo;</strong> (tùy chọn).<br>
+                        • Mũi tên <code>&laquo;include&raquo;</code> chỉ <strong>vào</strong> use case phụ thuộc.<br>
+                        • Mũi tên <code>&laquo;extend&raquo;</code> chỉ <strong>về</strong> use case chính ban đầu.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- BOTTOM TABLE: DETAILED USE CASE MAPPING TO PROJECT REQUIREMENTS -->
+        <div class="border-t border-slate-200 pt-6 space-y-4">
+            <h2 class="text-base font-bold text-slate-900 flex items-center gap-2">
+                <span>📋</span> Bảng Đặc Tả Chi Tiết Use Case & Ánh Xạ Yêu Cầu Dự Án (FR / SR)
+            </h2>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-xs border border-slate-200 rounded-xl overflow-hidden">
+                    <thead class="bg-slate-800 text-slate-100 uppercase tracking-wider text-[11px]">
+                        <tr>
+                            <th class="p-3 border-b border-slate-700">Mã UC</th>
+                            <th class="p-3 border-b border-slate-700">Tên Use Case</th>
+                            <th class="p-3 border-b border-slate-700">Tác nhân chính</th>
+                            <th class="p-3 border-b border-slate-700">Phân loại & Quan hệ</th>
+                            <th class="p-3 border-b border-slate-700">Ánh xạ FR/SR</th>
+                            <th class="p-3 border-b border-slate-700">Mô tả tóm tắt nghiệp vụ</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-200 text-slate-700">
+                        <tr class="hover:bg-slate-50">
+                            <td class="p-3 font-mono font-bold text-indigo-700">UC-01</td>
+                            <td class="p-3 font-semibold text-slate-900">Đăng ký tài khoản</td>
+                            <td class="p-3">Sinh viên</td>
+                            <td class="p-3"><span class="px-2 py-0.5 rounded bg-sky-100 text-sky-800 font-bold">Chính</span> &rarr; &laquo;include&raquo; UC-03</td>
+                            <td class="p-3 font-mono">FR-01</td>
+                            <td class="p-3">Sinh viên tạo hồ sơ ban đầu bằng mã SV và mật khẩu.</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50">
+                            <td class="p-3 font-mono font-bold text-indigo-700">UC-02</td>
+                            <td class="p-3 font-semibold text-slate-900">Đăng nhập</td>
+                            <td class="p-3">Sinh viên</td>
+                            <td class="p-3"><span class="px-2 py-0.5 rounded bg-sky-100 text-sky-800 font-bold">Chính</span> &rarr; &laquo;include&raquo; UC-03</td>
+                            <td class="p-3 font-mono">FR-01</td>
+                            <td class="p-3">Xác thực đăng nhập để vào cổng xếp phòng KTX.</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50 bg-emerald-50/40">
+                            <td class="p-3 font-mono font-bold text-emerald-700">UC-03</td>
+                            <td class="p-3 font-semibold text-slate-900">Xác thực thông tin sinh viên</td>
+                            <td class="p-3">Hệ thống</td>
+                            <td class="p-3"><span class="px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold">&laquo;include&raquo;</span></td>
+                            <td class="p-3 font-mono">SR-01</td>
+                            <td class="p-3">Kiểm tra tính hợp lệ của mã số sinh viên, định danh trường (VNUK, SPKT, DUE...).</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50">
+                            <td class="p-3 font-mono font-bold text-indigo-700">UC-04</td>
+                            <td class="p-3 font-semibold text-slate-900">Khai báo thói quen sinh hoạt</td>
+                            <td class="p-3">Sinh viên</td>
+                            <td class="p-3"><span class="px-2 py-0.5 rounded bg-sky-100 text-sky-800 font-bold">Chính</span> &larr; &laquo;extend&raquo; UC-05</td>
+                            <td class="p-3 font-mono">FR-01, SR-01</td>
+                            <td class="p-3">Nhập 8 tiêu chí kỹ thuật: ngủ, dậy, gọn gàng, học tập, độ ồn, hút thuốc, dắt bạn, sở thích & ưu tiên số 1.</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50 bg-purple-50/40">
+                            <td class="p-3 font-mono font-bold text-purple-700">UC-05</td>
+                            <td class="p-3 font-semibold text-slate-900">Nạp hồ sơ mẫu Persona</td>
+                            <td class="p-3">Sinh viên</td>
+                            <td class="p-3"><span class="px-2 py-0.5 rounded bg-purple-100 text-purple-800 font-bold">&laquo;extend&raquo;</span></td>
+                            <td class="p-3 font-mono">FR-01</td>
+                            <td class="p-3">Tùy chọn tải nhanh mẫu sinh viên điển hình: Thái Bảo (VNUK), Văn Việt (SPKT), Minh Quân (DUE).</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50">
+                            <td class="p-3 font-mono font-bold text-indigo-700">UC-06</td>
+                            <td class="p-3 font-semibold text-slate-900">Xem Bảng xếp hạng bạn cùng phòng</td>
+                            <td class="p-3">Sinh viên</td>
+                            <td class="p-3"><span class="px-2 py-0.5 rounded bg-sky-100 text-sky-800 font-bold">Chính</span> &rarr; &laquo;include&raquo; UC-07</td>
+                            <td class="p-3 font-mono">FR-04, SR-02</td>
+                            <td class="p-3">Xem danh sách ứng viên phù hợp được sắp xếp từ Hạng 1 đến Hạng 8 kèm % độ hòa hợp.</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50 bg-emerald-50/40">
+                            <td class="p-3 font-mono font-bold text-emerald-700">UC-07</td>
+                            <td class="p-3 font-semibold text-slate-900">Tính điểm tương thích 2 chiều</td>
+                            <td class="p-3">Hệ thống</td>
+                            <td class="p-3"><span class="px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold">&laquo;include&raquo;</span></td>
+                            <td class="p-3 font-mono">FR-04, FR-05</td>
+                            <td class="p-3">Tính ma trận M[a][b] và M[b][a] theo trọng số 8 tiêu chí có nhân hệ số 1.5x cho tiêu chí ưu tiên.</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50 bg-purple-50/40">
+                            <td class="p-3 font-mono font-bold text-purple-700">UC-08</td>
+                            <td class="p-3 font-semibold text-slate-900">Xem chi tiết giải thích tiêu chí</td>
+                            <td class="p-3">Sinh viên</td>
+                            <td class="p-3"><span class="px-2 py-0.5 rounded bg-purple-100 text-purple-800 font-bold">&laquo;extend&raquo;</span></td>
+                            <td class="p-3 font-mono">FR-09, SR-03</td>
+                            <td class="p-3">Mở rộng chi tiết: Liệt kê các tiêu chí trùng khớp (&ge; 0.75) và các điểm cần lưu ý (&le; 0.40).</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50">
+                            <td class="p-3 font-mono font-bold text-indigo-700">UC-09</td>
+                            <td class="p-3 font-semibold text-slate-900">Quản lý dữ liệu sinh viên KTX</td>
+                            <td class="p-3">Ban quản lý KTX</td>
+                            <td class="p-3"><span class="px-2 py-0.5 rounded bg-sky-100 text-sky-800 font-bold">Chính</span> &larr; &laquo;extend&raquo; UC-10, UC-11</td>
+                            <td class="p-3 font-mono">FR-02, FR-03, SR-04</td>
+                            <td class="p-3">Quản lý toàn bộ danh sách hồ sơ sinh viên nhóm A và nhóm B trong KTX.</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50 bg-purple-50/40">
+                            <td class="p-3 font-mono font-bold text-purple-700">UC-10</td>
+                            <td class="p-3 font-semibold text-slate-900">Nạp dữ liệu từ file CSV</td>
+                            <td class="p-3">Ban quản lý KTX</td>
+                            <td class="p-3"><span class="px-2 py-0.5 rounded bg-purple-100 text-purple-800 font-bold">&laquo;extend&raquo;</span></td>
+                            <td class="p-3 font-mono">FR-02</td>
+                            <td class="p-3">Upload file CSV khảo sát đầu năm học của toàn bộ sinh viên nội trú.</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50 bg-purple-50/40">
+                            <td class="p-3 font-mono font-bold text-purple-700">UC-11</td>
+                            <td class="p-3 font-semibold text-slate-900">Sinh dữ liệu giả lập (Seed)</td>
+                            <td class="p-3">Ban quản lý KTX</td>
+                            <td class="p-3"><span class="px-2 py-0.5 rounded bg-purple-100 text-purple-800 font-bold">&laquo;extend&raquo;</span></td>
+                            <td class="p-3 font-mono">FR-03</td>
+                            <td class="p-3">Sinh ngẫu nhiên N sinh viên theo seed để kiểm thử tải và thuật toán quy mô 20, 50, 100, 200.</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50">
+                            <td class="p-3 font-mono font-bold text-indigo-700">UC-12</td>
+                            <td class="p-3 font-semibold text-slate-900">Thực hiện ghép phòng tự động</td>
+                            <td class="p-3">Ban quản lý KTX</td>
+                            <td class="p-3"><span class="px-2 py-0.5 rounded bg-sky-100 text-sky-800 font-bold">Chính</span> &rarr; &laquo;include&raquo; UC-13, UC-14</td>
+                            <td class="p-3 font-mono">FR-06, SR-05</td>
+                            <td class="p-3">Kích hoạt quy trình ghép phòng tổng thể cho toàn bộ ký túc xá.</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50 bg-emerald-50/40">
+                            <td class="p-3 font-mono font-bold text-emerald-700">UC-13</td>
+                            <td class="p-3 font-semibold text-slate-900">Chạy thuật toán Gale-Shapley</td>
+                            <td class="p-3">Hệ thống</td>
+                            <td class="p-3"><span class="px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold">&laquo;include&raquo;</span></td>
+                            <td class="p-3 font-mono">FR-06</td>
+                            <td class="p-3">Thực thi thuật toán đề xuất và chấp nhận hoãn lại (Deferred Acceptance) đảm bảo ghép cặp ổn định.</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50 bg-emerald-50/40">
+                            <td class="p-3 font-mono font-bold text-emerald-700">UC-14</td>
+                            <td class="p-3 font-semibold text-slate-900">Đếm cặp chặn (Blocking Pairs)</td>
+                            <td class="p-3">Hệ thống</td>
+                            <td class="p-3"><span class="px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold">&laquo;include&raquo;</span></td>
+                            <td class="p-3 font-mono">FR-08</td>
+                            <td class="p-3">Kiểm tra toàn bộ các cặp chéo để chứng minh số cặp chặn bằng 0 (tính ổn định tuyệt đối).</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50">
+                            <td class="p-3 font-mono font-bold text-indigo-700">UC-15</td>
+                            <td class="p-3 font-semibold text-slate-900">Xem báo cáo & so sánh đối chứng</td>
+                            <td class="p-3">Ban quản lý KTX</td>
+                            <td class="p-3"><span class="px-2 py-0.5 rounded bg-sky-100 text-sky-800 font-bold">Chính</span> &larr; &laquo;extend&raquo; UC-16</td>
+                            <td class="p-3 font-mono">FR-07, FR-10, SR-06</td>
+                            <td class="p-3">Xem biểu đồ đối sánh điểm hài lòng trung bình giữa Gale-Shapley và ghép phòng ngẫu nhiên.</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50 bg-purple-50/40">
+                            <td class="p-3 font-mono font-bold text-purple-700">UC-16</td>
+                            <td class="p-3 font-semibold text-slate-900">Xuất kết quả phân phòng (CSV)</td>
+                            <td class="p-3">Ban quản lý KTX</td>
+                            <td class="p-3"><span class="px-2 py-0.5 rounded bg-purple-100 text-purple-800 font-bold">&laquo;extend&raquo;</span></td>
+                            <td class="p-3 font-mono">FR-11, SR-08</td>
+                            <td class="p-3">Tải về danh sách ghép phòng chính thức để dán thông báo tại sảnh KTX hoặc bàn giao bảo vệ.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
