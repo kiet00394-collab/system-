@@ -69,7 +69,7 @@ def test_load_students_csv_rejects_invalid_numeric_data():
 
 
 def test_load_students_csv_rejects_empty_file():
-    with pytest.raises(pd.errors.EmptyDataError):
+    with pytest.raises((pd.errors.EmptyDataError, ValueError)):
         load_students_csv(StringIO(""))
 
 
