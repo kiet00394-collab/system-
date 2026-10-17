@@ -20,6 +20,16 @@
 
 ## II. YÊU CẦU THÔNG TIN (INFORMATION REQUIREMENTS - IR)
 
+| Mã IR | Tên thành phần thông tin | Nội dung & Mục đích | Định dạng / Nơi lưu |
+| :--- | :--- | :--- | :--- |
+| **IR-01** | **File CSV mẫu** | Bộ dữ liệu mẫu gồm 20 sinh viên chứa đủ 12 trường tiêu chí sinh hoạt chuẩn để thử nghiệm hệ thống. | `data/sample_students.csv` |
+| **IR-02** | **Tài liệu hướng dẫn (README)** | Tài liệu hướng dẫn thiết lập môi trường, cài đặt thư viện, hướng dẫn chạy ứng dụng, cấu trúc mã nguồn và bảng phân công vai trò. | `README.md` |
+| **IR-03** | **Dữ liệu giả lập** | Thuật toán sinh tự động dữ liệu thử nghiệm với quy mô tùy biến (\(N \in [10, 200]\)), kiểm soát bằng `seed`, mô phỏng 2 cụm thói quen (cú đêm / ngủ sớm). | Hàm `generate_students(n, seed)` |
+| **IR-04** | **Video demo** | Video quay màn hình thời lượng 5–10 phút trình bày toàn bộ luồng ứng dụng từ nạp dữ liệu, ghép cặp, giải thích lý do đến trực quan hóa so sánh. | Link video đính kèm báo cáo |
+| **IR-05** | **Quy trình chuyển đổi Excel sang CSV** | Hướng dẫn chuẩn hóa và chuyển đổi bảng tính Excel quản lý ký túc xá thực tế sang file CSV tương thích với định dạng đầu vào của hệ thống. | Mục hướng dẫn trong báo cáo & README |
+
+---
+
 ### 1. Dữ liệu Đầu vào (Input Requirements - IR-IN)
 Dữ liệu được nạp từ file CSV khảo sát (`data/sample_students.csv`) hoặc sinh tự động qua hàm `generate_students(n, seed)`:
 
