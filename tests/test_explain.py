@@ -21,3 +21,13 @@ def test_explain_pair_opposite_students():
     explanation = explain_pair(s1, s2)
     assert "Cần lưu ý:" in explanation
     assert "giờ đi ngủ" in explanation or "hút thuốc" in explanation
+
+def test_explain_pair_contains_top_priority_analysis():
+    s1 = Student(id=0, name="An", group="A", sleep=22.0, wake=7.0, tidy=5, study="phong",
+                 noise=2, smoke=0, guests=2, hobbies={"game"}, top="sleep")
+    s2 = Student(id=1, name="Binh", group="B", sleep=22.0, wake=7.0, tidy=5, study="phong",
+                 noise=2, smoke=0, guests=2, hobbies={"game"}, top="tidy")
+    explanation = explain_pair(s1, s2)
+    assert "Tiêu chí ưu tiên:" in explanation
+    assert "An quan tâm nhất 'giờ đi ngủ'" in explanation
+    assert "Binh quan tâm nhất 'mức gọn gàng'" in explanation

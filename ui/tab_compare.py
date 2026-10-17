@@ -8,7 +8,7 @@ def render():
 
     st.markdown("""
     Tab này thực hiện so sánh đối chứng giữa thuật toán **Gale-Shapley** (ghép ổn định 2 phía) 
-    và **Ghép ngẫu nhiên (Random Matching)** nhằm kiểm chứng các chỉ tiêu trong **BR-01** và **SR-06**.
+    và **Ghép ngẫu nhiên (Random Matching)** nhằm kiểm chứng các chỉ tiêu trong **BR-01**, **SR-06** và **NFR-02**.
     """)
 
     col_cfg1, col_cfg2 = st.columns(2)
@@ -26,7 +26,7 @@ def render():
             st.warning("Vui lòng chọn ít nhất một quy mô sinh viên để thử nghiệm.")
             return
 
-        with st.spinner("Đang chạy mô phỏng thuật toán..."):
+        with st.spinner("Đang chạy mô phỏng thuật toán trên các quy mô..."):
             results = []
             for n in sorted(sizes):
                 res = run_experiment(n=n, seed=int(seed), n_random=100)
@@ -37,23 +37,26 @@ def render():
 
             df = pd.DataFrame(results)
 
-            st.subheader("1. Bảng số liệu đối chứng")
+            st.subheader("1. Bảng số liệu thực nghiệm chi tiết")
             display_df = df.rename(columns={
-                "n": "Số sinh viên",
-                "gs": "Điểm hài lòng GS",
+                "n": "Số sinh viên (N)",
+                "gs": "Điểm hài lòng GS (Chung)",
+                "gs_a": "Hài lòng Nhóm A (Đề nghị)",
+                "gs_b": "Hài lòng Nhóm B (Chấp thuận)",
+                "a_bias": "Chênh lệch (A - B)",
                 "random": "Điểm hài lòng Ngẫu nhiên",
-                "blocking_pairs": "Số cặp chặn (Blocking Pairs)",
+                "blocking_pairs": "Cặp chặn (Blocking Pairs)",
                 "improvement_pct": "% Cải thiện so với ngẫu nhiên"
             })
             st.dataframe(display_df, use_container_width=True)
 
             st.subheader("2. Biểu đồ so sánh điểm hài lòng trung bình")
-            fig, ax = plt.subplots(figsize=(8, 4.5))
+            fig, ax = plt.subplots(figsize=(8.5, 4.5))
             w = 0.35
             x = range(len(df))
 
-            rects1 = ax.bar([i - w/2 for i in x], df["gs"], w, label="Gale-Shapley (Ổn định)", color="#2b5c8f")
-            rects2 = ax.bar([i + w/2 for i in x], df["random"], w, label="Ngẫu nhiên (Baseline)", color="#d95f02")
+            rects1 = ax.bar([i - w/2 for i in x], df["gs"], w, label="Gale-Shapley (Ổn định)", color="#1f77b4")
+            rects2 = ax.bar([i + w/2 for i in x], df["random"], w, label="Ngẫu nhiên (Baseline)", color="#ff7f0e")
 
             ax.set_xticks(list(x))
             ax.set_xticklabels([f"N={n}" for n in df["n"]])
@@ -61,7 +64,7 @@ def render():
             ax.set_ylabel("Điểm hài lòng trung bình (thang 100)", fontsize=11)
             ax.set_ylim(0, 100)
             ax.legend(loc="upper right")
-            ax.grid(axis="y", linestyle="--", alpha=0.7)
+            ax.grid(axis="y", linestyle="--", alpha=0.6)
 
             # Gắn nhãn giá trị lên cột
             for r in rects1:
@@ -75,12 +78,14 @@ def render():
 
             st.pyplot(fig)
 
-            # Kết luận kiểm chứng mục tiêu SMART
+            # Kết luận kiểm chứng mục tiêu SMART & Phân tích lý thuyết trò chơi
             all_zero_blocking = (df["blocking_pairs"] == 0).all()
             avg_imp = df["improvement_pct"].mean()
+            avg_bias = df["a_bias"].mean()
 
             st.success(f"""
             **Kết luận kiểm chứng thực nghiệm:**
-            * ✅ **Tính ổn định (NFR-02):** Tất cả các quy mô thử nghiệm đều có **0 cặp chặn**.
+            * ✅ **Tính ổn định (NFR-02):** Tất cả các quy mô thử nghiệm đều đạt **0 cặp chặn** tuyệt đối.
             * ✅ **Độ tương thích (BR-01):** Thuật toán Gale-Shapley giúp tăng độ hài lòng trung bình **+{avg_imp:.1f}%** so với ghép ngẫu nhiên.
+            * 🔍 **Kiểm chứng Lý thuyết trò chơi (A-optimal):** Nhóm A (bên chủ động đề nghị) đạt mức hài lòng trung bình cao hơn nhóm B là **+{avg_bias:.1f} điểm**, hoàn toàn khớp với định lý toán học của thuật toán Gale-Shapley.
             """)

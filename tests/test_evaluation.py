@@ -18,6 +18,9 @@ def test_run_experiment_structure_and_validity():
     res = run_experiment(n=20, seed=42, n_random=10)
     assert res["n"] == 20
     assert "gs" in res
+    assert "gs_a" in res
+    assert "gs_b" in res
+    assert "a_bias" in res
     assert "random" in res
     assert "blocking_pairs" in res
     # Gale-Shapley phải luôn đảm bảo 0 cặp chặn
@@ -25,3 +28,13 @@ def test_run_experiment_structure_and_validity():
     # Thang điểm hài lòng trong đoạn [0, 100]
     assert 0.0 <= res["gs"] <= 100.0
     assert 0.0 <= res["random"] <= 100.0
+
+def test_group_satisfaction():
+    from evaluation import group_satisfaction
+    match = {0: 1}
+    M = np.zeros((2, 2))
+    M[0][1] = 90.0  # Điểm A đánh giá B
+    M[1][0] = 70.0  # Điểm B đánh giá A
+    sat_a, sat_b = group_satisfaction(match, M)
+    assert sat_a == 90.0
+    assert sat_b == 70.0
