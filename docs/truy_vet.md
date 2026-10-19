@@ -1,7 +1,7 @@
 # MA TRẬN TRUY VẾT YÊU CẦU (REQUIREMENTS TRACEABILITY MATRIX)
 
-**Hệ thống:** Ghép phòng Ký túc xá tự động (Gale-Shapley Matching System)  
-**Phụ trách tổng hợp phần B:** Châu Tuấn Kiệt  
+**Phụ trách quản lý & truy vết:** Hoàng Triều (Người C - Quản lý Repo & Đánh giá)  
+**Phối hợp đóng góp:** Bùi Đình Hiếu (Người A), Châu Tuấn Kiệt (Người B)  
 
 ---
 
