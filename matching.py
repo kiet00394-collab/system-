@@ -91,3 +91,27 @@ def run_benchmark(student_totals: list[int] = [100, 200, 400, 1000], seeds: int 
             total_time += (time.perf_counter() - t0)
         results[total] = round(total_time / seeds, 5)
     return results
+    def analyze_matching_quality(match: dict[int, int], pref_a: dict[int, list[int]], pref_b: dict[int, list[int]]) -> dict[str, float]:
+    """
+    Thống kê chất lượng phép ghép (Bước A7 - Báo cáo phân tích):
+    - Thứ hạng ưu tiên trung bình của nhóm A và nhóm B (1 là nguyện vọng 1).
+    - Tỷ lệ % sinh viên đạt được Top 3 nguyện vọng đầu tiên.
+    """
+    if not match:
+        return {"avg_rank_a": 0.0, "avg_rank_b": 0.0, "top3_rate_a": 0.0, "top3_rate_b": 0.0}
+
+    ranks_a = []
+    ranks_b = []
+    for a, b in match.items():
+        r_a = pref_a[a].index(b) + 1 if b in pref_a[a] else len(pref_a[a])
+        r_b = pref_b[b].index(a) + 1 if a in pref_b[b] else len(pref_b[b])
+        ranks_a.append(r_a)
+        ranks_b.append(r_b)
+
+    n = len(match)
+    return {
+        "avg_rank_a": round(sum(ranks_a) / n, 2),
+        "avg_rank_b": round(sum(ranks_b) / n, 2),
+        "top3_rate_a": round(sum(1 for r in ranks_a if r <= 3) * 100.0 / n, 1),
+        "top3_rate_b": round(sum(1 for r in ranks_b if r <= 3) * 100.0 / n, 1),
+    }
