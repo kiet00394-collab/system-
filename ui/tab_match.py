@@ -1,6 +1,12 @@
 import streamlit as st
 import pandas as pd
-from matching import gale_shapley, count_blocking_pairs, merge_pairs_into_rooms, run_benchmark
+from matching import (
+    gale_shapley,
+    count_blocking_pairs,
+    merge_pairs_into_rooms,
+    run_benchmark,
+    analyze_matching_quality
+)
 
 def render():
     st.header("Tab 2: Ghép phòng Ký túc xá")
@@ -22,6 +28,15 @@ def render():
 
         match = st.session_state.get("match")
         if match:
+            bp = count_blocking_pairs(match, pa, pb)
+            stats = analyze_matching_quality(match, pa, pb)
+
+            c1, c2, c3, c4 = st.columns(4)
+            c1.metric("Số cặp chặn (NFR-02)", bp)
+            c2.metric("Hạng nguyện vọng TB (Nhóm A)", stats["avg_rank_a"])
+            c3.metric("Hạng nguyện vọng TB (Nhóm B)", stats["avg_rank_b"])
+            c4.metric("Đạt Top 3 nguyện vọng (Nhóm A)", f"{stats['top3_rate_a']}%")
+
             if room_type == "2 người/phòng":
                 rows = [
                     {
@@ -33,9 +48,8 @@ def render():
                     }
                     for i, (a, b) in enumerate(match.items())
                 ]
-                st.dataframe(pd.DataFrame(rows), use_container_width=True)
-                bp = count_blocking_pairs(match, pa, pb)
-                st.metric("Số cặp chặn (Blocking Pairs - 0 là tuyệt đối ổn định)", bp)
+                df_res = pd.DataFrame(rows)
+                st.dataframe(df_res, use_container_width=True)
             else:
                 rooms_4 = merge_pairs_into_rooms(match, M, room_size=4)
                 rows = [
@@ -45,9 +59,16 @@ def render():
                     }
                     for i, r in enumerate(rooms_4)
                 ]
-                st.dataframe(pd.DataFrame(rows), use_container_width=True)
-                bp = count_blocking_pairs(match, pa, pb)
-                st.metric("Số cặp chặn gốc (Gale-Shapley)", bp)
+                df_res = pd.DataFrame(rows)
+                st.dataframe(df_res, use_container_width=True)
+
+            csv_data = df_res.to_csv(index=False).encode("utf-8-sig")
+            st.download_button(
+                label="📥 Tải danh sách phân phòng (CSV)",
+                data=csv_data,
+                file_name="ket_qua_ghep_phong_ktx.csv",
+                mime="text/csv"
+            )
 
     st.markdown("---")
     st.subheader("⚡ Đo hiệu năng thuật toán (NFR-01 Benchmark - Bước A6)")
