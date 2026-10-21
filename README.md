@@ -43,20 +43,28 @@ system-/
 │   ├── tab_match.py           # Giao diện Tab 2: Ghép phòng Gale-Shapley (A)
 │   ├── tab_explain.py         # Giao diện Tab 3: Giải thích cặp ghép (C)
 │   └── tab_compare.py         # Giao diện Tab 4: Biểu đồ so sánh thực nghiệm (C)
-├── tests/                     # Bộ kiểm thử tự động (Pytest)
+├── tests/                     # Bộ kiểm thử tự động (Pytest) - 31/31 PASS
 │   ├── test_data_io.py
 │   ├── test_scoring.py
 │   ├── test_matching.py
-│   └── test_error_handling.py
+│   ├── test_benchmark.py
+│   ├── test_error_handling.py
+│   ├── test_evaluation.py
+│   ├── test_explain.py
+│   └── test_perf_scoring.py
 ├── data/                      # Dữ liệu mẫu và dữ liệu kiểm thử
 │   ├── sample_students.csv
 │   └── error_*.csv
 ├── docs/                      # Tài liệu phân tích và kỹ thuật (SRS, BR, FR, SR, IR, NFR)
-│   ├── BR_FR.md
-│   ├── SR_IR.md
-│   ├── NFR.md
-│   ├── ly_thuyet.md
-│   └── truy_vet.md
+│   ├── bao_cao_tong_hop.md    # Báo cáo tổng hợp toàn diện đồ án
+│   ├── bao_cao_phan_A.md      # Báo cáo chi tiết phần A (Gale-Shapley, Benchmark, A-optimal)
+│   ├── bao_cao_nguoi_b.md     # Báo cáo chi tiết phần B (Dữ liệu, 8 tiêu chí, Công thức điểm)
+│   ├── thuc_nghiem_thoi_gian.md # Thực nghiệm thời gian chạy NFR-01
+│   ├── BR_FR.md               # Yêu cầu nghiệp vụ & Chức năng
+│   ├── SR_IR.md               # Yêu cầu bên liên quan & Giao diện
+│   ├── NFR.md                 # Yêu cầu phi chức năng
+│   ├── ly_thuyet.md           # Lý thuyết thuật toán
+│   └── truy_vet.md            # Ma trận truy vết yêu cầu (Traceability Matrix)
 ├── requirements.txt           # Danh mục thư viện phụ thuộc
 └── README.md                  # Hướng dẫn dự án
 ```
