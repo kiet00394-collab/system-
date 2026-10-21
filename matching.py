@@ -91,7 +91,8 @@ def run_benchmark(student_totals: list[int] = [100, 200, 400, 1000], seeds: int 
             total_time += (time.perf_counter() - t0)
         results[total] = round(total_time / seeds, 5)
     return results
-    def analyze_matching_quality(match: dict[int, int], pref_a: dict[int, list[int]], pref_b: dict[int, list[int]]) -> dict[str, float]:
+
+def analyze_matching_quality(match: dict[int, int], pref_a: dict[int, list[int]], pref_b: dict[int, list[int]]) -> dict[str, float]:
     """
     Thống kê chất lượng phép ghép (Bước A7 - Báo cáo phân tích):
     - Thứ hạng ưu tiên trung bình của nhóm A và nhóm B (1 là nguyện vọng 1).

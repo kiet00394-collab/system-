@@ -18,7 +18,8 @@ def test_gale_shapley_is_stable():
 def test_random_usually_unstable():
     pa, pb = make_random_prefs(20, 1)
     assert count_blocking_pairs(random_matching(pa, pb, seed=1), pa, pb) > 0
-    from matching import analyze_matching_quality, merge_pairs_into_rooms
+
+from matching import analyze_matching_quality, merge_pairs_into_rooms
 import numpy as np
 
 def test_analyze_matching_quality_perfect():
