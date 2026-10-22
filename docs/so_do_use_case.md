@@ -1,197 +1,286 @@
-# TÀI LIỆU BIỂU ĐỒ USE CASE – HỆ THỐNG GHÉP BẠN CÙNG PHÒNG KÝ TÚC XÁ
-**Dự án:** Hệ thống xếp phòng ký túc xá thông minh theo độ tương thích thói quen (KTX Smart Roommate Matching)  
-**Nhóm thực hiện:** Nhóm 3 – Đồ án Trí tuệ Nhân tạo & Thuật toán Ghép cặp ổn định Gale-Shapley (2026)  
-**Phiên bản:** 2.0 (Cập nhật chuẩn UML theo mẫu phân tích chức năng)
+# TÀI LIỆU ĐẶC TẢ BIỂU ĐỒ USE CASE – HỆ THỐNG GHÉP PHÒNG KÝ TÚC XÁ THÔNG MINH
+**Dự án:** Hệ thống Quản trị & Ghép bạn cùng phòng Ký túc xá theo Độ tương thích và Tối ưu hóa Doanh thu (KTX Smart Match & Management)  
+**Nhóm thực hiện:** Nhóm 3 – Đồ án System Engineering & Kỹ thuật Hệ thống  
+**Phiên bản:** 3.0 (Cập nhật toàn diện theo phản hồi: Bổ sung Quản lý Phòng, Loại phòng, Phê duyệt Business Approve, Quy trình Thanh toán, Tối ưu hóa Lợi nhuận và Quy định Nghiệp vụ KTX)
 
 ---
 
-## 1. TỔNG QUAN BIỂU ĐỒ USE CASE
-Hệ thống giải quyết bài toán mâu thuẫn sinh hoạt nội trú KTX bằng cách thu thập khảo sát 8 tiêu chí thói quen sống và áp dụng thuật toán đề xuất và chấp nhận hoãn lại (**Gale-Shapley Algorithm**) để xếp phòng với tiêu chí **0 cặp chặn (Blocking Pairs = 0)**.
+## 1. TỔNG QUAN HỆ THỐNG VÀ BỐI CẢNH NGIỆP VỤ
 
-Biểu đồ Use Case phân định rõ ràng 02 tác nhân (Actor) chính:
-1. **Sinh viên nội trú (Người dùng cuối):** Tương tác với cổng thông tin sinh viên để khai báo thói quen và nhận bảng xếp hạng bạn cùng phòng phù hợp từ Hạng 1 đến Hạng 8.
-2. **Ban quản lý KTX (Quản trị viên):** Quản trị danh sách dữ liệu sinh viên, kích hoạt thuật toán ghép phòng tự động trên quy mô lớn và xem báo cáo đối sánh thực nghiệm.
+Trong thực tế vận hành ký túc xá đại học, bài toán không đơn thuần là một thuật toán ghép cặp thuần túy trong phòng thí nghiệm, mà là một **Hệ sinh thái Quản trị Ký túc xá hoàn chỉnh** kết hợp hài hòa giữa:
+1. **Trải nghiệm sinh viên:** Khảo sát nếp sinh hoạt 8 tiêu chí, chọn loại phòng mong muốn phù hợp ngân sách, minh bạch hóa điểm tương thích và lý do ghép bạn cùng phòng.
+2. **Nghiệp vụ Phê duyệt (Business Approve):** Ban quản lý KTX thẩm định tư cách sinh viên, kiểm tra điều kiện liên kết trường học, lịch sử kỷ luật và cam kết thời gian ở tối thiểu.
+3. **Quy trình Thanh toán & Đặt cọc (Payment & Deposit):** Xử lý giao dịch thu tiền phòng theo kỳ, tiền đặt cọc cơ sở vật chất, sinh biên lai điện tử và hợp đồng lưu trú.
+4. **Hiệu quả Kinh doanh & Lợi nhuận KTX (Revenue & Profit Optimization):** Quản lý danh mục phòng đa dạng (2, 4, 6 người), tối ưu hóa tỷ lệ lấp đầy giường (Occupancy Rate $\ge 90\%$), giảm thiểu chi phí vận hành phòng trống và báo cáo biên lợi nhuận ròng.
 
 ---
 
-## 2. BIỂU ĐỒ USE CASE UML (MERMAID)
+## 2. CÁC QUY ĐỊNH NGHIỆP VỤ CỐT LÕI (BUSINESS RULES - BR)
+
+Hệ thống được vận hành chặt chẽ dựa trên 5 Quy tắc nghiệp vụ (Business Rules):
+
+* **BR-01 (Quy tắc Đối tượng Tiếp nhận - Đại học Liên kết):**
+  - Ký túc xá A được chỉ định phục vụ cho sinh viên thuộc **Trường Đại học A** (hoặc các đơn vị trong khối liên kết).
+  - Sinh viên trường A khi đăng ký đến KTX A sẽ được hệ thống tự động xác thực qua Mã số sinh viên (MSSV) và email giáo dục (`@edu.vn`), sau đó được kích hoạt quy trình hỗ trợ tự động ghép phòng bằng thuật toán.
+* **BR-02 (Quy tắc Thời hạn Hợp đồng Tối thiểu 1 Kỳ):**
+  - Để đảm bảo ổn định an ninh trật tự, nếp sống văn hóa nội trú và đảm bảo dòng tiền kế hoạch tài chính của KTX, sinh viên bắt buộc phải cam kết thời gian lưu trú **tối thiểu 01 học kỳ (5 tháng)** hoặc 1 năm học.
+  - Hệ thống từ chối các yêu cầu thuê phòng ngắn hạn (theo ngày/tuần) đối với diện ghép phòng tự động.
+* **BR-03 (Quy trình Phê duyệt Nghiệp vụ - Business Approval Workflow):**
+  - Hồ sơ đăng ký của sinh viên phải trải qua bước **Phê duyệt nghiệp vụ (Business Approve)** của BQL KTX trước khi được đưa vào hàng đợi chạy thuật toán phân phòng.
+  - BQL có quyền xét duyệt diện ưu tiên chính sách, thẩm định hồ sơ và từ chối nếu sinh viên có tiền sử vi phạm nội quy KTX.
+* **BR-04 (Quy tắc Đặt cọc & Thời hạn Thanh toán):**
+  - Trong vòng **72 giờ** kể từ khi nhận được thông báo kết quả ghép phòng, sinh viên phải hoàn tất thanh toán tiền phòng học kỳ đầu tiên kèm **Tiền đặt cọc tài sản** (1.000.000 VNĐ).
+  - Nếu quá hạn 72h chưa thanh toán, hệ thống tự động hủy kết quả giữ chỗ và chuyển nhượng vị trí cho sinh viên trong danh sách chờ (Waitlist). Nếu sinh viên đơn phương hủy hợp đồng trước hạn 1 kỳ, tiền cọc sẽ không được hoàn trả để bù đắp chi phí vận hành phòng.
+* **BR-05 (Quy tắc Tối ưu hóa Lợi nhuận & Tỷ lệ Lấp đầy Phòng - Occupancy):**
+  - Thuật toán ghép phòng kết hợp: Phân nhóm sinh viên theo cùng nguyện vọng loại phòng (2 người, 4 người, 6 người) trước, sau đó áp dụng Gale-Shapley để ghép cặp tương thích thói quen.
+  - Ưu tiên lấp đầy 100% số giường của từng phòng trước khi mở phòng mới, tránh tình trạng nhiều phòng dở dang (ví dụ phòng 4 người chỉ có 1 người ở) gây lãng phí chi phí điện nước chung và nhân lực vệ sinh, qua đó tối đa hóa lợi nhuận ròng cho KTX.
+
+---
+
+## 3. TÁC NHÂN HỆ THỐNG (SYSTEM ACTORS)
+
+1. 🧑 **Sinh viên nội trú (Student - Primary Actor):**
+   - Sinh viên trường A có nhu cầu đăng ký ở ký túc xá A.
+   - Khai báo hồ sơ cá nhân, chọn loại phòng & ngân sách mong muốn, làm khảo sát 8 tiêu chí thói quen, xem bảng xếp hạng gợi ý bạn cùng phòng, nộp đơn cam kết $\ge 1$ kỳ, thực hiện thanh toán tiền phòng/cọc và nhận hợp đồng.
+2. 👨‍💼 **Ban quản lý KTX (Dormitory Admin / Staff - Business Actor):**
+   - Cán bộ quản lý KTX chịu trách nhiệm vận hành: Quản lý danh mục phòng & đơn giá, phê duyệt nghiệp vụ hồ sơ đăng ký (Business Approve), kích hoạt thuật toán ghép phòng Gale-Shapley, quản lý công nợ thanh toán, giám sát báo cáo doanh thu & tỷ lệ lấp đầy lợi nhuận KTX.
+3. 💳 **Cổng thanh toán điện tử (Payment Gateway - Secondary System Actor):**
+   - Hệ thống ngân hàng / Cổng trung gian (VNPay, MoMo, Thẻ ngân hàng) tiếp nhận yêu cầu thanh toán, xử lý giao dịch an toàn và phản hồi trạng thái giao dịch cho KTX.
+
+---
+
+## 4. BIỂU ĐỒ USE CASE UML TOÀN DIỆN (MERMAID)
 
 ```mermaid
 graph LR
     %% System Boundary
-    subgraph SYSTEM ["HỆ THỐNG GHÉP BẠN CÙNG PHÒNG KÝ TÚC XÁ"]
+    subgraph SYSTEM ["HỆ THỐNG QUẢN TRỊ & GHÉP PHÒNG KÝ TÚC XÁ THÔNG MINH"]
         direction TB
-        
-        %% Use Cases of Student
-        UC01(["UC-01: Đăng ký tài khoản"])
-        UC02(["UC-02: Đăng nhập"])
-        UC03(["UC-03: Xác thực thông tin sinh viên"])
-        
-        UC04(["UC-04: Khai báo thói quen sinh hoạt"])
-        UC05(["UC-05: Nạp hồ sơ mẫu Persona"])
-        
-        UC06(["UC-06: Xem Bảng xếp hạng bạn cùng phòng"])
-        UC07(["UC-07: Tính điểm tương thích 2 chiều"])
-        UC08(["UC-08: Xem chi tiết giải thích tiêu chí"])
-        
-        %% Use Cases of Admin
-        UC09(["UC-09: Quản lý dữ liệu sinh viên KTX"])
-        UC10(["UC-10: Nạp dữ liệu từ file CSV"])
-        UC11(["UC-11: Sinh dữ liệu giả lập (Seed)"])
-        
-        UC12(["UC-12: Thực hiện ghép phòng tự động"])
-        UC13(["UC-13: Chạy thuật toán Gale-Shapley"])
-        UC14(["UC-14: Đếm cặp chặn (Blocking Pairs)"])
-        
-        UC15(["UC-15: Xem báo cáo & so sánh đối chứng"])
-        UC16(["UC-16: Xuất kết quả phân phòng (CSV)"])
+
+        %% Subsystem 1: Identity & Profiles
+        subgraph PKG1 ["Phân hệ 1: Quản lý Tài khoản & Hồ sơ"]
+            UC01(["UC-01: Đăng ký tài khoản KTX"])
+            UC02(["UC-02: Đăng nhập hệ thống"])
+            UC03(["UC-03: Xác thực sinh viên Trường A (BR-01)"])
+            UC04(["UC-04: Quản lý hồ sơ cá nhân"])
+        end
+
+        %% Subsystem 2: Preference & Room Choice
+        subgraph PKG2 ["Phân hệ 2: Khảo sát Thói quen & Chọn Loại phòng"]
+            UC05(["UC-05: Khai báo 8 tiêu chí thói quen"])
+            UC06(["UC-06: Nạp hồ sơ mẫu Persona"])
+            UC07(["UC-07: Chọn loại phòng & tiện ích mong muốn"])
+        end
+
+        %% Subsystem 3: Business Approval & Match Suggestion
+        subgraph PKG3 ["Phân hệ 3: Đăng ký & Phê duyệt Nghiệp vụ (Business Approve)"]
+            UC08(["UC-08: Nộp đơn đăng ký KTX (Cam kết ≥ 1 kỳ - BR-02)"])
+            UC09(["UC-09: Phê duyệt đơn đăng ký KTX (Business Approve - BR-03)"])
+            UC10(["UC-10: Xem Xếp hạng bạn cùng phòng phù hợp"])
+            UC11(["UC-11: Tính điểm tương thích 2 chiều"])
+            UC12(["UC-12: Xem giải thích tiêu chí chi tiết"])
+        end
+
+        %% Subsystem 4: Room Management & Algorithm Matching
+        subgraph PKG4 ["Phân hệ 4: Quản lý Danh mục Phòng & Ghép phòng Gale-Shapley"]
+            UC13(["UC-13: Quản lý danh mục phòng & giá thuê"])
+            UC14(["UC-14: Quản lý dữ liệu sinh viên KTX"])
+            UC15(["UC-15: Thực hiện ghép phòng tự động"])
+            UC16(["UC-16: Chạy thuật toán Gale-Shapley"])
+            UC17(["UC-17: Đếm cặp chặn (Blocking Pairs)"])
+            UC18(["UC-18: Tối ưu hóa tỷ lệ lấp đầy phòng (BR-05)"])
+        end
+
+        %% Subsystem 5: Payment & Tenancy Contract
+        subgraph PKG5 ["Phân hệ 5: Thanh toán & Hợp đồng Lưu trú"]
+            UC19(["UC-19: Thanh toán tiền phòng & đặt cọc (BR-04)"])
+            UC20(["UC-20: Xử lý giao dịch thanh toán"])
+            UC21(["UC-21: Quản lý công nợ & xuất biên lai"])
+            UC22(["UC-22: Ký & Tải hợp đồng lưu trú KTX"])
+        end
+
+        %% Subsystem 6: Revenue, Profit & Analytics
+        subgraph PKG6 ["Phân hệ 6: Quản lý Doanh thu, Lợi nhuận & Báo cáo"]
+            UC23(["UC-23: Báo cáo Doanh thu & Lợi nhuận KTX"])
+            UC24(["UC-24: Báo cáo đối sánh thuật toán (vs Random)"])
+            UC25(["UC-25: Xuất báo cáo & danh sách phòng (CSV)"])
+        end
     end
 
     %% Actors
     SV["🧑 Sinh viên<br/>(Người dùng)"]
     BQL["👨‍💼 Ban quản lý KTX<br/>(Quản trị viên)"]
+    GATEWAY["💳 Cổng thanh toán<br/>(VNPay / Ngân hàng)"]
 
-    %% Actor Connections
+    %% Student Connections
     SV --- UC01
     SV --- UC02
     SV --- UC04
-    SV --- UC06
+    SV --- UC05
+    SV --- UC07
+    SV --- UC08
+    SV --- UC10
+    SV --- UC19
+    SV --- UC22
 
+    %% Admin Connections
     BQL --- UC09
-    BQL --- UC12
+    BQL --- UC13
+    BQL --- UC14
     BQL --- UC15
+    BQL --- UC21
+    BQL --- UC23
+    BQL --- UC24
 
-    %% Include Relationships
+    %% Payment Gateway Connection
+    UC20 --- GATEWAY
+
+    %% Include Relationships (Dashed with <<include>>)
     UC01 -.->|&laquo;include&raquo;| UC03
     UC02 -.->|&laquo;include&raquo;| UC03
-    
-    UC06 -.->|&laquo;include&raquo;| UC07
-    
-    UC12 -.->|&laquo;include&raquo;| UC13
-    UC12 -.->|&laquo;include&raquo;| UC14
 
-    %% Extend Relationships
-    UC05 -.->|&laquo;extend&raquo;| UC04
-    UC08 -.->|&laquo;extend&raquo;| UC06
-    
-    UC10 -.->|&laquo;extend&raquo;| UC09
-    UC11 -.->|&laquo;extend&raquo;| UC09
-    
-    UC16 -.->|&laquo;extend&raquo;| UC15
+    UC10 -.->|&laquo;include&raquo;| UC11
+
+    UC15 -.->|&laquo;include&raquo;| UC16
+    UC15 -.->|&laquo;include&raquo;| UC17
+    UC15 -.->|&laquo;include&raquo;| UC18
+
+    UC19 -.->|&laquo;include&raquo;| UC20
+
+    %% Extend Relationships (Dashed with <<extend>>)
+    UC06 -.->|&laquo;extend&raquo;| UC05
+    UC12 -.->|&laquo;extend&raquo;| UC10
+    UC25 -.->|&laquo;extend&raquo;| UC23
+    UC25 -.->|&laquo;extend&raquo;| UC24
 
     %% Styling
-    classDef mainUC fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0369a1,font-weight:bold;
+    classDef coreUC fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0369a1,font-weight:bold;
     classDef incUC fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#15803d,font-weight:bold;
     classDef extUC fill:#f3e8ff,stroke:#9333ea,stroke-width:2px,color:#7e22ce,font-weight:bold;
 
-    class UC01,UC02,UC04,UC06,UC09,UC12,UC15 mainUC;
-    class UC03,UC07,UC13,UC14 incUC;
-    class UC05,UC08,UC10,UC11,UC16 extUC;
+    class UC01,UC02,UC04,UC05,UC07,UC08,UC09,UC10,UC13,UC14,UC15,UC19,UC21,UC22,UC23,UC24 coreUC;
+    class UC03,UC11,UC16,UC17,UC18,UC20 incUC;
+    class UC06,UC12,UC25 extUC;
 ```
 
 ---
 
-## 3. NGUYÊN TẮC QUAN HỆ TRONG BIỂU ĐỒ (THEO CHUẨN UML)
+## 5. BẢNG DANH MỤC 25 USE CASE VÀ PHÂN VAI TRÁCH NHIỆM
 
-### 3.1 Quan hệ `<<include>>` (Bắt buộc dùng chung)
-* **Khái niệm:** Use case gốc luôn bắt buộc phải thực hiện hành vi của Use case được include như một phần cốt lõi của quy trình xử lý.
-* **Quy tắc mũi tên:** Mũi tên nét đứt hướng **về phía** Use case được include (`A ..>|<<include>>| B`).
-* **Áp dụng trong hệ thống:**
-  1. `UC-01 (Đăng ký)` & `UC-02 (Đăng nhập)` $\rightarrow$ `<<include>>` $\rightarrow$ `UC-03 (Xác thực thông tin sinh viên)`: Mọi hành động đăng ký hoặc đăng nhập đều phải kiểm tra mã sinh viên và mật khẩu hợp lệ trước khi cấp phiên làm việc.
-  2. `UC-06 (Xem Bảng xếp hạng bạn cùng phòng)` $\rightarrow$ `<<include>>` $\rightarrow$ `UC-07 (Tính điểm tương thích 2 chiều)`: Để hiển thị bảng xếp hạng từ Hạng 1 đến Hạng 8, hệ thống bắt buộc phải tính ma trận điểm 2 chiều $M[a][b]$ và $M[b][a]$ dựa trên 8 tiêu chí.
-  3. `UC-12 (Thực hiện ghép phòng tự động)` $\rightarrow$ `<<include>>` $\rightarrow$ `UC-13 (Chạy thuật toán Gale-Shapley)` & `UC-14 (Đếm cặp chặn)`: Quy trình ghép phòng bắt buộc phải chạy thuật toán Gale-Shapley và tự động quét kiểm tra blocking pairs để chứng minh tính ổn định tuyệt đối.
-
-### 3.2 Quan hệ `<<extend>>` (Mở rộng tùy điều kiện)
-* **Khái niệm:** Use case mở rộng bổ sung hành vi cho Use case gốc khi và chỉ khi thỏa mãn một điều kiện nghiệp vụ nhất định (extension point). Use case gốc vẫn hoạt động độc lập và hoàn chỉnh nếu không có hành vi mở rộng này.
-* **Quy tắc mũi tên:** Mũi tên nét đứt hướng **ngược về phía** Use case gốc (`B ..>|<<extend>>| A`).
-* **Áp dụng trong hệ thống:**
-  1. `UC-05 (Nạp hồ sơ mẫu Persona)` $\rightarrow$ `<<extend>>` $\rightarrow$ `UC-04 (Khai báo thói quen sinh hoạt)`: Chỉ xảy ra khi sinh viên muốn thử nghiệm nhanh bằng cách nhấp chọn các hồ sơ mẫu điển hình (Nguyễn Duy Thái Bảo - VNUK, Lê Văn Việt - SPKT, Lê Minh Quân - DUE). Sinh viên vẫn có thể tự nhập tay thói quen của riêng mình.
-  2. `UC-08 (Xem chi tiết giải thích tiêu chí)` $\rightarrow$ `<<extend>>` $\rightarrow$ `UC-06 (Xem Bảng xếp hạng bạn cùng phòng)`: Bảng xếp hạng mặc định chỉ hiển thị thẻ tóm tắt và % điểm tương thích. Hành vi phân tích sâu chỉ diễn ra khi người dùng nhấp vào nút *"Chi tiết tiêu chí ▼"* để xem danh sách điểm cộng hòa hợp ($\ge 0.75$) và điểm lưu ý ($\le 0.40$).
-  3. `UC-10 (Nạp dữ liệu từ file CSV)` & `UC-11 (Sinh dữ liệu giả lập Seed)` $\rightarrow$ `<<extend>>` $\rightarrow$ `UC-09 (Quản lý dữ liệu sinh viên KTX)`: Cung cấp phương thức nạp dữ liệu hàng loạt tùy theo nhu cầu của Ban quản lý.
-  4. `UC-16 (Xuất kết quả phân phòng CSV)` $\rightarrow$ `<<extend>>` $\rightarrow$ `UC-15 (Xem báo cáo & so sánh đối chứng)`: Chỉ kích hoạt khi Ban quản lý cần tải file bảng điểm chính thức để in ấn và dán thông báo tại sảnh KTX.
-
-### 3.3 Lưu ý quan trọng: Không có `<<exclude>>` trong UML
-* Chuẩn UML thế giới (OMG UML Standard) **hoàn toàn không tồn tại quan hệ `<<exclude>>`**.
-* Để biểu diễn các điều kiện bài trừ hoặc ràng buộc nghiệp vụ trong dự án KTX, ta sử dụng:
-  * **Constraint (Ràng buộc nghiệp vụ):** Ví dụ sinh viên khai báo tiêu chí `smoke = 0` (dị ứng khói thuốc) thì hệ thống kích hoạt ràng buộc cứng loại bỏ các ứng viên có `smoke = 1`.
-  * **Precondition (Tiền điều kiện):** Sinh viên bắt buộc phải hoàn thành `UC-02 (Đăng nhập)` thì mới được phép truy cập `UC-04 (Khai báo thói quen)` và `UC-06 (Xem bảng xếp hạng)`.
-  * **Business Rule (Quy tắc bài trừ):** Hai sinh viên cùng một nhóm không được phép ghép phòng với nhau (Nhóm A chỉ ghép với Nhóm B trong mô hình hai phía).
-
----
-
-## 4. BẢNG DANH MỤC USE CASE VÀ ÁNH XẠ YÊU CẦU DỰ ÁN
-
-| Mã UC | Tên Use Case | Tác nhân | Phân loại | Quan hệ | Yêu cầu nghiệp vụ / kỹ thuật ánh xạ |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| **UC-01** | Đăng ký tài khoản | Sinh viên | Use case chính | $\rightarrow$ `<<include>>` UC-03 | FR-01, SR-01 |
-| **UC-02** | Đăng nhập hệ thống | Sinh viên | Use case chính | $\rightarrow$ `<<include>>` UC-03 | FR-01, SR-01 |
-| **UC-03** | Xác thực thông tin sinh viên | Hệ thống | Include | Được include bởi UC-01, UC-02 | SR-01, BR-04 |
-| **UC-04** | Khai báo thói quen sinh hoạt | Sinh viên | Use case chính | $\leftarrow$ `<<extend>>` UC-05 | FR-01, SR-01, BR-01 |
-| **UC-05** | Nạp hồ sơ mẫu Persona | Sinh viên | Extend | Extend vào UC-04 | FR-01 |
-| **UC-06** | Xem Bảng xếp hạng bạn cùng phòng | Sinh viên | Use case chính | $\rightarrow$ `<<include>>` UC-07, $\leftarrow$ `<<extend>>` UC-08 | FR-04, FR-05, SR-02, BR-01 |
-| **UC-07** | Tính điểm tương thích 2 chiều | Hệ thống | Include | Được include bởi UC-06 | FR-04, BR-01 |
-| **UC-08** | Xem chi tiết giải thích tiêu chí | Sinh viên | Extend | Extend vào UC-06 | FR-09, SR-03, BR-04 |
-| **UC-09** | Quản lý dữ liệu sinh viên KTX | Ban quản lý KTX | Use case chính | $\leftarrow$ `<<extend>>` UC-10, UC-11 | FR-02, FR-03, SR-04, BR-03 |
-| **UC-10** | Nạp dữ liệu từ file CSV | Ban quản lý KTX | Extend | Extend vào UC-09 | FR-02, SR-04 |
-| **UC-11** | Sinh dữ liệu giả lập (Seed) | Ban quản lý KTX | Extend | Extend vào UC-09 | FR-03, SR-04 |
-| **UC-12** | Thực hiện ghép phòng tự động | Ban quản lý KTX | Use case chính | $\rightarrow$ `<<include>>` UC-13, UC-14 | FR-06, FR-08, SR-05, BR-02 |
-| **UC-13** | Chạy thuật toán Gale-Shapley | Hệ thống | Include | Được include bởi UC-12 | FR-06, SR-05, BR-02 |
-| **UC-14** | Đếm cặp chặn (Blocking Pairs) | Hệ thống | Include | Được include bởi UC-12 | FR-08, SR-05, BR-02 |
-| **UC-15** | Xem báo cáo & so sánh đối chứng | Ban quản lý KTX | Use case chính | $\leftarrow$ `<<extend>>` UC-16 | FR-07, FR-10, SR-06, BR-01 |
-| **UC-16** | Xuất kết quả phân phòng (CSV) | Ban quản lý KTX | Extend | Extend vào UC-15 | FR-11, SR-08, BR-03 |
+| Mã UC | Tên Use Case | Tác nhân chính | Loại quan hệ | Phụ thuộc / Ghi chú | Quy định liên quan |
+| :---: | :--- | :---: | :---: | :--- | :--- |
+| **UC-01** | Đăng ký tài khoản KTX | Sinh viên | Core | $\rightarrow$ `<<include>>` UC-03 | BR-01 (SV trường A) |
+| **UC-02** | Đăng nhập hệ thống | Sinh viên, BQL | Core | $\rightarrow$ `<<include>>` UC-03 | Bảo mật tài khoản |
+| **UC-03** | Xác thực sinh viên Trường A | Hệ thống | Include | Được include bởi UC-01, UC-02 | **BR-01** |
+| **UC-04** | Quản lý hồ sơ cá nhân | Sinh viên | Core | Xem/sửa thông tin liên hệ | Cập nhật hồ sơ |
+| **UC-05** | Khai báo 8 tiêu chí thói quen | Sinh viên | Core | $\leftarrow$ `<<extend>>` UC-06 | 8 tiêu chí + `top` |
+| **UC-06** | Nạp hồ sơ mẫu Persona | Sinh viên | Extend | Extend vào UC-05 | Thái Bảo, Văn Việt, Minh Quân |
+| **UC-07** | **Chọn loại phòng & tiện ích** | Sinh viên | Core | Chọn phòng 2, 4, 6 người, AC | **Theo ý thầy: chọn loại phòng** |
+| **UC-08** | **Nộp đơn đăng ký KTX** | Sinh viên | Core | Cam kết thời hạn $\ge 1$ kỳ | **BR-02 (Tối thiểu 1 kỳ)** |
+| **UC-09** | **Phê duyệt đơn KTX (Business Approve)** | Ban quản lý KTX | Core | Duyệt hồ sơ, điều kiện trường A | **Theo ý thầy: Business Approve** |
+| **UC-10** | Xem Xếp hạng bạn cùng phòng | Sinh viên | Core | $\rightarrow$ `<<include>>` UC-11 | Hiển thị Top 8 ứng viên |
+| **UC-11** | Tính điểm tương thích 2 chiều | Hệ thống | Include | Được include bởi UC-10 | Công thức `pair_score` |
+| **UC-12** | Xem giải thích tiêu chí chi tiết | Sinh viên | Extend | Extend vào UC-10 | Tiêu chí $\ge 0.8$ & $\le 0.4$ |
+| **UC-13** | **Quản lý danh mục phòng & giá** | Ban quản lý KTX | Core | Cấu hình phòng 2/4/6, giá thuê | **Theo ý thầy: Quản lý phòng** |
+| **UC-14** | Quản lý dữ liệu sinh viên KTX | Ban quản lý KTX | Core | Nạp file CSV, sinh dữ liệu giả lập | NFR-04 xử lý lỗi dữ liệu |
+| **UC-15** | **Thực hiện ghép phòng tự động** | Ban quản lý KTX | Core | $\rightarrow$ `<<include>>` UC-16, 17, 18 | Ghép ổn định + lấp đầy phòng |
+| **UC-16** | Chạy thuật toán Gale-Shapley | Hệ thống | Include | Được include bởi UC-15 | Deferred Acceptance |
+| **UC-17** | Đếm cặp chặn (Blocking Pairs) | Hệ thống | Include | Được include bởi UC-15 | NFR-02: Blocking Pairs = 0 |
+| **UC-18** | **Tối ưu hóa tỷ lệ lấp đầy phòng** | Hệ thống | Include | Được include bởi UC-15 | **BR-05 (Tối ưu lợi nhuận)** |
+| **UC-19** | **Thanh toán tiền phòng & đặt cọc** | Sinh viên | Core | $\rightarrow$ `<<include>>` UC-20 | **Theo ý thầy: Quá trình thanh toán** |
+| **UC-20** | Xử lý giao dịch thanh toán | Cổng thanh toán | Include | Kết nối VNPay / Ngân hàng | **BR-04 (Hạn 72h, cọc 1tr)** |
+| **UC-21** | Quản lý công nợ & xuất biên lai | Ban quản lý KTX | Core | Đối soát giao dịch, xuất hóa đơn | Kế toán KTX |
+| **UC-22** | Ký & Tải hợp đồng lưu trú KTX | Sinh viên | Core | Hợp đồng có mã QR xác thực | Chốt phòng chính thức |
+| **UC-23** | **Báo cáo Doanh thu & Lợi nhuận KTX** | Ban quản lý KTX | Core | Thống kê doanh thu, chi phí, lãi ròng | **Theo ý thầy: Tính tới lợi nhuận** |
+| **UC-24** | Báo cáo đối sánh thuật toán | Ban quản lý KTX | Core | So sánh Gale-Shapley vs Random | $N \in \{20, 50, 100, 200\}$ |
+| **UC-25** | Xuất báo cáo & danh sách CSV | Ban quản lý KTX | Extend | Extend vào UC-23, UC-24 | Xuất file CSV phân phòng |
 
 ---
 
-## 5. ĐẶC TẢ CHI TIẾT CÁC USE CASE TRỌNG TÂM (USE CASE SPECIFICATION)
+## 6. ĐẶC TẢ CHI TIẾT CÁC USE CASE BỔ SUNG MỚI (THEO YÊU CẦU CỦA THẦY)
 
-### 5.1 Đặc tả UC-04: Khai báo thói quen sinh hoạt
+### 6.1 Đặc tả UC-07: Chọn loại phòng & Tiện ích mong muốn
 * **Tác nhân chính:** Sinh viên.
-* **Mục đích:** Thu thập chính xác nếp sinh hoạt đời thực của sinh viên để làm đầu vào cho thuật toán xếp hạng.
-* **Tiền điều kiện (Preconditions):** Sinh viên đã đăng nhập thành công vào hệ thống.
-* **Hậu điều kiện (Postconditions):** Thông tin thói quen được ghi nhận và truyền sang bộ tính điểm tương thích.
-* **Luồng sự kiện chính (Basic Flow):**
-  1. Sinh viên mở biểu mẫu nhập thói quen trên màn hình Dashboard.
-  2. Sinh viên kéo thanh trượt chọn giờ đi ngủ (`sleep`) và giờ thức dậy (`wake`).
-  3. Sinh viên chọn các mức độ: gọn gàng (`tidy`), chịu tiếng ồn (`noise`), dắt bạn về phòng (`guests`).
-  4. Sinh viên chọn thói quen học tập (`study`), tình trạng hút thuốc (`smoke`) và tích chọn các sở thích chung (`hobbies`).
-  5. Sinh viên chỉ định tiêu chí quan trọng nhất đối với bản thân (`top`) để nhận hệ số ưu tiên 1.5x.
-  6. Sinh viên nhấn nút *"Tính toán & Cập nhật Xếp hạng"*.
-* **Luồng mở rộng (Extension Flow - UC-05):**
-  * Tại bước 1, nếu sinh viên muốn thử nghiệm nhanh, sinh viên có thể nhấp chọn 1 trong 3 nút Persona mẫu:
-    * *Thái Bảo (VNUK)*: Tự điền ngủ 22h, dậy 6h, gọn 5/5, học thư viện, ưu tiên ngủ sớm.
-    * *Văn Việt (SPKT)*: Tự điền ngủ 2h sáng, dậy 9h30, gọn 2/5, học tại phòng, ưu tiên chịu tiếng ồn.
-    * *Minh Quân (DUE)*: Tự điền ngủ 23h30, dậy 6h30, gọn 4/5, ưu tiên không khói thuốc.
+* **Mục đích:** Cho phép sinh viên lựa chọn loại không gian phòng và tiện ích phù hợp với nhu cầu sinh hoạt và khả năng tài chính.
+* **Tiền điều kiện:** Sinh viên đã đăng nhập và được xác thực là sinh viên trường A.
+* **Luồng sự kiện chính:**
+  1. Sinh viên vào màn hình Đăng ký phòng KTX.
+  2. Hệ thống tải danh sách các loại phòng đang mở từ danh mục của KTX:
+     - **Phòng 2 người (Phòng Đôi Cao cấp):** Máy lạnh, tủ lạnh, bàn học riêng, WC khép kín (2.500.000 VNĐ/tháng/SV).
+     - **Phòng 4 người (Phòng Tiêu chuẩn):** Máy lạnh, quạt trần, giường tầng cao cấp, WC khép kín (1.400.000 VNĐ/tháng/SV).
+     - **Phòng 6 người (Phòng Tiết kiệm):** Quạt trần, tủ cá nhân, WC chung dãy (800.000 VNĐ/tháng/SV).
+  3. Sinh viên chọn loại phòng mong muốn ưu tiên số 1 và số 2.
+  4. Sinh viên chọn các tiện ích bổ sung nếu cần: Đăng ký vé xe tháng, dịch vụ giặt sấy.
+  5. Hệ thống lưu nguyện vọng loại phòng làm tiêu chí lọc đầu vào cho thuật toán ghép cặp.
 
 ---
 
-### 5.2 Đặc tả UC-06: Xem Bảng xếp hạng bạn cùng phòng
-* **Tác nhân chính:** Sinh viên.
-* **Mục đích:** Cung cấp cho sinh viên danh sách những bạn cùng phòng tương thích nhất theo thứ tự giảm dần từ Hạng 1 đến Hạng 8.
-* **Bao gồm (Include):** `UC-07 (Tính điểm tương thích 2 chiều)`.
-* **Mở rộng (Extend):** `UC-08 (Xem chi tiết giải thích tiêu chí)`.
-* **Luồng sự kiện chính:**
-  1. Sau khi nhận được thói quen của người dùng, hệ thống tự động lọc danh sách sinh viên thuộc nhóm đối diện (Nhóm B nếu người dùng là Nhóm A, hoặc ngược lại).
-  2. Hệ thống gọi Use Case `UC-07` để tính toán ma trận điểm tương thích 2 chiều:
-     $$\text{AvgScore}(A, B) = \frac{\text{Score}(A \rightarrow B) + \text{Score}(B \rightarrow A)}{2}$$
-  3. Hệ thống sắp xếp danh sách giảm dần và gán nhãn thứ hạng từ `#1` (Hạng 1) đến `#8` (Hạng 8).
-  4. Giao diện hiển thị các thẻ ứng viên với huy hiệu xếp hạng (🥇 Hạng 1, 🥈 Hạng 2, 🥉 Hạng 3), ảnh đại diện, trường đại học, % điểm và thẻ đánh giá hòa hợp (*Siêu hòa hợp*, *Hòa hợp tốt*, *Cần thỏa hiệp*, *Dễ xung đột*).
-* **Luồng mở rộng (UC-08):**
-  * Sinh viên nhấp vào nút *"Chi tiết tiêu chí ▼"* trên thẻ ứng viên bất kỳ.
-  * Hệ thống mở rộng hiển thị 2 khối thông tin phân tích rõ ràng:
-    * ✅ **Điểm cộng tương thích:** Liệt kê các tiêu chí có điểm hòa hợp cao $\ge 0.75$.
-    * ⚠️ **Điểm cần lưu ý:** Cảnh báo các tiêu chí có nguy cơ lệch pha $\le 0.40$.
+### 6.2 Đặc tả UC-08 & UC-09: Nộp đơn & Phê duyệt Nghiệp vụ (Business Approve)
+* **Tác nhân:** Sinh viên (UC-08) và Ban Quản lý KTX (UC-09).
+* **Mục đích:** Thiết lập quy trình phê duyệt chặt chẽ, đảm bảo đúng đối tượng sinh viên trường A và cam kết thời gian ở tối thiểu 1 kỳ.
+* **Tiền điều kiện:** Sinh viên đã hoàn tất khảo sát thói quen và chọn loại phòng.
+* **Luồng sự kiện chính (UC-08: Nộp đơn):**
+  1. Sinh viên tích chọn cam kết: *"Tôi đồng ý với Quy chế Ký túc xá và cam kết thời hạn lưu trú tối thiểu 01 học kỳ (5 tháng)"* (BR-02).
+  2. Sinh viên nhấn nút *"Nộp hồ sơ xét duyệt KTX"*. Trạng thái hồ sơ chuyển sang `Chờ duyệt (Pending)`.
+* **Luồng sự kiện chính (UC-09: Business Approve):**
+  1. Cán bộ BQL mở màn hình Quản lý Hồ sơ Đăng ký.
+  2. BQL kiểm tra danh sách: Hệ thống tự động đánh dấu xanh sinh viên hợp lệ (đúng trường A, mã sinh viên còn hiệu lực, không có vi phạm kỷ luật).
+  3. BQL kiểm tra tỷ lệ phân bổ nam/nữ và số lượng phòng khả dụng.
+  4. BQL nhấn *"Phê duyệt (Business Approve)"* cho các hồ sơ đạt chuẩn (chuyển sang `Đã duyệt (Approved)`).
+  5. Đối với hồ sơ không đạt (sai trường, vi phạm nội quy cũ), BQL nhấn *"Từ chối"* kèm lý do.
+  6. Hệ thống gửi thông báo kết quả phê duyệt cho sinh viên qua ứng dụng/email.
 
 ---
 
-### 5.3 Đặc tả UC-12: Thực hiện ghép phòng tự động
-* **Tác nhân chính:** Ban quản lý KTX.
-* **Mục đích:** Xếp phòng toàn diện cho hàng trăm sinh viên KTX đảm bảo không phát sinh mâu thuẫn đổi phòng (Cặp chặn = 0).
-* **Bao gồm (Include):** `UC-13 (Chạy thuật toán Gale-Shapley)` và `UC-14 (Đếm cặp chặn)`.
+### 6.3 Đặc tả UC-19, UC-20 & UC-21: Quy trình Thanh toán Tiền phòng & Đặt cọc
+* **Tác nhân:** Sinh viên, Cổng thanh toán (VNPay / Ngân hàng), Ban Quản lý KTX.
+* **Mục đích:** Thu tiền phòng kỳ đầu và tiền cọc tài sản trong vòng 72 giờ để hoàn tất thủ tục giữ chỗ (BR-04).
+* **Tiền điều kiện:** Sinh viên đã có kết quả phân phòng chính thức từ thuật toán Gale-Shapley.
 * **Luồng sự kiện chính:**
-  1. Ban quản lý KTX nhấn nút *"Khởi chạy ghép phòng tự động"*.
-  2. Hệ thống gọi `UC-13` áp dụng thuật toán Gale-Shapley (Deferred Acceptance):
-     * Các sinh viên nhóm A lần lượt đề xuất ghép phòng với ứng viên nhóm B mà mình yêu thích nhất theo danh sách ưu tiên.
-     * Sinh viên nhóm B tạm thời giữ lời đề xuất tốt nhất và từ chối các lời đề xuất kém hơn.
-     * Quá trình lặp lại cho đến khi toàn bộ sinh viên đều được ghép phòng.
-  3. Hệ thống gọi `UC-14` để kiểm tra toàn bộ các cặp chéo.
-  4. Kết quả trả về danh sách phân phòng chính thức cùng chứng chỉ số cặp chặn $\text{Blocking Pairs} = 0$.
+  1. Sinh viên mở màn hình Chi tiết Phân phòng & Thanh toán.
+  2. Hệ thống hiển thị bảng kê chi phí kỳ 1:
+     - Tiền phòng Học kỳ 1 (5 tháng): ví dụ $5 \times 1.400.000 = 7.000.000$ VNĐ.
+     - Tiền đặt cọc bảo đảm tài sản KTX: $1.000.000$ VNĐ.
+     - **Tổng cộng cần thanh toán:** $8.000.000$ VNĐ.
+     - **Thời hạn thanh toán:** Đồng hồ đếm ngược 72 giờ.
+  3. Sinh viên chọn phương thức thanh toán: *Cổng thanh toán VNPay (QR Code)* hoặc *Thẻ ATM nội địa / Thẻ quốc tế*.
+  4. Hệ thống chuyển hướng sang giao diện an toàn của Cổng thanh toán (UC-20).
+  5. Sinh viên quét mã QR thanh toán trên ứng dụng Mobile Banking.
+  6. Cổng thanh toán xử lý giao dịch, trừ tiền tài khoản và phản hồi mã kết quả giao dịch `SUCCESS` về máy chủ KTX.
+  7. Hệ thống cập nhật trạng thái hợp đồng thành `Đã thanh toán (Paid)` và cấp mã phòng chính thức.
+  8. Hệ thống tự động phát hành **Biên lai điện tử có mã số thuế** và mở khóa Use Case `UC-22` cho sinh viên ký hợp đồng số.
+* **Luồng ngoại lệ (Quá hạn 72h):**
+  - Nếu sau 72 giờ sinh viên không thanh toán, hệ thống tự động hủy kết quả giữ phòng, hoàn trả giường về kho phòng trống để thuật toán phân phối cho sinh viên trong danh sách chờ.
+
+---
+
+### 6.4 Đặc tả UC-23: Quản lý Doanh thu, Lợi nhuận & Tỷ lệ Lấp đầy KTX
+* **Tác nhân chính:** Ban quản lý KTX / Ban Giám đốc KTX.
+* **Mục đích:** Cung cấp bức tranh tài chính toàn diện, tối ưu hóa bài toán kinh doanh và lợi nhuận cho KTX (BR-05).
+* **Tiền điều kiện:** Đã hoàn thành đợt phân phòng và thu tiền sinh viên.
+* **Luồng sự kiện chính:**
+  1. BQL truy cập Dashboard Quản lý Doanh thu & Lợi nhuận.
+  2. Hệ thống hiển thị các chỉ số tài chính chủ chốt (KPIs):
+     - **Tổng doanh thu học kỳ:** $\sum (\text{Giá phòng} \times \text{Số SV đã đóng})$.
+     - **Tổng tiền cọc đang quản lý:** $1.000.000 \times \text{Tổng số sinh viên nội trú}$.
+     - **Chi phí vận hành ước tính:** Tiền điện nước định mức, chi phí bảo vệ, vệ sinh, bảo trì định kỳ.
+     - **Lợi nhuận ròng dự kiến:** $\text{Doanh thu} - \text{Chi phí vận hành}$.
+     - **Tỷ lệ lấp đầy giường (Occupancy Rate):** $\frac{\text{Số giường đã ở}}{\text{Tổng số giường khả dụng}} \times 100\%$.
+  3. Biểu đồ phân tích cấu trúc doanh thu theo từng phân khúc loại phòng:
+     - Tỷ trọng phòng 2 người (biên lợi nhuận cao nhất).
+     - Tỷ trọng phòng 4 người (chiếm tỷ trọng số lượng lớn nhất).
+     - Tỷ trọng phòng 6 người (đáp ứng diện an sinh sinh viên).
+  4. Cảnh báo các phòng bị trống giường dở dang để BQL kích hoạt chính sách dồn phòng hoặc ghép bổ sung đợt 2 nhằm triệt tiêu lãng phí vận hành.
+  5. BQL có thể xuất báo cáo tài chính ra file Excel/CSV (UC-25).
+
+---
+
+## 7. ĐỐI CHIẾU VỚI Ý KIẾN GÓP Ý CỦA THẦY GIÁO
+
+| Điểm thầy giáo góp ý trong ảnh | Đã khắc phục & bổ sung trong Sơ đồ Use Case v3.0 | Mã Use Case / Business Rules tương ứng |
+| :--- | :--- | :--- |
+| **"Chưa tính tới lợi nhuận"** | Bổ sung phân hệ Quản lý Tài chính, tính toán doanh thu từng loại phòng, chi phí vận hành, lợi nhuận ròng và tối ưu tỷ lệ lấp đầy phòng trống. | **UC-23, UC-25, BR-05** |
+| **"Thiếu business approve"** | Thiết lập quy trình phê duyệt nghiệp vụ bắt buộc: BQL kiểm tra tính hợp lệ của sinh viên trường A trước khi chạy giải thuật ghép phòng. | **UC-09, BR-03** |
+| **"Chưa có quản lý phòng, muốn ở loại phòng nào"** | Thêm Use Case Quản lý danh mục phòng cho BQL và Use Case Chọn loại phòng (2/4/6 giường, máy lạnh) cho sinh viên trước khi ghép cặp. | **UC-07, UC-13** |
+| **"Chưa tính tới quá trình thanh toán"** | Bổ sung quy trình thanh toán tiền phòng kỳ 1 + tiền cọc 72h, tích hợp cổng thanh toán trực tuyến, xuất biên lai điện tử và ký hợp đồng. | **UC-19, UC-20, UC-21, UC-22, BR-04** |
+| **"Business rules: sv A tới ktx A tự động ghép, ở tối thiểu 1 kỳ"** | Đưa trực tiếp vào 2 quy tắc nền tảng: BR-01 (Xác thực SV trường A) và BR-02 (Cam kết hợp đồng lưu trú tối thiểu 1 học kỳ). | **BR-01, BR-02, UC-03, UC-08** |

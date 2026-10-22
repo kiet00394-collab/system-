@@ -3,523 +3,467 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Biểu Đồ Use Case - Hệ Thống Ghép Bạn Cùng Phòng KTX</title>
+    <title>Biểu Đồ Use Case v3.0 - Hệ Thống Quản Trị & Ghép Phòng KTX</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Mermaid CDN for automatic rendering -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true, theme: 'default', flowchart: { curve: 'basis' } });
+    </script>
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .tab-btn.active {
+            background-color: #1e293b;
+            color: #ffffff;
+            border-color: #1e293b;
+        }
     </style>
 </head>
-<body class="bg-slate-100 text-slate-800 p-4 md:p-8 min-h-screen">
-    <!-- Outer Slide Container -->
-    <div class="max-w-7xl mx-auto bg-white border border-slate-300 rounded-3xl shadow-2xl p-6 md:p-8 space-y-6">
+<body class="bg-slate-100 text-slate-800 p-3 md:p-6 min-h-screen">
+    <!-- Main Outer Container -->
+    <div class="max-w-7xl mx-auto bg-white border border-slate-300 rounded-3xl shadow-2xl p-5 md:p-8 space-y-6">
         
         <!-- Header -->
-        <div class="border-b border-slate-200 pb-4 flex flex-wrap items-center justify-between gap-4">
+        <div class="border-b border-slate-200 pb-5 flex flex-wrap items-center justify-between gap-4">
             <div>
-                <span class="text-xs font-bold text-indigo-600 bg-indigo-50 border border-indigo-200 px-3 py-1 rounded-full uppercase tracking-wider">
-                    Đồ Án Trí Tuệ Nhân Tạo & Ghép Cặp Ổn Định 2026
-                </span>
-                <h1 class="text-xl md:text-2xl font-extrabold text-slate-900 mt-2">
-                    Biểu đồ Use Case – Hệ thống Ghép Bạn Cùng Phòng KTX (KTX Smart Matching)
+                <div class="flex items-center gap-2 flex-wrap">
+                    <span class="text-xs font-extrabold text-blue-700 bg-blue-50 border border-blue-200 px-3 py-1 rounded-full uppercase tracking-wider">
+                        Đồ Án System Engineering 2026
+                    </span>
+                    <span class="text-xs font-extrabold text-emerald-700 bg-emerald-50 border border-emerald-200 px-3 py-1 rounded-full uppercase tracking-wider">
+                        Phiên Bản 3.0: Chuẩn Hóa Theo Ý Kiến Thầy Giáo
+                    </span>
+                </div>
+                <h1 class="text-xl md:text-3xl font-extrabold text-slate-900 mt-2">
+                    Biểu Đồ Use Case – Hệ Thống Quản Trị & Ghép Phòng Ký Túc Xá Thông Minh
                 </h1>
-                <p class="text-xs text-slate-500 mt-0.5">Mô hình hóa yêu cầu chức năng (FR) & tương tác giữa các tác nhân theo chuẩn UML</p>
+                <p class="text-xs md:text-sm text-slate-500 mt-1">
+                    Bổ sung Quản lý Phòng & Loại phòng, Phê duyệt Business Approve, Quy trình Thanh toán, Quản lý Doanh thu - Lợi nhuận và 5 Business Rules
+                </p>
             </div>
             <div class="flex items-center gap-2">
-                <a href="/" class="px-3.5 py-1.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold shadow transition">
+                <a href="/" class="px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold shadow transition">
                     ← Trở lại Dashboard
                 </a>
-                <button onclick="window.print()" class="px-3.5 py-1.5 rounded-xl bg-indigo-50 hover:bg-indigo-100 text-indigo-700 border border-indigo-200 text-xs font-semibold transition">
-                    🖨️ In / Lưu PDF
+                <button onclick="window.print()" class="px-4 py-2 rounded-xl bg-indigo-50 hover:bg-indigo-100 text-indigo-700 border border-indigo-200 text-xs font-semibold transition">
+                    🖨️ In / PDF
                 </button>
             </div>
         </div>
 
-        <!-- 2 Columns: Left = Diagram, Right = Explanations -->
-        <div class="grid grid-cols-1 xl:grid-cols-12 gap-8 items-start">
-            
-            <!-- LEFT COLUMN: SVG DIAGRAM (8 cols) -->
-            <div class="xl:col-span-8 bg-slate-50 border border-slate-200 rounded-2xl p-4 shadow-inner overflow-x-auto">
-                <div class="min-w-[760px]">
-                    <svg viewBox="0 0 880 730" class="w-full h-auto select-none" xmlns="http://www.w3.org/2000/svg">
-                        <defs>
-                            <!-- Arrowhead marker for include -->
-                            <marker id="arrow-include" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-                                <path d="M 0 1 L 10 5 L 0 9 z" fill="#0284c7" />
-                            </marker>
-                            <!-- Arrowhead marker for extend -->
-                            <marker id="arrow-extend" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-                                <path d="M 0 1 L 10 5 L 0 9 z" fill="#e11d48" />
-                            </marker>
-                            <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
-                                <feDropShadow dx="1" dy="2" stdDeviation="1.5" flood-opacity="0.08" />
-                            </filter>
-                        </defs>
-
-                        <!-- SYSTEM BOUNDARY -->
-                        <rect x="115" y="20" width="650" height="635" rx="18" fill="#ffffff" stroke="#94a3b8" stroke-width="2" />
-                        <text x="440" y="48" text-anchor="middle" font-size="14" font-weight="800" fill="#1e293b" letter-spacing="0.5">
-                            Hệ thống Ghép Bạn Cùng Phòng KTX
-                        </text>
-
-                        <!-- ================= ACTOR 1: SINH VIÊN (LEFT) ================= -->
-                        <g transform="translate(55, 230)">
-                            <!-- Head -->
-                            <circle cx="0" cy="0" r="14" fill="#ffffff" stroke="#1e293b" stroke-width="2.5" />
-                            <!-- Body -->
-                            <line x1="0" y1="14" x2="0" y2="52" stroke="#1e293b" stroke-width="2.5" />
-                            <!-- Arms -->
-                            <line x1="-22" y1="28" x2="22" y2="28" stroke="#1e293b" stroke-width="2.5" />
-                            <!-- Legs -->
-                            <line x1="0" y1="52" x2="-18" y2="88" stroke="#1e293b" stroke-width="2.5" />
-                            <line x1="0" y1="52" x2="18" y2="88" stroke="#1e293b" stroke-width="2.5" />
-                            <text x="0" y="108" text-anchor="middle" font-size="13" font-weight="800" fill="#0f172a">Sinh viên</text>
-                            <text x="0" y="122" text-anchor="middle" font-size="10" fill="#64748b">(Người dùng)</text>
-                        </g>
-
-                        <!-- ================= ACTOR 2: BAN QUẢN LÝ KTX (RIGHT) ================= -->
-                        <g transform="translate(825, 410)">
-                            <!-- Head -->
-                            <circle cx="0" cy="0" r="14" fill="#ffffff" stroke="#1e293b" stroke-width="2.5" />
-                            <!-- Body -->
-                            <line x1="0" y1="14" x2="0" y2="52" stroke="#1e293b" stroke-width="2.5" />
-                            <!-- Arms -->
-                            <line x1="-22" y1="28" x2="22" y2="28" stroke="#1e293b" stroke-width="2.5" />
-                            <!-- Legs -->
-                            <line x1="0" y1="52" x2="-18" y2="88" stroke="#1e293b" stroke-width="2.5" />
-                            <line x1="0" y1="52" x2="18" y2="88" stroke="#1e293b" stroke-width="2.5" />
-                            <text x="0" y="108" text-anchor="middle" font-size="13" font-weight="800" fill="#0f172a">Ban quản lý KTX</text>
-                            <text x="0" y="122" text-anchor="middle" font-size="10" fill="#64748b">(Quản trị viên)</text>
-                        </g>
-
-                        <!-- ================= SOLID ASSOCIATION LINES (ACTORS -> UC) ================= -->
-                        <!-- Sinh viên -> Đăng ký tài khoản -->
-                        <line x1="75" y1="230" x2="175" y2="90" stroke="#64748b" stroke-width="1.8" />
-                        <!-- Sinh viên -> Đăng nhập -->
-                        <line x1="75" y1="240" x2="175" y2="155" stroke="#64748b" stroke-width="1.8" />
-                        <!-- Sinh viên -> Khai báo thói quen -->
-                        <line x1="75" y1="260" x2="160" y2="225" stroke="#64748b" stroke-width="1.8" />
-                        <!-- Sinh viên -> Xem bảng xếp hạng -->
-                        <line x1="75" y1="280" x2="170" y2="310" stroke="#64748b" stroke-width="1.8" />
-
-                        <!-- Ban quản lý KTX -> Quản lý dữ liệu sinh viên -->
-                        <line x1="805" y1="410" x2="715" y2="420" stroke="#64748b" stroke-width="1.8" />
-                        <!-- Ban quản lý KTX -> Thực hiện ghép phòng tự động -->
-                        <line x1="805" y1="430" x2="710" y2="515" stroke="#64748b" stroke-width="1.8" />
-                        <!-- Ban quản lý KTX -> Xem báo cáo & so sánh -->
-                        <line x1="805" y1="450" x2="715" y2="605" stroke="#64748b" stroke-width="1.8" />
-
-                        <!-- ================= DASHED RELATIONSHIPS (INCLUDE / EXTEND) ================= -->
-                        <!-- Đăng ký -> Xác thực (include) -->
-                        <path d="M 315 90 L 450 115" stroke="#0284c7" stroke-width="1.5" stroke-dasharray="5,4" marker-end="url(#arrow-include)" />
-                        <rect x="350" y="88" width="64" height="16" rx="4" fill="#ffffff" />
-                        <text x="382" y="100" text-anchor="middle" font-size="10" font-weight="700" fill="#0284c7">&laquo;include&raquo;</text>
-
-                        <!-- Đăng nhập -> Xác thực (include) -->
-                        <path d="M 290 155 L 450 135" stroke="#0284c7" stroke-width="1.5" stroke-dasharray="5,4" marker-end="url(#arrow-include)" />
-                        <rect x="340" y="145" width="64" height="16" rx="4" fill="#ffffff" />
-                        <text x="372" y="157" text-anchor="middle" font-size="10" font-weight="700" fill="#0284c7">&laquo;include&raquo;</text>
-
-                        <!-- Nạp mẫu Persona -> Khai báo thói quen (extend) -->
-                        <path d="M 450 225 L 340 225" stroke="#e11d48" stroke-width="1.5" stroke-dasharray="5,4" marker-end="url(#arrow-extend)" />
-                        <rect x="365" y="217" width="62" height="16" rx="4" fill="#ffffff" />
-                        <text x="396" y="229" text-anchor="middle" font-size="10" font-weight="700" fill="#e11d48">&laquo;extend&raquo;</text>
-
-                        <!-- Xem xếp hạng -> Tính điểm tương thích 2 chiều (include) -->
-                        <path d="M 355 305 L 455 295" stroke="#0284c7" stroke-width="1.5" stroke-dasharray="5,4" marker-end="url(#arrow-include)" />
-                        <rect x="378" y="287" width="64" height="16" rx="4" fill="#ffffff" />
-                        <text x="410" y="299" text-anchor="middle" font-size="10" font-weight="700" fill="#0284c7">&laquo;include&raquo;</text>
-
-                        <!-- Xem giải thích chi tiết -> Xem xếp hạng (extend) -->
-                        <path d="M 460 355 L 350 330" stroke="#e11d48" stroke-width="1.5" stroke-dasharray="5,4" marker-end="url(#arrow-extend)" />
-                        <rect x="375" y="340" width="62" height="16" rx="4" fill="#ffffff" />
-                        <text x="406" y="352" text-anchor="middle" font-size="10" font-weight="700" fill="#e11d48">&laquo;extend&raquo;</text>
-
-                        <!-- Nạp dữ liệu CSV -> Quản lý dữ liệu sinh viên (extend) -->
-                        <path d="M 380 415 L 480 420" stroke="#e11d48" stroke-width="1.5" stroke-dasharray="5,4" marker-end="url(#arrow-extend)" />
-                        <rect x="402" y="407" width="62" height="16" rx="4" fill="#ffffff" />
-                        <text x="433" y="419" text-anchor="middle" font-size="10" font-weight="700" fill="#e11d48">&laquo;extend&raquo;</text>
-
-                        <!-- Sinh dữ liệu giả lập -> Quản lý dữ liệu sinh viên (extend) -->
-                        <path d="M 385 455 L 485 435" stroke="#e11d48" stroke-width="1.5" stroke-dasharray="5,4" marker-end="url(#arrow-extend)" />
-                        <rect x="408" y="445" width="62" height="16" rx="4" fill="#ffffff" />
-                        <text x="439" y="457" text-anchor="middle" font-size="10" font-weight="700" fill="#e11d48">&laquo;extend&raquo;</text>
-
-                        <!-- Ghép phòng tự động -> Thuật toán Gale-Shapley (include) -->
-                        <path d="M 480 505 L 380 500" stroke="#0284c7" stroke-width="1.5" stroke-dasharray="5,4" marker-end="url(#arrow-include)" />
-                        <rect x="402" y="492" width="64" height="16" rx="4" fill="#ffffff" />
-                        <text x="434" y="504" text-anchor="middle" font-size="10" font-weight="700" fill="#0284c7">&laquo;include&raquo;</text>
-
-                        <!-- Ghép phòng tự động -> Kiểm tra cặp chặn (include) -->
-                        <path d="M 480 525 L 385 545" stroke="#0284c7" stroke-width="1.5" stroke-dasharray="5,4" marker-end="url(#arrow-include)" />
-                        <rect x="406" y="535" width="64" height="16" rx="4" fill="#ffffff" />
-                        <text x="438" y="547" text-anchor="middle" font-size="10" font-weight="700" fill="#0284c7">&laquo;include&raquo;</text>
-
-                        <!-- Xuất kết quả CSV -> Xem báo cáo (extend) -->
-                        <path d="M 390 605 L 485 605" stroke="#e11d48" stroke-width="1.5" stroke-dasharray="5,4" marker-end="url(#arrow-extend)" />
-                        <rect x="410" y="597" width="62" height="16" rx="4" fill="#ffffff" />
-                        <text x="441" y="609" text-anchor="middle" font-size="10" font-weight="700" fill="#e11d48">&laquo;extend&raquo;</text>
-
-                        <!-- ================= USE CASES (CIRCLES / OVALS) ================= -->
-                        
-                        <!-- 1. Đăng ký tài khoản (Main) -->
-                        <g filter="url(#shadow)">
-                            <ellipse cx="240" cy="90" rx="75" ry="22" fill="#e0f2fe" stroke="#0284c7" stroke-width="2" />
-                            <text x="240" y="94" text-anchor="middle" font-size="12" font-weight="700" fill="#0369a1">Đăng ký tài khoản</text>
-                        </g>
-
-                        <!-- 2. Đăng nhập (Main) -->
-                        <g filter="url(#shadow)">
-                            <ellipse cx="230" cy="155" rx="60" ry="22" fill="#e0f2fe" stroke="#0284c7" stroke-width="2" />
-                            <text x="230" y="159" text-anchor="middle" font-size="12" font-weight="700" fill="#0369a1">Đăng nhập</text>
-                        </g>
-
-                        <!-- 3. Xác thực thông tin sinh viên (Include) -->
-                        <g filter="url(#shadow)">
-                            <ellipse cx="545" cy="125" rx="95" ry="23" fill="#dcfce7" stroke="#16a34a" stroke-width="2" />
-                            <text x="545" y="129" text-anchor="middle" font-size="11" font-weight="700" fill="#15803d">Xác thực thông tin sinh viên</text>
-                        </g>
-
-                        <!-- 4. Khai báo thói quen sinh hoạt (Main) -->
-                        <g filter="url(#shadow)">
-                            <ellipse cx="245" cy="225" rx="95" ry="23" fill="#e0f2fe" stroke="#0284c7" stroke-width="2" />
-                            <text x="245" y="229" text-anchor="middle" font-size="11.5" font-weight="700" fill="#0369a1">Khai báo thói quen sinh hoạt</text>
-                        </g>
-
-                        <!-- 5. Nạp hồ sơ mẫu Persona (Extend) -->
-                        <g filter="url(#shadow)">
-                            <ellipse cx="545" cy="225" rx="90" ry="23" fill="#f3e8ff" stroke="#9333ea" stroke-width="2" />
-                            <text x="545" y="229" text-anchor="middle" font-size="11" font-weight="700" fill="#7e22ce">Nạp hồ sơ mẫu Persona</text>
-                        </g>
-
-                        <!-- 6. Xem bảng xếp hạng bạn cùng phòng (Main) -->
-                        <g filter="url(#shadow)">
-                            <ellipse cx="245" cy="315" rx="110" ry="25" fill="#e0f2fe" stroke="#0284c7" stroke-width="2" />
-                            <text x="245" y="319" text-anchor="middle" font-size="11" font-weight="700" fill="#0369a1">Xem Bảng xếp hạng bạn cùng phòng</text>
-                        </g>
-
-                        <!-- 7. Tính điểm tương thích 2 chiều (Include) -->
-                        <g filter="url(#shadow)">
-                            <ellipse cx="550" cy="295" rx="95" ry="23" fill="#dcfce7" stroke="#16a34a" stroke-width="2" />
-                            <text x="550" y="299" text-anchor="middle" font-size="11" font-weight="700" fill="#15803d">Tính điểm tương thích 2 chiều</text>
-                        </g>
-
-                        <!-- 8. Xem chi tiết giải thích tiêu chí (Extend) -->
-                        <g filter="url(#shadow)">
-                            <ellipse cx="555" cy="365" rx="100" ry="23" fill="#f3e8ff" stroke="#9333ea" stroke-width="2" />
-                            <text x="555" y="369" text-anchor="middle" font-size="11" font-weight="700" fill="#7e22ce">Xem chi tiết giải thích tiêu chí</text>
-                        </g>
-
-                        <!-- 9. Quản lý dữ liệu sinh viên KTX (Main - Admin) -->
-                        <g filter="url(#shadow)">
-                            <ellipse cx="595" cy="425" rx="105" ry="24" fill="#e0f2fe" stroke="#0284c7" stroke-width="2" />
-                            <text x="595" y="429" text-anchor="middle" font-size="11" font-weight="700" fill="#0369a1">Quản lý dữ liệu sinh viên KTX</text>
-                        </g>
-
-                        <!-- 10. Nạp dữ liệu từ file CSV (Extend) -->
-                        <g filter="url(#shadow)">
-                            <ellipse cx="295" cy="415" rx="85" ry="21" fill="#f3e8ff" stroke="#9333ea" stroke-width="2" />
-                            <text x="295" y="419" text-anchor="middle" font-size="11" font-weight="700" fill="#7e22ce">Nạp dữ liệu từ file CSV</text>
-                        </g>
-
-                        <!-- 11. Sinh dữ liệu giả lập Seed (Extend) -->
-                        <g filter="url(#shadow)">
-                            <ellipse cx="295" cy="460" rx="90" ry="21" fill="#f3e8ff" stroke="#9333ea" stroke-width="2" />
-                            <text x="295" y="464" text-anchor="middle" font-size="11" font-weight="700" fill="#7e22ce">Sinh dữ liệu giả lập (Seed)</text>
-                        </g>
-
-                        <!-- 12. Thực hiện ghép phòng tự động (Main - Admin) -->
-                        <g filter="url(#shadow)">
-                            <ellipse cx="595" cy="515" rx="105" ry="24" fill="#e0f2fe" stroke="#0284c7" stroke-width="2" />
-                            <text x="595" y="519" text-anchor="middle" font-size="11" font-weight="700" fill="#0369a1">Thực hiện ghép phòng tự động</text>
-                        </g>
-
-                        <!-- 13. Chạy thuật toán Gale-Shapley (Include) -->
-                        <g filter="url(#shadow)">
-                            <ellipse cx="285" cy="500" rx="95" ry="21" fill="#dcfce7" stroke="#16a34a" stroke-width="2" />
-                            <text x="285" y="504" text-anchor="middle" font-size="11" font-weight="700" fill="#15803d">Thuật toán Gale-Shapley</text>
-                        </g>
-
-                        <!-- 14. Kiểm tra cặp chặn (Include) -->
-                        <g filter="url(#shadow)">
-                            <ellipse cx="285" cy="550" rx="100" ry="21" fill="#dcfce7" stroke="#16a34a" stroke-width="2" />
-                            <text x="285" y="554" text-anchor="middle" font-size="10.5" font-weight="700" fill="#15803d">Đếm cặp chặn (Blocking Pairs)</text>
-                        </g>
-
-                        <!-- 15. Xem báo cáo & so sánh thực nghiệm (Main - Admin) -->
-                        <g filter="url(#shadow)">
-                            <ellipse cx="600" cy="605" rx="110" ry="24" fill="#e0f2fe" stroke="#0284c7" stroke-width="2" />
-                            <text x="600" y="609" text-anchor="middle" font-size="11" font-weight="700" fill="#0369a1">Xem báo cáo & so sánh đối chứng</text>
-                        </g>
-
-                        <!-- 16. Xuất kết quả file CSV (Extend) -->
-                        <g filter="url(#shadow)">
-                            <ellipse cx="295" cy="605" rx="95" ry="21" fill="#f3e8ff" stroke="#9333ea" stroke-width="2" />
-                            <text x="295" y="609" text-anchor="middle" font-size="11" font-weight="700" fill="#7e22ce">Xuất kết quả phân phòng (CSV)</text>
-                        </g>
-
-                        <!-- ================= LEGEND / CHÚ THÍCH (BOTTOM) ================= -->
-                        <g transform="translate(15, 675)">
-                            <rect x="0" y="0" width="850" height="45" rx="10" fill="#f8fafc" stroke="#cbd5e1" />
-                            
-                            <text x="15" y="27" font-size="11" font-weight="800" fill="#0f172a">Chú thích:</text>
-
-                            <!-- Stick figure icon -->
-                            <circle cx="85" cy="18" r="5" fill="none" stroke="#1e293b" stroke-width="1.5" />
-                            <line x1="85" y1="23" x2="85" y2="34" stroke="#1e293b" stroke-width="1.5" />
-                            <text x="96" y="27" font-size="10.5" fill="#334155">: Tác nhân (Actor)</text>
-
-                            <!-- Main UC -->
-                            <ellipse cx="205" cy="22" rx="14" ry="9" fill="#e0f2fe" stroke="#0284c7" stroke-width="1.5" />
-                            <text x="225" y="26" font-size="10.5" fill="#334155">: Use case chính</text>
-
-                            <!-- Include UC -->
-                            <ellipse cx="325" cy="22" rx="14" ry="9" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5" />
-                            <text x="345" y="26" font-size="10.5" fill="#334155">: Use case được include</text>
-
-                            <!-- Extend UC -->
-                            <ellipse cx="480" cy="22" rx="14" ry="9" fill="#f3e8ff" stroke="#9333ea" stroke-width="1.5" />
-                            <text x="500" y="26" font-size="10.5" fill="#334155">: Use case được extend</text>
-
-                            <!-- Include Arrow -->
-                            <path d="M 640 22 L 675 22" stroke="#0284c7" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrow-include)" />
-                            <text x="685" y="26" font-size="10.5" font-weight="700" fill="#0284c7">: &laquo;include&raquo;</text>
-
-                            <!-- Extend Arrow -->
-                            <path d="M 750 22 L 785 22" stroke="#e11d48" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrow-extend)" />
-                            <text x="795" y="26" font-size="10.5" font-weight="700" fill="#e11d48">: &laquo;extend&raquo;</text>
-                        </g>
-
-                    </svg>
+        <!-- 5 Teacher Feedback Alert Box -->
+        <div class="bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-300 rounded-2xl p-4 md:p-5 shadow-sm">
+            <div class="flex items-start gap-3">
+                <span class="text-2xl">💡</span>
+                <div class="flex-1">
+                    <h2 class="text-sm md:text-base font-bold text-amber-900">
+                        Bảng Đối Chiếu Nâng Cấp Theo 5 Góp Ý Trực Tiếp Của Thầy Giáo:
+                    </h2>
+                    <div class="grid grid-cols-1 md:grid-cols-5 gap-3 mt-3 text-xs">
+                        <div class="bg-white/80 p-3 rounded-xl border border-amber-200 shadow-sm">
+                            <span class="font-bold text-rose-700 block">1. Lợi nhuận KTX:</span>
+                            <span class="text-slate-600 mt-1 block">Bổ sung phân hệ Báo cáo Doanh thu, Chi phí, Lợi nhuận ròng (UC-23) & Tối ưu lấp đầy phòng (BR-05).</span>
+                        </div>
+                        <div class="bg-white/80 p-3 rounded-xl border border-amber-200 shadow-sm">
+                            <span class="font-bold text-blue-700 block">2. Business Approve:</span>
+                            <span class="text-slate-600 mt-1 block">Bổ sung bước Phê duyệt nghiệp vụ (UC-09, BR-03) để BQL thẩm định hồ sơ trước khi phân phòng.</span>
+                        </div>
+                        <div class="bg-white/80 p-3 rounded-xl border border-amber-200 shadow-sm">
+                            <span class="font-bold text-indigo-700 block">3. Loại phòng KTX:</span>
+                            <span class="text-slate-600 mt-1 block">BQL quản lý danh mục phòng (UC-13) & Sinh viên chọn phòng 2, 4, 6 người có máy lạnh theo ngân sách (UC-07).</span>
+                        </div>
+                        <div class="bg-white/80 p-3 rounded-xl border border-amber-200 shadow-sm">
+                            <span class="font-bold text-emerald-700 block">4. Quá trình Thanh toán:</span>
+                            <span class="text-slate-600 mt-1 block">Thanh toán tiền phòng kỳ 1 + Đặt cọc 1 triệu trong 72h (UC-19), tích hợp VNPay (UC-20) và ký hợp đồng (UC-22).</span>
+                        </div>
+                        <div class="bg-white/80 p-3 rounded-xl border border-amber-200 shadow-sm">
+                            <span class="font-bold text-purple-700 block">5. Business Rules:</span>
+                            <span class="text-slate-600 mt-1 block">BR-01 (SV trường A đến KTX A được tự động ghép) & BR-02 (Thời hạn hợp đồng tối thiểu 1 học kỳ).</span>
+                        </div>
+                    </div>
                 </div>
             </div>
-
-            <!-- RIGHT COLUMN: DETAILED SPECIFICATION & EXPLANATIONS (4 cols) -->
-            <div class="xl:col-span-4 space-y-4 text-xs">
-                
-                <!-- Box 1: Giải thích quan hệ <<include>> -->
-                <div class="bg-sky-50 border border-sky-200 rounded-2xl p-4 space-y-2">
-                    <div class="flex items-center gap-2">
-                        <span class="px-2 py-0.5 rounded bg-sky-600 text-white font-mono font-bold text-[11px]">&laquo;include&raquo;</span>
-                        <h3 class="font-bold text-sky-900 text-sm">Bắt buộc dùng chung</h3>
-                    </div>
-                    <ul class="list-disc list-inside space-y-1.5 text-slate-700 leading-relaxed text-[11.5px]">
-                        <li>Use case A luôn cần thực hiện hành vi của Use case B như <strong>một phần cốt lõi</strong> của quy trình.</li>
-                        <li>Mũi tên nét đứt hướng về phía Use case được include (B).</li>
-                        <li><strong>Ví dụ trong KTX:</strong>
-                            <div class="mt-1 pl-2 text-sky-800 space-y-0.5">
-                                • <em>Đăng ký / Đăng nhập</em> &rarr; (&laquo;include&raquo;) <strong>Xác thực thông tin sinh viên</strong>.<br>
-                                • <em>Xem Bảng xếp hạng</em> &rarr; (&laquo;include&raquo;) <strong>Tính điểm tương thích 2 chiều</strong>.<br>
-                                • <em>Thực hiện ghép phòng tự động</em> &rarr; (&laquo;include&raquo;) <strong>Thuật toán Gale-Shapley</strong> & <strong>Đếm cặp chặn</strong>.
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- Box 2: Giải thích quan hệ <<extend>> -->
-                <div class="bg-purple-50 border border-purple-200 rounded-2xl p-4 space-y-2">
-                    <div class="flex items-center gap-2">
-                        <span class="px-2 py-0.5 rounded bg-purple-600 text-white font-mono font-bold text-[11px]">&laquo;extend&raquo;</span>
-                        <h3 class="font-bold text-purple-900 text-sm">Mở rộng tùy điều kiện</h3>
-                    </div>
-                    <ul class="list-disc list-inside space-y-1.5 text-slate-700 leading-relaxed text-[11.5px]">
-                        <li>Use case B bổ sung hành vi cho Use case A khi <strong>thỏa mãn điều kiện nhất định</strong> (extension point). A vẫn có thể hoạt động độc lập mà không cần B.</li>
-                        <li>Mũi tên nét đứt hướng về phía Use case gốc (A).</li>
-                        <li><strong>Ví dụ trong KTX:</strong>
-                            <div class="mt-1 pl-2 text-purple-800 space-y-0.5">
-                                • <strong>Nạp hồ sơ mẫu Persona</strong> &rarr; (&laquo;extend&raquo;) <em>Khai báo thói quen sinh hoạt</em> (chỉ khi sinh viên muốn test nhanh mẫu Thái Bảo/Việt/Quân).<br>
-                                • <strong>Xem chi tiết giải thích tiêu chí</strong> &rarr; (&laquo;extend&raquo;) <em>Xem Bảng xếp hạng</em> (chỉ khi click "Chi tiết tiêu chí").<br>
-                                • <strong>Nạp file CSV / Sinh dữ liệu Seed</strong> &rarr; (&laquo;extend&raquo;) <em>Quản lý dữ liệu sinh viên</em>.<br>
-                                • <strong>Xuất kết quả file CSV</strong> &rarr; (&laquo;extend&raquo;) <em>Xem báo cáo</em>.
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- Box 3: Không có <<exclude>> trong UML -->
-                <div class="bg-emerald-50 border border-emerald-200 rounded-2xl p-4 space-y-2">
-                    <div class="flex items-center gap-2">
-                        <span class="w-5 h-5 rounded-full bg-emerald-600 text-white flex items-center justify-center font-bold text-xs">✓</span>
-                        <h3 class="font-bold text-emerald-950 text-sm">Không có &laquo;exclude&raquo; trong UML</h3>
-                    </div>
-                    <p class="text-slate-700 leading-relaxed text-[11.5px]">
-                        Tiêu chuẩn UML Use Case Diagram không có quan hệ chuẩn tên là <code>&laquo;exclude&raquo;</code>. Để mô hình hóa một chức năng bị loại trừ hoặc điều kiện tiên quyết, ta dùng:
-                    </p>
-                    <ul class="list-disc list-inside space-y-1 text-slate-700 text-[11.5px]">
-                        <li><strong>Constraint (Ràng buộc):</strong> Ví dụ sinh viên dị ứng khói thuốc thiết lập tiêu chí <code>smoke = 0</code> là bộ lọc cứng.</li>
-                        <li><strong>Precondition (Tiền điều kiện):</strong> Phải có tài khoản đã xác thực trước khi khai báo và xem xếp hạng.</li>
-                        <li><strong>Ghi chú nghiệp vụ (Note):</strong> Đính kèm ghi chú logic Gale-Shapley không tạo blocking pair.</li>
-                    </ul>
-                </div>
-
-                <!-- Box 4: Tóm lại -->
-                <div class="bg-amber-50 border border-amber-200 rounded-2xl p-4 space-y-1.5">
-                    <div class="flex items-center gap-2 text-amber-900 font-bold text-sm">
-                        <span>💡</span>
-                        <h4>Tóm lại cho báo cáo nhóm</h4>
-                    </div>
-                    <p class="text-slate-700 text-[11.5px] leading-relaxed">
-                        • Biểu đồ Use Case chỉ dùng <strong>&laquo;include&raquo;</strong> (bắt buộc) và <strong>&laquo;extend&raquo;</strong> (tùy chọn).<br>
-                        • Mũi tên <code>&laquo;include&raquo;</code> chỉ <strong>vào</strong> use case phụ thuộc.<br>
-                        • Mũi tên <code>&laquo;extend&raquo;</code> chỉ <strong>về</strong> use case chính ban đầu.
-                    </p>
-                </div>
-
-            </div>
-
         </div>
 
-        <!-- BOTTOM TABLE: DETAILED USE CASE MAPPING TO PROJECT REQUIREMENTS -->
-        <div class="border-t border-slate-200 pt-6 space-y-4">
-            <h2 class="text-base font-bold text-slate-900 flex items-center gap-2">
-                <span>📋</span> Bảng Đặc Tả Chi Tiết Use Case & Ánh Xạ Yêu Cầu Dự Án (FR / SR)
-            </h2>
-            <div class="overflow-x-auto">
-                <table class="w-full text-left text-xs border border-slate-200 rounded-xl overflow-hidden">
-                    <thead class="bg-slate-800 text-slate-100 uppercase tracking-wider text-[11px]">
-                        <tr>
-                            <th class="p-3 border-b border-slate-700">Mã UC</th>
-                            <th class="p-3 border-b border-slate-700">Tên Use Case</th>
-                            <th class="p-3 border-b border-slate-700">Tác nhân chính</th>
-                            <th class="p-3 border-b border-slate-700">Phân loại & Quan hệ</th>
-                            <th class="p-3 border-b border-slate-700">Ánh xạ FR/SR</th>
-                            <th class="p-3 border-b border-slate-700">Mô tả tóm tắt nghiệp vụ</th>
+        <!-- Navigation Tabs -->
+        <div class="flex flex-wrap items-center gap-2 border-b border-slate-200 pb-3">
+            <button onclick="switchTab('diagram')" id="btn-diagram" class="tab-btn active px-4 py-2 rounded-xl text-xs font-bold border border-slate-300 transition">
+                🗺️ 1. Sơ Đồ Use Case UML
+            </button>
+            <button onclick="switchTab('rules')" id="btn-rules" class="tab-btn px-4 py-2 rounded-xl text-xs font-bold border border-slate-300 text-slate-700 hover:bg-slate-200 transition">
+                ⚖️ 2. Quy Định Nghiệp Vụ (5 Business Rules)
+            </button>
+            <button onclick="switchTab('usecases')" id="btn-usecases" class="tab-btn px-4 py-2 rounded-xl text-xs font-bold border border-slate-300 text-slate-700 hover:bg-slate-200 transition">
+                📋 3. Bảng 25 Use Case & 3 Actors
+            </button>
+            <button onclick="switchTab('specs')" id="btn-specs" class="tab-btn px-4 py-2 rounded-xl text-xs font-bold border border-slate-300 text-slate-700 hover:bg-slate-200 transition">
+                🔍 4. Đặc Tả Chi Tiết 5 Use Case Trọng Tâm
+            </button>
+            <button onclick="switchTab('defense')" id="btn-defense" class="tab-btn px-4 py-2 rounded-xl text-xs font-bold border border-slate-300 text-slate-700 hover:bg-slate-200 transition">
+                🎯 5. Kịch Bản Vấn Đáp Bảo Vệ
+            </button>
+        </div>
+
+        <!-- TAB CONTENT 1: SƠ ĐỒ USE CASE UML -->
+        <div id="tab-diagram" class="space-y-6">
+            <div class="bg-slate-50 border border-slate-200 rounded-2xl p-6 shadow-inner">
+                <div class="flex items-center justify-between mb-4">
+                    <div>
+                        <h2 class="text-base font-bold text-slate-900">Mô hình Use Case v3.0 (Mermaid Flowchart)</h2>
+                        <p class="text-xs text-slate-500">Bao gồm 3 Actors (Sinh viên, BQL KTX, Cổng thanh toán) và 25 Use Cases phân theo 6 phân hệ nghiệp vụ</p>
+                    </div>
+                    <div class="flex items-center gap-3 text-xs">
+                        <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-sky-200 border border-sky-600"></span> Core Use Case</span>
+                        <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-emerald-200 border border-emerald-600"></span> &laquo;include&raquo;</span>
+                        <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-purple-200 border border-purple-600"></span> &laquo;extend&raquo;</span>
+                    </div>
+                </div>
+
+                <div class="mermaid bg-white p-4 rounded-xl border border-slate-200 overflow-x-auto">
+graph LR
+    %% System Boundary
+    subgraph SYSTEM ["HỆ THỐNG QUẢN TRỊ & GHÉP PHÒNG KÝ TÚC XÁ THÔNG MINH"]
+        direction TB
+
+        %% Subsystem 1: Identity & Profiles
+        subgraph PKG1 ["Phân hệ 1: Quản lý Tài khoản & Hồ sơ"]
+            UC01(["UC-01: Đăng ký tài khoản KTX"])
+            UC02(["UC-02: Đăng nhập hệ thống"])
+            UC03(["UC-03: Xác thực sinh viên Trường A (BR-01)"])
+            UC04(["UC-04: Quản lý hồ sơ cá nhân"])
+        end
+
+        %% Subsystem 2: Preference & Room Choice
+        subgraph PKG2 ["Phân hệ 2: Khảo sát Thói quen & Chọn Loại phòng"]
+            UC05(["UC-05: Khai báo 8 tiêu chí thói quen"])
+            UC06(["UC-06: Nạp hồ sơ mẫu Persona"])
+            UC07(["UC-07: Chọn loại phòng & tiện ích mong muốn"])
+        end
+
+        %% Subsystem 3: Business Approval & Match Suggestion
+        subgraph PKG3 ["Phân hệ 3: Đăng ký & Phê duyệt Nghiệp vụ (Business Approve)"]
+            UC08(["UC-08: Nộp đơn đăng ký KTX (Cam kết ≥ 1 kỳ - BR-02)"])
+            UC09(["UC-09: Phê duyệt đơn đăng ký KTX (Business Approve - BR-03)"])
+            UC10(["UC-10: Xem Xếp hạng bạn cùng phòng phù hợp"])
+            UC11(["UC-11: Tính điểm tương thích 2 chiều"])
+            UC12(["UC-12: Xem giải thích tiêu chí chi tiết"])
+        end
+
+        %% Subsystem 4: Room Management & Algorithm Matching
+        subgraph PKG4 ["Phân hệ 4: Quản lý Danh mục Phòng & Ghép phòng Gale-Shapley"]
+            UC13(["UC-13: Quản lý danh mục phòng & giá thuê"])
+            UC14(["UC-14: Quản lý dữ liệu sinh viên KTX"])
+            UC15(["UC-15: Thực hiện ghép phòng tự động"])
+            UC16(["UC-16: Chạy thuật toán Gale-Shapley"])
+            UC17(["UC-17: Đếm cặp chặn (Blocking Pairs)"])
+            UC18(["UC-18: Tối ưu hóa tỷ lệ lấp đầy phòng (BR-05)"])
+        end
+
+        %% Subsystem 5: Payment & Tenancy Contract
+        subgraph PKG5 ["Phân hệ 5: Thanh toán & Hợp đồng Lưu trú"]
+            UC19(["UC-19: Thanh toán tiền phòng & đặt cọc (BR-04)"])
+            UC20(["UC-20: Xử lý giao dịch thanh toán"])
+            UC21(["UC-21: Quản lý công nợ & xuất biên lai"])
+            UC22(["UC-22: Ký & Tải hợp đồng lưu trú KTX"])
+        end
+
+        %% Subsystem 6: Revenue, Profit & Analytics
+        subgraph PKG6 ["Phân hệ 6: Quản lý Doanh thu, Lợi nhuận & Báo cáo"]
+            UC23(["UC-23: Báo cáo Doanh thu & Lợi nhuận KTX"])
+            UC24(["UC-24: Báo cáo đối sánh thuật toán (vs Random)"])
+            UC25(["UC-25: Xuất báo cáo & danh sách phòng (CSV)"])
+        end
+    end
+
+    %% Actors
+    SV["🧑 Sinh viên<br/>(Người dùng)"]
+    BQL["👨‍💼 Ban quản lý KTX<br/>(Quản trị viên)"]
+    GATEWAY["💳 Cổng thanh toán<br/>(VNPay / Ngân hàng)"]
+
+    %% Student Connections
+    SV --- UC01
+    SV --- UC02
+    SV --- UC04
+    SV --- UC05
+    SV --- UC07
+    SV --- UC08
+    SV --- UC10
+    SV --- UC19
+    SV --- UC22
+
+    %% Admin Connections
+    BQL --- UC09
+    BQL --- UC13
+    BQL --- UC14
+    BQL --- UC15
+    BQL --- UC21
+    BQL --- UC23
+    BQL --- UC24
+
+    %% Payment Gateway Connection
+    UC20 --- GATEWAY
+
+    %% Include Relationships (Dashed with <<include>>)
+    UC01 -.->|&laquo;include&raquo;| UC03
+    UC02 -.->|&laquo;include&raquo;| UC03
+
+    UC10 -.->|&laquo;include&raquo;| UC11
+
+    UC15 -.->|&laquo;include&raquo;| UC16
+    UC15 -.->|&laquo;include&raquo;| UC17
+    UC15 -.->|&laquo;include&raquo;| UC18
+
+    UC19 -.->|&laquo;include&raquo;| UC20
+
+    %% Extend Relationships (Dashed with <<extend>>)
+    UC06 -.->|&laquo;extend&raquo;| UC05
+    UC12 -.->|&laquo;extend&raquo;| UC10
+    UC25 -.->|&laquo;extend&raquo;| UC23
+    UC25 -.->|&laquo;extend&raquo;| UC24
+
+    %% Styling
+    classDef coreUC fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0369a1,font-weight:bold;
+    classDef incUC fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#15803d,font-weight:bold;
+    classDef extUC fill:#f3e8ff,stroke:#9333ea,stroke-width:2px,color:#7e22ce,font-weight:bold;
+
+    class UC01,UC02,UC04,UC05,UC07,UC08,UC09,UC10,UC13,UC14,UC15,UC19,UC21,UC22,UC23,UC24 coreUC;
+    class UC03,UC11,UC16,UC17,UC18,UC20 incUC;
+    class UC06,UC12,UC25 extUC;
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB CONTENT 2: 5 BUSINESS RULES -->
+        <div id="tab-rules" class="hidden space-y-4">
+            <h2 class="text-base font-bold text-slate-900">Hệ Thống 5 Quy Tắc Nghiệp Vụ Cốt Lõi (Business Rules - BR)</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                
+                <div class="bg-blue-50/70 border border-blue-200 rounded-2xl p-5 space-y-2">
+                    <div class="flex items-center gap-2">
+                        <span class="w-7 h-7 rounded-lg bg-blue-600 text-white font-bold flex items-center justify-center text-xs">BR-01</span>
+                        <h3 class="text-sm font-bold text-blue-950">Quy tắc Đối tượng Tiếp nhận (Đại học Liên kết)</h3>
+                    </div>
+                    <p class="text-xs text-slate-700 leading-relaxed">
+                        KTX A được chỉ định phục vụ cho sinh viên thuộc <strong>Trường Đại học A</strong> (hoặc các đơn vị thành viên liên kết). Sinh viên trường A khi đến KTX A sẽ được hệ thống tự động xác thực qua MSSV và email trường cấp (<code class="bg-blue-100 text-blue-800 px-1 rounded">@edu.vn</code>), sau đó được quyền kích hoạt quy trình hỗ trợ tự động ghép phòng bằng thuật toán.
+                    </p>
+                </div>
+
+                <div class="bg-indigo-50/70 border border-indigo-200 rounded-2xl p-5 space-y-2">
+                    <div class="flex items-center gap-2">
+                        <span class="w-7 h-7 rounded-lg bg-indigo-600 text-white font-bold flex items-center justify-center text-xs">BR-02</span>
+                        <h3 class="text-sm font-bold text-indigo-950">Quy tắc Thời hạn Hợp đồng Tối thiểu 1 Kỳ</h3>
+                    </div>
+                    <p class="text-xs text-slate-700 leading-relaxed">
+                        Để đảm bảo nếp sống văn hóa nội trú, tránh xáo trộn bạn cùng phòng và bảo toàn kế hoạch dòng tiền tài chính của KTX, sinh viên bắt buộc phải cam kết thời hạn hợp đồng lưu trú <strong>tối thiểu 01 học kỳ (5 tháng)</strong> hoặc trọn năm học. Hệ thống từ chối các yêu cầu thuê phòng ngắn hạn theo ngày hoặc theo tháng dở dang.
+                    </p>
+                </div>
+
+                <div class="bg-amber-50/70 border border-amber-200 rounded-2xl p-5 space-y-2">
+                    <div class="flex items-center gap-2">
+                        <span class="w-7 h-7 rounded-lg bg-amber-600 text-white font-bold flex items-center justify-center text-xs">BR-03</span>
+                        <h3 class="text-sm font-bold text-amber-950">Quy trình Phê duyệt Nghiệp vụ (Business Approve)</h3>
+                    </div>
+                    <p class="text-xs text-slate-700 leading-relaxed">
+                        Hồ sơ sinh viên sau khi nộp đơn không được vào thẳng khâu phân phòng mà bắt buộc phải qua bước <strong>Business Approve</strong> của BQL KTX. Cán bộ quản lý kiểm duyệt tư cách sinh viên, rà soát lịch sử kỷ luật, xác nhận diện chính sách ưu tiên và chuyển trạng thái <code>Approved</code> cho hồ sơ đủ chuẩn.
+                    </p>
+                </div>
+
+                <div class="bg-emerald-50/70 border border-emerald-200 rounded-2xl p-5 space-y-2">
+                    <div class="flex items-center gap-2">
+                        <span class="w-7 h-7 rounded-lg bg-emerald-600 text-white font-bold flex items-center justify-center text-xs">BR-04</span>
+                        <h3 class="text-sm font-bold text-emerald-950">Quy tắc Đặt cọc & Thời hạn Thanh toán 72h</h3>
+                    </div>
+                    <p class="text-xs text-slate-700 leading-relaxed">
+                        Trong vòng <strong>72 giờ</strong> kể từ khi có kết quả phân phòng, sinh viên phải hoàn tất thanh toán tiền phòng học kỳ 1 kèm <strong>Tiền đặt cọc tài sản (1.000.000 VNĐ)</strong> qua cổng VNPay/Ngân hàng. Quá hạn 72h chưa thanh toán, hệ thống tự động hủy giữ chỗ và nhường suất cho sinh viên trong danh sách chờ. Hủy trước hạn 1 kỳ sẽ không được hoàn cọc.
+                    </p>
+                </div>
+
+                <div class="bg-purple-50/70 border border-purple-200 rounded-2xl p-5 space-y-2 md:col-span-2">
+                    <div class="flex items-center gap-2">
+                        <span class="w-7 h-7 rounded-lg bg-purple-600 text-white font-bold flex items-center justify-center text-xs">BR-05</span>
+                        <h3 class="text-sm font-bold text-purple-950">Quy tắc Tối ưu hóa Lợi nhuận & Tỷ lệ Lấp đầy Phòng (Occupancy Rate)</h3>
+                    </div>
+                    <p class="text-xs text-slate-700 leading-relaxed">
+                        Thuật toán ghép phòng kết hợp: Phân nhóm sinh viên theo cùng nguyện vọng loại phòng (2, 4, 6 người) trước, sau đó áp dụng Gale-Shapley để ghép cặp tương thích thói quen. Hệ thống ưu tiên <strong>lấp đầy 100% số giường của từng phòng</strong> trước khi mở phòng mới, tránh tình trạng mở nhiều phòng dở dang (ví dụ phòng 4 người chỉ có 1 người ở) gây lãng phí chi phí điện nước chung và nhân lực vệ sinh, qua đó tối đa hóa biên lợi nhuận ròng cho KTX.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- TAB CONTENT 3: BẢNG 25 USE CASE & ACTORS -->
+        <div id="tab-usecases" class="hidden space-y-4">
+            <h2 class="text-base font-bold text-slate-900">Bảng Danh Mục 25 Use Case & Phân Vai Trách Nhiệm</h2>
+            <div class="overflow-x-auto border border-slate-200 rounded-2xl shadow-sm">
+                <table class="w-full text-left border-collapse text-xs">
+                    <thead>
+                        <tr class="bg-slate-900 text-white">
+                            <th class="p-3 font-bold text-center w-16">Mã UC</th>
+                            <th class="p-3 font-bold">Tên Use Case</th>
+                            <th class="p-3 font-bold">Tác nhân chính</th>
+                            <th class="p-3 font-bold text-center">Phân loại UML</th>
+                            <th class="p-3 font-bold">Mô tả hành vi & Quy định liên quan</th>
                         </tr>
                     </thead>
-                    <tbody class="divide-y divide-slate-200 text-slate-700">
-                        <tr class="hover:bg-slate-50">
-                            <td class="p-3 font-mono font-bold text-indigo-700">UC-01</td>
-                            <td class="p-3 font-semibold text-slate-900">Đăng ký tài khoản</td>
-                            <td class="p-3">Sinh viên</td>
-                            <td class="p-3"><span class="px-2 py-0.5 rounded bg-sky-100 text-sky-800 font-bold">Chính</span> &rarr; &laquo;include&raquo; UC-03</td>
-                            <td class="p-3 font-mono">FR-01</td>
-                            <td class="p-3">Sinh viên tạo hồ sơ ban đầu bằng mã SV và mật khẩu.</td>
-                        </tr>
-                        <tr class="hover:bg-slate-50">
-                            <td class="p-3 font-mono font-bold text-indigo-700">UC-02</td>
-                            <td class="p-3 font-semibold text-slate-900">Đăng nhập</td>
-                            <td class="p-3">Sinh viên</td>
-                            <td class="p-3"><span class="px-2 py-0.5 rounded bg-sky-100 text-sky-800 font-bold">Chính</span> &rarr; &laquo;include&raquo; UC-03</td>
-                            <td class="p-3 font-mono">FR-01</td>
-                            <td class="p-3">Xác thực đăng nhập để vào cổng xếp phòng KTX.</td>
-                        </tr>
-                        <tr class="hover:bg-slate-50 bg-emerald-50/40">
-                            <td class="p-3 font-mono font-bold text-emerald-700">UC-03</td>
-                            <td class="p-3 font-semibold text-slate-900">Xác thực thông tin sinh viên</td>
-                            <td class="p-3">Hệ thống</td>
-                            <td class="p-3"><span class="px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold">&laquo;include&raquo;</span></td>
-                            <td class="p-3 font-mono">SR-01</td>
-                            <td class="p-3">Kiểm tra tính hợp lệ của mã số sinh viên, định danh trường (VNUK, SPKT, DUE...).</td>
-                        </tr>
-                        <tr class="hover:bg-slate-50">
-                            <td class="p-3 font-mono font-bold text-indigo-700">UC-04</td>
-                            <td class="p-3 font-semibold text-slate-900">Khai báo thói quen sinh hoạt</td>
-                            <td class="p-3">Sinh viên</td>
-                            <td class="p-3"><span class="px-2 py-0.5 rounded bg-sky-100 text-sky-800 font-bold">Chính</span> &larr; &laquo;extend&raquo; UC-05</td>
-                            <td class="p-3 font-mono">FR-01, SR-01</td>
-                            <td class="p-3">Nhập 8 tiêu chí kỹ thuật: ngủ, dậy, gọn gàng, học tập, độ ồn, hút thuốc, dắt bạn, sở thích & ưu tiên số 1.</td>
-                        </tr>
-                        <tr class="hover:bg-slate-50 bg-purple-50/40">
-                            <td class="p-3 font-mono font-bold text-purple-700">UC-05</td>
-                            <td class="p-3 font-semibold text-slate-900">Nạp hồ sơ mẫu Persona</td>
-                            <td class="p-3">Sinh viên</td>
-                            <td class="p-3"><span class="px-2 py-0.5 rounded bg-purple-100 text-purple-800 font-bold">&laquo;extend&raquo;</span></td>
-                            <td class="p-3 font-mono">FR-01</td>
-                            <td class="p-3">Tùy chọn tải nhanh mẫu sinh viên điển hình: Thái Bảo (VNUK), Văn Việt (SPKT), Minh Quân (DUE).</td>
-                        </tr>
-                        <tr class="hover:bg-slate-50">
-                            <td class="p-3 font-mono font-bold text-indigo-700">UC-06</td>
-                            <td class="p-3 font-semibold text-slate-900">Xem Bảng xếp hạng bạn cùng phòng</td>
-                            <td class="p-3">Sinh viên</td>
-                            <td class="p-3"><span class="px-2 py-0.5 rounded bg-sky-100 text-sky-800 font-bold">Chính</span> &rarr; &laquo;include&raquo; UC-07</td>
-                            <td class="p-3 font-mono">FR-04, SR-02</td>
-                            <td class="p-3">Xem danh sách ứng viên phù hợp được sắp xếp từ Hạng 1 đến Hạng 8 kèm % độ hòa hợp.</td>
-                        </tr>
-                        <tr class="hover:bg-slate-50 bg-emerald-50/40">
-                            <td class="p-3 font-mono font-bold text-emerald-700">UC-07</td>
-                            <td class="p-3 font-semibold text-slate-900">Tính điểm tương thích 2 chiều</td>
-                            <td class="p-3">Hệ thống</td>
-                            <td class="p-3"><span class="px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold">&laquo;include&raquo;</span></td>
-                            <td class="p-3 font-mono">FR-04, FR-05</td>
-                            <td class="p-3">Tính ma trận M[a][b] và M[b][a] theo trọng số 8 tiêu chí có nhân hệ số 1.5x cho tiêu chí ưu tiên.</td>
-                        </tr>
-                        <tr class="hover:bg-slate-50 bg-purple-50/40">
-                            <td class="p-3 font-mono font-bold text-purple-700">UC-08</td>
-                            <td class="p-3 font-semibold text-slate-900">Xem chi tiết giải thích tiêu chí</td>
-                            <td class="p-3">Sinh viên</td>
-                            <td class="p-3"><span class="px-2 py-0.5 rounded bg-purple-100 text-purple-800 font-bold">&laquo;extend&raquo;</span></td>
-                            <td class="p-3 font-mono">FR-09, SR-03</td>
-                            <td class="p-3">Mở rộng chi tiết: Liệt kê các tiêu chí trùng khớp (&ge; 0.75) và các điểm cần lưu ý (&le; 0.40).</td>
-                        </tr>
-                        <tr class="hover:bg-slate-50">
-                            <td class="p-3 font-mono font-bold text-indigo-700">UC-09</td>
-                            <td class="p-3 font-semibold text-slate-900">Quản lý dữ liệu sinh viên KTX</td>
-                            <td class="p-3">Ban quản lý KTX</td>
-                            <td class="p-3"><span class="px-2 py-0.5 rounded bg-sky-100 text-sky-800 font-bold">Chính</span> &larr; &laquo;extend&raquo; UC-10, UC-11</td>
-                            <td class="p-3 font-mono">FR-02, FR-03, SR-04</td>
-                            <td class="p-3">Quản lý toàn bộ danh sách hồ sơ sinh viên nhóm A và nhóm B trong KTX.</td>
-                        </tr>
-                        <tr class="hover:bg-slate-50 bg-purple-50/40">
-                            <td class="p-3 font-mono font-bold text-purple-700">UC-10</td>
-                            <td class="p-3 font-semibold text-slate-900">Nạp dữ liệu từ file CSV</td>
-                            <td class="p-3">Ban quản lý KTX</td>
-                            <td class="p-3"><span class="px-2 py-0.5 rounded bg-purple-100 text-purple-800 font-bold">&laquo;extend&raquo;</span></td>
-                            <td class="p-3 font-mono">FR-02</td>
-                            <td class="p-3">Upload file CSV khảo sát đầu năm học của toàn bộ sinh viên nội trú.</td>
-                        </tr>
-                        <tr class="hover:bg-slate-50 bg-purple-50/40">
-                            <td class="p-3 font-mono font-bold text-purple-700">UC-11</td>
-                            <td class="p-3 font-semibold text-slate-900">Sinh dữ liệu giả lập (Seed)</td>
-                            <td class="p-3">Ban quản lý KTX</td>
-                            <td class="p-3"><span class="px-2 py-0.5 rounded bg-purple-100 text-purple-800 font-bold">&laquo;extend&raquo;</span></td>
-                            <td class="p-3 font-mono">FR-03</td>
-                            <td class="p-3">Sinh ngẫu nhiên N sinh viên theo seed để kiểm thử tải và thuật toán quy mô 20, 50, 100, 200.</td>
-                        </tr>
-                        <tr class="hover:bg-slate-50">
-                            <td class="p-3 font-mono font-bold text-indigo-700">UC-12</td>
-                            <td class="p-3 font-semibold text-slate-900">Thực hiện ghép phòng tự động</td>
-                            <td class="p-3">Ban quản lý KTX</td>
-                            <td class="p-3"><span class="px-2 py-0.5 rounded bg-sky-100 text-sky-800 font-bold">Chính</span> &rarr; &laquo;include&raquo; UC-13, UC-14</td>
-                            <td class="p-3 font-mono">FR-06, SR-05</td>
-                            <td class="p-3">Kích hoạt quy trình ghép phòng tổng thể cho toàn bộ ký túc xá.</td>
-                        </tr>
-                        <tr class="hover:bg-slate-50 bg-emerald-50/40">
-                            <td class="p-3 font-mono font-bold text-emerald-700">UC-13</td>
-                            <td class="p-3 font-semibold text-slate-900">Chạy thuật toán Gale-Shapley</td>
-                            <td class="p-3">Hệ thống</td>
-                            <td class="p-3"><span class="px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold">&laquo;include&raquo;</span></td>
-                            <td class="p-3 font-mono">FR-06</td>
-                            <td class="p-3">Thực thi thuật toán đề xuất và chấp nhận hoãn lại (Deferred Acceptance) đảm bảo ghép cặp ổn định.</td>
-                        </tr>
-                        <tr class="hover:bg-slate-50 bg-emerald-50/40">
-                            <td class="p-3 font-mono font-bold text-emerald-700">UC-14</td>
-                            <td class="p-3 font-semibold text-slate-900">Đếm cặp chặn (Blocking Pairs)</td>
-                            <td class="p-3">Hệ thống</td>
-                            <td class="p-3"><span class="px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold">&laquo;include&raquo;</span></td>
-                            <td class="p-3 font-mono">FR-08</td>
-                            <td class="p-3">Kiểm tra toàn bộ các cặp chéo để chứng minh số cặp chặn bằng 0 (tính ổn định tuyệt đối).</td>
-                        </tr>
-                        <tr class="hover:bg-slate-50">
-                            <td class="p-3 font-mono font-bold text-indigo-700">UC-15</td>
-                            <td class="p-3 font-semibold text-slate-900">Xem báo cáo & so sánh đối chứng</td>
-                            <td class="p-3">Ban quản lý KTX</td>
-                            <td class="p-3"><span class="px-2 py-0.5 rounded bg-sky-100 text-sky-800 font-bold">Chính</span> &larr; &laquo;extend&raquo; UC-16</td>
-                            <td class="p-3 font-mono">FR-07, FR-10, SR-06</td>
-                            <td class="p-3">Xem biểu đồ đối sánh điểm hài lòng trung bình giữa Gale-Shapley và ghép phòng ngẫu nhiên.</td>
-                        </tr>
-                        <tr class="hover:bg-slate-50 bg-purple-50/40">
-                            <td class="p-3 font-mono font-bold text-purple-700">UC-16</td>
-                            <td class="p-3 font-semibold text-slate-900">Xuất kết quả phân phòng (CSV)</td>
-                            <td class="p-3">Ban quản lý KTX</td>
-                            <td class="p-3"><span class="px-2 py-0.5 rounded bg-purple-100 text-purple-800 font-bold">&laquo;extend&raquo;</span></td>
-                            <td class="p-3 font-mono">FR-11, SR-08</td>
-                            <td class="p-3">Tải về danh sách ghép phòng chính thức để dán thông báo tại sảnh KTX hoặc bàn giao bảo vệ.</td>
-                        </tr>
+                    <tbody class="divide-y divide-slate-200">
+                        <!-- Phân hệ 1 -->
+                        <tr class="bg-slate-50 font-bold text-slate-900"><td colspan="5" class="p-2.5 bg-slate-200/80">Phân hệ 1: Quản lý Tài khoản & Hồ sơ Sinh viên</td></tr>
+                        <tr><td class="p-2.5 font-bold text-blue-900 text-center">UC-01</td><td class="p-2.5 font-medium">Đăng ký tài khoản KTX</td><td class="p-2.5">Sinh viên</td><td class="p-2.5 text-center font-bold text-sky-700">Chính</td><td class="p-2.5 text-slate-600">Đăng ký tài khoản gắn liền với MSSV trường A (BR-01). Include UC-03.</td></tr>
+                        <tr><td class="p-2.5 font-bold text-blue-900 text-center">UC-02</td><td class="p-2.5 font-medium">Đăng nhập hệ thống</td><td class="p-2.5">Sinh viên, BQL</td><td class="p-2.5 text-center font-bold text-sky-700">Chính</td><td class="p-2.5 text-slate-600">Xác thực danh tính trước khi vào cổng nội trú. Include UC-03.</td></tr>
+                        <tr class="bg-emerald-50/50"><td class="p-2.5 font-bold text-emerald-800 text-center">UC-03</td><td class="p-2.5 font-medium text-emerald-900">Xác thực sinh viên Trường A</td><td class="p-2.5">Hệ thống</td><td class="p-2.5 text-center font-bold text-emerald-700">&laquo;include&raquo;</td><td class="p-2.5 text-slate-600">Kiểm tra tính hợp lệ sinh viên trường A theo BR-01.</td></tr>
+                        <tr><td class="p-2.5 font-bold text-blue-900 text-center">UC-04</td><td class="p-2.5 font-medium">Quản lý hồ sơ cá nhân</td><td class="p-2.5">Sinh viên</td><td class="p-2.5 text-center font-bold text-sky-700">Chính</td><td class="p-2.5 text-slate-600">Cập nhật thông tin liên hệ, giấy tờ, người thân khẩn cấp.</td></tr>
+
+                        <!-- Phân hệ 2 -->
+                        <tr class="bg-slate-50 font-bold text-slate-900"><td colspan="5" class="p-2.5 bg-slate-200/80">Phân hệ 2: Khảo sát Thói quen & Chọn Loại phòng</td></tr>
+                        <tr><td class="p-2.5 font-bold text-blue-900 text-center">UC-05</td><td class="p-2.5 font-medium">Khai báo 8 tiêu chí thói quen</td><td class="p-2.5">Sinh viên</td><td class="p-2.5 text-center font-bold text-sky-700">Chính</td><td class="p-2.5 text-slate-600">Nhập giờ ngủ, dậy, gọn gàng, tiếng ồn, hút thuốc... và tiêu chí ưu tiên top 1.5x.</td></tr>
+                        <tr class="bg-purple-50/50"><td class="p-2.5 font-bold text-purple-800 text-center">UC-06</td><td class="p-2.5 font-medium text-purple-900">Nạp hồ sơ mẫu Persona</td><td class="p-2.5">Sinh viên</td><td class="p-2.5 text-center font-bold text-purple-700">&laquo;extend&raquo;</td><td class="p-2.5 text-slate-600">Tùy chọn tải nhanh mẫu Thái Bảo (VNUK), Văn Việt (SPKT), Minh Quân (DUE).</td></tr>
+                        <tr class="bg-amber-50/40"><td class="p-2.5 font-bold text-amber-900 text-center">UC-07</td><td class="p-2.5 font-bold text-amber-950">Chọn loại phòng & tiện ích mong muốn</td><td class="p-2.5 font-bold">Sinh viên</td><td class="p-2.5 text-center font-bold text-sky-700">Chính</td><td class="p-2.5 text-amber-900"><strong>Theo ý Thầy:</strong> Chọn phòng 2, 4, 6 người có máy lạnh phù hợp ngân sách.</td></tr>
+
+                        <!-- Phân hệ 3 -->
+                        <tr class="bg-slate-50 font-bold text-slate-900"><td colspan="5" class="p-2.5 bg-slate-200/80">Phân hệ 3: Đăng ký & Phê duyệt Nghiệp vụ (Business Approve)</td></tr>
+                        <tr class="bg-indigo-50/40"><td class="p-2.5 font-bold text-indigo-900 text-center">UC-08</td><td class="p-2.5 font-bold text-indigo-950">Nộp đơn đăng ký KTX</td><td class="p-2.5 font-bold">Sinh viên</td><td class="p-2.5 text-center font-bold text-sky-700">Chính</td><td class="p-2.5 text-indigo-900"><strong>Theo ý Thầy:</strong> Nộp đơn kèm cam kết lưu trú tối thiểu 1 học kỳ (BR-02).</td></tr>
+                        <tr class="bg-rose-50/50"><td class="p-2.5 font-bold text-rose-900 text-center">UC-09</td><td class="p-2.5 font-bold text-rose-950">Phê duyệt đơn KTX (Business Approve)</td><td class="p-2.5 font-bold">Ban quản lý KTX</td><td class="p-2.5 text-center font-bold text-sky-700">Chính</td><td class="p-2.5 text-rose-900"><strong>Theo ý Thầy:</strong> BQL thẩm định hồ sơ sinh viên trường A trước khi phân phòng (BR-03).</td></tr>
+                        <tr><td class="p-2.5 font-bold text-blue-900 text-center">UC-10</td><td class="p-2.5 font-medium">Xem Xếp hạng bạn cùng phòng</td><td class="p-2.5">Sinh viên</td><td class="p-2.5 text-center font-bold text-sky-700">Chính</td><td class="p-2.5 text-slate-600">Hiển thị Top 8 bạn cùng phòng tương thích nhất giảm dần. Include UC-11.</td></tr>
+                        <tr class="bg-emerald-50/50"><td class="p-2.5 font-bold text-emerald-800 text-center">UC-11</td><td class="p-2.5 font-medium text-emerald-900">Tính điểm tương thích 2 chiều</td><td class="p-2.5">Hệ thống</td><td class="p-2.5 text-center font-bold text-emerald-700">&laquo;include&raquo;</td><td class="p-2.5 text-slate-600">Tính ma trận M[a][b] và M[b][a] theo công thức pair_score.</td></tr>
+                        <tr class="bg-purple-50/50"><td class="p-2.5 font-bold text-purple-800 text-center">UC-12</td><td class="p-2.5 font-medium text-purple-900">Xem giải thích tiêu chí chi tiết</td><td class="p-2.5">Sinh viên</td><td class="p-2.5 text-center font-bold text-purple-700">&laquo;extend&raquo;</td><td class="p-2.5 text-slate-600">Mở rộng giải thích tiêu chí hòa hợp cao (>=0.8) và tiêu chí cảnh báo (<=0.4).</td></tr>
+
+                        <!-- Phân hệ 4 -->
+                        <tr class="bg-slate-50 font-bold text-slate-900"><td colspan="5" class="p-2.5 bg-slate-200/80">Phân hệ 4: Quản lý Danh mục Phòng & Ghép phòng Gale-Shapley</td></tr>
+                        <tr class="bg-amber-50/40"><td class="p-2.5 font-bold text-amber-900 text-center">UC-13</td><td class="p-2.5 font-bold text-amber-950">Quản lý danh mục phòng & giá thuê</td><td class="p-2.5 font-bold">Ban quản lý KTX</td><td class="p-2.5 text-center font-bold text-sky-700">Chính</td><td class="p-2.5 text-amber-900"><strong>Theo ý Thầy:</strong> Cấu hình loại phòng 2/4/6 người, số giường, đơn giá/kỳ.</td></tr>
+                        <tr><td class="p-2.5 font-bold text-blue-900 text-center">UC-14</td><td class="p-2.5 font-medium">Quản lý dữ liệu sinh viên KTX</td><td class="p-2.5">Ban quản lý KTX</td><td class="p-2.5 text-center font-bold text-sky-700">Chính</td><td class="p-2.5 text-slate-600">Nạp CSV toàn trường, sinh dữ liệu giả lập có Seed kiểm thử NFR-04.</td></tr>
+                        <tr><td class="p-2.5 font-bold text-blue-900 text-center">UC-15</td><td class="p-2.5 font-medium">Thực hiện ghép phòng tự động</td><td class="p-2.5">Ban quản lý KTX</td><td class="p-2.5 text-center font-bold text-sky-700">Chính</td><td class="p-2.5 text-slate-600">Chạy phân bổ phòng. Include UC-16, UC-17, UC-18.</td></tr>
+                        <tr class="bg-emerald-50/50"><td class="p-2.5 font-bold text-emerald-800 text-center">UC-16</td><td class="p-2.5 font-medium text-emerald-900">Chạy thuật toán Gale-Shapley</td><td class="p-2.5">Hệ thống</td><td class="p-2.5 text-center font-bold text-emerald-700">&laquo;include&raquo;</td><td class="p-2.5 text-slate-600">Thực thi thuật toán đề xuất - hoãn chấp nhận đảm bảo ghép cặp ổn định.</td></tr>
+                        <tr class="bg-emerald-50/50"><td class="p-2.5 font-bold text-emerald-800 text-center">UC-17</td><td class="p-2.5 font-medium text-emerald-900">Đếm cặp chặn (Blocking Pairs)</td><td class="p-2.5">Hệ thống</td><td class="p-2.5 text-center font-bold text-emerald-700">&laquo;include&raquo;</td><td class="p-2.5 text-slate-600">Kiểm tra chứng minh Blocking Pairs = 0 (NFR-02).</td></tr>
+                        <tr class="bg-emerald-50/50"><td class="p-2.5 font-bold text-emerald-800 text-center">UC-18</td><td class="p-2.5 font-bold text-emerald-950">Tối ưu hóa tỷ lệ lấp đầy phòng</td><td class="p-2.5">Hệ thống</td><td class="p-2.5 text-center font-bold text-emerald-700">&laquo;include&raquo;</td><td class="p-2.5 text-emerald-900"><strong>Theo ý Thầy:</strong> Lấp đầy 100% số giường từng phòng để tối đa hóa lợi nhuận (BR-05).</td></tr>
+
+                        <!-- Phân hệ 5 -->
+                        <tr class="bg-slate-50 font-bold text-slate-900"><td colspan="5" class="p-2.5 bg-slate-200/80">Phân hệ 5: Thanh toán & Hợp đồng Lưu trú</td></tr>
+                        <tr class="bg-emerald-50/40"><td class="p-2.5 font-bold text-emerald-900 text-center">UC-19</td><td class="p-2.5 font-bold text-emerald-950">Thanh toán tiền phòng & đặt cọc</td><td class="p-2.5 font-bold">Sinh viên</td><td class="p-2.5 text-center font-bold text-sky-700">Chính</td><td class="p-2.5 text-emerald-900"><strong>Theo ý Thầy:</strong> Nộp tiền phòng kỳ 1 + Cọc 1 triệu trong hạn 72h (BR-04). Include UC-20.</td></tr>
+                        <tr class="bg-emerald-50/50"><td class="p-2.5 font-bold text-emerald-800 text-center">UC-20</td><td class="p-2.5 font-medium text-emerald-900">Xử lý giao dịch thanh toán</td><td class="p-2.5">Cổng thanh toán</td><td class="p-2.5 text-center font-bold text-emerald-700">&laquo;include&raquo;</td><td class="p-2.5 text-slate-600">Kết nối VNPay/Ngân hàng xử lý giao dịch an toàn và phản hồi trạng thái.</td></tr>
+                        <tr><td class="p-2.5 font-bold text-blue-900 text-center">UC-21</td><td class="p-2.5 font-medium">Quản lý công nợ & xuất biên lai</td><td class="p-2.5">Ban quản lý KTX</td><td class="p-2.5 text-center font-bold text-sky-700">Chính</td><td class="p-2.5 text-slate-600">Đối soát các khoản thu, xuất biên lai điện tử có mã tra cứu hóa đơn.</td></tr>
+                        <tr><td class="p-2.5 font-bold text-blue-900 text-center">UC-22</td><td class="p-2.5 font-medium">Ký & Tải hợp đồng lưu trú KTX</td><td class="p-2.5">Sinh viên</td><td class="p-2.5 text-center font-bold text-sky-700">Chính</td><td class="p-2.5 text-slate-600">Ký xác nhận hợp đồng điện tử có mã QR để chính thức nhận phòng.</td></tr>
+
+                        <!-- Phân hệ 6 -->
+                        <tr class="bg-slate-50 font-bold text-slate-900"><td colspan="5" class="p-2.5 bg-slate-200/80">Phân hệ 6: Quản lý Doanh thu, Lợi nhuận & Báo cáo</td></tr>
+                        <tr class="bg-amber-50/40"><td class="p-2.5 font-bold text-amber-900 text-center">UC-23</td><td class="p-2.5 font-bold text-amber-950">Báo cáo Doanh thu & Lợi nhuận KTX</td><td class="p-2.5 font-bold">Ban quản lý KTX</td><td class="p-2.5 text-center font-bold text-sky-700">Chính</td><td class="p-2.5 text-amber-900"><strong>Theo ý Thầy:</strong> Thống kê doanh thu theo kỳ, chi phí vận hành, lãi ròng và tỷ lệ lấp đầy.</td></tr>
+                        <tr><td class="p-2.5 font-bold text-blue-900 text-center">UC-24</td><td class="p-2.5 font-medium">Báo cáo đối sánh thuật toán</td><td class="p-2.5">Ban quản lý KTX</td><td class="p-2.5 text-center font-bold text-sky-700">Chính</td><td class="p-2.5 text-slate-600">Biểu đồ so sánh điểm thỏa mãn Gale-Shapley vs Ghép ngẫu nhiên qua các mức N.</td></tr>
+                        <tr class="bg-purple-50/50"><td class="p-2.5 font-bold text-purple-800 text-center">UC-25</td><td class="p-2.5 font-medium text-purple-900">Xuất báo cáo & danh sách CSV</td><td class="p-2.5">Ban quản lý KTX</td><td class="p-2.5 text-center font-bold text-purple-700">&laquo;extend&raquo;</td><td class="p-2.5 text-slate-600">Xuất file CSV kết quả phân phòng và báo cáo tài chính. Extend UC-23, UC-24.</td></tr>
                     </tbody>
                 </table>
             </div>
         </div>
 
+        <!-- TAB CONTENT 4: ĐẶC TẢ CHI TIẾT 5 USE CASE -->
+        <div id="tab-specs" class="hidden space-y-4">
+            <h2 class="text-base font-bold text-slate-900">Đặc Tả Chi Tiết 5 Use Case Trọng Tâm Bổ Sung</h2>
+            
+            <div class="space-y-4 text-xs">
+                <!-- UC-07 -->
+                <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm space-y-2">
+                    <span class="px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-800 font-bold text-[11px]">UC-07: Chọn loại phòng & tiện ích mong muốn</span>
+                    <p class="text-slate-600"><strong>Tác nhân:</strong> Sinh viên | <strong>Tiền điều kiện:</strong> Đã đăng nhập và được xác thực là sinh viên trường A.</p>
+                    <p class="text-slate-700"><strong>Luồng chính:</strong> Hệ thống tải danh mục các loại phòng đang mở: (1) Phòng 2 người VIP (2.5tr/tháng/SV, máy lạnh, wc khép kín); (2) Phòng 4 người Tiêu chuẩn (1.4tr/tháng/SV, máy lạnh); (3) Phòng 6 người Tiết kiệm (800k/tháng/SV). Sinh viên chọn loại phòng ưu tiên số 1 và số 2 theo khả năng chi trả. Nguyện vọng này được lưu lại làm tiêu chí phân loại đầu vào trước khi chạy thuật toán ghép thói quen.</p>
+                </div>
+
+                <!-- UC-09 -->
+                <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm space-y-2">
+                    <span class="px-2.5 py-0.5 rounded-full bg-rose-100 text-rose-800 font-bold text-[11px]">UC-09: Phê duyệt đơn đăng ký KTX (Business Approve)</span>
+                    <p class="text-slate-600"><strong>Tác nhân:</strong> Ban quản lý KTX | <strong>Tiền điều kiện:</strong> Sinh viên đã nộp đơn kèm cam kết ở tối thiểu 1 kỳ (trạng thái Pending).</p>
+                    <p class="text-slate-700"><strong>Luồng chính:</strong> Cán bộ BQL mở màn hình duyệt đơn. Hệ thống tự động đánh dấu xanh hồ sơ hợp lệ (đúng trường A, MSSV còn hiệu lực). BQL kiểm tra hạn ngạch phòng, đối chiếu kỷ luật cũ và nhấn 'Business Approve' chuyển hồ sơ sang 'Approved'. Chỉ các hồ sơ này mới được nạp vào hàng đợi chạy Gale-Shapley.</p>
+                </div>
+
+                <!-- UC-19 -->
+                <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm space-y-2">
+                    <span class="px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-bold text-[11px]">UC-19 & UC-20: Thanh toán tiền phòng & Đặt cọc trong hạn 72h</span>
+                    <p class="text-slate-600"><strong>Tác nhân:</strong> Sinh viên, Cổng thanh toán (VNPay), BQL | <strong>Tiền điều kiện:</strong> Đã có kết quả ghép phòng Gale-Shapley.</p>
+                    <p class="text-slate-700"><strong>Luồng chính:</strong> Sinh viên nhận bảng kê chi phí: Tiền phòng kỳ 1 (5 tháng x 1.4tr = 7tr) + Tiền cọc tài sản (1tr) = Tổng 8.000.000 VNĐ. Đồng hồ đếm ngược 72 giờ kích hoạt. Sinh viên quét mã QR VNPay. Cổng thanh toán trừ tiền tài khoản an toàn và phản hồi SUCCESS. Hệ thống cập nhật 'Đã thanh toán', sinh biên lai điện tử và cho phép ký hợp đồng lưu trú số.</p>
+                    <p class="text-rose-600"><strong>Ngoại lệ:</strong> Quá 72h không thanh toán, hệ thống tự động hủy kết quả giữ phòng, nhường suất cho sinh viên trong danh sách chờ (Waitlist).</p>
+                </div>
+
+                <!-- UC-23 -->
+                <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm space-y-2">
+                    <span class="px-2.5 py-0.5 rounded-full bg-blue-100 text-blue-800 font-bold text-[11px]">UC-23: Báo cáo Doanh thu, Lợi nhuận & Tỷ lệ Lấp đầy Phòng KTX</span>
+                    <p class="text-slate-600"><strong>Tác nhân:</strong> Ban quản lý KTX, Ban Giám đốc KTX | <strong>Tiền điều kiện:</strong> Đã hoàn thành đợt phân phòng và thu tiền.</p>
+                    <p class="text-slate-700"><strong>Luồng chính:</strong> Dashboard tài chính tổng hợp: Tổng doanh thu thu về theo kỳ, tổng quỹ tiền cọc đang quản lý, chi phí vận hành ước tính (điện nước định mức, bảo vệ, vệ sinh) và Lợi nhuận ròng dự kiến. Thống kê tỷ lệ lấp đầy phòng (Occupancy Rate). Cảnh báo các phòng bị trống giường dở dang để BQL dồn phòng ghép bổ sung đợt 2 nhằm triệt tiêu lãng phí vận hành.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB CONTENT 5: KỊCH BẢN VẤN ĐÁP BẢO VỆ -->
+        <div id="tab-defense" class="hidden space-y-4">
+            <h2 class="text-base font-bold text-slate-900">Kịch Bản Trả Lời Vấn Đáp Tự Tin Trước Hội Đồng (Q&A)</h2>
+            <div class="space-y-3 text-xs">
+                
+                <div class="bg-slate-50 border border-slate-200 rounded-xl p-4">
+                    <span class="font-bold text-blue-900 block text-[13px] mb-1">❓ Câu 1: Tại sao lại cần Use Case Chọn loại phòng mà không ghép thẳng vào bất kỳ phòng nào?</span>
+                    <p class="text-slate-700 leading-relaxed">
+                        <strong>Trả lời tự tin:</strong> "Dạ thưa Thầy, trong ký túc xá thực tế, mỗi sinh viên có hoàn cảnh kinh tế và nhu cầu tiện ích rất khác nhau: có bạn có điều kiện tài chính sẵn sàng chi 2.5 triệu/tháng để ở phòng đôi máy lạnh khép kín, nhưng cũng có bạn sinh viên khó khăn chỉ có thể chi trả 800 ngàn/tháng cho phòng 6 người. Nếu hệ thống chỉ ghép dựa trên giờ ngủ và thói quen mà bỏ qua loại phòng thì sẽ dẫn đến việc ghép 2 người cùng thói quen nhưng một người không đủ tiền đóng tiền phòng. Do đó, việc cho sinh viên chọn loại phòng (UC-07) là bộ lọc phân loại đầu vào bắt buộc trước khi chạy thuật toán tương thích."
+                    </p>
+                </div>
+
+                <div class="bg-slate-50 border border-slate-200 rounded-xl p-4">
+                    <span class="font-bold text-blue-900 block text-[13px] mb-1">❓ Câu 2: Bước Business Approve đóng vai trò gì trong mô hình Use Case?</span>
+                    <p class="text-slate-700 leading-relaxed">
+                        <strong>Trả lời tự tin:</strong> "Dạ thưa Thầy, 'Business Approve' (UC-09) là cánh cổng kiểm soát nghiệp vụ của Ban quản lý theo Quy tắc BR-03. Không một tổ chức ký túc xá nào cho phép sinh viên cứ điền form là tự động vào ở ngay. KTX phải thẩm định: (1) Sinh viên có đúng là sinh viên trường A không theo BR-01; (2) Sinh viên có vi phạm kỷ luật nội trú cũ không; (3) Sinh viên có cam kết ở đủ tối thiểu 1 học kỳ theo BR-02 không. Chỉ khi hồ sơ được BQL phê duyệt 'Business Approve', sinh viên mới được đưa vào danh sách chính thức để chạy thuật toán phân phòng."
+                    </p>
+                </div>
+
+                <div class="bg-slate-50 border border-slate-200 rounded-xl p-4">
+                    <span class="font-bold text-blue-900 block text-[13px] mb-1">❓ Câu 3: Hệ thống tính toán và tối ưu hóa lợi nhuận cho KTX như thế nào?</span>
+                    <p class="text-slate-700 leading-relaxed">
+                        <strong>Trả lời tự tin:</strong> "Dạ thưa Thầy, hệ thống quản lý lợi nhuận ở 2 khía cạnh: (1) Về mặt báo cáo tài chính (UC-23), hệ thống tính toán Tổng doanh thu từ các phân khúc phòng (phòng 2 người có biên lợi nhuận cao nhất, phòng 4 người tạo doanh thu ổn định nhất) trừ đi chi phí vận hành (điện nước định mức, bảo vệ, vệ sinh) để ra Lợi nhuận ròng; (2) Về mặt giải thuật (UC-18 & BR-05), hệ thống tối ưu hóa tỷ lệ lấp đầy giường (Occupancy Rate). Thuật toán ưu tiên lấp đầy 100% số giường của từng phòng (ví dụ phòng 4 người phải đủ 4 người), tránh tình trạng nhiều phòng dở dang gây tốn chi phí điện nước và dọn dẹp không cần thiết, nhờ đó tối đa hóa lợi nhuận cho KTX."
+                    </p>
+                </div>
+
+                <div class="bg-slate-50 border border-slate-200 rounded-xl p-4">
+                    <span class="font-bold text-blue-900 block text-[13px] mb-1">❓ Câu 4: Quá trình thanh toán và đặt cọc được thiết kế bảo đảm quyền lợi KTX ra sao?</span>
+                    <p class="text-slate-700 leading-relaxed">
+                        <strong>Trả lời tự tin:</strong> "Dạ thưa Thầy, theo quy định BR-04 và các Use Case UC-19, UC-20, UC-21: Sau khi có kết quả xếp phòng, sinh viên có thời hạn tối đa 72 giờ để hoàn thành thanh toán tiền phòng kỳ 1 kèm tiền đặt cọc tài sản 1.000.000 VNĐ qua cổng thanh toán VNPay. Tiền cọc này ràng buộc trách nhiệm bảo vệ tài sản và cam kết ở tối thiểu 1 kỳ. Nếu sinh viên tự ý hủy trước hạn, KTX không hoàn cọc để bù đắp chi phí phòng trống. Nếu quá 72h chưa nộp tiền, hệ thống tự động hủy giữ chỗ để nhường cơ hội cho sinh viên khác, đảm bảo KTX không bị treo giường ảo và đảm bảo dòng tiền tài chính."
+                    </p>
+                </div>
+
+                <div class="bg-slate-50 border border-slate-200 rounded-xl p-4">
+                    <span class="font-bold text-blue-900 block text-[13px] mb-1">❓ Câu 5: Tại sao lại quy định sinh viên phải ở tối thiểu 01 học kỳ mà không cho ở theo tháng?</span>
+                    <p class="text-slate-700 leading-relaxed">
+                        <strong>Trả lời tự tin:</strong> "Dạ thưa Thầy, đây là Quy tắc nghiệp vụ nền tảng BR-02. Ký túc xá sinh viên đại học hoạt động theo học chế tín chỉ theo từng học kỳ (5 tháng). Nếu cho phép sinh viên ở theo tháng và tự do chuyển đi giữa kỳ, KTX sẽ đối mặt với rủi ro phòng bị bỏ trống giữa chừng rất khó tìm người lấp đầy, gây thất thoát doanh thu nghiêm trọng và làm xáo trộn nếp sinh hoạt của các bạn cùng phòng còn lại. Cam kết 1 học kỳ là chuẩn mực vận hành của toàn bộ các ký túc xá đại học."
+                    </p>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="border-t border-slate-200 pt-4 flex flex-wrap items-center justify-between gap-3 text-xs text-slate-500">
+            <div>
+                © 2026 Hệ thống Ghép bạn cùng phòng KTX thông minh (Gale-Shapley Matching System v3.0)
+            </div>
+            <div class="flex items-center gap-2">
+                <span class="text-slate-700 font-semibold">Tài liệu đã được tải về:</span>
+                <span class="bg-emerald-50 text-emerald-700 border border-emerald-200 px-2 py-0.5 rounded font-mono font-bold">Tai_Lieu_Giai_Thich_So_Do_Use_Case_KTX.docx</span>
+            </div>
+        </div>
+
     </div>
+
+    <!-- Tab Switch Script -->
+    <script>
+        function switchTab(tabId) {
+            const tabs = ['diagram', 'rules', 'usecases', 'specs', 'defense'];
+            tabs.forEach(t => {
+                const el = document.getElementById('tab-' + t);
+                const btn = document.getElementById('btn-' + t);
+                if (t === tabId) {
+                    el.classList.remove('hidden');
+                    btn.classList.add('active');
+                    btn.classList.remove('text-slate-700');
+                } else {
+                    el.classList.add('hidden');
+                    btn.classList.remove('active');
+                    btn.classList.add('text-slate-700');
+                }
+            });
+        }
+    </script>
 </body>
 </html>
