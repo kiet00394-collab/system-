@@ -4,7 +4,7 @@ import base64
 import urllib.parse
 from typing import List, Dict, Set, Optional
 from fastapi import FastAPI, Request, Response, HTTPException
-from fastapi.responses import HTMLResponse, RedirectResponse, JSONResponse
+from fastapi.responses import HTMLResponse, RedirectResponse, JSONResponse, FileResponse
 from pydantic import BaseModel
 import uvicorn
 
@@ -406,6 +406,17 @@ def wireframe_page():
     html_path = os.path.join(os.path.dirname(__file__), "ui", "wireframe_view.html")
     with open(html_path, "r", encoding="utf-8") as f:
         return HTMLResponse(content=f.read())
+
+@app.get("/download-spec-docx")
+def download_spec_docx():
+    docx_path = os.path.join(os.path.dirname(__file__), "docs", "Tai_Lieu_Dac_Ta_UseCase_Va_Sequence_Diagram_KTX.docx")
+    if os.path.exists(docx_path):
+        return FileResponse(
+            docx_path,
+            media_type="application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+            filename="Tai_Lieu_Dac_Ta_UseCase_Va_Sequence_Diagram_KTX.docx"
+        )
+    raise HTTPException(status_code=404, detail="File tài liệu Word chưa được tạo.")
 
 @app.post("/api/rank")
 def rank_roommates(user: UserProfileInput, request: Request):
