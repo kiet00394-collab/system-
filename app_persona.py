@@ -418,6 +418,23 @@ def download_spec_docx():
         )
     raise HTTPException(status_code=404, detail="File tài liệu Word chưa được tạo.")
 
+@app.get("/download-wireframe-pdf")
+def download_wireframe_pdf():
+    pdf_path = os.path.join(os.path.dirname(__file__), "docs", "Tai_Lieu_Wireframe_Chi_Tiet_He_Thong_KTX.pdf")
+    if os.path.exists(pdf_path):
+        return FileResponse(
+            pdf_path,
+            media_type="application/pdf",
+            filename="Tai_Lieu_Wireframe_Chi_Tiet_He_Thong_KTX.pdf"
+        )
+    raise HTTPException(status_code=404, detail="File tài liệu PDF chưa được tạo.")
+
+@app.get("/wireframe-detail", response_class=HTMLResponse)
+def wireframe_detail_page():
+    html_path = os.path.join(os.path.dirname(__file__), "ui", "wireframe_detail_export.html")
+    with open(html_path, "r", encoding="utf-8") as f:
+        return HTMLResponse(content=f.read())
+
 @app.post("/api/rank")
 def rank_roommates(user: UserProfileInput, request: Request):
     auth_user = get_current_user_from_request(request)
