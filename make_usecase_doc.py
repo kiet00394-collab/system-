@@ -206,10 +206,10 @@ def build_document():
          "Bổ sung phân hệ Quản lý Doanh thu & Lợi nhuận (UC-23, UC-25), tối ưu tỷ lệ lấp đầy phòng trống (BR-05) và báo cáo biên lãi ròng."),
         ("2. 'Thiếu business approve'",
          "Sinh viên nộp khảo sát là chạy ghép thẳng vào phòng, không qua kiểm duyệt.",
-         "Thiết lập quy trình Phê duyệt nghiệp vụ (UC-09, BR-03): BQL duyệt hồ sơ trường A, tư cách sinh viên và kỷ luật trước khi phân phòng."),
+         "Thiết lập quy trình Phê duyệt nghiệp vụ (UC-09, BR-03): Hệ thống duyệt hồ sơ trường A, tư cách sinh viên và kỷ luật trước khi phân phòng."),
         ("3. 'Chưa có quản lý phòng, muốn ở loại phòng nào'",
          "Mặc định phòng đồng nhất, không cho sinh viên chọn loại phòng hay tiện ích.",
-         "Bổ sung UC-13 (BQL Quản lý danh mục phòng: 2, 4, 6 người, giá thuê) và UC-07 (Sinh viên chọn loại phòng & máy lạnh theo ngân sách)."),
+         "Bổ sung UC-13 (Hệ thống Quản lý danh mục phòng: 2, 4, 6 người, giá thuê) và UC-07 (Sinh viên chọn loại phòng & máy lạnh theo ngân sách)."),
         ("4. 'Chưa tính tới quá trình thanh toán'",
          "Hoàn toàn bỏ qua bước thu tiền phòng, đặt cọc giữ chỗ và ký hợp đồng.",
          "Bổ sung quy trình thanh toán toàn diện (UC-19, UC-20, UC-21, UC-22): Thanh toán kỳ 1 + Cọc 1 triệu trong 72h, tích hợp VNPay và xuất biên lai."),
@@ -262,7 +262,7 @@ def build_document():
     add_bullet(doc, "Sinh viên thuộc trường Đại học A có nhu cầu nội trú tại Ký túc xá A.", "Đối tượng: ")
     add_bullet(doc, "Đăng ký/đăng nhập tài khoản, chọn loại phòng mong muốn (2, 4, 6 người) và tiện ích theo ngân sách, khai báo 8 tiêu chí thói quen sinh hoạt (có hỗ trợ nạp mẫu Persona), nộp đơn cam kết tối thiểu 1 kỳ, xem bảng xếp hạng gợi ý bạn cùng phòng, thanh toán tiền phòng/cọc qua cổng thanh toán và ký hợp đồng lưu trú điện tử.", "Hành vi: ")
 
-    add_heading_2(doc, "3.2 Tác nhân Ban quản lý KTX (Dormitory Management - Business Actor)")
+    add_heading_2(doc, "3.2 Tác nhân Hệ thống KTX (System - System/Managing Actor)")
     add_bullet(doc, "Đội ngũ cán bộ quản lý KTX chịu trách nhiệm điều hành toàn diện công tác nghiệp vụ nội trú.", "Đối tượng: ")
     add_bullet(doc, "Cấu hình danh mục loại phòng và giá thuê theo kỳ; thực hiện phê duyệt nghiệp vụ (Business Approve) hồ sơ sinh viên; nạp dữ liệu khảo sát CSV hoặc sinh dữ liệu giả lập có Seed; kích hoạt thuật toán ghép phòng Gale-Shapley và tối ưu lấp đầy phòng; đối soát công nợ thanh toán; theo dõi báo cáo doanh thu, chi phí vận hành, tỷ lệ lấp đầy giường và lợi nhuận ròng của KTX.", "Hành vi: ")
 
@@ -296,7 +296,7 @@ def build_document():
     uc_data = [
         # Phân hệ 1
         ("UC-01", "Đăng ký tài khoản KTX", "Sinh viên", "Chính", "Tạo tài khoản KTX gắn với Mã SV trường A và email giáo dục."),
-        ("UC-02", "Đăng nhập hệ thống", "Sinh viên, BQL", "Chính", "Xác thực danh tính trước khi truy cập cổng thông tin nội trú."),
+        ("UC-02", "Đăng nhập hệ thống", "Sinh viên, Hệ thống", "Chính", "Xác thực danh tính trước khi truy cập cổng thông tin nội trú."),
         ("UC-03", "Xác thực sinh viên Trường A", "Hệ thống", "<<include>>", "Kiểm tra sinh viên thuộc đối tượng hợp lệ theo BR-01."),
         ("UC-04", "Quản lý hồ sơ cá nhân", "Sinh viên", "Chính", "Cập nhật thông tin liên hệ, giấy tờ tùy thân, người liên hệ khẩn cấp."),
         # Phân hệ 2
@@ -305,26 +305,26 @@ def build_document():
         ("UC-07", "Chọn loại phòng & tiện ích", "Sinh viên", "Chính", "Chọn phòng 2, 4, 6 người; tiện ích máy lạnh/quạt theo khả năng tài chính."),
         # Phân hệ 3
         ("UC-08", "Nộp đơn đăng ký KTX", "Sinh viên", "Chính", "Nộp đơn kèm cam kết thời hạn lưu trú tối thiểu 1 học kỳ (BR-02)."),
-        ("UC-09", "Phê duyệt đơn (Business Approve)", "Ban quản lý KTX", "Chính", "BQL kiểm duyệt điều kiện trường A, kỷ luật trước khi phân phòng (BR-03)."),
+        ("UC-09", "Phê duyệt đơn (Business Approve)", "Hệ thống (System)", "Chính", "Hệ thống kiểm duyệt điều kiện trường A, kỷ luật trước khi phân phòng (BR-03)."),
         ("UC-10", "Xem Xếp hạng bạn cùng phòng", "Sinh viên", "Chính", "Hiển thị Top 8 ứng viên hòa hợp nhất được xếp hạng giảm dần."),
         ("UC-11", "Tính điểm tương thích 2 chiều", "Hệ thống", "<<include>>", "Tính toán ma trận M[a][b] và M[b][a] có xét trọng số ưu tiên 1.5x."),
         ("UC-12", "Xem giải thích tiêu chí chi tiết", "Sinh viên", "<<extend>>", "Xem chi tiết tiêu chí hòa hợp cao (>=0.8) và tiêu chí cảnh báo (<=0.4)."),
         # Phân hệ 4
-        ("UC-13", "Quản lý danh mục phòng & giá", "Ban quản lý KTX", "Chính", "Cấu hình số phòng, tòa nhà, loại phòng 2/4/6 người, đơn giá thuê mỗi kỳ."),
-        ("UC-14", "Quản lý dữ liệu sinh viên KTX", "Ban quản lý KTX", "Chính", "Nạp dữ liệu khảo sát từ CSV hoặc sinh dữ liệu giả lập có Seed."),
-        ("UC-15", "Thực hiện ghép phòng tự động", "Ban quản lý KTX", "Chính", "Kích hoạt giải thuật Gale-Shapley kết hợp tối ưu lấp đầy phòng."),
+        ("UC-13", "Quản lý danh mục phòng & giá", "Hệ thống (System)", "Chính", "Cấu hình số phòng, tòa nhà, loại phòng 2/4/6 người, đơn giá thuê mỗi kỳ."),
+        ("UC-14", "Quản lý dữ liệu sinh viên KTX", "Hệ thống (System)", "Chính", "Nạp dữ liệu khảo sát từ CSV hoặc sinh dữ liệu giả lập có Seed."),
+        ("UC-15", "Thực hiện ghép phòng tự động", "Hệ thống (System)", "Chính", "Kích hoạt giải thuật Gale-Shapley kết hợp tối ưu lấp đầy phòng."),
         ("UC-16", "Chạy thuật toán Gale-Shapley", "Hệ thống", "<<include>>", "Thuật toán đề xuất và chấp nhận hoãn lại đảm bảo ghép cặp ổn định."),
         ("UC-17", "Đếm cặp chặn (Blocking Pairs)", "Hệ thống", "<<include>>", "Quét kiểm tra toàn bộ các cặp chéo chứng minh Blocking Pairs = 0."),
         ("UC-18", "Tối ưu hóa tỷ lệ lấp đầy phòng", "Hệ thống", "<<include>>", "Ưu tiên lấp đầy 100% giường trước khi mở phòng mới để tối ưu lợi nhuận (BR-05)."),
         # Phân hệ 5
         ("UC-19", "Thanh toán tiền phòng & đặt cọc", "Sinh viên", "Chính", "Thanh toán tiền phòng kỳ 1 + tiền cọc 1 triệu VNĐ trong 72h (BR-04)."),
         ("UC-20", "Xử lý giao dịch thanh toán", "Cổng thanh toán", "<<include>>", "Kết nối VNPay/Ngân hàng xử lý giao dịch an toàn và phản hồi trạng thái."),
-        ("UC-21", "Quản lý công nợ & xuất biên lai", "Ban quản lý KTX", "Chính", "Đối soát các khoản thu, xuất biên lai thu tiền điện tử có mã tra cứu."),
+        ("UC-21", "Quản lý công nợ & xuất biên lai", "Hệ thống (System)", "Chính", "Đối soát các khoản thu, xuất biên lai thu tiền điện tử có mã tra cứu."),
         ("UC-22", "Ký & Tải hợp đồng lưu trú KTX", "Sinh viên", "Chính", "Ký xác nhận hợp đồng thuê phòng số có mã QR hợp lệ."),
         # Phân hệ 6
-        ("UC-23", "Báo cáo Doanh thu & Lợi nhuận", "Ban quản lý KTX", "Chính", "Thống kê doanh thu theo kỳ, chi phí vận hành, lãi ròng và tỷ lệ lấp đầy."),
-        ("UC-24", "Báo cáo đối sánh thuật toán", "Ban quản lý KTX", "Chính", "Biểu đồ so sánh điểm thỏa mãn Gale-Shapley vs Ghép ngẫu nhiên."),
-        ("UC-25", "Xuất báo cáo & danh sách CSV", "Ban quản lý KTX", "<<extend>>", "Trích xuất file CSV/Excel danh sách phòng và bảng doanh thu.")
+        ("UC-23", "Báo cáo Doanh thu & Lợi nhuận", "Hệ thống (System)", "Chính", "Thống kê doanh thu theo kỳ, chi phí vận hành, lãi ròng và tỷ lệ lấp đầy."),
+        ("UC-24", "Báo cáo đối sánh thuật toán", "Hệ thống (System)", "Chính", "Biểu đồ so sánh điểm thỏa mãn Gale-Shapley vs Ghép ngẫu nhiên."),
+        ("UC-25", "Xuất báo cáo & danh sách CSV", "Hệ thống (System)", "<<extend>>", "Trích xuất file CSV/Excel danh sách phòng và bảng doanh thu.")
     ]
 
     for i, row_data in enumerate(uc_data):
@@ -372,20 +372,20 @@ def build_document():
     add_bullet(doc, "Hệ thống tải danh mục các loại phòng KTX: Phòng 2 người (VIP - 2.5tr/tháng/SV), Phòng 4 người (Tiêu chuẩn - 1.4tr/tháng/SV), Phòng 6 người (Tiết kiệm - 800k/tháng/SV). Sinh viên tích chọn nguyện vọng 1 và nguyện vọng 2 kèm dịch vụ xe/giặt. Nguyện vọng này đóng vai trò bộ lọc phân cụm trước khi thuật toán chạy.", "Luồng chính: ")
 
     add_heading_2(doc, "5.2 Đặc tả UC-09: Phê duyệt đơn đăng ký KTX (Business Approve)")
-    add_bullet(doc, "Ban quản lý KTX (Cán bộ phê duyệt).", "Tác nhân: ")
+    add_bullet(doc, "Hệ thống (System) (Cán bộ phê duyệt).", "Tác nhân: ")
     add_bullet(doc, "Kiểm soát chặt chẽ điều kiện nhập nội trú theo các quy định nghiệp vụ BR-01 và BR-02.", "Mục tiêu: ")
     add_bullet(doc, "Sinh viên đã hoàn tất nộp đơn đăng ký kèm cam kết ở tối thiểu 1 kỳ (trạng thái Pending).", "Tiền điều kiện: ")
-    add_bullet(doc, "Cán bộ BQL mở màn hình duyệt đơn. Hệ thống tự động gán nhãn xanh cho hồ sơ hợp lệ. BQL kiểm tra hạn ngạch phòng, đối chiếu kỷ luật cũ và nhấn 'Business Approve' chuyển hồ sơ sang trạng thái 'Approved'. Các hồ sơ này mới được nạp vào hàng đợi chạy Gale-Shapley.", "Luồng chính: ")
+    add_bullet(doc, "Cán bộ Hệ thống mở màn hình duyệt đơn. Hệ thống tự động gán nhãn xanh cho hồ sơ hợp lệ. Hệ thống kiểm tra hạn ngạch phòng, đối chiếu kỷ luật cũ và nhấn 'Business Approve' chuyển hồ sơ sang trạng thái 'Approved'. Các hồ sơ này mới được nạp vào hàng đợi chạy Gale-Shapley.", "Luồng chính: ")
 
     add_heading_2(doc, "5.3 Đặc tả UC-19, UC-20, UC-21: Quy trình Thanh toán Tiền phòng & Đặt cọc")
-    add_bullet(doc, "Sinh viên, Cổng thanh toán (VNPay), Ban quản lý KTX.", "Tác nhân: ")
+    add_bullet(doc, "Sinh viên, Cổng thanh toán (VNPay), Hệ thống (System).", "Tác nhân: ")
     add_bullet(doc, "Ràng buộc giữ chỗ bằng tiền cọc 1 triệu VNĐ và thu tiền phòng kỳ 1 trong 72h (BR-04).", "Mục tiêu: ")
     add_bullet(doc, "Đã có kết quả ghép phòng chính thức từ thuật toán Gale-Shapley.", "Tiền điều kiện: ")
     add_bullet(doc, "Sinh viên nhận bảng kê chi phí: Tiền phòng kỳ 1 (5 tháng x 1.400.000 = 7.000.000 đ) + Tiền cọc tài sản (1.000.000 đ) = Tổng 8.000.000 đ. Đồng hồ 72h đếm ngược. Sinh viên quét mã QR VNPay. Cổng thanh toán xác thực SUCCESS. Hệ thống cập nhật 'Đã thanh toán', xuất biên lai điện tử và cho phép ký hợp đồng lưu trú số (UC-22).", "Luồng chính: ")
     add_bullet(doc, "Quá 72h sinh viên không nộp tiền, hệ thống tự động hủy kết quả giữ chỗ, nhường suất cho sinh viên trong danh sách chờ (Waitlist).", "Ngoại lệ: ")
 
     add_heading_2(doc, "5.4 Đặc tả UC-23: Quản lý Doanh thu, Lợi nhuận & Tỷ lệ Lấp đầy KTX")
-    add_bullet(doc, "Ban quản lý KTX / Ban Giám đốc KTX.", "Tác nhân: ")
+    add_bullet(doc, "Hệ thống (System) / Ban Giám đốc KTX.", "Tác nhân: ")
     add_bullet(doc, "Phân tích hiệu quả tài chính và tối ưu hóa bài toán kinh doanh cho ký túc xá.", "Mục tiêu: ")
     add_bullet(doc, "Hệ thống tổng hợp Dashboard tài chính: Tổng doanh thu thu về theo kỳ, tổng quỹ tiền cọc đang giữ, chi phí điện nước/bảo trì/vệ sinh ước tính, và Lợi nhuận ròng dự kiến. Thống kê tỷ lệ lấp đầy phòng (Occupancy Rate). Cảnh báo các phòng bị trống giường dở dang để kích hoạt chính sách dồn phòng ghép bổ sung.", "Luồng chính: ")
 
@@ -399,7 +399,7 @@ def build_document():
          "Dạ thưa Thầy, trong ký túc xá thực tế, mỗi sinh viên có hoàn cảnh kinh tế và nhu cầu tiện ích rất khác nhau: có bạn có điều kiện tài chính sẵn sàng chi 2.5 triệu/tháng để ở phòng đôi máy lạnh khép kín, nhưng cũng có bạn sinh viên khó khăn chỉ có thể chi trả 800 ngàn/tháng cho phòng 6 người. Nếu hệ thống chỉ ghép dựa trên giờ ngủ và thói quen mà bỏ qua loại phòng thì sẽ dẫn đến việc ghép 2 người cùng thói quen nhưng một người không đủ tiền đóng tiền phòng. Do đó, việc cho sinh viên chọn loại phòng (UC-07) là bộ lọc phân loại đầu vào bắt buộc trước khi chạy thuật toán tương thích."),
 
         ("Câu 2: Thầy hỏi: 'Bước Business Approve đóng vai trò gì trong mô hình Use Case?'",
-         "Dạ thưa Thầy, 'Business Approve' (UC-09) là cánh cổng kiểm soát nghiệp vụ của Ban quản lý theo Quy tắc BR-03. Không một tổ chức ký túc xá nào cho phép sinh viên cứ điền form là tự động vào ở ngay. KTX phải thẩm định: (1) Sinh viên có đúng là sinh viên trường A không theo BR-01; (2) Sinh viên có vi phạm kỷ luật nội trú cũ không; (3) Sinh viên có cam kết ở đủ tối thiểu 1 học kỳ theo BR-02 không. Chỉ khi hồ sơ được BQL phê duyệt 'Business Approve', sinh viên mới được đưa vào danh sách chính thức để chạy thuật toán phân phòng."),
+         "Dạ thưa Thầy, 'Business Approve' (UC-09) là cánh cổng kiểm soát nghiệp vụ của Ban quản lý theo Quy tắc BR-03. Không một tổ chức ký túc xá nào cho phép sinh viên cứ điền form là tự động vào ở ngay. KTX phải thẩm định: (1) Sinh viên có đúng là sinh viên trường A không theo BR-01; (2) Sinh viên có vi phạm kỷ luật nội trú cũ không; (3) Sinh viên có cam kết ở đủ tối thiểu 1 học kỳ theo BR-02 không. Chỉ khi hồ sơ được Hệ thống phê duyệt 'Business Approve', sinh viên mới được đưa vào danh sách chính thức để chạy thuật toán phân phòng."),
 
         ("Câu 3: Thầy hỏi: 'Hệ thống tính toán và tối ưu hóa lợi nhuận cho KTX như thế nào?'",
          "Dạ thưa Thầy, hệ thống quản lý lợi nhuận ở 2 khía cạnh: (1) Về mặt báo cáo tài chính (UC-23), hệ thống tính toán Tổng doanh thu từ các phân khúc phòng (phòng 2 người có biên lợi nhuận cao nhất, phòng 4 người tạo doanh thu ổn định nhất) trừ đi chi phí vận hành (điện nước định mức, bảo vệ, vệ sinh) để ra Lợi nhuận ròng; (2) Về mặt giải thuật (UC-18 & BR-05), hệ thống tối ưu hóa tỷ lệ lấp đầy giường (Occupancy Rate). Thuật toán ưu tiên lấp đầy 100% số giường của từng phòng (ví dụ phòng 4 người phải đủ 4 người), tránh tình trạng nhiều phòng dở dang gây tốn chi phí điện nước và dọn dẹp không cần thiết, nhờ đó tối đa hóa lợi nhuận cho KTX."),
