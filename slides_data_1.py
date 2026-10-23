@@ -43,7 +43,7 @@ SLIDE_1 = r"""
     <div class="border-t border-indigo-500/30 pt-4 flex justify-between items-center text-sm">
         <div>
             <span class="text-indigo-300 text-xs block font-mono">SINH VIÊN THỰC HIỆN (NHÓM 3 - VNUK):</span>
-            <strong class="text-white text-base">Châu Tuấn Kiệt • Bùi Đình Hiếu • Lê Hoàng Triệu</strong>
+            <strong class="text-white text-base">Châu Tuấn Kiệt • Bùi Đình Hiếu • Lê Hoàng Triều</strong>
         </div>
         <div class="text-right text-xs font-mono text-slate-300">
             <span>Giảng viên hướng dẫn & chấm điểm</span><br>
@@ -97,7 +97,7 @@ SLIDE_2 = r"""
 
     <div class="border-t border-slate-200 pt-2 flex justify-between items-center text-xs text-slate-500 font-mono">
         <span>Đề tài KTX Smart Match • Viện Nghiên cứu và Đào tạo Việt - Anh (VNUK)</span>
-        <span>Sinh viên: Châu Tuấn Kiệt • Bùi Đình Hiếu • Lê Hoàng Triệu</span>
+        <span>Sinh viên: Châu Tuấn Kiệt • Bùi Đình Hiếu • Lê Hoàng Triều</span>
     </div>
 </div>
 """
@@ -170,7 +170,7 @@ SLIDE_3 = r"""
 
     <div class="border-t border-slate-200 pt-2 flex justify-between items-center text-xs text-slate-500 font-mono">
         <span>Đề tài KTX Smart Match • Viện Nghiên cứu và Đào tạo Việt - Anh (VNUK)</span>
-        <span>Sinh viên: Châu Tuấn Kiệt • Bùi Đình Hiếu • Lê Hoàng Triệu</span>
+        <span>Sinh viên: Châu Tuấn Kiệt • Bùi Đình Hiếu • Lê Hoàng Triều</span>
     </div>
 </div>
 """
@@ -227,7 +227,7 @@ SLIDE_4 = r"""
 
     <div class="border-t border-slate-200 pt-2 flex justify-between items-center text-xs text-slate-500 font-mono">
         <span>Đề tài KTX Smart Match • Viện Nghiên cứu và Đào tạo Việt - Anh (VNUK)</span>
-        <span>Sinh viên: Châu Tuấn Kiệt • Bùi Đình Hiếu • Lê Hoàng Triệu</span>
+        <span>Sinh viên: Châu Tuấn Kiệt • Bùi Đình Hiếu • Lê Hoàng Triều</span>
     </div>
 </div>
 """
@@ -286,7 +286,7 @@ SLIDE_5 = r"""
 
     <div class="border-t border-slate-200 pt-2 flex justify-between items-center text-xs text-slate-500 font-mono">
         <span>Đề tài KTX Smart Match • Viện Nghiên cứu và Đào tạo Việt - Anh (VNUK)</span>
-        <span>Sinh viên: Châu Tuấn Kiệt • Bùi Đình Hiếu • Lê Hoàng Triệu</span>
+        <span>Sinh viên: Châu Tuấn Kiệt • Bùi Đình Hiếu • Lê Hoàng Triều</span>
     </div>
 </div>
 """
@@ -364,7 +364,7 @@ SLIDE_6 = r"""
 
     <div class="border-t border-slate-200 pt-2 flex justify-between items-center text-xs text-slate-500 font-mono">
         <span>Đề tài KTX Smart Match • Viện Nghiên cứu và Đào tạo Việt - Anh (VNUK)</span>
-        <span>Sinh viên: Châu Tuấn Kiệt • Bùi Đình Hiếu • Lê Hoàng Triệu</span>
+        <span>Sinh viên: Châu Tuấn Kiệt • Bùi Đình Hiếu • Lê Hoàng Triều</span>
     </div>
 </div>
 """

@@ -418,6 +418,32 @@ def download_spec_docx():
         )
     raise HTTPException(status_code=404, detail="File tài liệu Word chưa được tạo.")
 
+@app.get("/download-master-pdf")
+def download_master_pdf():
+    pdf_path = os.path.join(os.path.dirname(__file__), "docs", "Bao_Cao_Do_An_KTX_Smart_Match_VNUK.pdf")
+    if os.path.exists(pdf_path):
+        return FileResponse(
+            pdf_path,
+            media_type="application/pdf",
+            filename="Bao_Cao_Do_An_KTX_Smart_Match_VNUK.pdf"
+        )
+    downloads_path = os.path.join(r"C:\Users\LENOVO\Downloads", "Bao_Cao_Do_An_KTX_Smart_Match_VNUK.pdf")
+    if os.path.exists(downloads_path):
+        return FileResponse(
+            downloads_path,
+            media_type="application/pdf",
+            filename="Bao_Cao_Do_An_KTX_Smart_Match_VNUK.pdf"
+        )
+    raise HTTPException(status_code=404, detail="File Bao_Cao_Do_An_KTX_Smart_Match_VNUK.pdf chưa được tạo.")
+
+@app.get("/master-deck", response_class=HTMLResponse)
+def view_master_deck_page():
+    html_path = os.path.join(os.path.dirname(__file__), "ui", "master_presentation_deck.html")
+    if os.path.exists(html_path):
+        with open(html_path, "r", encoding="utf-8") as f:
+            return HTMLResponse(content=f.read())
+    raise HTTPException(status_code=404, detail="File master_presentation_deck.html chưa được tạo.")
+
 @app.get("/download-slides-pdf")
 def download_slides_pdf():
     pdf_path = os.path.join(os.path.dirname(__file__), "docs", "Slide_Thuyet_Trinh_KTX_Smart_Match_VNUK.pdf")
@@ -435,6 +461,32 @@ def download_slides_pdf():
             filename="Slide_Thuyet_Trinh_KTX_Smart_Match_VNUK.pdf"
         )
     raise HTTPException(status_code=404, detail="File Slide thuyết trình PDF chưa được tạo.")
+
+@app.get("/download-br-nfr-pdf")
+def download_br_nfr_pdf():
+    pdf_path = os.path.join(os.path.dirname(__file__), "docs", "Business_Rules_Va_Non_Functional_KTX_VNUK.pdf")
+    if os.path.exists(pdf_path):
+        return FileResponse(
+            pdf_path,
+            media_type="application/pdf",
+            filename="Business_Rules_Va_Non_Functional_KTX_VNUK.pdf"
+        )
+    downloads_path = os.path.join(r"C:\Users\LENOVO\Downloads", "Business_Rules_Va_Non_Functional_KTX_VNUK.pdf")
+    if os.path.exists(downloads_path):
+        return FileResponse(
+            downloads_path,
+            media_type="application/pdf",
+            filename="Business_Rules_Va_Non_Functional_KTX_VNUK.pdf"
+        )
+    raise HTTPException(status_code=404, detail="File Business_Rules_Va_Non_Functional_KTX_VNUK.pdf chưa được tạo.")
+
+@app.get("/business-rules-nfr", response_class=HTMLResponse)
+def view_business_rules_nfr_page():
+    html_path = os.path.join(os.path.dirname(__file__), "ui", "business_rules_nfr_export.html")
+    if os.path.exists(html_path):
+        with open(html_path, "r", encoding="utf-8") as f:
+            return HTMLResponse(content=f.read())
+    raise HTTPException(status_code=404, detail="File business_rules_nfr_export.html chưa được tạo.")
 
 @app.get("/download-3-diagrams-pdf")
 def download_3_diagrams_pdf():

@@ -118,7 +118,7 @@ html_template = r"""<!DOCTYPE html>
 
             <div class="flex items-center justify-between text-xs text-slate-400 pt-4 border-t border-indigo-400/20">
                 <div>
-                    <span class="text-slate-300 font-bold">Nhóm sinh viên thực hiện:</span> Nhóm 3 (Châu Tuấn Kiệt, Bùi Đình Hiếu, Lê Hoàng Triệu)
+                    <span class="text-slate-300 font-bold">Nhóm sinh viên thực hiện:</span> Nhóm 3 (Châu Tuấn Kiệt, Bùi Đình Hiếu, Lê Hoàng Triều)
                 </div>
                 <div class="font-mono text-slate-300">
                     Năm học 2026 • Đại học Đà Nẵng

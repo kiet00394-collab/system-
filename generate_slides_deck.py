@@ -2,7 +2,7 @@
 r"""
 generate_slides_deck.py
 Builds the 22-slide Presentation Deck in Widescreen 16:9 format for VNUK students:
-Châu Tuấn Kiệt • Bùi Đình Hiếu • Lê Hoàng Triệu (Viện Nghiên cứu và Đào tạo Việt - Anh, ĐHĐN)
+Châu Tuấn Kiệt • Bùi Đình Hiếu • Lê Hoàng Triều (Viện Nghiên cứu và Đào tạo Việt - Anh, ĐHĐN)
 Exports to:
   - C:\Users\LENOVO\Downloads\Slide_Thuyet_Trinh_KTX_Smart_Match_VNUK.pdf
   - docs\Slide_Thuyet_Trinh_KTX_Smart_Match_VNUK.pdf
@@ -30,7 +30,7 @@ HTML_HEADER = r"""<!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Báo Cáo Đồ Án KTX Smart Match - VNUK Nhóm 3 (Châu Tuấn Kiệt - Bùi Đình Hiếu - Lê Hoàng Triệu)</title>
+    <title>Báo Cáo Đồ Án KTX Smart Match - VNUK Nhóm 3 (Châu Tuấn Kiệt - Bùi Đình Hiếu - Lê Hoàng Triều)</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>

@@ -63,7 +63,7 @@ SLIDE_15 = r"""
 
     <div class="border-t border-slate-200 pt-2 flex justify-between items-center text-xs text-slate-500 font-mono">
         <span>Đề tài KTX Smart Match • Viện Nghiên cứu và Đào tạo Việt - Anh (VNUK)</span>
-        <span>Sinh viên: Châu Tuấn Kiệt • Bùi Đình Hiếu • Lê Hoàng Triệu</span>
+        <span>Sinh viên: Châu Tuấn Kiệt • Bùi Đình Hiếu • Lê Hoàng Triều</span>
     </div>
 </div>
 """
@@ -134,7 +134,7 @@ SLIDE_16 = r"""
 
     <div class="border-t border-slate-200 pt-2 flex justify-between items-center text-xs text-slate-500 font-mono">
         <span>Đề tài KTX Smart Match • Viện Nghiên cứu và Đào tạo Việt - Anh (VNUK)</span>
-        <span>Sinh viên: Châu Tuấn Kiệt • Bùi Đình Hiếu • Lê Hoàng Triệu</span>
+        <span>Sinh viên: Châu Tuấn Kiệt • Bùi Đình Hiếu • Lê Hoàng Triều</span>
     </div>
 </div>
 """
@@ -193,7 +193,7 @@ SLIDE_17 = r"""
 
     <div class="border-t border-slate-200 pt-2 flex justify-between items-center text-xs text-slate-500 font-mono">
         <span>Đề tài KTX Smart Match • Viện Nghiên cứu và Đào tạo Việt - Anh (VNUK)</span>
-        <span>Sinh viên: Châu Tuấn Kiệt • Bùi Đình Hiếu • Lê Hoàng Triệu</span>
+        <span>Sinh viên: Châu Tuấn Kiệt • Bùi Đình Hiếu • Lê Hoàng Triều</span>
     </div>
 </div>
 """
@@ -268,7 +268,7 @@ SLIDE_18 = r"""
 
     <div class="border-t border-slate-200 pt-2 flex justify-between items-center text-xs text-slate-500 font-mono">
         <span>Đề tài KTX Smart Match • Viện Nghiên cứu và Đào tạo Việt - Anh (VNUK)</span>
-        <span>Sinh viên: Châu Tuấn Kiệt • Bùi Đình Hiếu • Lê Hoàng Triệu</span>
+        <span>Sinh viên: Châu Tuấn Kiệt • Bùi Đình Hiếu • Lê Hoàng Triều</span>
     </div>
 </div>
 """
@@ -328,7 +328,7 @@ SLIDE_19 = r"""
 
     <div class="border-t border-slate-200 pt-2 flex justify-between items-center text-xs text-slate-500 font-mono">
         <span>Đề tài KTX Smart Match • Viện Nghiên cứu và Đào tạo Việt - Anh (VNUK)</span>
-        <span>Sinh viên: Châu Tuấn Kiệt • Bùi Đình Hiếu • Lê Hoàng Triệu</span>
+        <span>Sinh viên: Châu Tuấn Kiệt • Bùi Đình Hiếu • Lê Hoàng Triều</span>
     </div>
 </div>
 """
@@ -399,7 +399,7 @@ SLIDE_20 = r"""
 
     <div class="border-t border-slate-200 pt-2 flex justify-between items-center text-xs text-slate-500 font-mono">
         <span>Đề tài KTX Smart Match • Viện Nghiên cứu và Đào tạo Việt - Anh (VNUK)</span>
-        <span>Sinh viên: Châu Tuấn Kiệt • Bùi Đình Hiếu • Lê Hoàng Triệu</span>
+        <span>Sinh viên: Châu Tuấn Kiệt • Bùi Đình Hiếu • Lê Hoàng Triều</span>
     </div>
 </div>
 """
@@ -455,7 +455,7 @@ SLIDE_21 = r"""
 
     <div class="border-t border-slate-200 pt-2 flex justify-between items-center text-xs text-slate-500 font-mono">
         <span>Đề tài KTX Smart Match • Viện Nghiên cứu và Đào tạo Việt - Anh (VNUK)</span>
-        <span>Sinh viên: Châu Tuấn Kiệt • Bùi Đình Hiếu • Lê Hoàng Triệu</span>
+        <span>Sinh viên: Châu Tuấn Kiệt • Bùi Đình Hiếu • Lê Hoàng Triều</span>
     </div>
 </div>
 """
@@ -486,7 +486,7 @@ SLIDE_22 = r"""
 
     <div class="border-t border-indigo-500/30 pt-4 flex justify-between items-center text-xs text-slate-300 font-mono">
         <div>
-            <span>Thành viên: Châu Tuấn Kiệt • Bùi Đình Hiếu • Lê Hoàng Triệu</span>
+            <span>Thành viên: Châu Tuấn Kiệt • Bùi Đình Hiếu • Lê Hoàng Triều</span>
         </div>
         <div>
             <span>Viện Nghiên cứu và Đào tạo Việt - Anh (VNUK) • Đại học Đà Nẵng (2026)</span>

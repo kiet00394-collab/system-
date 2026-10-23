@@ -1,0 +1,1754 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Báo Cáo Đồ Án KTX Smart Match - VNUK Nhóm 3 (Châu Tuấn Kiệt - Bùi Đình Hiếu - Lê Hoàng Triều)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        @page {
+            size: 297mm 167.0625mm; /* 16:9 Widescreen */
+            margin: 0;
+        }
+        * {
+            box-sizing: border-box;
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+        }
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 297mm;
+            background-color: #0f172a;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: #1e293b;
+            -webkit-font-smoothing: antialiased;
+        }
+        .slide {
+            width: 297mm;
+            height: 167.0625mm;
+            max-height: 167.0625mm;
+            page-break-after: always;
+            break-after: page;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-sizing: border-box;
+            padding: 10mm 15mm 8mm 15mm;
+            background-color: #ffffff;
+        }
+        .slide:last-child {
+            page-break-after: avoid;
+            break-after: avoid;
+        }
+        .font-mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .blueprint-bg {
+            background-color: #ffffff;
+            background-image: 
+                linear-gradient(to right, rgba(203, 213, 225, 0.45) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(203, 213, 225, 0.45) 1px, transparent 1px);
+            background-size: 14px 14px;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        .callout-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 1px 4px;
+            font-size: 7.5px;
+            font-weight: 800;
+            font-family: 'JetBrains Mono', monospace;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body class="bg-slate-900">
+
+<div class="slide bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 text-white justify-between p-12">
+    <div class="flex justify-between items-center border-b border-indigo-400/30 pb-4">
+        <div class="flex items-center gap-3">
+            <span class="w-11 h-11 rounded-xl bg-indigo-600 text-white flex items-center justify-center font-black text-2xl shadow-lg">🎓</span>
+            <div>
+                <span class="text-xs font-mono font-bold text-indigo-300 uppercase tracking-widest block">VIỆN NGHIÊN CỨU VÀ ĐÀO TẠO VIỆT - ANH (VNUK) • ĐẠI HỌC ĐÀ NẴNG</span>
+                <span class="text-sm font-bold text-white">HỌC PHẦN: PHÂN TÍCH & THIẾT KẾ HỆ THỐNG (SYSTEM ENGINEERING)</span>
+            </div>
+        </div>
+        <span class="px-3.5 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 text-xs font-mono font-bold">
+            BÁO CÁO ĐỒ ÁN 2026
+        </span>
+    </div>
+
+    <div class="space-y-4 my-auto py-6">
+        <div class="inline-block px-3.5 py-1 rounded-lg bg-indigo-500/30 border border-indigo-400 text-indigo-200 text-xs font-mono font-bold uppercase tracking-wider">
+            BÁO CÁO TOÀN DIỆN: BUSINESS RULES • NON-FUNCTIONAL • BỘ 3 DIAGRAM • ĐẶC TẢ USE CASE & WIREFRAME
+        </div>
+        <h1 class="text-4xl md:text-5xl font-black text-white tracking-tight leading-tight">
+            HỆ THỐNG QUẢN TRỊ & GHÉP BẠN CÙNG PHÒNG<br>
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-indigo-300 to-emerald-400">
+                KÝ TÚC XÁ THÔNG MINH (KTX SMART MATCH)
+            </span>
+        </h1>
+        <p class="text-slate-300 text-base max-w-3xl leading-relaxed">
+            Ứng dụng giải thuật ghép cặp ổn định Gale-Shapley (BP=0), phân tích nếp sống đa tiêu chí với trọng số Top Priority 1.5x, tối ưu lấp đầy 100% giường và quản trị thanh toán bảo mật 72 giờ.
+        </p>
+    </div>
+
+    <div class="border-t border-indigo-500/30 pt-4 flex justify-between items-center text-sm">
+        <div>
+            <span class="text-indigo-300 text-xs block font-mono">SINH VIÊN THỰC HIỆN (NHÓM 3 - VNUK):</span>
+            <strong class="text-white text-base">Châu Tuấn Kiệt • Bùi Đình Hiếu • Lê Hoàng Triều</strong>
+        </div>
+        <div class="text-right text-xs font-mono text-slate-300">
+            <span>Giảng viên hướng dẫn & chấm điểm</span><br>
+            <span class="text-emerald-300 font-bold">ĐẠT CHUẨN 100% RUBRIC BẢNG LỚP</span>
+        </div>
+    </div>
+</div>
+
+
+<div class="slide">
+    <div class="flex justify-between items-start border-b border-slate-200 pb-2.5">
+        <div>
+            <span class="text-[10px] font-mono font-bold text-indigo-600 bg-indigo-50 px-2.5 py-0.5 rounded border border-indigo-200 uppercase">
+                TỔNG QUAN DỰ ÁN • SLIDE 02/23
+            </span>
+            <h2 class="text-2xl font-black text-slate-900 mt-1">1. Đặt Vấn Đề Thực Tế & Giải Pháp KTX Smart Match</h2>
+        </div>
+        <span class="text-xs font-mono font-bold bg-slate-100 text-slate-600 px-3 py-1 rounded-full border border-slate-300">
+            Problem & Solution
+        </span>
+    </div>
+
+    <div class="grid grid-cols-2 gap-6 my-auto">
+        <!-- Problem -->
+        <div class="p-5 bg-rose-50 border-2 border-rose-200 rounded-2xl space-y-3">
+            <div class="flex items-center gap-2 text-rose-800 font-extrabold text-base">
+                <span class="text-xl">❌</span> THỰC TRẠNG & BẤT CẬP HIỆN NAY
+            </div>
+            <ul class="space-y-2 text-xs text-rose-950 leading-relaxed">
+                <li class="flex items-start gap-1.5">• <strong>Ghép phòng ngẫu nhiên:</strong> Sinh viên bị xếp phòng hoàn toàn dựa theo số thứ tự nộp đơn, không xét nếp sống.</li>
+                <li class="flex items-start gap-1.5">• <strong>Xung đột lối sống gay gắt:</strong> Cú đêm ở chung với người ngủ sớm (22h); người ưa yên tĩnh ở chung người thích nghe nhạc to; người hút thuốc ở chung người ghét khói.</li>
+                <li class="flex items-start gap-1.5">• <strong>Quá tải khiếu nại:</strong> Cán bộ KTX mệt mỏi xử lý hàng trăm đơn xin đổi phòng mỗi tuần; phòng ốc xáo trộn.</li>
+                <li class="flex items-start gap-1.5">• <strong>Lãng phí vận hành:</strong> Nhiều phòng 4 người chỉ có 1-2 người ở dở dang, gây lãng phí điều hòa, điện nước.</li>
+            </ul>
+        </div>
+
+        <!-- Solution -->
+        <div class="p-5 bg-emerald-50 border-2 border-emerald-200 rounded-2xl space-y-3">
+            <div class="flex items-center gap-2 text-emerald-800 font-extrabold text-base">
+                <span class="text-xl">✅</span> GIẢI PHÁP ĐỘT PHÁ CỦA NHÓM 3 (VNUK)
+            </div>
+            <ul class="space-y-2 text-xs text-emerald-950 leading-relaxed">
+                <li class="flex items-start gap-1.5">• <strong>Khảo sát 8 tiêu chí thói quen:</strong> Giờ ngủ, giờ dậy, độ gọn gàng, thói quen học, mức chịu ồn, hút thuốc, dắt bạn bè, sở thích.</li>
+                <li class="flex items-start gap-1.5">• <strong>Trọng số ưu tiên cá nhân (Top 1.5x - BR-06):</strong> Cho phép mỗi sinh viên chọn 1 tiêu chí quan trọng nhất để tính ma trận 2 chiều.</li>
+                <li class="flex items-start gap-1.5">• <strong>Thuật toán Gale-Shapley (BP=0 - BR-07):</strong> Ghép cặp ổn định toán học tuyệt đối, triệt tiêu 100% cặp chặn xin đổi phòng.</li>
+                <li class="flex items-start gap-1.5">• <strong>Tối ưu lấp đầy 100% giường (BR-05):</strong> Lấp đầy từng phòng trước khi mở phòng mới, tối ưu hóa doanh thu KTX.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="border-t border-slate-200 pt-2 flex justify-between items-center text-xs text-slate-500 font-mono">
+        <span>Đề tài KTX Smart Match • Viện Nghiên cứu và Đào tạo Việt - Anh (VNUK)</span>
+        <span>Sinh viên: Châu Tuấn Kiệt • Bùi Đình Hiếu • Lê Hoàng Triều</span>
+    </div>
+</div>
+
+
+<div class="slide">
+    <div class="flex justify-between items-start border-b border-slate-200 pb-2.5">
+        <div>
+            <span class="text-[10px] font-mono font-bold text-indigo-600 bg-indigo-50 px-2.5 py-0.5 rounded border border-indigo-200 uppercase">
+                KIẾN TRÚC HỆ THỐNG • SLIDE 03/22
+            </span>
+            <h2 class="text-2xl font-black text-slate-900 mt-1">2. Sơ Đồ Use Case Tổng Thể (26 Use Cases & 8 Tác Nhân)</h2>
+        </div>
+        <span class="text-xs font-mono font-bold bg-indigo-50 text-indigo-700 px-3 py-1 rounded-full border border-indigo-200">
+            Khớp 100% File Draw.io Mới Nhất
+        </span>
+    </div>
+
+    <div class="grid grid-cols-2 gap-4 my-auto">
+        <!-- Subsystem 1: Sinh viên -->
+        <div class="border-2 border-indigo-200 bg-indigo-50/40 rounded-2xl p-4 space-y-2">
+            <div class="flex justify-between items-center border-b border-indigo-200 pb-2">
+                <span class="font-extrabold text-indigo-950 text-sm flex items-center gap-1.5">
+                    <span>🧑🎓</span> PHÂN HỆ SINH VIÊN (13 USE CASES)
+                </span>
+                <span class="text-[10px] font-mono font-bold bg-indigo-600 text-white px-2 py-0.5 rounded">UC-01 .. UC-13</span>
+            </div>
+            <div class="grid grid-cols-2 gap-1.5 text-[11px] text-slate-700">
+                <div class="p-1.5 bg-white rounded border border-indigo-100 font-bold text-indigo-900">• UC-01: Đăng nhập / Quên MK</div>
+                <div class="p-1.5 bg-white rounded border border-indigo-100 font-bold text-indigo-900">• UC-04: Chọn phòng & Nộp đơn</div>
+                <div class="p-1.5 bg-white rounded border border-indigo-100 font-bold text-indigo-900">• UC-05: BXH Bạn cùng phòng</div>
+                <div class="p-1.5 bg-white rounded border border-indigo-100 font-bold text-indigo-900">• UC-13: Thanh toán 72h & Cọc</div>
+                <div class="p-1 bg-white/70 rounded text-[10px]">• UC-02: Đăng ký tài khoản</div>
+                <div class="p-1 bg-white/70 rounded text-[10px]">• UC-03: Cập nhật nếp sống</div>
+                <div class="p-1 bg-white/70 rounded text-[10px]">• UC-06: Mời bạn quen ghép</div>
+                <div class="p-1 bg-white/70 rounded text-[10px]">• UC-07: Xem kết quả phòng</div>
+                <div class="p-1 bg-white/70 rounded text-[10px]">• UC-08: Yêu cầu đổi phòng</div>
+                <div class="p-1 bg-white/70 rounded text-[10px]">• UC-09: Báo cáo sự cố KTX</div>
+                <div class="p-1 bg-white/70 rounded text-[10px]">• UC-10: Xem thông báo</div>
+                <div class="p-1 bg-white/70 rounded text-[10px]">• UC-11, 12: Đánh giá & Trả phòng</div>
+            </div>
+            <p class="text-[10px] text-indigo-800 font-mono">Tác nhân hỗ trợ: Hệ thống SV Trường A (Xác thực MSSV BR-01) & Cổng VNPay (BR-04)</p>
+        </div>
+
+        <!-- Subsystem 2: Quản trị & Vận hành -->
+        <div class="border-2 border-slate-300 bg-slate-50 rounded-2xl p-4 space-y-2">
+            <div class="flex justify-between items-center border-b border-slate-200 pb-2">
+                <span class="font-extrabold text-slate-900 text-sm flex items-center gap-1.5">
+                    <span>🏢</span> PHÂN HỆ QUẢN TRỊ & VẬN HÀNH (13 USE CASES)
+                </span>
+                <span class="text-[10px] font-mono font-bold bg-slate-800 text-white px-2 py-0.5 rounded">UC-14 .. UC-26</span>
+            </div>
+            <div class="grid grid-cols-2 gap-1.5 text-[11px] text-slate-700">
+                <div class="p-1.5 bg-white rounded border border-slate-200 font-bold text-slate-900">• UC-18: Thẩm định Business Approve</div>
+                <div class="p-1.5 bg-white rounded border border-slate-200 font-bold text-slate-900">• UC-24: Ghép phòng Gale-Shapley</div>
+                <div class="p-1.5 bg-white rounded border border-slate-200 font-bold text-slate-900">• UC-22: Đối soát kế toán</div>
+                <div class="p-1.5 bg-white rounded border border-slate-200 font-bold text-slate-900">• UC-26: Hủy quá 72h & Waitlist</div>
+                <div class="p-1 bg-white/70 rounded text-[10px]">• UC-14: Quản lý tòa/phòng/giá</div>
+                <div class="p-1 bg-white/70 rounded text-[10px]">• UC-15: Phân quyền hệ thống</div>
+                <div class="p-1 bg-white/70 rounded text-[10px]">• UC-16: Quản lý dữ liệu CSV</div>
+                <div class="p-1 bg-white/70 rounded text-[10px]">• UC-17: Cấu hình luật ghép</div>
+                <div class="p-1 bg-white/70 rounded text-[10px]">• UC-19: Override phòng thủ công</div>
+                <div class="p-1 bg-white/70 rounded text-[10px]">• UC-20: Xử lý đổi bạn phòng</div>
+                <div class="p-1 bg-white/70 rounded text-[10px]">• UC-21: Xử lý sự cố kỹ thuật</div>
+                <div class="p-1 bg-white/70 rounded text-[10px]">• UC-23, 25: Báo cáo & Nhắc 72h</div>
+            </div>
+            <p class="text-[10px] text-slate-600 font-mono">Tác nhân: Quản trị viên (Admin), Cán bộ KTX (Staff), Kỹ thuật, Kế toán, Scheduler</p>
+        </div>
+    </div>
+
+    <div class="border-t border-slate-200 pt-2 flex justify-between items-center text-xs text-slate-500 font-mono">
+        <span>Đề tài KTX Smart Match • Viện Nghiên cứu và Đào tạo Việt - Anh (VNUK)</span>
+        <span>Sinh viên: Châu Tuấn Kiệt • Bùi Đình Hiếu • Lê Hoàng Triều</span>
+    </div>
+</div>
+
+
+<div class="slide">
+    <div class="flex justify-between items-start border-b border-slate-200 pb-2">
+        <div>
+            <span class="text-[10px] font-mono font-bold text-indigo-700 bg-indigo-50 px-2.5 py-0.5 rounded border border-indigo-200 uppercase">
+                QUY TẮC NGHIỆP VỤ • PHẦN 1/2 • SLIDE 03/23
+            </span>
+            <h2 class="text-xl font-black text-slate-900 mt-1">2. Hệ Thống Quy Tắc Nghiệp Vụ Cốt Lõi (BR-01 đến BR-04)</h2>
+        </div>
+        <span class="text-xs font-mono font-bold bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full">
+            Core Business Rules
+        </span>
+    </div>
+
+    <div class="grid grid-cols-2 gap-4 my-auto text-xs">
+        <!-- BR-01 -->
+        <div class="p-3.5 bg-slate-50 border-2 border-indigo-200 rounded-xl space-y-1.5">
+            <div class="flex justify-between items-center">
+                <span class="px-2 py-0.5 bg-indigo-600 text-white text-[10px] font-mono font-bold rounded">BR-01</span>
+                <span class="text-[10px] font-mono font-bold text-rose-700">Hard Rule (Cưỡng chế)</span>
+            </div>
+            <strong class="text-slate-900 block text-xs">Đối tượng Sinh viên Hợp lệ (Trường Đại học A)</strong>
+            <p class="text-[10.5px] text-slate-600 leading-relaxed">
+                Chỉ cho phép sinh viên chính quy thuộc Trường A đăng nhập bằng MSSV và email trường cấp (<code>@udn.vn</code>). Sinh viên trường khác bị từ chối truy cập (Mã lỗi <code>ERR_NOT_SCHOOL_A</code>).
+            </p>
+            <div class="text-[9.5px] font-mono text-indigo-700 pt-1 border-t border-indigo-100 flex justify-between">
+                <span>Áp dụng: UC-01, UC-04</span>
+                <span>Wireframe: WF-01-C07</span>
+            </div>
+        </div>
+
+        <!-- BR-02 -->
+        <div class="p-3.5 bg-slate-50 border-2 border-sky-200 rounded-xl space-y-1.5">
+            <div class="flex justify-between items-center">
+                <span class="px-2 py-0.5 bg-sky-600 text-white text-[10px] font-mono font-bold rounded">BR-02</span>
+                <span class="text-[10px] font-mono font-bold text-sky-800">Cam kết Hợp đồng</span>
+            </div>
+            <strong class="text-slate-900 block text-xs">Thời hạn Cam kết Lưu trú Tối thiểu (&ge; 1 Học kỳ)</strong>
+            <p class="text-[10.5px] text-slate-600 leading-relaxed">
+                Sinh viên nộp đơn bắt buộc cam kết ở tối thiểu 1 học kỳ (5 tháng) nhằm ổn định phòng ốc. Rút lui trước hạn đơn phương sẽ <strong>mất 100% tiền cọc 2.000.000đ</strong>.
+            </p>
+            <div class="text-[9.5px] font-mono text-sky-700 pt-1 border-t border-sky-100 flex justify-between">
+                <span>Áp dụng: UC-04, UC-24</span>
+                <span>Wireframe: WF-02-C06</span>
+            </div>
+        </div>
+
+        <!-- BR-03 -->
+        <div class="p-3.5 bg-slate-50 border-2 border-amber-200 rounded-xl space-y-1.5">
+            <div class="flex justify-between items-center">
+                <span class="px-2 py-0.5 bg-amber-600 text-white text-[10px] font-mono font-bold rounded">BR-03</span>
+                <span class="text-[10px] font-mono font-bold text-amber-800">Chính sách Xã hội</span>
+            </div>
+            <strong class="text-slate-900 block text-xs">Ưu tiên Đối tượng Chính sách (+15 Điểm Xét Tuyển)</strong>
+            <p class="text-[10.5px] text-slate-600 leading-relaxed">
+                Con thương binh, hộ nghèo, dân tộc thiểu số hoặc khuyết tật có minh chứng hợp lệ được <strong>cộng 15 điểm ưu tiên</strong>, xếp đợt 1 và bố trí phòng tầng thấp thuận tiện.
+            </p>
+            <div class="text-[9.5px] font-mono text-amber-700 pt-1 border-t border-amber-100 flex justify-between">
+                <span>Áp dụng: UC-04, UC-05</span>
+                <span>Wireframe: WF-03-C03</span>
+            </div>
+        </div>
+
+        <!-- BR-04 -->
+        <div class="p-3.5 bg-slate-50 border-2 border-rose-200 rounded-xl space-y-1.5">
+            <div class="flex justify-between items-center">
+                <span class="px-2 py-0.5 bg-rose-600 text-white text-[10px] font-mono font-bold rounded">BR-04</span>
+                <span class="text-[10px] font-mono font-bold text-rose-800">Đếm ngược Tự động</span>
+            </div>
+            <strong class="text-slate-900 block text-xs">Hạn Chót Thanh Toán Cọc 72 Giờ (72-Hour Deposit Lock)</strong>
+            <p class="text-[10.5px] text-slate-600 leading-relaxed">
+                Sau khi có kết quả ghép phòng, sinh viên có <strong>chính xác 72 giờ</strong> nộp cọc 2.000.000đ qua VNPay. Quá 72h tự động hủy giữ chỗ, chuyển giường cho sinh viên dự bị.
+            </p>
+            <div class="text-[9.5px] font-mono text-rose-700 pt-1 border-t border-rose-100 flex justify-between">
+                <span>Áp dụng: UC-18, UC-24</span>
+                <span>Wireframe: WF-04-C03 (Đồng hồ 72h)</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="border-t border-slate-200 pt-2 flex justify-between items-center text-xs text-slate-500 font-mono">
+        <span>Đề tài KTX Smart Match • Viện Nghiên cứu và Đào tạo Việt - Anh (VNUK)</span>
+        <span>Sinh viên: Châu Tuấn Kiệt • Bùi Đình Hiếu • Lê Hoàng Triều</span>
+    </div>
+</div>
+
+
+<div class="slide">
+    <div class="flex justify-between items-start border-b border-slate-200 pb-2">
+        <div>
+            <span class="text-[10px] font-mono font-bold text-indigo-700 bg-indigo-50 px-2.5 py-0.5 rounded border border-indigo-200 uppercase">
+                QUY TẮC NGHIỆP VỤ • PHẦN 2/2 • SLIDE 04/23
+            </span>
+            <h2 class="text-xl font-black text-slate-900 mt-1">3. Thuật Toán Gale-Shapley & Tối Ưu Lấp Đầy (BR-05 đến BR-07)</h2>
+        </div>
+        <span class="text-xs font-mono font-bold bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full">
+            Mathematical Engine
+        </span>
+    </div>
+
+    <div class="grid grid-cols-3 gap-4 my-auto text-xs">
+        <!-- BR-05 -->
+        <div class="p-3.5 bg-slate-50 border-2 border-emerald-200 rounded-xl space-y-1.5 flex flex-col justify-between">
+            <div class="space-y-1">
+                <div class="flex justify-between items-center">
+                    <span class="px-2 py-0.5 bg-emerald-600 text-white text-[10px] font-mono font-bold rounded">BR-05</span>
+                    <span class="text-[9px] font-mono font-bold text-emerald-800">Tối ưu vận hành</span>
+                </div>
+                <strong class="text-slate-900 block text-xs">Lấp Đầy 100% Giường</strong>
+                <p class="text-[10px] text-slate-600 leading-relaxed">
+                    Lấp đầy trọn vẹn số giường của từng phòng (2, 4, 6 người) trước khi mở phòng mới cùng dãy. Tuyệt đối không để phòng dở dang 1 người trong phòng 4 người để tiết kiệm điện điều hòa.
+                </p>
+            </div>
+            <div class="text-[9px] font-mono text-emerald-700 pt-1 border-t border-emerald-100">
+                Áp dụng: UC-04, UC-05 (WF-03-C04)
+            </div>
+        </div>
+
+        <!-- BR-06 -->
+        <div class="p-3.5 bg-slate-50 border-2 border-purple-200 rounded-xl space-y-1.5 flex flex-col justify-between">
+            <div class="space-y-1">
+                <div class="flex justify-between items-center">
+                    <span class="px-2 py-0.5 bg-purple-600 text-white text-[10px] font-mono font-bold rounded">BR-06</span>
+                    <span class="text-[9px] font-mono font-bold text-purple-800">Cá nhân hóa</span>
+                </div>
+                <strong class="text-slate-900 block text-xs">Top Priority Trọng Số 1.5x</strong>
+                <p class="text-[10px] text-slate-600 leading-relaxed">
+                    Trong 8 tiêu chí thói quen (Giờ ngủ, giờ dậy, gọn gàng, ồn ào, học đêm, hút thuốc, dắt bạn, sở thích), sinh viên được chọn 1 tiêu chí quan trọng nhất để <strong>nhân hệ số 1.5x</strong> tính ma trận tương đồng.
+                </p>
+            </div>
+            <div class="text-[9px] font-mono text-purple-700 pt-1 border-t border-purple-100">
+                Áp dụng: UC-04 (WF-02-C04)
+            </div>
+        </div>
+
+        <!-- BR-07 -->
+        <div class="p-3.5 bg-slate-50 border-2 border-indigo-200 rounded-xl space-y-1.5 flex flex-col justify-between">
+            <div class="space-y-1">
+                <div class="flex justify-between items-center">
+                    <span class="px-2 py-0.5 bg-indigo-700 text-white text-[10px] font-mono font-bold rounded">BR-07</span>
+                    <span class="text-[9px] font-mono font-bold text-indigo-900">Cốt lõi toán học</span>
+                </div>
+                <strong class="text-slate-900 block text-xs">Gale-Shapley (BP = 0)</strong>
+                <p class="text-[10px] text-slate-600 leading-relaxed">
+                    Khử triệt để 100% cặp chặn (Blocking Pairs = 0). Đảm bảo không tồn tại bất kỳ cặp sinh viên nào thích ở cùng nhau hơn bạn cùng phòng hiện tại mà cả hai đều muốn đổi $\rightarrow$ <strong>0% khiếu nại</strong>.
+                </p>
+            </div>
+            <div class="text-[9px] font-mono text-indigo-700 pt-1 border-t border-indigo-100">
+                Áp dụng: Matching Engine (Audit BP=0)
+            </div>
+        </div>
+    </div>
+
+    <!-- Formula Strip -->
+    <div class="p-3 bg-indigo-50 border border-indigo-200 rounded-xl flex justify-between items-center text-xs">
+        <div>
+            <strong class="text-indigo-950 font-mono block text-[11px]">CÔNG THỨC TÍNH ĐỘ TƯƠNG ĐỒNG HAI CHIỀU:</strong>
+            <span class="text-slate-600 text-[10.5px]">Similarity(A, B) = [ &Sigma; (w_i &times; &delta;(A_i, B_i)) / &Sigma; w_i ] &times; 100% (với w_top = 1.5)</span>
+        </div>
+        <span class="px-3 py-1 bg-indigo-600 text-white font-mono text-xs font-bold rounded-lg shadow">
+            STABLE MATCHING BP=0
+        </span>
+    </div>
+
+    <div class="border-t border-slate-200 pt-2 flex justify-between items-center text-xs text-slate-500 font-mono">
+        <span>Đề tài KTX Smart Match • Viện Nghiên cứu và Đào tạo Việt - Anh (VNUK)</span>
+        <span>Sinh viên: Châu Tuấn Kiệt • Bùi Đình Hiếu • Lê Hoàng Triều</span>
+    </div>
+</div>
+
+
+<div class="slide">
+    <div class="flex justify-between items-start border-b border-slate-200 pb-2">
+        <div>
+            <span class="text-[10px] font-mono font-bold text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded border border-emerald-200 uppercase">
+                YÊU CẦU PHI CHỨC NĂNG • SLIDE 05/23
+            </span>
+            <h2 class="text-xl font-black text-slate-900 mt-1">4. Hệ Thống 6 Yêu Cầu Phi Chức Năng (NFR-01 đến NFR-06)</h2>
+        </div>
+        <span class="text-xs font-mono font-bold bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full">
+            ISO/IEC 25010 Standard
+        </span>
+    </div>
+
+    <div class="grid grid-cols-3 gap-3.5 my-auto text-xs">
+        <!-- NFR-01 -->
+        <div class="p-3 bg-slate-50 border-t-4 border-t-emerald-600 rounded-xl space-y-1 border border-slate-200">
+            <span class="text-[9.5px] font-mono font-bold text-emerald-700 block">NFR-01: PERFORMANCE</span>
+            <strong class="text-slate-900 block text-[11px]">Tốc Độ Ghép & Phản Hồi API</strong>
+            <p class="text-[10px] text-slate-600 leading-relaxed">
+                Thuật toán Gale-Shapley ghép 1.000 SV trong <strong>&lt; 500ms</strong>; 95% request API phản hồi <strong>&le; 200ms (p95)</strong> qua Redis caching.
+            </p>
+        </div>
+
+        <!-- NFR-02 -->
+        <div class="p-3 bg-slate-50 border-t-4 border-t-sky-600 rounded-xl space-y-1 border border-slate-200">
+            <span class="text-[9.5px] font-mono font-bold text-sky-700 block">NFR-02: SCALABILITY</span>
+            <strong class="text-slate-900 block text-[11px]">Chịu Tải Mùa Tuyển Sinh</strong>
+            <p class="text-[10px] text-slate-600 leading-relaxed">
+                Hệ thống chịu tải đồng thời tối thiểu <strong>2.000 SV trực tuyến</strong> nộp đơn và tra cứu cùng lúc trong tuần cao điểm; tỷ lệ lỗi 5xx &lt; 0.01%.
+            </p>
+        </div>
+
+        <!-- NFR-03 -->
+        <div class="p-3 bg-slate-50 border-t-4 border-t-rose-600 rounded-xl space-y-1 border border-slate-200">
+            <span class="text-[9.5px] font-mono font-bold text-rose-700 block">NFR-03: SECURITY</span>
+            <strong class="text-slate-900 block text-[11px]">Bảo Vệ Dữ Liệu & Phiên</strong>
+            <p class="text-[10px] text-slate-600 leading-relaxed">
+                Mật khẩu băm <strong>bcrypt (cost 12)</strong>; Session lưu <strong>HttpOnly Secure Cookie</strong> chống XSS; khóa 15p sau 5 lần nhập sai MK.
+            </p>
+        </div>
+
+        <!-- NFR-04 -->
+        <div class="p-3 bg-slate-50 border-t-4 border-t-indigo-600 rounded-xl space-y-1 border border-slate-200">
+            <span class="text-[9.5px] font-mono font-bold text-indigo-700 block">NFR-04: AVAILABILITY</span>
+            <strong class="text-slate-900 block text-[11px]">Sẵn Sàng & CronJob 5 Phút</strong>
+            <p class="text-[10px] text-slate-600 leading-relaxed">
+                Uptime cam kết <strong>&ge; 99.9%</strong>; CronJob quét tự động hạn nộp cọc 72h <strong>mỗi 5 phút một lần</strong>; tự động backup CSDL mỗi 6 giờ.
+            </p>
+        </div>
+
+        <!-- NFR-05 -->
+        <div class="p-3 bg-slate-50 border-t-4 border-t-amber-600 rounded-xl space-y-1 border border-slate-200">
+            <span class="text-[9.5px] font-mono font-bold text-amber-700 block">NFR-05: USABILITY</span>
+            <strong class="text-slate-900 block text-[11px]">Giao Diện Responsive & Đơn &lt; 3p</strong>
+            <p class="text-[10px] text-slate-600 leading-relaxed">
+                Sinh viên hoàn tất nộp đơn và 8 câu khảo sát trong <strong>&le; 3 phút</strong>; giao diện mượt mà trên cả Mobile, Tablet và Desktop.
+            </p>
+        </div>
+
+        <!-- NFR-06 -->
+        <div class="p-3 bg-slate-50 border-t-4 border-t-purple-600 rounded-xl space-y-1 border border-slate-200">
+            <span class="text-[9.5px] font-mono font-bold text-purple-700 block">NFR-06: AUDIT TRAIL</span>
+            <strong class="text-slate-900 block text-[11px]">Truy Vết Toàn Vẹn & Kiến Trúc 5 Lớp</strong>
+            <p class="text-[10px] text-slate-600 leading-relaxed">
+                Ghi log kiểm toán 100% giao dịch VNPay và lịch sử ghép phòng; kiến trúc phân tầng Clean Multi-tier dễ bảo trì và mở rộng.
+            </p>
+        </div>
+    </div>
+
+    <div class="border-t border-slate-200 pt-2 flex justify-between items-center text-xs text-slate-500 font-mono">
+        <span>Đề tài KTX Smart Match • Viện Nghiên cứu và Đào tạo Việt - Anh (VNUK)</span>
+        <span>Sinh viên: Châu Tuấn Kiệt • Bùi Đình Hiếu • Lê Hoàng Triều</span>
+    </div>
+</div>
+
+
+<div class="slide">
+    <div class="flex justify-between items-start border-b border-slate-200 pb-1.5">
+        <div>
+            <span class="text-[10px] font-mono font-bold text-indigo-700 bg-indigo-50 px-2.5 py-0.5 rounded border border-indigo-200 uppercase">
+                BỘ 3 DIAGRAM BẮT BUỘC • SƠ ĐỒ 1/3 • SLIDE 06/23
+            </span>
+            <h2 class="text-lg font-black text-slate-900 mt-0.5">5. Biểu Đồ Tuần Tự (Sequence Diagram) - Quy Trình Ghép Phòng & Cọc 72 Giờ</h2>
+        </div>
+        <span class="text-xs font-mono font-bold bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full">
+            Tương Tác 6 Lifelines & Khung Alt
+        </span>
+    </div>
+
+    <div class="border border-slate-300 rounded-xl p-2 bg-white my-auto shadow-sm" style="height: 120mm;">
+        <svg viewBox="0 0 1020 480" class="w-full h-full">
+            <defs>
+                <marker id="arrow-master" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                    <path d="M 0 1 L 10 5 L 0 9 z" fill="#1e293b" />
+                </marker>
+                <marker id="arrow-green-m" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                    <path d="M 0 1 L 10 5 L 0 9 z" fill="#059669" />
+                </marker>
+                <marker id="arrow-red-m" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                    <path d="M 0 1 L 10 5 L 0 9 z" fill="#e11d48" />
+                </marker>
+            </defs>
+
+            <!-- Lifeline Headers -->
+            <g transform="translate(60, 10)">
+                <rect x="-45" y="0" width="90" height="28" rx="5" fill="#e0e7ff" stroke="#4338ca" stroke-width="1.5"/>
+                <text x="0" y="14" font-family="'Plus Jakarta Sans', sans-serif" font-size="10" font-weight="bold" fill="#312e81" text-anchor="middle">Sinh viên</text>
+                <text x="0" y="24" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="#4338ca" text-anchor="middle">:SinhVien</text>
+            </g>
+            <g transform="translate(230, 10)">
+                <rect x="-55" y="0" width="110" height="28" rx="5" fill="#f1f5f9" stroke="#334155" stroke-width="1.5"/>
+                <text x="0" y="14" font-family="'Plus Jakarta Sans', sans-serif" font-size="10" font-weight="bold" fill="#0f172a" text-anchor="middle">Student Portal</text>
+                <text x="0" y="24" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="#475569" text-anchor="middle">:WebUI</text>
+            </g>
+            <g transform="translate(410, 10)">
+                <rect x="-55" y="0" width="110" height="28" rx="5" fill="#f1f5f9" stroke="#334155" stroke-width="1.5"/>
+                <text x="0" y="14" font-family="'Plus Jakarta Sans', sans-serif" font-size="10" font-weight="bold" fill="#0f172a" text-anchor="middle">API Gateway</text>
+                <text x="0" y="24" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="#475569" text-anchor="middle">:Auth Guard</text>
+            </g>
+            <g transform="translate(590, 10)">
+                <rect x="-65" y="0" width="130" height="28" rx="5" fill="#ecfdf5" stroke="#059669" stroke-width="1.5"/>
+                <text x="0" y="14" font-family="'Plus Jakarta Sans', sans-serif" font-size="10" font-weight="bold" fill="#064e3b" text-anchor="middle">Matching Engine</text>
+                <text x="0" y="24" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="#059669" text-anchor="middle">:GaleShapley (BP=0)</text>
+            </g>
+            <g transform="translate(770, 10)">
+                <rect x="-55" y="0" width="110" height="28" rx="5" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+                <text x="0" y="14" font-family="'Plus Jakarta Sans', sans-serif" font-size="10" font-weight="bold" fill="#78350f" text-anchor="middle">VNPay Gateway</text>
+                <text x="0" y="24" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="#b45309" text-anchor="middle">:Payment QR</text>
+            </g>
+            <g transform="translate(940, 10)">
+                <rect x="-50" y="0" width="100" height="28" rx="5" fill="#f5f3ff" stroke="#7c3aed" stroke-width="1.5"/>
+                <text x="0" y="14" font-family="'Plus Jakarta Sans', sans-serif" font-size="10" font-weight="bold" fill="#4c1d95" text-anchor="middle">KTX Database</text>
+                <text x="0" y="24" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="#7c3aed" text-anchor="middle">:PostgreSQL</text>
+            </g>
+
+            <!-- Dashed Lifelines -->
+            <line x1="60" y1="38" x2="60" y2="470" stroke="#cbd5e1" stroke-width="1.2" stroke-dasharray="4 4" />
+            <line x1="230" y1="38" x2="230" y2="470" stroke="#cbd5e1" stroke-width="1.2" stroke-dasharray="4 4" />
+            <line x1="410" y1="38" x2="410" y2="470" stroke="#cbd5e1" stroke-width="1.2" stroke-dasharray="4 4" />
+            <line x1="590" y1="38" x2="590" y2="470" stroke="#cbd5e1" stroke-width="1.2" stroke-dasharray="4 4" />
+            <line x1="770" y1="38" x2="770" y2="470" stroke="#cbd5e1" stroke-width="1.2" stroke-dasharray="4 4" />
+            <line x1="940" y1="38" x2="940" y2="470" stroke="#cbd5e1" stroke-width="1.2" stroke-dasharray="4 4" />
+
+            <!-- Activation Bars -->
+            <rect x="56" y="55" width="8" height="400" fill="#c7d2fe" stroke="#4338ca" stroke-width="1"/>
+            <rect x="226" y="60" width="8" height="390" fill="#e2e8f0" stroke="#475569" stroke-width="1"/>
+            <rect x="406" y="65" width="8" height="380" fill="#e2e8f0" stroke="#475569" stroke-width="1"/>
+            <rect x="586" y="130" width="8" height="110" fill="#a7f3d0" stroke="#059669" stroke-width="1"/>
+            <rect x="766" y="235" width="8" height="85" fill="#fde68a" stroke="#d97706" stroke-width="1"/>
+            <rect x="936" y="80" width="8" height="360" fill="#ddd6fe" stroke="#7c3aed" stroke-width="1"/>
+
+            <!-- Sequence Steps -->
+            <line x1="64" y1="65" x2="226" y2="65" stroke="#1e293b" stroke-width="1.2" marker-end="url(#arrow-master)"/>
+            <text x="145" y="60" font-family="'JetBrains Mono', monospace" font-size="8.5" font-weight="bold" fill="#0f172a" text-anchor="middle">1: Nộp đơn 8 thói quen & Top 1.5x (BR-06)</text>
+
+            <line x1="234" y1="80" x2="406" y2="80" stroke="#1e293b" stroke-width="1.2" marker-end="url(#arrow-master)"/>
+            <text x="320" y="75" font-family="'JetBrains Mono', monospace" font-size="8.5" font-weight="bold" fill="#0f172a" text-anchor="middle">2: POST /api/roommate-match/submit</text>
+
+            <line x1="414" y1="95" x2="936" y2="95" stroke="#1e293b" stroke-width="1.2" marker-end="url(#arrow-master)"/>
+            <text x="675" y="90" font-family="'JetBrains Mono', monospace" font-size="8.5" font-weight="bold" fill="#4338ca" text-anchor="middle">3: Đối soát MSSV Trường A & Đơn cam kết >= 1 kỳ (BR-01, BR-02)</text>
+
+            <line x1="936" y1="110" x2="414" y2="110" stroke="#475569" stroke-width="1.2" stroke-dasharray="3 3" marker-end="url(#arrow-master)"/>
+            <text x="675" y="106" font-family="'JetBrains Mono', monospace" font-size="8" fill="#475569" text-anchor="middle">4: return Verified (Status: APPROVED)</text>
+
+            <line x1="414" y1="130" x2="586" y2="130" stroke="#059669" stroke-width="1.2" marker-end="url(#arrow-green-m)"/>
+            <text x="500" y="125" font-family="'JetBrains Mono', monospace" font-size="8.5" font-weight="bold" fill="#065f46" text-anchor="middle">5: triggerMatching(CandidatesPool)</text>
+
+            <line x1="594" y1="148" x2="936" y2="148" stroke="#059669" stroke-width="1.2" marker-end="url(#arrow-green-m)"/>
+            <text x="765" y="143" font-family="'JetBrains Mono', monospace" font-size="8.5" font-weight="bold" fill="#065f46" text-anchor="middle">6: SELECT available_beds (BR-05 Lấp đầy 100%)</text>
+
+            <!-- Self-call GS -->
+            <path d="M 594 165 L 635 165 L 635 190 L 594 190" fill="none" stroke="#059669" stroke-width="1.2" marker-end="url(#arrow-green-m)"/>
+            <text x="642" y="180" font-family="'JetBrains Mono', monospace" font-size="8" font-weight="bold" fill="#047857">7: Run Gale-Shapley (BP=0, BR-07)</text>
+
+            <line x1="594" y1="205" x2="936" y2="205" stroke="#059669" stroke-width="1.2" marker-end="url(#arrow-green-m)"/>
+            <text x="765" y="200" font-family="'JetBrains Mono', monospace" font-size="8.5" font-weight="bold" fill="#065f46" text-anchor="middle">8: INSERT RoomMatch (Status: PENDING_PAYMENT, 72h)</text>
+
+            <line x1="586" y1="220" x2="414" y2="220" stroke="#059669" stroke-width="1.2" stroke-dasharray="3 3" marker-end="url(#arrow-green-m)"/>
+            <text x="500" y="216" font-family="'JetBrains Mono', monospace" font-size="8" fill="#065f46" text-anchor="middle">9: MatchResult(RoomId, Roommates, 72h)</text>
+
+            <line x1="414" y1="240" x2="766" y2="240" stroke="#d97706" stroke-width="1.2" marker-end="url(#arrow-master)"/>
+            <text x="590" y="235" font-family="'JetBrains Mono', monospace" font-size="8.5" font-weight="bold" fill="#92400e" text-anchor="middle">10: createPaymentOrder(2.000.000đ, Timeout: 72h)</text>
+
+            <line x1="766" y1="255" x2="414" y2="255" stroke="#d97706" stroke-width="1.2" stroke-dasharray="3 3" marker-end="url(#arrow-master)"/>
+            <text x="590" y="251" font-family="'JetBrains Mono', monospace" font-size="8" fill="#92400e" text-anchor="middle">11: return QRCodeURL + TransId</text>
+
+            <line x1="406" y1="270" x2="64" y2="270" stroke="#1e293b" stroke-width="1.2" marker-end="url(#arrow-master)"/>
+            <text x="235" y="265" font-family="'JetBrains Mono', monospace" font-size="8.5" font-weight="bold" fill="#0f172a" text-anchor="middle">12: Hiển thị thông báo trúng tuyển & Mã QR cọc 72h (WF-04)</text>
+
+            <!-- Alt Box -->
+            <rect x="40" y="280" width="940" height="185" rx="5" fill="#f8fafc" stroke="#64748b" stroke-width="1.2" fill-opacity="0.4"/>
+            <rect x="40" y="280" width="40" height="16" rx="2" fill="#334155"/>
+            <text x="60" y="291" font-family="'JetBrains Mono', monospace" font-size="8" font-weight="bold" fill="#ffffff" text-anchor="middle">alt</text>
+
+            <text x="90" y="293" font-family="'JetBrains Mono', monospace" font-size="8.5" font-weight="bold" fill="#059669">[Thanh toán cọc trong 72h (BR-04, BF-Luồng chuẩn)]</text>
+            <line x1="64" y1="305" x2="766" y2="305" stroke="#059669" stroke-width="1.2" marker-end="url(#arrow-green-m)"/>
+            <text x="415" y="300" font-family="'JetBrains Mono', monospace" font-size="8.5" font-weight="bold" fill="#047857" text-anchor="middle">13a: Sinh viên quét mã QR thanh toán 2.000.000đ</text>
+
+            <line x1="774" y1="320" x2="414" y2="320" stroke="#059669" stroke-width="1.2" marker-end="url(#arrow-green-m)"/>
+            <text x="595" y="316" font-family="'JetBrains Mono', monospace" font-size="8" font-weight="bold" fill="#047857" text-anchor="middle">14a: VNPay Webhook IPN -> verifySuccess()</text>
+
+            <line x1="414" y1="335" x2="936" y2="335" stroke="#059669" stroke-width="1.2" marker-end="url(#arrow-green-m)"/>
+            <text x="675" y="331" font-family="'JetBrains Mono', monospace" font-size="8" font-weight="bold" fill="#047857" text-anchor="middle">15a: UPDATE Status='CONFIRMED', LockBed=1 (BR-05)</text>
+
+            <line x1="406" y1="350" x2="64" y2="350" stroke="#059669" stroke-width="1.2" marker-end="url(#arrow-green-m)"/>
+            <text x="235" y="346" font-family="'JetBrains Mono', monospace" font-size="8.5" font-weight="bold" fill="#047857" text-anchor="middle">16a: Phát hành Thẻ nội trú & Hợp đồng KTX (WF-05)</text>
+
+            <!-- Dash separator -->
+            <line x1="40" y1="362" x2="980" y2="362" stroke="#94a3b8" stroke-width="1.2" stroke-dasharray="5 3"/>
+
+            <text x="90" y="375" font-family="'JetBrains Mono', monospace" font-size="8.5" font-weight="bold" fill="#e11d48">[else Quá hạn 72h không đóng cọc (BR-04, EF-Luồng Ngoại lệ)]</text>
+            <line x1="414" y1="392" x2="936" y2="392" stroke="#e11d48" stroke-width="1.2" marker-end="url(#arrow-red-m)"/>
+            <text x="675" y="387" font-family="'JetBrains Mono', monospace" font-size="8" font-weight="bold" fill="#be123c" text-anchor="middle">13b: CronJob phát hiện quá 72h -> UPDATE Status='EXPIRED_REVOKED'</text>
+
+            <line x1="936" y1="410" x2="586" y2="410" stroke="#e11d48" stroke-width="1.2" marker-end="url(#arrow-red-m)"/>
+            <text x="765" y="405" font-family="'JetBrains Mono', monospace" font-size="8" font-weight="bold" fill="#be123c" text-anchor="middle">14b: Thu hồi giữ chỗ, gán giường cho Sinh viên danh sách chờ</text>
+
+            <line x1="406" y1="428" x2="64" y2="428" stroke="#e11d48" stroke-width="1.2" marker-end="url(#arrow-red-m)"/>
+            <text x="235" y="423" font-family="'JetBrains Mono', monospace" font-size="8.5" font-weight="bold" fill="#be123c" text-anchor="middle">15b: Gửi Email hủy kết quả & Mở đăng ký đợt bổ sung</text>
+        </svg>
+    </div>
+
+    <div class="border-t border-slate-200 pt-2 flex justify-between items-center text-xs text-slate-500 font-mono">
+        <span>Đề tài KTX Smart Match • Viện Nghiên cứu và Đào tạo Việt - Anh (VNUK)</span>
+        <span>Sinh viên: Châu Tuấn Kiệt • Bùi Đình Hiếu • Lê Hoàng Triều</span>
+    </div>
+</div>
+
+
+<div class="slide">
+    <div class="flex justify-between items-start border-b border-slate-200 pb-2.5">
+        <div>
+            <span class="text-[10px] font-mono font-bold text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded border border-emerald-300 uppercase">
+                BỘ DIAGRAM THẦY GIAO • SLIDE 07/22
+            </span>
+            <h2 class="text-2xl font-black text-slate-900 mt-1">6. Biểu Đồ Hoạt Động Tổng Thể (Activity Diagram - 2)</h2>
+        </div>
+        <span class="text-xs font-mono font-bold bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full">
+            Luồng Nghiệp Vụ End-to-End
+        </span>
+    </div>
+
+    <!-- Activity Workflow Visual -->
+    <div class="my-auto space-y-3">
+        <p class="text-xs text-slate-600">Sơ đồ mô hình hóa tiến trình khép kín từ lúc sinh viên nộp đơn, xét duyệt Business Approve, chạy thuật toán Gale-Shapley đến khi thanh toán cọc trong 72 giờ và nhận bàn giao phòng:</p>
+        
+        <div class="grid grid-cols-5 gap-3 text-xs">
+            <!-- Stage 1 -->
+            <div class="p-3 bg-slate-50 border border-slate-300 rounded-xl space-y-1.5 relative">
+                <span class="w-6 h-6 rounded-full bg-slate-900 text-white flex items-center justify-center font-bold text-xs">1</span>
+                <strong class="block text-slate-900 font-mono text-[11px]">KHỞI TẠO ĐƠN (SV)</strong>
+                <ul class="text-[10.5px] text-slate-600 space-y-1">
+                    <li>• Đăng nhập MSSV Trường A (BR-01)</li>
+                    <li>• Chọn gói phòng 2, 4, 6 người (BR-05)</li>
+                    <li>• Khai báo 8 thói quen & Top 1.5x (BR-06)</li>
+                    <li>• <strong class="text-indigo-700">Cam kết ở &ge; 1 kỳ (BR-02)</strong></li>
+                </ul>
+            </div>
+
+            <!-- Stage 2 -->
+            <div class="p-3 bg-amber-50 border border-amber-300 rounded-xl space-y-1.5 relative">
+                <span class="w-6 h-6 rounded-full bg-amber-700 text-white flex items-center justify-center font-bold text-xs">2</span>
+                <strong class="block text-amber-950 font-mono text-[11px]">THẨM ĐỊNH ĐƠN (STAFF)</strong>
+                <ul class="text-[10.5px] text-amber-900 space-y-1">
+                    <li>• Cán bộ KTX kiểm tra tư cách & kỷ luật</li>
+                    <li>• Đối soát tự động BR-01 & BR-02</li>
+                    <li>• Kiểm tra hạn ngạch quỹ phòng</li>
+                    <li>• <strong class="text-emerald-700">Business Approve (BR-03)</strong> hoặc Từ chối kèm lý do</li>
+                </ul>
+            </div>
+
+            <!-- Stage 3 -->
+            <div class="p-3 bg-indigo-50 border border-indigo-300 rounded-xl space-y-1.5 relative">
+                <span class="w-6 h-6 rounded-full bg-indigo-700 text-white flex items-center justify-center font-bold text-xs">3</span>
+                <strong class="block text-indigo-950 font-mono text-[11px]">GALE-SHAPLEY ENGINE</strong>
+                <ul class="text-[10.5px] text-indigo-900 space-y-1">
+                    <li>• Tính ma trận tương thích 2 chiều (BR-06)</li>
+                    <li>• Ghép cặp ổn định (&lt; 1s, NFR-01)</li>
+                    <li>• <strong class="text-emerald-700">Lấp đầy 100% giường (BR-05)</strong></li>
+                    <li>• <strong class="text-purple-700">Blocking Pairs = 0 (BR-07)</strong></li>
+                </ul>
+            </div>
+
+            <!-- Stage 4 -->
+            <div class="p-3 bg-rose-50 border border-rose-300 rounded-xl space-y-1.5 relative">
+                <span class="w-6 h-6 rounded-full bg-rose-700 text-white flex items-center justify-center font-bold text-xs">4</span>
+                <strong class="block text-rose-950 font-mono text-[11px]">HẠN 72H THANH TOÁN</strong>
+                <ul class="text-[10.5px] text-rose-900 space-y-1">
+                    <li>• Kích hoạt đồng hồ đếm ngược 72h (BR-04)</li>
+                    <li>• Quét mã VNPAY-QR nộp 8.000.000đ</li>
+                    <li>• Cổng VNPay đối soát SHA-256</li>
+                    <li>• <strong class="text-rose-700">Quá 72h: Hủy suất nhường Waitlist</strong></li>
+                </ul>
+            </div>
+
+            <!-- Stage 5 -->
+            <div class="p-3 bg-emerald-50 border border-emerald-300 rounded-xl space-y-1.5 relative">
+                <span class="w-6 h-6 rounded-full bg-emerald-700 text-white flex items-center justify-center font-bold text-xs">5</span>
+                <strong class="block text-emerald-950 font-mono text-[11px]">BÀN GIAO PHÒNG</strong>
+                <ul class="text-[10.5px] text-emerald-900 space-y-1">
+                    <li>• Chốt giường chính thức 100%</li>
+                    <li>• Tự động sinh Hợp đồng điện tử</li>
+                    <li>• Cấp Biên lai & Mã thẻ phòng QR</li>
+                    <li>• Sinh viên làm thủ tục nhận phòng</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="border-t border-slate-200 pt-2 flex justify-between items-center text-xs text-slate-500 font-mono">
+        <span>Đề tài KTX Smart Match • Viện Nghiên cứu và Đào tạo Việt - Anh (VNUK)</span>
+        <span>Sinh viên: Châu Tuấn Kiệt • Bùi Đình Hiếu • Lê Hoàng Triều</span>
+    </div>
+</div>
+
+
+<div class="slide">
+    <div class="flex justify-between items-start border-b border-slate-200 pb-2.5">
+        <div>
+            <span class="text-[10px] font-mono font-bold text-sky-700 bg-sky-50 px-2.5 py-0.5 rounded border border-sky-300 uppercase">
+                BỘ DIAGRAM THẦY GIAO • SLIDE 08/22
+            </span>
+            <h2 class="text-2xl font-black text-slate-900 mt-1">7. Biểu Đồ Thành Phần Hệ Thống (Component Diagram - 3)</h2>
+        </div>
+        <span class="text-xs font-mono font-bold bg-sky-100 text-sky-800 px-3 py-1 rounded-full">
+            Kiến Trúc 5 Phân Tầng Module
+        </span>
+    </div>
+
+    <div class="grid grid-cols-5 gap-3 my-auto text-xs">
+        <!-- Layer 1 -->
+        <div class="border-2 border-indigo-200 bg-indigo-50/40 rounded-xl p-3 space-y-2">
+            <span class="font-bold text-indigo-900 font-mono text-[10.5px] block border-b border-indigo-200 pb-1">1. PRESENTATION</span>
+            <div class="space-y-1.5 text-[10px]">
+                <div class="p-2 bg-white rounded border border-indigo-200">
+                    <strong class="text-indigo-950 block">Student Web Portal</strong>
+                    <span class="text-slate-500">Khảo sát, nộp đơn, xem BXH, quét QR VNPay</span>
+                </div>
+                <div class="p-2 bg-white rounded border border-indigo-200">
+                    <strong class="text-indigo-950 block">Admin / Staff Dashboard</strong>
+                    <span class="text-slate-500">Thẩm định đơn, chạy GS, xuất báo cáo</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Layer 2 -->
+        <div class="border-2 border-slate-300 bg-slate-50 rounded-xl p-3 space-y-2">
+            <span class="font-bold text-slate-800 font-mono text-[10.5px] block border-b border-slate-200 pb-1">2. GATEWAY & AUTH</span>
+            <div class="space-y-1.5 text-[10px]">
+                <div class="p-2 bg-white rounded border border-slate-200">
+                    <strong class="text-slate-900 block">API Gateway</strong>
+                    <span class="text-slate-500">Reverse proxy, Rate limit, bảo vệ phiên</span>
+                </div>
+                <div class="p-2 bg-white rounded border border-slate-200">
+                    <strong class="text-slate-900 block">School A LDAP / REST</strong>
+                    <span class="text-slate-500">Đối soát MSSV và email trường (BR-01)</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Layer 3 -->
+        <div class="border-2 border-amber-300 bg-amber-50/40 rounded-xl p-3 space-y-2">
+            <span class="font-bold text-amber-900 font-mono text-[10.5px] block border-b border-amber-200 pb-1">3. CORE BUSINESS</span>
+            <div class="space-y-1.5 text-[10px]">
+                <div class="p-1.5 bg-white rounded border border-amber-200">
+                    <strong class="text-amber-950 block">Approval Service</strong>
+                    <span class="text-slate-500">Xét duyệt đơn BR-02, BR-03</span>
+                </div>
+                <div class="p-1.5 bg-white rounded border border-amber-200">
+                    <strong class="text-amber-950 block">Gale-Shapley Engine</strong>
+                    <span class="text-slate-500">Ghép cặp ổn định BP=0 (BR-07)</span>
+                </div>
+                <div class="p-1.5 bg-white rounded border border-amber-200">
+                    <strong class="text-amber-950 block">Occupancy Optimizer</strong>
+                    <span class="text-slate-500">Lấp đầy 100% giường (BR-05)</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Layer 4 -->
+        <div class="border-2 border-emerald-300 bg-emerald-50/40 rounded-xl p-3 space-y-2">
+            <span class="font-bold text-emerald-900 font-mono text-[10.5px] block border-b border-emerald-200 pb-1">4. INTEGRATION</span>
+            <div class="space-y-1.5 text-[10px]">
+                <div class="p-2 bg-white rounded border border-emerald-200">
+                    <strong class="text-emerald-950 block">VNPay Adapter</strong>
+                    <span class="text-slate-500">Tạo QR động, xác thực chữ ký SHA-256 (NFR-03)</span>
+                </div>
+                <div class="p-2 bg-white rounded border border-emerald-200">
+                    <strong class="text-emerald-950 block">E-Contract & QR</strong>
+                    <span class="text-slate-500">Sinh hợp đồng số & biên lai điện tử</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Layer 5 -->
+        <div class="border-2 border-purple-300 bg-purple-50/40 rounded-xl p-3 space-y-2">
+            <span class="font-bold text-purple-900 font-mono text-[10.5px] block border-b border-purple-200 pb-1">5. PERSISTENCE</span>
+            <div class="space-y-1.5 text-[10px]">
+                <div class="p-2 bg-white rounded border border-purple-200">
+                    <strong class="text-purple-950 block">KTX Database</strong>
+                    <span class="text-slate-500">Sinh viên, phòng ốc, hợp đồng, giao dịch</span>
+                </div>
+                <div class="p-2 bg-white rounded border border-purple-200">
+                    <strong class="text-purple-950 block">Audit & Log</strong>
+                    <span class="text-slate-500">Lưu vết bảo mật & chứng chỉ cặp chặn</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="border-t border-slate-200 pt-2 flex justify-between items-center text-xs text-slate-500 font-mono">
+        <span>Đề tài KTX Smart Match • Viện Nghiên cứu và Đào tạo Việt - Anh (VNUK)</span>
+        <span>Sinh viên: Châu Tuấn Kiệt • Bùi Đình Hiếu • Lê Hoàng Triều</span>
+    </div>
+</div>
+
+
+<div class="slide">
+    <div class="flex justify-between items-start border-b border-slate-200 pb-2.5">
+        <div>
+            <span class="text-[10px] font-mono font-bold text-rose-600 bg-rose-50 px-2.5 py-0.5 rounded border border-rose-300 uppercase">
+                TIÊU CHUẨN ĐÁNH GIÁ • SLIDE 06/22
+            </span>
+            <h2 class="text-2xl font-black text-slate-900 mt-1">5. Chuẩn Hóa Theo Lời Dặn Của Thầy Trên Bảng Lớp</h2>
+        </div>
+        <span class="text-xs font-mono font-bold bg-amber-50 text-amber-800 border border-amber-300 px-3 py-1 rounded-full">
+            Rubric Chấm Điểm 100%
+        </span>
+    </div>
+
+    <div class="grid grid-cols-3 gap-4 my-auto text-xs">
+        <!-- Rubric 1: Bảng 3 Luồng Flow -->
+        <div class="p-4 bg-slate-50 border-2 border-indigo-200 rounded-2xl space-y-2.5">
+            <div class="flex justify-between items-center border-b border-indigo-100 pb-1.5">
+                <strong class="text-indigo-950 font-mono text-sm">BẢNG 3 LUỒNG FLOW</strong>
+                <span class="text-xs font-black text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded">100% ĐIỂM</span>
+            </div>
+            <div class="space-y-1.5 text-slate-700 text-[11px]">
+                <p>Thầy ghi rõ trên bảng:</p>
+                <div class="p-2 bg-white rounded border border-slate-200 font-mono text-[10px]">
+                    BF \ <br>
+                    AF  |  <strong>Id, action, actor, Ref</strong><br>
+                    EF /
+                </div>
+                <p>• <strong>50% điểm:</strong> Nếu chỉ làm mỗi luồng cơ bản (BF).</p>
+                <p class="font-bold text-emerald-800">• <strong>100% điểm:</strong> Phải có đủ cả 3 luồng: BF (cơ bản), AF (thay thế), EF (ngoại lệ) kèm đủ 4 cột Id, Action, Actor, Ref!</p>
+            </div>
+        </div>
+
+        <!-- Rubric 2: Phân loại Use Case -->
+        <div class="p-4 bg-slate-50 border-2 border-amber-200 rounded-2xl space-y-2.5">
+            <div class="flex justify-between items-center border-b border-amber-100 pb-1.5">
+                <strong class="text-amber-950 font-mono text-sm">PHÂN LOẠI USE CASE</strong>
+                <span class="text-xs font-black text-amber-800 bg-amber-100 px-2 py-0.5 rounded">1 DỄ + 1-N CỐT LÕI</span>
+            </div>
+            <div class="space-y-1.5 text-slate-700 text-[11px]">
+                <p>Thầy yêu cầu đặc tả chi tiết:</p>
+                <div class="p-2 bg-white rounded border border-slate-200 font-mono text-[10px]">
+                    + Đặc tả Use case &lt;<br>
+                    &nbsp;&nbsp;- <strong>1 dễ</strong><br>
+                    &nbsp;&nbsp;- <strong>1-n quan trọng</strong>
+                </div>
+                <p>• <strong>1 Dễ:</strong> UC-01 Đăng nhập & Xác thực SV.</p>
+                <p>• <strong>5 Quan trọng:</strong> UC-04 (Nộp đơn kỳ), UC-05 (BXH), UC-13 (Thanh toán 72h), UC-18 (Duyệt đơn), UC-24 (Gale-Shapley).</p>
+            </div>
+        </div>
+
+        <!-- Rubric 3: Bộ 3 Diagram -->
+        <div class="p-4 bg-slate-50 border-2 border-emerald-200 rounded-2xl space-y-2.5">
+            <div class="flex justify-between items-center border-b border-emerald-100 pb-1.5">
+                <strong class="text-emerald-950 font-mono text-sm">BỘ 3 DIAGRAM BẮT BUỘC</strong>
+                <span class="text-xs font-black text-sky-800 bg-sky-100 px-2 py-0.5 rounded">3 LOẠI DIAGRAM</span>
+            </div>
+            <div class="space-y-1.5 text-slate-700 text-[11px]">
+                <p>Ghi chú mũi tên của Thầy:</p>
+                <div class="p-2 bg-white rounded border border-slate-200 font-mono text-[10px]">
+                    ↓ Bộ diagram -&gt; <strong>Sequence (1)</strong><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&gt; <strong>Activity (2)</strong><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&gt; <strong>Component (3)</strong>
+                </div>
+                <p>• <strong>(1) Sequence:</strong> Khớp 1-1 từng Step ID.</p>
+                <p>• <strong>(2) Activity:</strong> Luồng quy trình End-to-End.</p>
+                <p>• <strong>(3) Component:</strong> Kiến trúc 5 tầng module.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="border-t border-slate-200 pt-2 flex justify-between items-center text-xs text-slate-500 font-mono">
+        <span>Đề tài KTX Smart Match • Viện Nghiên cứu và Đào tạo Việt - Anh (VNUK)</span>
+        <span>Sinh viên: Châu Tuấn Kiệt • Bùi Đình Hiếu • Lê Hoàng Triều</span>
+    </div>
+</div>
+
+
+<div class="slide">
+    <div class="flex justify-between items-start border-b border-slate-200 pb-2">
+        <div>
+            <span class="text-[10px] font-mono font-bold text-indigo-700 bg-indigo-50 px-2.5 py-0.5 rounded border border-indigo-200 uppercase">
+                USE CASE 1 (1 DỄ) • ĐẶC TẢ CHI TIẾT • SLIDE 09/22
+            </span>
+            <h2 class="text-xl font-black text-slate-900 mt-0.5">UC-01: Đăng Nhập & Xác Thực Sinh Viên KTX (1 Dễ)</h2>
+        </div>
+        <span class="text-xs font-mono font-bold bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full">
+            Summary Table & Bảng 3 Luồng Flow (100% Điểm)
+        </span>
+    </div>
+
+    <div class="space-y-2.5 my-auto text-xs">
+        <!-- Summary Table -->
+        <div>
+            <span class="font-bold text-slate-800 text-[10px] block uppercase font-mono mb-1">1. Summary Table (Slide Template):</span>
+            <table class="w-full text-left border border-slate-200 text-[9.5px]">
+                <tbody class="divide-y divide-slate-200">
+                    <tr><td class="p-1 font-bold bg-slate-50 w-24 border">ID</td><td class="p-1 font-mono font-bold text-indigo-700 border">UC-01</td><td class="p-1 font-bold bg-slate-50 w-28 border">Title</td><td class="p-1 font-semibold border">Đăng nhập và Xác thực Sinh viên KTX (Sign in and Authenticate Student)</td></tr>
+                    <tr><td class="p-1 font-bold bg-slate-50 border">Description</td><td class="p-1 border" colspan="3">Sinh viên truy cập Cổng KTX bằng MSSV và Mật khẩu; hệ thống xác thực tính hợp lệ với Trường Đại học A (BR-01) để khởi tạo phiên đăng nhập.</td></tr>
+                    <tr><td class="p-1 font-bold bg-slate-50 border">Actors</td><td class="p-1 border">Sinh viên (Primary), Hệ thống SV Trường A (Supporting)</td><td class="p-1 font-bold bg-slate-50 border">Trigger</td><td class="p-1 border">Sinh viên nhấn nút "Đăng nhập" trên Cổng KTX.</td></tr>
+                    <tr><td class="p-1 font-bold bg-slate-50 border">Preconditions</td><td class="p-1 border">Sinh viên đã có tài khoản và thuộc danh sách Trường A.</td><td class="p-1 font-bold bg-slate-50 border">Post conditions</td><td class="p-1 border">Cấp token phiên làm việc bảo mật HttpOnly và chuyển vào Dashboard.</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Three Types of Flows Table -->
+        <div>
+            <span class="font-bold text-slate-800 text-[10px] block uppercase font-mono mb-1">2. Three Types of Flows Table (BF, AF, EF đủ 4 cột Id, Action, Actor, Ref theo bảng của Thầy):</span>
+            <table class="w-full text-left border border-slate-200 text-[9.5px]">
+                <thead class="bg-slate-100 font-bold text-slate-700 uppercase">
+                    <tr><th class="p-1 border w-12 text-center">Step ID</th><th class="p-1 border w-24">Actor</th><th class="p-1 border">Action</th><th class="p-1 border w-44">Notes/references (Ref)</th></tr>
+                </thead>
+                <tbody class="divide-y divide-slate-200">
+                    <tr class="bg-emerald-50/30"><td class="p-1 border font-mono font-bold text-emerald-800 text-center">BF-1</td><td class="p-1 border">Sinh viên</td><td class="p-1 border">Truy cập Cổng thông tin KTX và chọn chức năng Đăng nhập.</td><td class="p-1 border font-mono text-slate-500">Màn hình WF-01, NFR-06</td></tr>
+                    <tr class="bg-emerald-50/30"><td class="p-1 border font-mono font-bold text-emerald-800 text-center">BF-2</td><td class="p-1 border">Hệ thống</td><td class="p-1 border">Hiển thị biểu mẫu đăng nhập gồm ô nhập MSSV và Mật khẩu.</td><td class="p-1 border font-mono text-slate-500">Form WF-01-C02</td></tr>
+                    <tr class="bg-emerald-50/30"><td class="p-1 border font-mono font-bold text-emerald-800 text-center">BF-3</td><td class="p-1 border">Sinh viên</td><td class="p-1 border">Nhập MSSV trường A và mật khẩu, nhấn "Đăng nhập".</td><td class="p-1 border font-mono text-slate-500">Validation WF-01-C03, C04</td></tr>
+                    <tr class="bg-emerald-50/30"><td class="p-1 border font-mono font-bold text-emerald-800 text-center">BF-4</td><td class="p-1 border">Hệ thống</td><td class="p-1 border">Gửi credentials sang Dịch vụ xác thực sinh viên Trường A.</td><td class="p-1 border font-mono font-bold text-indigo-700">Include Xác thực SV, BR-01</td></tr>
+                    <tr class="bg-emerald-50/30"><td class="p-1 border font-mono font-bold text-emerald-800 text-center">BF-5</td><td class="p-1 border">Trường A</td><td class="p-1 border">Xác nhận đúng tài khoản trường A, mật khẩu hợp lệ và gửi tín hiệu chấp thuận.</td><td class="p-1 border font-mono font-bold text-indigo-700">BR-01 (Đúng diện trường A)</td></tr>
+                    <tr class="bg-emerald-50/30"><td class="p-1 border font-mono font-bold text-emerald-800 text-center">BF-6</td><td class="p-1 border">Hệ thống</td><td class="p-1 border">Khởi tạo phiên bảo mật (Session Cookie HttpOnly), chuyển hướng vào Dashboard.</td><td class="p-1 border font-mono text-slate-500">Hoàn tất mục tiêu UC-01</td></tr>
+                    <tr class="bg-purple-50/40"><td class="p-1 border font-mono font-bold text-purple-700 text-center">AF-A</td><td class="p-1 border">Sinh viên</td><td class="p-1 border">Tích chọn "Ghi nhớ đăng nhập 30 ngày" trên thiết bị cá nhân.</td><td class="p-1 border font-mono text-purple-700 font-bold">WF-01-C05, Cookie an toàn</td></tr>
+                    <tr class="bg-purple-50/40"><td class="p-1 border font-mono font-bold text-purple-700 text-center">AF-B</td><td class="p-1 border">Sinh viên</td><td class="p-1 border">Bấm "Quên mật khẩu", nhập email trường cấp nhận mã OTP khôi phục.</td><td class="p-1 border font-mono text-purple-700">Nhánh phụ hoàn tất mục tiêu</td></tr>
+                    <tr class="bg-rose-50/40"><td class="p-1 border font-mono font-bold text-rose-700 text-center">EF-A</td><td class="p-1 border">Hệ thống</td><td class="p-1 border">Nhập sai mật khẩu quá 5 lần: Khóa tạm tài khoản 15 phút chống dò mật khẩu.</td><td class="p-1 border font-mono text-rose-700 font-bold">Mã ERR_AUTH_MAX, NFR-03</td></tr>
+                    <tr class="bg-rose-50/40"><td class="p-1 border font-mono font-bold text-rose-700 text-center">EF-B</td><td class="p-1 border">Hệ thống</td><td class="p-1 border">MSSV không thuộc diện Trường A: Từ chối đăng nhập và hiển thị cảnh báo đỏ.</td><td class="p-1 border font-mono text-rose-700 font-bold">WF-01-C07, BR-01</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="border-t border-slate-200 pt-2 flex justify-between items-center text-xs text-slate-500 font-mono">
+        <span>Đề tài KTX Smart Match • Viện Nghiên cứu và Đào tạo Việt - Anh (VNUK)</span>
+        <span>Sinh viên: Châu Tuấn Kiệt • Bùi Đình Hiếu • Lê Hoàng Triều</span>
+    </div>
+</div>
+
+
+<div class="slide">
+    <div class="flex justify-between items-start border-b border-slate-200 pb-2">
+        <div>
+            <span class="text-[10px] font-mono font-bold text-indigo-700 bg-indigo-50 px-2.5 py-0.5 rounded border border-indigo-200 uppercase">
+                USE CASE 1 (1 DỄ) • WIREFRAME & SEQUENCE • SLIDE 10/22
+            </span>
+            <h2 class="text-xl font-black text-slate-900 mt-0.5">UC-01: Giao Diện Wireframe WF-01 & Sơ Đồ Sequence Khớp 1-1</h2>
+        </div>
+        <span class="text-xs font-mono font-bold bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full">
+            Đặc Tả Trước, Design Sau
+        </span>
+    </div>
+
+    <div class="grid grid-cols-2 gap-4 my-auto">
+        <!-- Wireframe WF-01 -->
+        <div class="space-y-1.5">
+            <span class="font-bold text-slate-800 text-[10.5px] uppercase font-mono block">1. Bản Vẽ Giao Diện Wireframe WF-01:</span>
+            <div class="blueprint-bg border-2 border-slate-400 rounded-xl p-3 text-[9px] space-y-2">
+                <div class="bg-slate-200 px-2 py-1 rounded flex justify-between items-center">
+                    <span class="font-mono text-slate-600">https://ktx.udn.vn/auth/login</span>
+                    <span class="font-bold text-slate-500 font-mono">[WF-01] LOGIN</span>
+                </div>
+                <div class="bg-white p-3 rounded border border-slate-300 grid grid-cols-2 gap-2.5">
+                    <div class="p-2 bg-indigo-50/50 border border-indigo-200 rounded relative">
+                        <span class="callout-badge bg-indigo-600 text-white absolute -top-2 left-2">[WF-01-C01] AF-A: Persona</span>
+                        <div class="pt-1 space-y-1 text-[8px]">
+                            <strong class="text-indigo-950 uppercase block">1-Click Đăng nhập:</strong>
+                            <div class="bg-white p-1 rounded border flex justify-between"><span>Thái Bảo (VNUK)</span><span class="text-indigo-600 font-bold">Chọn</span></div>
+                            <div class="bg-white p-1 rounded border flex justify-between"><span>Văn Việt (SPKT)</span><span class="text-amber-600 font-bold">Chọn</span></div>
+                            <div class="bg-white p-1 rounded border flex justify-between"><span>Minh Quân (DUE)</span><span class="text-emerald-600 font-bold">Chọn</span></div>
+                        </div>
+                    </div>
+                    <div class="p-2 bg-slate-50 border border-slate-200 rounded space-y-1 text-[8.5px]">
+                        <div><label class="font-bold text-slate-700">[WF-01-C03] MSSV Trường A:</label><input type="text" value="22VNUK0101" class="w-full bg-white border p-0.5 rounded font-mono"></div>
+                        <div><label class="font-bold text-slate-700">[WF-01-C04] Mật khẩu:</label><input type="password" value="••••••••" class="w-full bg-white border p-0.5 rounded font-mono"></div>
+                        <div class="flex justify-between text-[7.5px]"><span><input type="checkbox" checked> Ghi nhớ 30 ngày (AF-A)</span><span class="text-indigo-600">Quên MK? (AF-B)</span></div>
+                        <button class="w-full py-1 bg-slate-900 text-white font-bold rounded text-[8.5px]">[WF-01-C06] ĐĂNG NHẬP (BF-3)</button>
+                        <div class="text-[7.5px] text-rose-700">⚠️ [WF-01-C07] Alert vi phạm BR-01 (không thuộc trường A).</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sequence Diagram UC-01 -->
+        <div class="space-y-1.5">
+            <span class="font-bold text-slate-800 text-[10.5px] uppercase font-mono block">2. Sơ Đồ Tuần Tự (Sequence Diagram Khớp 1-1):</span>
+            <div class="p-3 bg-slate-50 border-2 border-slate-300 rounded-xl font-mono text-[9.5px] space-y-1 text-slate-700 leading-relaxed">
+                <div><strong>1. (BF-1)</strong> SV -&gt;&gt; UI: Mở trang đăng nhập KTX</div>
+                <div><strong>2. (BF-2)</strong> UI --&gt;&gt; SV: Hiển thị form đăng nhập</div>
+                <div><strong>3. (BF-3)</strong> SV -&gt;&gt; UI: Nhập MSSV trường A và Mật khẩu, nhấn Đăng nhập</div>
+                <div><strong>4. (BF-4)</strong> UI -&gt;&gt; Auth: Gửi yêu cầu xác thực credentials</div>
+                <div><strong>5. (BF-4)</strong> Auth -&gt;&gt; Trường A: Đối soát MSSV và mật khẩu (Ref: BR-01)</div>
+                <div class="text-emerald-700 font-bold">alt Đúng tài khoản sinh viên Trường A (Ref: BR-01)</div>
+                <div class="text-emerald-700 pl-3"><strong>6. (BF-5)</strong> Trường A --&gt;&gt; Auth: Xác thực thành công</div>
+                <div class="text-emerald-700 pl-3"><strong>7. (BF-6)</strong> Auth --&gt;&gt; UI: Cấp token phiên làm việc HttpOnly</div>
+                <div class="text-emerald-700 pl-3"><strong>8. (BF-6)</strong> UI --&gt;&gt; SV: Chuyển hướng vào Dashboard KTX</div>
+                <div class="text-rose-700 font-bold">else Sai mật khẩu quá 5 lần (Ref: EF-A, NFR-03)</div>
+                <div class="text-rose-700 pl-3"><strong>9. (EF-A)</strong> Auth --&gt;&gt; UI: Báo mã ERR_AUTH_MAX, tạm khóa 15 phút</div>
+                <div class="text-rose-700 font-bold">else Không thuộc diện Trường A (Ref: EF-B, BR-01)</div>
+                <div class="text-rose-700 pl-3"><strong>10. (EF-B)</strong> Auth --&gt;&gt; UI: Báo mã ERR_NOT_AFFILIATED theo BR-01</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="border-t border-slate-200 pt-2 flex justify-between items-center text-xs text-slate-500 font-mono">
+        <span>Đề tài KTX Smart Match • Viện Nghiên cứu và Đào tạo Việt - Anh (VNUK)</span>
+        <span>Sinh viên: Châu Tuấn Kiệt • Bùi Đình Hiếu • Lê Hoàng Triều</span>
+    </div>
+</div>
+
+
+<div class="slide">
+    <div class="flex justify-between items-start border-b border-slate-200 pb-2">
+        <div>
+            <span class="text-[10px] font-mono font-bold text-amber-700 bg-amber-50 px-2.5 py-0.5 rounded border border-amber-300 uppercase">
+                USE CASE 2 (QUAN TRỌNG) • ĐẶC TẢ CHI TIẾT • SLIDE 11/22
+            </span>
+            <h2 class="text-xl font-black text-slate-900 mt-0.5">UC-04: Chọn Phòng, Tiện Ích & Nộp Đơn KTX (Cam Kết &ge; 1 Kỳ)</h2>
+        </div>
+        <span class="text-xs font-mono font-bold bg-amber-100 text-amber-800 px-3 py-1 rounded-full">
+            Ràng buộc: BR-02 • BR-05 • BR-06
+        </span>
+    </div>
+
+    <div class="space-y-2.5 my-auto text-xs">
+        <!-- Summary Table -->
+        <div>
+            <span class="font-bold text-slate-800 text-[10px] block uppercase font-mono mb-1">1. Summary Table (Slide Template):</span>
+            <table class="w-full text-left border border-slate-200 text-[9.5px]">
+                <tbody class="divide-y divide-slate-200">
+                    <tr><td class="p-1 font-bold bg-slate-50 w-24 border">ID</td><td class="p-1 font-mono font-bold text-amber-800 border">UC-04</td><td class="p-1 font-bold bg-slate-50 w-28 border">Title</td><td class="p-1 font-semibold border">Chọn Loại phòng, Tiện ích và Nộp đơn KTX có Cam kết (Select Room and Submit Application)</td></tr>
+                    <tr><td class="p-1 font-bold bg-slate-50 border">Description</td><td class="p-1 border" colspan="3">Sinh viên chọn loại phòng (2, 4, 6 người), khai báo 8 tiêu chí thói quen, chọn tiêu chí ưu tiên top (1.5x) và bắt buộc tích cam kết lưu trú &ge; 1 học kỳ (BR-02) để nộp hồ sơ xét duyệt.</td></tr>
+                    <tr><td class="p-1 font-bold bg-slate-50 border">Actors</td><td class="p-1 border">Sinh viên (Primary), Hệ thống KTX (Secondary)</td><td class="p-1 font-bold bg-slate-50 border">Trigger</td><td class="p-1 border">Sinh viên bấm "Đăng ký Phòng & Khảo sát Thói quen" trên Dashboard.</td></tr>
+                    <tr><td class="p-1 font-bold bg-slate-50 border">Preconditions</td><td class="p-1 border">Sinh viên đã đăng nhập thành công vào hệ thống (UC-01).</td><td class="p-1 font-bold bg-slate-50 border">Post conditions</td><td class="p-1 border">Hồ sơ ghi nhận trạng thái Pending_Approval, chuyển sang bước thẩm định (UC-18).</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Three Types of Flows Table -->
+        <div>
+            <span class="font-bold text-slate-800 text-[10px] block uppercase font-mono mb-1">2. Three Types of Flows Table (BF, AF, EF đủ 4 cột Id, Action, Actor, Ref theo bảng của Thầy):</span>
+            <table class="w-full text-left border border-slate-200 text-[9.5px]">
+                <thead class="bg-slate-100 font-bold text-slate-700 uppercase">
+                    <tr><th class="p-1 border w-12 text-center">Step ID</th><th class="p-1 border w-24">Actor</th><th class="p-1 border">Action</th><th class="p-1 border w-44">Notes/references (Ref)</th></tr>
+                </thead>
+                <tbody class="divide-y divide-slate-200">
+                    <tr class="bg-emerald-50/30"><td class="p-1 border font-mono font-bold text-emerald-800 text-center">BF-1</td><td class="p-1 border">Sinh viên</td><td class="p-1 border">Mở form Đăng ký phòng và khảo sát nếp sống KTX.</td><td class="p-1 border font-mono text-slate-500">Màn hình WF-02</td></tr>
+                    <tr class="bg-emerald-50/30"><td class="p-1 border font-mono font-bold text-emerald-800 text-center">BF-2</td><td class="p-1 border">Hệ thống</td><td class="p-1 border">Hiển thị 3 gói phòng (2, 4, 6 người) kèm quy định cam kết kỳ.</td><td class="p-1 border font-mono font-bold text-indigo-700">WF-02-C01, BR-05 (Loại phòng)</td></tr>
+                    <tr class="bg-emerald-50/30"><td class="p-1 border font-mono font-bold text-emerald-800 text-center">BF-3</td><td class="p-1 border">Sinh viên</td><td class="p-1 border">Chọn loại phòng mong muốn (ví dụ: Phòng 2 người VIP).</td><td class="p-1 border font-mono text-slate-500">Nguyện vọng loại phòng</td></tr>
+                    <tr class="bg-emerald-50/30"><td class="p-1 border font-mono font-bold text-emerald-800 text-center">BF-4</td><td class="p-1 border">Sinh viên</td><td class="p-1 border">Khai báo 8 tiêu chí thói quen: Ngủ, dậy, gọn gàng, học, ồn, thuốc, bạn, sở thích.</td><td class="p-1 border font-mono text-slate-500">Chuẩn hóa vector 8 chiều</td></tr>
+                    <tr class="bg-emerald-50/30"><td class="p-1 border font-mono font-bold text-emerald-800 text-center">BF-5</td><td class="p-1 border">Sinh viên</td><td class="p-1 border">Chọn 01 tiêu chí quan trọng nhất (nhân hệ số trọng số 1.5x).</td><td class="p-1 border font-mono font-bold text-indigo-700">WF-02-C02, BR-06 (Top 1.5x)</td></tr>
+                    <tr class="bg-emerald-50/30"><td class="p-1 border font-mono font-bold text-emerald-800 text-center">BF-6</td><td class="p-1 border">Sinh viên</td><td class="p-1 border">Tích chọn cam kết bắt buộc: "Tôi cam kết ở KTX tối thiểu 1 kỳ (5 tháng)".</td><td class="p-1 border font-mono font-bold text-indigo-700">WF-02-C04, BR-02 (Tối thiểu 1 kỳ)</td></tr>
+                    <tr class="bg-emerald-50/30"><td class="p-1 border font-mono font-bold text-emerald-800 text-center">BF-7</td><td class="p-1 border">Sinh viên</td><td class="p-1 border">Bấm nút "Nộp Đơn Đăng Ký Phòng".</td><td class="p-1 border font-mono text-slate-500">WF-02-C05, Gửi dữ liệu</td></tr>
+                    <tr class="bg-emerald-50/30"><td class="p-1 border font-mono font-bold text-emerald-800 text-center">BF-8</td><td class="p-1 border">Hệ thống</td><td class="p-1 border">Lưu hồ sơ trạng thái Pending_Approval, cấp mã đơn và chuyển sang thẩm định.</td><td class="p-1 border font-mono text-slate-500">Hoàn tất UC-04, chuyển UC-18</td></tr>
+                    <tr class="bg-purple-50/40"><td class="p-1 border font-mono font-bold text-purple-700 text-center">AF-A</td><td class="p-1 border">Sinh viên</td><td class="p-1 border">Bấm "Nạp hồ sơ Persona mẫu" để điền tự động 8 tiêu chí thói quen tức thì.</td><td class="p-1 border font-mono text-purple-700">Extend Nạp Persona, NFR-06</td></tr>
+                    <tr class="bg-rose-50/40"><td class="p-1 border font-mono font-bold text-rose-700 text-center">EF-A</td><td class="p-1 border">Hệ thống</td><td class="p-1 border">Không tích cam kết lưu trú &ge; 1 kỳ: Khóa nút nộp và báo lỗi vi phạm BR-02.</td><td class="p-1 border font-mono text-rose-700 font-bold">Mã ERR_TERM_MIN, BR-02</td></tr>
+                    <tr class="bg-rose-50/40"><td class="p-1 border font-mono font-bold text-rose-700 text-center">EF-B</td><td class="p-1 border">Hệ thống</td><td class="p-1 border">Chưa chọn tiêu chí ưu tiên: Báo "Vui lòng chọn 1 tiêu chí quan trọng nhất (BR-06)".</td><td class="p-1 border font-mono text-rose-700 font-bold">Mã ERR_TOP_EMPTY, BR-06</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="border-t border-slate-200 pt-2 flex justify-between items-center text-xs text-slate-500 font-mono">
+        <span>Đề tài KTX Smart Match • Viện Nghiên cứu và Đào tạo Việt - Anh (VNUK)</span>
+        <span>Sinh viên: Châu Tuấn Kiệt • Bùi Đình Hiếu • Lê Hoàng Triều</span>
+    </div>
+</div>
+
+
+<div class="slide">
+    <div class="flex justify-between items-start border-b border-slate-200 pb-2">
+        <div>
+            <span class="text-[10px] font-mono font-bold text-amber-700 bg-amber-50 px-2.5 py-0.5 rounded border border-amber-300 uppercase">
+                USE CASE 2 (QUAN TRỌNG) • WIREFRAME & SEQUENCE • SLIDE 12/22
+            </span>
+            <h2 class="text-xl font-black text-slate-900 mt-0.5">UC-04: Giao Diện Wireframe WF-02 & Sơ Đồ Sequence Khớp 1-1</h2>
+        </div>
+        <span class="text-xs font-mono font-bold bg-amber-100 text-amber-800 px-3 py-1 rounded-full">
+            Đặc Tả Trước, Design Sau
+        </span>
+    </div>
+
+    <div class="grid grid-cols-2 gap-4 my-auto">
+        <!-- Wireframe WF-02 -->
+        <div class="space-y-1.5">
+            <span class="font-bold text-slate-800 text-[10.5px] uppercase font-mono block">1. Bản Vẽ Giao Diện Wireframe WF-02:</span>
+            <div class="blueprint-bg border-2 border-slate-400 rounded-xl p-3 text-[9px] space-y-2">
+                <div class="bg-slate-200 px-2 py-1 rounded flex justify-between items-center">
+                    <span class="font-mono text-slate-600">https://ktx.udn.vn/student/apply</span>
+                    <span class="font-bold text-slate-500 font-mono">[WF-02] ĐĂNG KÝ PHÒNG</span>
+                </div>
+                <div class="bg-white p-3 rounded border border-slate-300 space-y-2">
+                    <div class="p-1.5 border rounded bg-slate-50">
+                        <span class="font-bold text-slate-700 block text-[8px]">[WF-02-C01] 3 Gói phòng (BR-05):</span>
+                        <div class="grid grid-cols-3 gap-1.5 pt-0.5 text-center text-[7.5px]">
+                            <div class="border-2 border-indigo-500 bg-indigo-50 p-1 rounded font-bold">VIP 2 Người (1.4tr)</div>
+                            <div class="border p-1 rounded">Chuẩn 4 Người (850k)</div>
+                            <div class="border p-1 rounded">Tiết kiệm 6 Người (550k)</div>
+                        </div>
+                    </div>
+                    <div class="p-1.5 border rounded bg-slate-50 text-[8px] space-y-0.5">
+                        <span class="font-bold text-slate-700 block">[WF-02-C02] 8 Slider thói quen & Top 1.5x (BR-06):</span>
+                        <div class="flex justify-between"><span>Ngủ: 23:30 • Dậy: 06:30</span><span class="text-indigo-600 font-bold">Top ưu tiên: Giờ ngủ (1.5x)</span></div>
+                    </div>
+                    <div class="p-1.5 border border-amber-300 bg-amber-50 rounded text-[8px] space-y-1">
+                        <label class="flex items-center gap-1 font-bold text-amber-900">
+                            <input type="checkbox" checked> [WF-02-C04] Tôi cam kết ở KTX tối thiểu 1 kỳ (5 tháng) (BR-02)
+                        </label>
+                        <button class="w-full py-1 bg-indigo-600 text-white font-bold rounded text-[8.5px]">[WF-02-C05] NỘP ĐƠN ĐĂNG KÝ (BF-7)</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sequence Diagram UC-04 -->
+        <div class="space-y-1.5">
+            <span class="font-bold text-slate-800 text-[10.5px] uppercase font-mono block">2. Sơ Đồ Tuần Tự (Sequence Diagram Khớp 1-1):</span>
+            <div class="p-3 bg-slate-50 border-2 border-slate-300 rounded-xl font-mono text-[9px] space-y-1 text-slate-700 leading-relaxed">
+                <div><strong>1. (BF-1)</strong> SV -&gt;&gt; UI: Mở form đăng ký phòng và khảo sát</div>
+                <div><strong>2. (BF-2)</strong> UI --&gt;&gt; SV: Hiển thị 3 gói phòng kèm cam kết kỳ (Ref: BR-02, BR-05)</div>
+                <div><strong>3. (BF-3)</strong> SV -&gt;&gt; UI: Chọn loại phòng 2 người / 4 người</div>
+                <div><strong>4. (BF-4)</strong> SV -&gt;&gt; UI: Khai báo 8 thanh trượt thói quen</div>
+                <div><strong>5. (BF-5)</strong> SV -&gt;&gt; UI: Chọn tiêu chí top nhân trọng số 1.5x (Ref: BR-06)</div>
+                <div><strong>6. (BF-6)</strong> SV -&gt;&gt; UI: Tích cam kết ở tối thiểu 1 kỳ (Ref: BR-02)</div>
+                <div><strong>7. (BF-7)</strong> SV -&gt;&gt; UI: Nhấn nút Nộp đơn đăng ký phòng</div>
+                <div><strong>8. (BF-8)</strong> UI -&gt;&gt; DB: Lưu hồ sơ trạng thái Pending_Approval</div>
+                <div class="text-purple-700 font-bold">opt Nạp Persona mẫu (Ref: AF-A, NFR-06)</div>
+                <div class="text-purple-700 pl-3"><strong>9. (AF-A)</strong> SV -&gt;&gt; UI: 1-Click chọn Thái Bảo / Văn Việt / Minh Quân</div>
+                <div class="text-rose-700 font-bold">alt Không tích cam kết ở &ge; 1 kỳ (Ref: EF-A, BR-02)</div>
+                <div class="text-rose-700 pl-3"><strong>10. (EF-A)</strong> UI --&gt;&gt; SV: Khóa nút nộp, báo lỗi bắt buộc cam kết &ge;1 kỳ</div>
+                <div class="text-rose-700 font-bold">else Chưa chọn tiêu chí ưu tiên (Ref: EF-B, BR-06)</div>
+                <div class="text-rose-700 pl-3"><strong>11. (EF-B)</strong> UI --&gt;&gt; SV: Cảnh báo chọn tiêu chí top 1.5x theo BR-06</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="border-t border-slate-200 pt-2 flex justify-between items-center text-xs text-slate-500 font-mono">
+        <span>Đề tài KTX Smart Match • Viện Nghiên cứu và Đào tạo Việt - Anh (VNUK)</span>
+        <span>Sinh viên: Châu Tuấn Kiệt • Bùi Đình Hiếu • Lê Hoàng Triều</span>
+    </div>
+</div>
+
+
+<div class="slide">
+    <div class="flex justify-between items-start border-b border-slate-200 pb-2">
+        <div>
+            <span class="text-[10px] font-mono font-bold text-amber-700 bg-amber-50 px-2.5 py-0.5 rounded border border-amber-300 uppercase">
+                USE CASE 3 (QUAN TRỌNG) • ĐẶC TẢ CHI TIẾT • SLIDE 13/22
+            </span>
+            <h2 class="text-xl font-black text-slate-900 mt-0.5">UC-05: Xem Bảng Xếp Hạng Gợi Ý Bạn Cùng Phòng (BR-06)</h2>
+        </div>
+        <span class="text-xs font-mono font-bold bg-amber-100 text-amber-800 px-3 py-1 rounded-full">
+            Ràng buộc: BR-06 • NFR-06
+        </span>
+    </div>
+
+    <div class="space-y-2.5 my-auto text-xs">
+        <!-- Summary Table -->
+        <div>
+            <span class="font-bold text-slate-800 text-[10px] block uppercase font-mono mb-1">1. Summary Table (Slide Template):</span>
+            <table class="w-full text-left border border-slate-200 text-[9.5px]">
+                <tbody class="divide-y divide-slate-200">
+                    <tr><td class="p-1 font-bold bg-slate-50 w-24 border">ID</td><td class="p-1 font-mono font-bold text-amber-800 border">UC-05</td><td class="p-1 font-bold bg-slate-50 w-28 border">Title</td><td class="p-1 font-semibold border">Xem Bảng Xếp Hạng Gợi Ý Bạn Cùng Phòng (View Roommate Compatibility Rankings)</td></tr>
+                    <tr><td class="p-1 font-bold bg-slate-50 border">Description</td><td class="p-1 border" colspan="3">Sinh viên xem bảng xếp hạng ứng viên cùng phòng được sắp xếp giảm dần theo điểm tương thích 2 chiều (BR-06); có thể mở modal xem chi tiết điểm cộng/trừ các tiêu chí.</td></tr>
+                    <tr><td class="p-1 font-bold bg-slate-50 border">Actors</td><td class="p-1 border">Sinh viên (Primary), Động cơ Scoring (Secondary)</td><td class="p-1 font-bold bg-slate-50 border">Trigger</td><td class="p-1 border">Sinh viên nhấn tab "Khảo sát & Bảng Xếp Hạng Bạn Cùng Phòng".</td></tr>
+                    <tr><td class="p-1 font-bold bg-slate-50 border">Preconditions</td><td class="p-1 border">Sinh viên đã khai báo vector 8 tiêu chí thói quen (UC-04).</td><td class="p-1 font-bold bg-slate-50 border">Post conditions</td><td class="p-1 border">Hiển thị Top ứng viên phù hợp nhất kèm minh giải chi tiết.</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Three Types of Flows Table -->
+        <div>
+            <span class="font-bold text-slate-800 text-[10px] block uppercase font-mono mb-1">2. Three Types of Flows Table (BF, AF, EF đủ 4 cột Id, Action, Actor, Ref theo bảng của Thầy):</span>
+            <table class="w-full text-left border border-slate-200 text-[9.5px]">
+                <thead class="bg-slate-100 font-bold text-slate-700 uppercase">
+                    <tr><th class="p-1 border w-12 text-center">Step ID</th><th class="p-1 border w-24">Actor</th><th class="p-1 border">Action</th><th class="p-1 border w-44">Notes/references (Ref)</th></tr>
+                </thead>
+                <tbody class="divide-y divide-slate-200">
+                    <tr class="bg-emerald-50/30"><td class="p-1 border font-mono font-bold text-emerald-800 text-center">BF-1</td><td class="p-1 border">Sinh viên</td><td class="p-1 border">Truy cập màn hình Khảo sát & Bảng Xếp Hạng Bạn Cùng Phòng.</td><td class="p-1 border font-mono text-slate-500">Màn hình WF-03, NFR-06</td></tr>
+                    <tr class="bg-emerald-50/30"><td class="p-1 border font-mono font-bold text-emerald-800 text-center">BF-2</td><td class="p-1 border">Hệ thống</td><td class="p-1 border">Tải vector thói quen của sinh viên từ cơ sở dữ liệu.</td><td class="p-1 border font-mono text-slate-500">Load profile data</td></tr>
+                    <tr class="bg-emerald-50/30"><td class="p-1 border font-mono font-bold text-emerald-800 text-center">BF-3</td><td class="p-1 border">Hệ thống</td><td class="p-1 border">Tính toán ma trận tương thích 2 chiều có nhân hệ số ưu tiên 1.5x (BR-06).</td><td class="p-1 border font-mono font-bold text-indigo-700">BR-06 (Ma trận 2 chiều)</td></tr>
+                    <tr class="bg-emerald-50/30"><td class="p-1 border font-mono font-bold text-emerald-800 text-center">BF-4</td><td class="p-1 border">Hệ thống</td><td class="p-1 border">Sắp xếp các ứng viên cùng phòng tiềm năng theo thứ tự điểm giảm dần.</td><td class="p-1 border font-mono text-slate-500">Preference ranking</td></tr>
+                    <tr class="bg-emerald-50/30"><td class="p-1 border font-mono font-bold text-emerald-800 text-center">BF-5</td><td class="p-1 border">Hệ thống</td><td class="p-1 border">Render bảng xếp hạng Top 1, Top 2, Top 3 kèm huy hiệu và điểm % hòa hợp.</td><td class="p-1 border font-mono text-slate-500">WF-03-C01, C02</td></tr>
+                    <tr class="bg-emerald-50/30"><td class="p-1 border font-mono font-bold text-emerald-800 text-center">BF-6</td><td class="p-1 border">Sinh viên</td><td class="p-1 border">Tham khảo các bạn cùng phòng tiềm năng để chuẩn bị tâm lý nội trú.</td><td class="p-1 border font-mono text-slate-500">Hoàn tất UC-05</td></tr>
+                    <tr class="bg-purple-50/40"><td class="p-1 border font-mono font-bold text-purple-700 text-center">AF-A</td><td class="p-1 border">Sinh viên</td><td class="p-1 border">Bấm "Chi tiết tiêu chí ▼" trên card của ứng viên để mở modal giải thích điểm.</td><td class="p-1 border font-mono text-purple-700 font-bold">WF-03-C03, NFR-06</td></tr>
+                    <tr class="bg-rose-50/40"><td class="p-1 border font-mono font-bold text-rose-700 text-center">EF-A</td><td class="p-1 border">Hệ thống</td><td class="p-1 border">Chưa có ứng viên cùng phòng nào nộp đơn: Hiển thị trạng thái chờ gom nhóm.</td><td class="p-1 border font-mono text-rose-700">Fallback giao diện trống</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="border-t border-slate-200 pt-2 flex justify-between items-center text-xs text-slate-500 font-mono">
+        <span>Đề tài KTX Smart Match • Viện Nghiên cứu và Đào tạo Việt - Anh (VNUK)</span>
+        <span>Sinh viên: Châu Tuấn Kiệt • Bùi Đình Hiếu • Lê Hoàng Triều</span>
+    </div>
+</div>
+
+
+<div class="slide">
+    <div class="flex justify-between items-start border-b border-slate-200 pb-2">
+        <div>
+            <span class="text-[10px] font-mono font-bold text-amber-700 bg-amber-50 px-2.5 py-0.5 rounded border border-amber-300 uppercase">
+                USE CASE 3 (QUAN TRỌNG) • WIREFRAME & SEQUENCE • SLIDE 14/22
+            </span>
+            <h2 class="text-xl font-black text-slate-900 mt-0.5">UC-05: Giao Diện Wireframe WF-03 & Sơ Đồ Sequence Khớp 1-1</h2>
+        </div>
+        <span class="text-xs font-mono font-bold bg-amber-100 text-amber-800 px-3 py-1 rounded-full">
+            Đặc Tả Trước, Design Sau
+        </span>
+    </div>
+
+    <div class="grid grid-cols-2 gap-4 my-auto">
+        <!-- Wireframe WF-03 -->
+        <div class="space-y-1.5">
+            <span class="font-bold text-slate-800 text-[10.5px] uppercase font-mono block">1. Bản Vẽ Giao Diện Wireframe WF-03:</span>
+            <div class="blueprint-bg border-2 border-slate-400 rounded-xl p-3 text-[9px] space-y-2">
+                <div class="bg-slate-200 px-2 py-1 rounded flex justify-between items-center">
+                    <span class="font-mono text-slate-600">https://ktx.udn.vn/student/roommate-ranking</span>
+                    <span class="font-bold text-slate-500 font-mono">[WF-03] BXH BẠN CÙNG PHÒNG</span>
+                </div>
+                <div class="bg-white p-3 rounded border border-slate-300 space-y-2">
+                    <div class="p-2 border-2 border-amber-400 bg-amber-50/40 rounded space-y-1">
+                        <div class="flex justify-between items-start">
+                            <div><span class="px-1.5 py-0.5 bg-amber-400 text-slate-900 font-extrabold rounded text-[8px]">[WF-03-C02] 🥇 HẠNG 1</span><strong class="block text-[10px] mt-0.5">Nguyễn Duy Thái Bảo (VNUK)</strong><span class="text-[8px] text-slate-500">Kỹ thuật Dữ liệu • Nhóm A</span></div>
+                            <div class="text-right"><span class="text-lg font-black text-emerald-600">92%</span><span class="block text-[7px] text-slate-500">Cực kỳ hòa hợp</span></div>
+                        </div>
+                        <div class="text-[8px] text-slate-600 border-t border-slate-200 pt-1 flex justify-between"><span>🌙 Ngủ: 23:00 • 🧹 Gọn: 5/5</span><span class="text-indigo-600 font-bold cursor-pointer">[WF-03-C03] Chi tiết tiêu chí ▼ (AF-A)</span></div>
+                    </div>
+                    <div class="p-2 border border-slate-200 bg-slate-50 rounded flex justify-between items-center">
+                        <div><span class="px-1.5 py-0.5 bg-slate-200 text-slate-700 font-extrabold rounded text-[8px]">🥈 HẠNG 2</span><strong class="text-[9px] ml-1">Lê Minh Quân (DUE)</strong></div>
+                        <span class="text-sm font-black text-sky-600">86%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sequence Diagram UC-05 -->
+        <div class="space-y-1.5">
+            <span class="font-bold text-slate-800 text-[10.5px] uppercase font-mono block">2. Sơ Đồ Tuần Tự (Sequence Diagram Khớp 1-1):</span>
+            <div class="p-3 bg-slate-50 border-2 border-slate-300 rounded-xl font-mono text-[9px] space-y-1 text-slate-700 leading-relaxed">
+                <div><strong>1. (BF-1)</strong> SV -&gt;&gt; UI: Mở màn hình Bảng Xếp Hạng Bạn Cùng Phòng</div>
+                <div><strong>2. (BF-2)</strong> UI -&gt;&gt; DB: Tải vector thói quen của sinh viên</div>
+                <div><strong>3. (BF-3)</strong> UI -&gt;&gt; Scoring: Tính toán ma trận tương thích 2 chiều (Ref: BR-06)</div>
+                <div><strong>4. (BF-4)</strong> Scoring -&gt;&gt; Scoring: Sắp xếp bảng ứng viên giảm dần</div>
+                <div><strong>5. (BF-5)</strong> Scoring --&gt;&gt; UI: Trả về danh sách Top 8 ứng viên hòa hợp nhất</div>
+                <div><strong>6. (BF-5)</strong> UI --&gt;&gt; SV: Hiển thị card Top 1, Top 2, Top 3 kèm huy hiệu</div>
+                <div class="text-purple-700 font-bold">opt Mở xem giải thích điểm cộng/trừ (Ref: AF-A, NFR-06)</div>
+                <div class="text-purple-700 pl-3"><strong>7. (AF-A)</strong> SV -&gt;&gt; UI: Nhấn nút "Chi tiết tiêu chí ▼" trên card</div>
+                <div class="text-purple-700 pl-3"><strong>8. (AF-A)</strong> UI --&gt;&gt; SV: Mở modal hiển thị điểm cộng/trừ từng thói quen</div>
+                <div class="text-rose-700 font-bold">alt Chưa có sinh viên đối diện nộp đơn (Ref: EF-A)</div>
+                <div class="text-rose-700 pl-3"><strong>9. (EF-A)</strong> UI --&gt;&gt; SV: Hiển thị thông báo chờ gom đủ ứng viên</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="border-t border-slate-200 pt-2 flex justify-between items-center text-xs text-slate-500 font-mono">
+        <span>Đề tài KTX Smart Match • Viện Nghiên cứu và Đào tạo Việt - Anh (VNUK)</span>
+        <span>Sinh viên: Châu Tuấn Kiệt • Bùi Đình Hiếu • Lê Hoàng Triều</span>
+    </div>
+</div>
+
+
+<div class="slide">
+    <div class="flex justify-between items-start border-b border-slate-200 pb-2">
+        <div>
+            <span class="text-[10px] font-mono font-bold text-amber-700 bg-amber-50 px-2.5 py-0.5 rounded border border-amber-300 uppercase">
+                USE CASE 4 (QUAN TRỌNG) • ĐẶC TẢ CHI TIẾT • SLIDE 15/22
+            </span>
+            <h2 class="text-xl font-black text-slate-900 mt-0.5">UC-18: Thẩm Định & Phê Duyệt Hồ Sơ KTX (Business Approve)</h2>
+        </div>
+        <span class="text-xs font-mono font-bold bg-amber-100 text-amber-800 px-3 py-1 rounded-full">
+            Ràng buộc: BR-01 • BR-02 • BR-03
+        </span>
+    </div>
+
+    <div class="space-y-2.5 my-auto text-xs">
+        <!-- Summary Table -->
+        <div>
+            <span class="font-bold text-slate-800 text-[10px] block uppercase font-mono mb-1">1. Summary Table (Slide Template):</span>
+            <table class="w-full text-left border border-slate-200 text-[9.5px]">
+                <tbody class="divide-y divide-slate-200">
+                    <tr><td class="p-1 font-bold bg-slate-50 w-24 border">ID</td><td class="p-1 font-mono font-bold text-amber-800 border">UC-18</td><td class="p-1 font-bold bg-slate-50 w-28 border">Title</td><td class="p-1 font-semibold border">Phê duyệt Đơn KTX (Business Approve Dormitory Application)</td></tr>
+                    <tr><td class="p-1 font-bold bg-slate-50 border">Description</td><td class="p-1 border" colspan="3">Cán bộ KTX thẩm định các điều kiện nghiệp vụ: tính hợp lệ MSSV trường A (BR-01), cam kết &ge; 1 kỳ (BR-02), lịch sử kỷ luật (BR-03); chỉ hồ sơ Approved mới được nạp vào Gale-Shapley.</td></tr>
+                    <tr><td class="p-1 font-bold bg-slate-50 border">Actors</td><td class="p-1 border">Cán bộ KTX (Staff - Primary), Hệ thống KTX (Secondary)</td><td class="p-1 font-bold bg-slate-50 border">Trigger</td><td class="p-1 border">Cán bộ KTX mở danh sách hồ sơ trạng thái Pending trên Dashboard.</td></tr>
+                    <tr><td class="p-1 font-bold bg-slate-50 border">Preconditions</td><td class="p-1 border">Sinh viên đã nộp đơn đăng ký KTX (UC-04).</td><td class="p-1 font-bold bg-slate-50 border">Post conditions</td><td class="p-1 border">Hồ sơ chuyển trạng thái Approved_For_Matching hoặc Rejected kèm lý do.</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Three Types of Flows Table -->
+        <div>
+            <span class="font-bold text-slate-800 text-[10px] block uppercase font-mono mb-1">2. Three Types of Flows Table (BF, AF, EF đủ 4 cột Id, Action, Actor, Ref theo bảng của Thầy):</span>
+            <table class="w-full text-left border border-slate-200 text-[9.5px]">
+                <thead class="bg-slate-100 font-bold text-slate-700 uppercase">
+                    <tr><th class="p-1 border w-12 text-center">Step ID</th><th class="p-1 border w-24">Actor</th><th class="p-1 border">Action</th><th class="p-1 border w-44">Notes/references (Ref)</th></tr>
+                </thead>
+                <tbody class="divide-y divide-slate-200">
+                    <tr class="bg-emerald-50/30"><td class="p-1 border font-mono font-bold text-emerald-800 text-center">BF-1</td><td class="p-1 border">Cán bộ KTX</td><td class="p-1 border">Đăng nhập Dashboard Quản trị và mở màn hình Thẩm định Đơn KTX.</td><td class="p-1 border font-mono text-slate-500">Màn hình WF-04</td></tr>
+                    <tr class="bg-emerald-50/30"><td class="p-1 border font-mono font-bold text-emerald-800 text-center">BF-2</td><td class="p-1 border">Hệ thống</td><td class="p-1 border">Hiển thị danh sách hồ sơ trạng thái Pending kèm huy hiệu đối soát tự động.</td><td class="p-1 border font-mono font-bold text-indigo-700">WF-04-C01, BR-01, BR-02</td></tr>
+                    <tr class="bg-emerald-50/30"><td class="p-1 border font-mono font-bold text-emerald-800 text-center">BF-3</td><td class="p-1 border">Cán bộ KTX</td><td class="p-1 border">Chọn hồ sơ để thẩm định tính kỷ luật và diện chính sách ưu tiên.</td><td class="p-1 border font-mono text-slate-500">Nghiệp vụ xét duyệt</td></tr>
+                    <tr class="bg-emerald-50/30"><td class="p-1 border font-mono font-bold text-emerald-800 text-center">BF-4</td><td class="p-1 border">Hệ thống</td><td class="p-1 border">Kiểm tra quỹ phòng còn chỗ tương ứng với loại phòng sinh viên đăng ký.</td><td class="p-1 border font-mono font-bold text-indigo-700">BR-05 (Quỹ phòng khả dụng)</td></tr>
+                    <tr class="bg-emerald-50/30"><td class="p-1 border font-mono font-bold text-emerald-800 text-center">BF-5</td><td class="p-1 border">Cán bộ KTX</td><td class="p-1 border">Nhấn nút "Phê duyệt (Business Approve)".</td><td class="p-1 border font-mono font-bold text-indigo-700">WF-04-C03, BR-03 (Approve)</td></tr>
+                    <tr class="bg-emerald-50/30"><td class="p-1 border font-mono font-bold text-emerald-800 text-center">BF-6</td><td class="p-1 border">Hệ thống</td><td class="p-1 border">Cập nhật trạng thái Approved_For_Matching, nạp hồ sơ vào hàng đợi phân phòng.</td><td class="p-1 border font-mono text-slate-500">Hoàn tất UC-18, nạp vào UC-24</td></tr>
+                    <tr class="bg-purple-50/40"><td class="p-1 border font-mono font-bold text-purple-700 text-center">AF-A</td><td class="p-1 border">Cán bộ KTX</td><td class="p-1 border">Bấm "Duyệt hàng loạt (Batch Approve)" cho các hồ sơ thỏa mãn 100% điều kiện.</td><td class="p-1 border font-mono text-purple-700">NFR-06 (Thao tác nhanh)</td></tr>
+                    <tr class="bg-rose-50/40"><td class="p-1 border font-mono font-bold text-rose-700 text-center">EF-A</td><td class="p-1 border">Cán bộ KTX</td><td class="p-1 border">Từ chối đơn (vi phạm kỷ luật, nợ phí cũ), nhập lý do và gửi email thông báo.</td><td class="p-1 border font-mono text-rose-700 font-bold">WF-04-C04, BR-03 (Reject)</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="border-t border-slate-200 pt-2 flex justify-between items-center text-xs text-slate-500 font-mono">
+        <span>Đề tài KTX Smart Match • Viện Nghiên cứu và Đào tạo Việt - Anh (VNUK)</span>
+        <span>Sinh viên: Châu Tuấn Kiệt • Bùi Đình Hiếu • Lê Hoàng Triều</span>
+    </div>
+</div>
+
+
+<div class="slide">
+    <div class="flex justify-between items-start border-b border-slate-200 pb-2">
+        <div>
+            <span class="text-[10px] font-mono font-bold text-amber-700 bg-amber-50 px-2.5 py-0.5 rounded border border-amber-300 uppercase">
+                USE CASE 4 (QUAN TRỌNG) • WIREFRAME & SEQUENCE • SLIDE 16/22
+            </span>
+            <h2 class="text-xl font-black text-slate-900 mt-0.5">UC-18: Giao Diện Wireframe WF-04 & Sơ Đồ Sequence Khớp 1-1</h2>
+        </div>
+        <span class="text-xs font-mono font-bold bg-amber-100 text-amber-800 px-3 py-1 rounded-full">
+            Đặc Tả Trước, Design Sau
+        </span>
+    </div>
+
+    <div class="grid grid-cols-2 gap-4 my-auto">
+        <!-- Wireframe WF-04 -->
+        <div class="space-y-1.5">
+            <span class="font-bold text-slate-800 text-[10.5px] uppercase font-mono block">1. Bản Vẽ Giao Diện Wireframe WF-04:</span>
+            <div class="blueprint-bg border-2 border-slate-400 rounded-xl p-3 text-[9px] space-y-2">
+                <div class="bg-slate-200 px-2 py-1 rounded flex justify-between items-center">
+                    <span class="font-mono text-slate-600">https://ktx.udn.vn/admin/approvals</span>
+                    <span class="font-bold text-slate-500 font-mono">[WF-04] THẨM ĐỊNH HỒ SƠ</span>
+                </div>
+                <div class="bg-white p-3 rounded border border-slate-300 space-y-2">
+                    <div class="flex justify-between items-center bg-slate-100 p-1.5 rounded">
+                        <strong class="text-[8.5px] text-slate-800">[WF-04-C01] Đơn Pending (42)</strong>
+                        <span class="text-[7.5px] bg-emerald-100 text-emerald-800 px-1 rounded font-bold">[WF-04-C02] Tích xanh BR-01/02</span>
+                        <button class="bg-indigo-600 text-white px-2 py-0.5 rounded text-[8px] font-bold">Duyệt loạt (AF-A)</button>
+                    </div>
+                    <div class="p-1.5 border rounded bg-slate-50 space-y-1">
+                        <div class="flex justify-between"><strong>Thái Bảo (VNUK)</strong><span class="text-emerald-700 font-bold">1 Kỳ (Đạt BR-02)</span></div>
+                        <div class="flex justify-between items-center pt-1 border-t">
+                            <span class="text-[7.5px] text-slate-500">Không nợ phí • Đủ chỉ tiêu</span>
+                            <div class="space-x-1">
+                                <button class="px-2 py-0.5 bg-emerald-600 text-white rounded font-bold text-[8px]">[WF-04-C03] Phê duyệt (BR-03)</button>
+                                <button class="px-2 py-0.5 bg-rose-600 text-white rounded font-bold text-[8px]">[WF-04-C04] Từ chối</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sequence Diagram UC-18 -->
+        <div class="space-y-1.5">
+            <span class="font-bold text-slate-800 text-[10.5px] uppercase font-mono block">2. Sơ Đồ Tuần Tự (Sequence Diagram Khớp 1-1):</span>
+            <div class="p-3 bg-slate-50 border-2 border-slate-300 rounded-xl font-mono text-[9px] space-y-1 text-slate-700 leading-relaxed">
+                <div><strong>1. (BF-1)</strong> Admin -&gt;&gt; UI: Mở màn hình Thẩm định hồ sơ KTX</div>
+                <div><strong>2. (BF-2)</strong> UI -&gt;&gt; Service: Yêu cầu danh sách hồ sơ trạng thái Pending</div>
+                <div><strong>3. (BF-2)</strong> Service -&gt;&gt; DB: Đối soát tự động BR-01 & BR-02</div>
+                <div><strong>4. (BF-2)</strong> UI --&gt;&gt; Admin: Hiển thị danh sách hồ sơ kèm tích xanh</div>
+                <div><strong>5. (BF-3)</strong> Admin -&gt;&gt; UI: Chọn hồ sơ kiểm tra chi tiết kỷ luật</div>
+                <div><strong>6. (BF-4)</strong> UI -&gt;&gt; Service: Kiểm tra quỹ phòng khả dụng (BR-05)</div>
+                <div class="text-emerald-700 font-bold">alt Đạt tiêu chuẩn thẩm định nghiệp vụ (Ref: BF-5, BR-03)</div>
+                <div class="text-emerald-700 pl-3"><strong>7. (BF-5)</strong> Admin -&gt;&gt; UI: Bấm "Phê duyệt (Business Approve)"</div>
+                <div class="text-emerald-700 pl-3"><strong>8. (BF-6)</strong> Service -&gt;&gt; DB: Cập nhật Approved_For_Matching</div>
+                <div class="text-emerald-700 pl-3"><strong>9. (BF-6)</strong> UI --&gt;&gt; Admin: Báo thành công, nạp đơn vào Gale-Shapley</div>
+                <div class="text-rose-700 font-bold">else Vi phạm kỷ luật / Chưa cam kết kỳ (Ref: EF-A, BR-03)</div>
+                <div class="text-rose-700 pl-3"><strong>10. (EF-A)</strong> Admin -&gt;&gt; UI: Nhập lý do từ chối và bấm "Từ chối"</div>
+                <div class="text-rose-700 pl-3"><strong>11. (EF-A)</strong> Service -&gt;&gt; DB: Cập nhật Rejected, gửi email cho SV</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="border-t border-slate-200 pt-2 flex justify-between items-center text-xs text-slate-500 font-mono">
+        <span>Đề tài KTX Smart Match • Viện Nghiên cứu và Đào tạo Việt - Anh (VNUK)</span>
+        <span>Sinh viên: Châu Tuấn Kiệt • Bùi Đình Hiếu • Lê Hoàng Triều</span>
+    </div>
+</div>
+
+
+<div class="slide">
+    <div class="flex justify-between items-start border-b border-slate-200 pb-2">
+        <div>
+            <span class="text-[10px] font-mono font-bold text-amber-700 bg-amber-50 px-2.5 py-0.5 rounded border border-amber-300 uppercase">
+                USE CASE 5 (QUAN TRỌNG) • ĐẶC TẢ CHI TIẾT • SLIDE 17/22
+            </span>
+            <h2 class="text-xl font-black text-slate-900 mt-0.5">UC-24: Ghép Phòng Tự Động Gale-Shapley & Lấp Đầy 100%</h2>
+        </div>
+        <span class="text-xs font-mono font-bold bg-amber-100 text-amber-800 px-3 py-1 rounded-full">
+            Ràng buộc: BR-05 • BR-07 • NFR-01, 02
+        </span>
+    </div>
+
+    <div class="space-y-2.5 my-auto text-xs">
+        <!-- Summary Table -->
+        <div>
+            <span class="font-bold text-slate-800 text-[10px] block uppercase font-mono mb-1">1. Summary Table (Slide Template):</span>
+            <table class="w-full text-left border border-slate-200 text-[9.5px]">
+                <tbody class="divide-y divide-slate-200">
+                    <tr><td class="p-1 font-bold bg-slate-50 w-24 border">ID</td><td class="p-1 font-mono font-bold text-amber-800 border">UC-24</td><td class="p-1 font-bold bg-slate-50 w-28 border">Title</td><td class="p-1 font-semibold border">Thực hiện Ghép phòng Tự động (Execute Automated Room Matching)</td></tr>
+                    <tr><td class="p-1 font-bold bg-slate-50 border">Description</td><td class="p-1 border" colspan="3">Thuật toán Gale-Shapley tự động phân bổ sinh viên vào phòng theo loại phòng đăng ký, tối ưu lấp đầy 100% giường (BR-05) và triệt tiêu cặp chặn Blocking Pairs = 0 (BR-07, NFR-02).</td></tr>
+                    <tr><td class="p-1 font-bold bg-slate-50 border">Actors</td><td class="p-1 border">Hệ thống Scheduler (Primary), Cán bộ KTX (Secondary)</td><td class="p-1 font-bold bg-slate-50 border">Trigger</td><td class="p-1 border">Đến hạn khóa sổ đăng ký hoặc Cán bộ KTX bấm nút "Khởi chạy ghép phòng".</td></tr>
+                    <tr><td class="p-1 font-bold bg-slate-50 border">Preconditions</td><td class="p-1 border">Có danh sách hồ sơ ở trạng thái Approved_For_Matching (UC-18).</td><td class="p-1 font-bold bg-slate-50 border">Post conditions</td><td class="p-1 border">Sinh danh sách phân phòng chính thức, kích hoạt đồng hồ hạn thanh toán 72h (BR-04).</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Three Types of Flows Table -->
+        <div>
+            <span class="font-bold text-slate-800 text-[10px] block uppercase font-mono mb-1">2. Three Types of Flows Table (BF, AF, EF đủ 4 cột Id, Action, Actor, Ref theo bảng của Thầy):</span>
+            <table class="w-full text-left border border-slate-200 text-[9.5px]">
+                <thead class="bg-slate-100 font-bold text-slate-700 uppercase">
+                    <tr><th class="p-1 border w-12 text-center">Step ID</th><th class="p-1 border w-24">Actor</th><th class="p-1 border">Action</th><th class="p-1 border w-44">Notes/references (Ref)</th></tr>
+                </thead>
+                <tbody class="divide-y divide-slate-200">
+                    <tr class="bg-emerald-50/30"><td class="p-1 border font-mono font-bold text-emerald-800 text-center">BF-1</td><td class="p-1 border">Scheduler</td><td class="p-1 border">Khởi chạy quy trình Phân phòng Tự động Gale-Shapley.</td><td class="p-1 border font-mono text-slate-500">Màn hình WF-05</td></tr>
+                    <tr class="bg-emerald-50/30"><td class="p-1 border font-mono font-bold text-emerald-800 text-center">BF-2</td><td class="p-1 border">Hệ thống</td><td class="p-1 border">Phân nhóm hồ sơ Approved theo loại phòng nguyện vọng (2, 4, 6 người).</td><td class="p-1 border font-mono font-bold text-indigo-700">BR-05 (Loại phòng)</td></tr>
+                    <tr class="bg-emerald-50/30"><td class="p-1 border font-mono font-bold text-emerald-800 text-center">BF-3</td><td class="p-1 border">Hệ thống</td><td class="p-1 border">Tính ma trận tương thích 2 chiều có nhân hệ số ưu tiên 1.5x cho tiêu chí top.</td><td class="p-1 border font-mono font-bold text-indigo-700">BR-06 (Top 1.5x)</td></tr>
+                    <tr class="bg-emerald-50/30"><td class="p-1 border font-mono font-bold text-emerald-800 text-center">BF-4</td><td class="p-1 border">Hệ thống</td><td class="p-1 border">Thiết lập bảng sở thích (Preference Lists) giảm dần theo điểm tương thích.</td><td class="p-1 border font-mono text-slate-500">Gale-Shapley input</td></tr>
+                    <tr class="bg-emerald-50/30"><td class="p-1 border font-mono font-bold text-emerald-800 text-center">BF-5</td><td class="p-1 border">Hệ thống</td><td class="p-1 border">Thực thi giải thuật ghép cặp ổn định Gale-Shapley trong thời gian &lt; 1.0 giây.</td><td class="p-1 border font-mono font-bold text-indigo-700">NFR-01 (&lt;1s)</td></tr>
+                    <tr class="bg-emerald-50/30"><td class="p-1 border font-mono font-bold text-emerald-800 text-center">BF-6</td><td class="p-1 border">Hệ thống</td><td class="p-1 border">Gộp các cặp ổn định vào phòng thực tế theo nguyên tắc lấp đầy 100% giường.</td><td class="p-1 border font-mono font-bold text-indigo-700">WF-05-C02, BR-05 (Lấp đầy)</td></tr>
+                    <tr class="bg-emerald-50/30"><td class="p-1 border font-mono font-bold text-emerald-800 text-center">BF-7</td><td class="p-1 border">Hệ thống</td><td class="p-1 border">Kiểm chứng độ ổn định toán học: Đạt số cặp chặn Blocking Pairs = 0.</td><td class="p-1 border font-mono font-bold text-indigo-700">WF-05-C01, BR-07, NFR-02</td></tr>
+                    <tr class="bg-emerald-50/30"><td class="p-1 border font-mono font-bold text-emerald-800 text-center">BF-8</td><td class="p-1 border">Hệ thống</td><td class="p-1 border">Lưu kết quả xếp phòng vào cơ sở dữ liệu và hiển thị bảng phân bổ.</td><td class="p-1 border font-mono text-slate-500">Database commit</td></tr>
+                    <tr class="bg-emerald-50/30"><td class="p-1 border font-mono font-bold text-emerald-800 text-center">BF-9</td><td class="p-1 border">Hệ thống</td><td class="p-1 border">Công bố danh sách trúng tuyển và kích hoạt đồng hồ hạn nộp tiền 72 giờ.</td><td class="p-1 border font-mono font-bold text-indigo-700">Chuyển sang UC-13, BR-04</td></tr>
+                    <tr class="bg-purple-50/40"><td class="p-1 border font-mono font-bold text-purple-700 text-center">AF-A</td><td class="p-1 border">Cán bộ KTX</td><td class="p-1 border">Xuất toàn bộ kết quả phân phòng và số liệu lấp đầy ra file CSV để báo cáo.</td><td class="p-1 border font-mono text-purple-700">NFR-06 (Export CSV)</td></tr>
+                    <tr class="bg-rose-50/40"><td class="p-1 border font-mono font-bold text-rose-700 text-center">EF-A</td><td class="p-1 border">Hệ thống</td><td class="p-1 border">Số lượng hồ sơ lẻ (không đủ cặp): Tự động chuyển hồ sơ lẻ vào danh sách chờ.</td><td class="p-1 border font-mono text-rose-700">Xử lý lẻ người, Waitlist</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="border-t border-slate-200 pt-2 flex justify-between items-center text-xs text-slate-500 font-mono">
+        <span>Đề tài KTX Smart Match • Viện Nghiên cứu và Đào tạo Việt - Anh (VNUK)</span>
+        <span>Sinh viên: Châu Tuấn Kiệt • Bùi Đình Hiếu • Lê Hoàng Triều</span>
+    </div>
+</div>
+
+
+<div class="slide">
+    <div class="flex justify-between items-start border-b border-slate-200 pb-2">
+        <div>
+            <span class="text-[10px] font-mono font-bold text-amber-700 bg-amber-50 px-2.5 py-0.5 rounded border border-amber-300 uppercase">
+                USE CASE 5 (QUAN TRỌNG) • WIREFRAME & SEQUENCE • SLIDE 18/22
+            </span>
+            <h2 class="text-xl font-black text-slate-900 mt-0.5">UC-24: Giao Diện Wireframe WF-05 & Sơ Đồ Sequence Khớp 1-1</h2>
+        </div>
+        <span class="text-xs font-mono font-bold bg-amber-100 text-amber-800 px-3 py-1 rounded-full">
+            Đặc Tả Trước, Design Sau
+        </span>
+    </div>
+
+    <div class="grid grid-cols-2 gap-4 my-auto">
+        <!-- Wireframe WF-05 -->
+        <div class="space-y-1.5">
+            <span class="font-bold text-slate-800 text-[10.5px] uppercase font-mono block">1. Bản Vẽ Giao Diện Wireframe WF-05:</span>
+            <div class="blueprint-bg border-2 border-slate-400 rounded-xl p-3 text-[9px] space-y-2">
+                <div class="bg-slate-200 px-2 py-1 rounded flex justify-between items-center">
+                    <span class="font-mono text-slate-600">https://ktx.udn.vn/admin/matching</span>
+                    <span class="font-bold text-slate-500 font-mono">[WF-05] PHÂN PHÒNG GALE-SHAPLEY</span>
+                </div>
+                <div class="bg-white p-3 rounded border border-slate-300 space-y-2">
+                    <div class="grid grid-cols-3 gap-1.5 text-center">
+                        <div class="p-1 border border-emerald-300 bg-emerald-50 rounded">
+                            <span class="text-[7.5px] text-emerald-800 font-bold block">[WF-05-C01] ĐỘ ỔN ĐỊNH</span>
+                            <span class="text-xs font-black text-emerald-700">BP = 0</span>
+                        </div>
+                        <div class="p-1 border border-sky-300 bg-sky-50 rounded">
+                            <span class="text-[7.5px] text-sky-800 font-bold block">[WF-05-C02] LẤP ĐẦY</span>
+                            <span class="text-xs font-black text-sky-700">100% Giường</span>
+                        </div>
+                        <div class="p-1 border border-indigo-300 bg-indigo-50 rounded">
+                            <span class="text-[7.5px] text-indigo-800 font-bold block">[WF-05-C03] HIỆU NĂNG</span>
+                            <span class="text-xs font-black text-indigo-700">0.08 Giây</span>
+                        </div>
+                    </div>
+                    <div class="p-1.5 border rounded bg-slate-50 flex justify-between items-center text-[8px]">
+                        <strong>Phòng 201 (VIP 2): Thái Bảo + Minh Quân (92%)</strong>
+                        <div class="space-x-1">
+                            <button class="bg-slate-800 text-white px-2 py-0.5 rounded">Xuất CSV</button>
+                            <button class="bg-indigo-600 text-white px-2 py-0.5 rounded font-bold">Công bố 72h (BF-9)</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sequence Diagram UC-24 -->
+        <div class="space-y-1.5">
+            <span class="font-bold text-slate-800 text-[10.5px] uppercase font-mono block">2. Sơ Đồ Tuần Tự (Sequence Diagram Khớp 1-1):</span>
+            <div class="p-3 bg-slate-50 border-2 border-slate-300 rounded-xl font-mono text-[9px] space-y-1 text-slate-700 leading-relaxed">
+                <div><strong>1. (BF-1)</strong> Scheduler -&gt;&gt; UI: Kích hoạt lệnh chạy ghép phòng</div>
+                <div><strong>2. (BF-2)</strong> UI -&gt;&gt; GS: Truyền hồ sơ Approved theo loại phòng</div>
+                <div><strong>3. (BF-3)</strong> GS -&gt;&gt; GS: Tính ma trận tương thích 2 chiều & Top 1.5x (BR-06)</div>
+                <div><strong>4. (BF-4)</strong> GS -&gt;&gt; GS: Xây dựng bảng sở thích giảm dần</div>
+                <div><strong>5. (BF-5)</strong> GS -&gt;&gt; GS: Thực thi giải thuật Gale-Shapley (&lt; 1s, NFR-01)</div>
+                <div><strong>6. (BF-6)</strong> GS -&gt;&gt; RoomOpt: Chuyển các cặp ổn định để gộp phòng</div>
+                <div><strong>7. (BF-6)</strong> RoomOpt -&gt;&gt; RoomOpt: Phân giường lấp đầy 100% (BR-05)</div>
+                <div><strong>8. (BF-7)</strong> GS -&gt;&gt; GS: Kiểm chứng Blocking Pairs = 0 (BR-07, NFR-02)</div>
+                <div><strong>9. (BF-8)</strong> RoomOpt --&gt;&gt; UI: Trả về kết quả phân phòng & lấp đầy</div>
+                <div><strong>10. (BF-8)</strong> UI -&gt;&gt; DB: Lưu kết quả xếp phòng vào cơ sở dữ liệu</div>
+                <div><strong>11. (BF-9)</strong> UI -&gt;&gt; DB: Kích hoạt đồng hồ hạn 72h & phát thông báo (BR-04)</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="border-t border-slate-200 pt-2 flex justify-between items-center text-xs text-slate-500 font-mono">
+        <span>Đề tài KTX Smart Match • Viện Nghiên cứu và Đào tạo Việt - Anh (VNUK)</span>
+        <span>Sinh viên: Châu Tuấn Kiệt • Bùi Đình Hiếu • Lê Hoàng Triều</span>
+    </div>
+</div>
+
+
+<div class="slide">
+    <div class="flex justify-between items-start border-b border-slate-200 pb-2">
+        <div>
+            <span class="text-[10px] font-mono font-bold text-amber-700 bg-amber-50 px-2.5 py-0.5 rounded border border-amber-300 uppercase">
+                USE CASE 6 (QUAN TRỌNG) • ĐẶC TẢ CHI TIẾT • SLIDE 19/22
+            </span>
+            <h2 class="text-xl font-black text-slate-900 mt-0.5">UC-13: Thanh Toán Tiền Phòng & Cọc Giữ Chỗ Hạn 72 Giờ Qua VNPay</h2>
+        </div>
+        <span class="text-xs font-mono font-bold bg-amber-100 text-amber-800 px-3 py-1 rounded-full">
+            Ràng buộc: BR-04 • NFR-03
+        </span>
+    </div>
+
+    <div class="space-y-2.5 my-auto text-xs">
+        <!-- Summary Table -->
+        <div>
+            <span class="font-bold text-slate-800 text-[10px] block uppercase font-mono mb-1">1. Summary Table (Slide Template):</span>
+            <table class="w-full text-left border border-slate-200 text-[9.5px]">
+                <tbody class="divide-y divide-slate-200">
+                    <tr><td class="p-1 font-bold bg-slate-50 w-24 border">ID</td><td class="p-1 font-mono font-bold text-amber-800 border">UC-13</td><td class="p-1 font-bold bg-slate-50 w-28 border">Title</td><td class="p-1 font-semibold border">Thanh toán Tiền phòng và Cọc 72h (Pay Room Fee and Deposit within 72h)</td></tr>
+                    <tr><td class="p-1 font-bold bg-slate-50 border">Description</td><td class="p-1 border" colspan="3">Sinh viên nộp tiền phòng kỳ 1 kèm tiền cọc tài sản (1.000.000 VNĐ) qua mã VNPAY-QR trong vòng 72 giờ để hoàn tất thủ tục nhận phòng; quá 72h tự động thu hồi phòng cho Waitlist (BR-04).</td></tr>
+                    <tr><td class="p-1 font-bold bg-slate-50 border">Actors</td><td class="p-1 border">Sinh viên (Primary), Cổng thanh toán VNPay (Secondary)</td><td class="p-1 font-bold bg-slate-50 border">Trigger</td><td class="p-1 border">Sinh viên nhận thông báo trúng tuyển phòng và mở màn hình thanh toán.</td></tr>
+                    <tr><td class="p-1 font-bold bg-slate-50 border">Preconditions</td><td class="p-1 border">Sinh viên đã được ghép phòng chính thức ở UC-24.</td><td class="p-1 font-bold bg-slate-50 border">Post conditions</td><td class="p-1 border">Khóa vị trí giường chính thức, phát hành Hợp đồng số và Biên lai điện tử có mã QR.</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Three Types of Flows Table -->
+        <div>
+            <span class="font-bold text-slate-800 text-[10px] block uppercase font-mono mb-1">2. Three Types of Flows Table (BF, AF, EF đủ 4 cột Id, Action, Actor, Ref theo bảng của Thầy):</span>
+            <table class="w-full text-left border border-slate-200 text-[9.5px]">
+                <thead class="bg-slate-100 font-bold text-slate-700 uppercase">
+                    <tr><th class="p-1 border w-12 text-center">Step ID</th><th class="p-1 border w-24">Actor</th><th class="p-1 border">Action</th><th class="p-1 border w-44">Notes/references (Ref)</th></tr>
+                </thead>
+                <tbody class="divide-y divide-slate-200">
+                    <tr class="bg-emerald-50/30"><td class="p-1 border font-mono font-bold text-emerald-800 text-center">BF-1</td><td class="p-1 border">Sinh viên</td><td class="p-1 border">Nhận thông báo xếp phòng và mở màn hình "Thanh toán Tiền phòng & Cọc".</td><td class="p-1 border font-mono text-slate-500">Màn hình WF-06</td></tr>
+                    <tr class="bg-emerald-50/30"><td class="p-1 border font-mono font-bold text-emerald-800 text-center">BF-2</td><td class="p-1 border">Hệ thống</td><td class="p-1 border">Hiển thị bảng kê: Tiền phòng Kỳ 1 (7tr) + Cọc tài sản (1tr) = 8.000.000 VNĐ.</td><td class="p-1 border font-mono font-bold text-indigo-700">WF-06-C02, BR-04 (Cọc 1tr)</td></tr>
+                    <tr class="bg-emerald-50/30"><td class="p-1 border font-mono font-bold text-emerald-800 text-center">BF-3</td><td class="p-1 border">Hệ thống</td><td class="p-1 border">Kích hoạt đồng hồ đếm ngược thời hạn thanh toán chính xác 72 giờ.</td><td class="p-1 border font-mono font-bold text-indigo-700">WF-06-C01, BR-04 (Hạn 72h)</td></tr>
+                    <tr class="bg-emerald-50/30"><td class="p-1 border font-mono font-bold text-emerald-800 text-center">BF-4</td><td class="p-1 border">Sinh viên</td><td class="p-1 border">Chọn phương thức: "Cổng thanh toán bảo mật VNPAY-QR".</td><td class="p-1 border font-mono text-slate-500">Phương thức online</td></tr>
+                    <tr class="bg-emerald-50/30"><td class="p-1 border font-mono font-bold text-emerald-800 text-center">BF-5</td><td class="p-1 border">Hệ thống</td><td class="p-1 border">Sinh mã giao dịch bảo mật và hiển thị mã QR động từ Cổng VNPay.</td><td class="p-1 border font-mono font-bold text-indigo-700">WF-06-C03, NFR-03 (TLS 1.3)</td></tr>
+                    <tr class="bg-emerald-50/30"><td class="p-1 border font-mono font-bold text-emerald-800 text-center">BF-6</td><td class="p-1 border">Sinh viên</td><td class="p-1 border">Dùng Mobile Banking quét mã QR để chuyển số tiền 8.000.000 VNĐ.</td><td class="p-1 border font-mono text-slate-500">Thao tác người dùng</td></tr>
+                    <tr class="bg-emerald-50/30"><td class="p-1 border font-mono font-bold text-emerald-800 text-center">BF-7</td><td class="p-1 border">VNPay</td><td class="p-1 border">Xử lý trừ tiền an toàn, gửi webhook phản hồi vnp_ResponseCode == "00" (SUCCESS).</td><td class="p-1 border font-mono font-bold text-indigo-700">NFR-03 (Đối soát SHA-256)</td></tr>
+                    <tr class="bg-emerald-50/30"><td class="p-1 border font-mono font-bold text-emerald-800 text-center">BF-8</td><td class="p-1 border">Hệ thống</td><td class="p-1 border">Cập nhật trạng thái "Paid", khóa vị trí giường chính thức trong cơ sở dữ liệu.</td><td class="p-1 border font-mono text-slate-500">Chốt giường 100%</td></tr>
+                    <tr class="bg-emerald-50/30"><td class="p-1 border font-mono font-bold text-emerald-800 text-center">BF-9</td><td class="p-1 border">Hệ thống</td><td class="p-1 border">Tự động phát hành Biên lai điện tử và cấp Hợp đồng lưu trú có mã QR xác thực.</td><td class="p-1 border font-mono text-slate-500">Extend: Tải hợp đồng/biên lai</td></tr>
+                    <tr class="bg-purple-50/40"><td class="p-1 border font-mono font-bold text-purple-700 text-center">AF-A</td><td class="p-1 border">Sinh viên</td><td class="p-1 border">Bấm tải bản PDF Biên lai thu tiền và Hợp đồng nội trú về máy.</td><td class="p-1 border font-mono text-purple-700">Lưu trữ văn bản số</td></tr>
+                    <tr class="bg-rose-50/40"><td class="p-1 border font-mono font-bold text-rose-700 text-center">EF-A</td><td class="p-1 border">Hệ thống</td><td class="p-1 border">Quá 72h không nộp tiền: Tự động hủy kết quả, thu hồi giường nhường cho Waitlist.</td><td class="p-1 border font-mono text-rose-700 font-bold">Mã ERR_TIMEOUT, BR-04</td></tr>
+                    <tr class="bg-rose-50/40"><td class="p-1 border font-mono font-bold text-rose-700 text-center">EF-B</td><td class="p-1 border">VNPay</td><td class="p-1 border">Tài khoản không đủ số dư: Báo FAILED, giữ nguyên đồng hồ 72h cho SV thử lại.</td><td class="p-1 border font-mono text-rose-700 font-bold">Mã ERR_INSUFFICIENT</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="border-t border-slate-200 pt-2 flex justify-between items-center text-xs text-slate-500 font-mono">
+        <span>Đề tài KTX Smart Match • Viện Nghiên cứu và Đào tạo Việt - Anh (VNUK)</span>
+        <span>Sinh viên: Châu Tuấn Kiệt • Bùi Đình Hiếu • Lê Hoàng Triều</span>
+    </div>
+</div>
+
+
+<div class="slide">
+    <div class="flex justify-between items-start border-b border-slate-200 pb-2">
+        <div>
+            <span class="text-[10px] font-mono font-bold text-amber-700 bg-amber-50 px-2.5 py-0.5 rounded border border-amber-300 uppercase">
+                USE CASE 6 (QUAN TRỌNG) • WIREFRAME & SEQUENCE • SLIDE 20/22
+            </span>
+            <h2 class="text-xl font-black text-slate-900 mt-0.5">UC-13: Giao Diện Wireframe WF-06 & Sơ Đồ Sequence Khớp 1-1</h2>
+        </div>
+        <span class="text-xs font-mono font-bold bg-amber-100 text-amber-800 px-3 py-1 rounded-full">
+            Đặc Tả Trước, Design Sau
+        </span>
+    </div>
+
+    <div class="grid grid-cols-2 gap-4 my-auto">
+        <!-- Wireframe WF-06 -->
+        <div class="space-y-1.5">
+            <span class="font-bold text-slate-800 text-[10.5px] uppercase font-mono block">1. Bản Vẽ Giao Diện Wireframe WF-06:</span>
+            <div class="blueprint-bg border-2 border-slate-400 rounded-xl p-3 text-[9px] space-y-2">
+                <div class="bg-slate-200 px-2 py-1 rounded flex justify-between items-center">
+                    <span class="font-mono text-slate-600">https://ktx.udn.vn/payment/checkout</span>
+                    <span class="font-bold text-slate-500 font-mono">[WF-06] THANH TOÁN 72H</span>
+                </div>
+                <div class="bg-white p-3 rounded border border-slate-300 grid grid-cols-2 gap-2 text-[8.5px]">
+                    <div class="space-y-1.5">
+                        <div class="p-1.5 bg-rose-50 border border-rose-300 rounded text-center">
+                            <span class="text-[7.5px] text-rose-800 font-bold block">[WF-06-C01] ĐỒNG HỒ 72H</span>
+                            <span class="text-sm font-black text-rose-600 font-mono">68h : 14m : 30s</span>
+                        </div>
+                        <div class="p-1.5 border rounded bg-slate-50">
+                            <span>• Tiền phòng VIP (5th): 7.000.000đ</span><br>
+                            <span>• Tiền cọc (BR-04): 1.000.000đ</span><br>
+                            <strong class="text-indigo-900">Tổng cộng: 8.000.000 VNĐ</strong>
+                        </div>
+                    </div>
+                    <div class="p-1.5 border border-indigo-200 bg-indigo-50/50 rounded text-center space-y-1">
+                        <span class="callout-badge bg-indigo-600 text-white">[WF-06-C03] Mã VNPAY-QR</span>
+                        <div class="w-14 h-14 mx-auto bg-slate-900 text-white rounded flex items-center justify-center font-mono text-[7px]">[QR 8tr]</div>
+                        <button class="w-full py-0.5 bg-emerald-600 text-white font-bold rounded text-[7.5px]">✓ Đã Nộp Tiền (BF-7)</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sequence Diagram UC-13 -->
+        <div class="space-y-1.5">
+            <span class="font-bold text-slate-800 text-[10.5px] uppercase font-mono block">2. Sơ Đồ Tuần Tự (Sequence Diagram Khớp 1-1):</span>
+            <div class="p-3 bg-slate-50 border-2 border-slate-300 rounded-xl font-mono text-[9px] space-y-1 text-slate-700 leading-relaxed">
+                <div><strong>1. (BF-1)</strong> SV -&gt;&gt; UI: Mở màn hình thanh toán tiền phòng & cọc</div>
+                <div><strong>2. (BF-2)</strong> UI -&gt;&gt; Pay: Yêu cầu bảng kê viện phí (7tr phòng + 1tr cọc = 8tr)</div>
+                <div><strong>3. (BF-3)</strong> Pay --&gt;&gt; UI: Kích hoạt đồng hồ đếm ngược 72 giờ (BR-04)</div>
+                <div><strong>4. (BF-4)</strong> SV -&gt;&gt; UI: Chọn phương thức VNPay-QR</div>
+                <div><strong>5. (BF-5)</strong> UI -&gt;&gt; VNPay: Khởi tạo phiên giao dịch (TLS 1.3, NFR-03)</div>
+                <div><strong>6. (BF-6)</strong> SV -&gt;&gt; VNPay: Quét mã QR trên Mobile Banking và xác thực</div>
+                <div class="text-emerald-700 font-bold">alt Thanh toán thành công trong 72h (Ref: BF-7, BR-04)</div>
+                <div class="text-emerald-700 pl-3"><strong>7. (BF-7)</strong> VNPay --&gt;&gt; Pay: Webhook SUCCESS (vnp_ResponseCode = 00)</div>
+                <div class="text-emerald-700 pl-3"><strong>8. (BF-8)</strong> Pay -&gt;&gt; DB: Cập nhật Paid, khóa giường chính thức 100%</div>
+                <div class="text-emerald-700 pl-3"><strong>9. (BF-9)</strong> Pay --&gt;&gt; SV: Cấp Hợp đồng số & Biên lai điện tử QR</div>
+                <div class="text-rose-700 font-bold">else Quá hạn 72h không thanh toán (Ref: EF-A, BR-04)</div>
+                <div class="text-rose-700 pl-3"><strong>10. (EF-A)</strong> Pay -&gt;&gt; DB: Hủy kết quả, thu hồi giường nhường cho Waitlist</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="border-t border-slate-200 pt-2 flex justify-between items-center text-xs text-slate-500 font-mono">
+        <span>Đề tài KTX Smart Match • Viện Nghiên cứu và Đào tạo Việt - Anh (VNUK)</span>
+        <span>Sinh viên: Châu Tuấn Kiệt • Bùi Đình Hiếu • Lê Hoàng Triều</span>
+    </div>
+</div>
+
+
+<div class="slide">
+    <div class="flex justify-between items-start border-b border-slate-200 pb-2">
+        <div>
+            <span class="text-[10px] font-mono font-bold text-indigo-700 bg-indigo-50 px-2.5 py-0.5 rounded border border-indigo-200 uppercase">
+                BẢO CHỨNG CHẤT LƯỢNG • SLIDE 21/22
+            </span>
+            <h2 class="text-xl font-black text-slate-900 mt-0.5">8. Bảng Ma Trận Truy Vết 1-to-1 (Traceability Matrix)</h2>
+        </div>
+        <span class="text-xs font-mono font-bold bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full">
+            Khớp 1-1 Tuyệt Đối: Step ID ↔ Message ↔ Wireframe ↔ BR
+        </span>
+    </div>
+
+    <div class="overflow-x-auto my-auto text-xs">
+        <table class="w-full text-left border border-slate-200 text-[9.5px]">
+            <thead class="bg-slate-100 font-bold text-slate-700 uppercase">
+                <tr>
+                    <th class="p-1.5 border w-12">Mã UC</th>
+                    <th class="p-1.5 border w-24">Bước Đặc Tả (Step ID)</th>
+                    <th class="p-1.5 border">Message Sequence Diagram (1-1)</th>
+                    <th class="p-1.5 border">Mã Thành Phần Wireframe Design</th>
+                    <th class="p-1.5 border">Quy Tắc Nghiệp Vụ (BR)</th>
+                    <th class="p-1.5 border text-center w-20">Kết Quả</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-200">
+                <tr><td class="p-1 border font-mono font-bold text-indigo-700">UC-01</td><td class="p-1 border font-mono">BF-3</td><td class="p-1 border">Message 3 (SV -&gt; UI)</td><td class="p-1 border font-mono font-bold text-indigo-700">WF-01-C03, C04</td><td class="p-1 border font-mono">BR-01 (Đúng trường A)</td><td class="p-1 border text-center text-emerald-700 font-bold">✓ Khớp 1-1</td></tr>
+                <tr><td class="p-1 border font-mono font-bold text-indigo-700">UC-01</td><td class="p-1 border font-mono">EF-B</td><td class="p-1 border">Message 10 (EF-B)</td><td class="p-1 border font-mono font-bold text-indigo-700">WF-01-C07</td><td class="p-1 border font-mono text-rose-600 font-bold">BR-01 (Từ chối sai trường)</td><td class="p-1 border text-center text-emerald-700 font-bold">✓ Khớp 1-1</td></tr>
+                
+                <tr class="bg-slate-50"><td class="p-1 border font-mono font-bold text-amber-800">UC-04</td><td class="p-1 border font-mono">BF-2, BF-3</td><td class="p-1 border">Message 2, 3 (UI -&gt; SV)</td><td class="p-1 border font-mono font-bold text-indigo-700">WF-02-C01</td><td class="p-1 border font-mono">BR-05 (3 Gói phòng)</td><td class="p-1 border text-center text-emerald-700 font-bold">✓ Khớp 1-1</td></tr>
+                <tr class="bg-slate-50"><td class="p-1 border font-mono font-bold text-amber-800">UC-04</td><td class="p-1 border font-mono">BF-5, BF-6</td><td class="p-1 border">Message 5, 6 (SV -&gt; UI)</td><td class="p-1 border font-mono font-bold text-indigo-700">WF-02-C02, C04</td><td class="p-1 border font-mono font-bold text-indigo-700">BR-06 (Top 1.5x) • BR-02 (Kỳ)</td><td class="p-1 border text-center text-emerald-700 font-bold">✓ Khớp 1-1</td></tr>
+
+                <tr><td class="p-1 border font-mono font-bold text-amber-800">UC-05</td><td class="p-1 border font-mono">BF-3, BF-5</td><td class="p-1 border">Message 3, 5 (Scoring Engine)</td><td class="p-1 border font-mono font-bold text-indigo-700">WF-03-C01, C02</td><td class="p-1 border font-mono">BR-06 (Ma trận 2 chiều)</td><td class="p-1 border text-center text-emerald-700 font-bold">✓ Khớp 1-1</td></tr>
+
+                <tr class="bg-slate-50"><td class="p-1 border font-mono font-bold text-amber-800">UC-18</td><td class="p-1 border font-mono">BF-5</td><td class="p-1 border">Message 7, 8 (Admin -&gt; UI)</td><td class="p-1 border font-mono font-bold text-indigo-700">WF-04-C03</td><td class="p-1 border font-mono font-bold text-indigo-700">BR-03 (Business Approve)</td><td class="p-1 border text-center text-emerald-700 font-bold">✓ Khớp 1-1</td></tr>
+
+                <tr><td class="p-1 border font-mono font-bold text-amber-800">UC-24</td><td class="p-1 border font-mono">BF-6, BF-7</td><td class="p-1 border">Message 7, 8 (Gale-Shapley)</td><td class="p-1 border font-mono font-bold text-indigo-700">WF-05-C01, C02</td><td class="p-1 border font-mono font-bold text-indigo-700">BR-05 (100% Giường) • BR-07 (BP=0)</td><td class="p-1 border text-center text-emerald-700 font-bold">✓ Khớp 1-1</td></tr>
+
+                <tr class="bg-slate-50"><td class="p-1 border font-mono font-bold text-amber-800">UC-13</td><td class="p-1 border font-mono">BF-2, BF-3</td><td class="p-1 border">Message 2, 3 (UI &lt;-&gt; Pay)</td><td class="p-1 border font-mono font-bold text-indigo-700">WF-06-C01, C02</td><td class="p-1 border font-mono font-bold text-indigo-700">BR-04 (Hạn 72h & Cọc 1tr)</td><td class="p-1 border text-center text-emerald-700 font-bold">✓ Khớp 1-1</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="p-3 bg-emerald-50 border border-emerald-300 rounded-xl text-[10.5px] text-emerald-950 font-semibold space-y-1">
+        <span class="font-bold block text-emerald-900">NGHIỆM THU NGUYÊN TẮC: "ĐẶC TẢ TRƯỚC, DESIGN SAU"</span>
+        <p>Mọi yếu tố giao diện wireframe (button, input, checkbox, widget, alert) đều được sinh ra từ các bước sự kiện cụ thể trong bảng đặc tả và message tương ứng trong sơ đồ tuần tự.</p>
+    </div>
+
+    <div class="border-t border-slate-200 pt-2 flex justify-between items-center text-xs text-slate-500 font-mono">
+        <span>Đề tài KTX Smart Match • Viện Nghiên cứu và Đào tạo Việt - Anh (VNUK)</span>
+        <span>Sinh viên: Châu Tuấn Kiệt • Bùi Đình Hiếu • Lê Hoàng Triều</span>
+    </div>
+</div>
+
+
+<div class="slide bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 text-white justify-between p-12">
+    <div class="flex justify-between items-center border-b border-indigo-400/30 pb-4">
+        <span class="text-xs font-mono font-bold text-indigo-300 uppercase tracking-widest block">TỔNG KẾT BÁO CÁO • SLIDE 22/22</span>
+        <span class="px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 text-xs font-mono font-bold">
+            HOÀN TẤT BẢO VỆ ĐỒ ÁN
+        </span>
+    </div>
+
+    <div class="space-y-4 my-auto py-6 text-center">
+        <span class="text-5xl block mb-2">🎉</span>
+        <h2 class="text-3xl md:text-4xl font-black text-white tracking-tight">
+            CẢM ƠN THẦY VÀ CÁC BẠN ĐÃ LẮNG NGHE!
+        </h2>
+        <p class="text-slate-300 text-sm max-w-2xl mx-auto leading-relaxed">
+            Hồ sơ đồ án Hệ Thống KTX Smart Match đã hoàn thành 100% các tiêu chuẩn học thuật khắt khe nhất: Chuẩn bản vẽ Draw.io 26 Use Case, Bảng luồng BF/AF/EF (100% điểm), Bộ 3 Diagram (Sequence, Activity, Component) và Thiết kế Wireframe UI đồng bộ 1-1.
+        </p>
+        <div class="pt-4">
+            <span class="px-5 py-2 rounded-xl bg-indigo-600/80 border border-indigo-400 text-white font-mono font-bold text-sm inline-block shadow-lg">
+                NHÓM 3 (VNUK) SẴN SÀNG CHO PHẦN HỎI ĐÁP (Q&A)
+            </span>
+        </div>
+    </div>
+
+    <div class="border-t border-indigo-500/30 pt-4 flex justify-between items-center text-xs text-slate-300 font-mono">
+        <div>
+            <span>Thành viên: Châu Tuấn Kiệt • Bùi Đình Hiếu • Lê Hoàng Triều</span>
+        </div>
+        <div>
+            <span>Viện Nghiên cứu và Đào tạo Việt - Anh (VNUK) • Đại học Đà Nẵng (2026)</span>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

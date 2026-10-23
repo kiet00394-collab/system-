@@ -7,7 +7,7 @@ visually drawn out according to the teacher's rubric:
 2. Activity Diagram (Sơ đồ hoạt động dạng Swimlanes 4 làn)
 3. Component Diagram (Sơ đồ thành phần kiến trúc 5 phân tầng UML 2.0)
 
-Authors: Châu Tuấn Kiệt • Bùi Đình Hiếu • Lê Hoàng Triệu (Nhóm 3)
+Authors: Châu Tuấn Kiệt • Bùi Đình Hiếu • Lê Hoàng Triều (Nhóm 3)
 Institution: Viện Nghiên cứu và Đào tạo Việt - Anh (VNUK) • Đại học Đà Nẵng
 """
 
@@ -134,7 +134,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         </div>
         <div class="text-right">
             <span class="text-[10.5px] font-mono font-bold bg-indigo-50 text-indigo-800 px-3 py-1 rounded-full border border-indigo-200 block">
-                NHÓM 3 (VNUK): Kiệt • Hiếu • Triệu
+                NHÓM 3 (VNUK): Kiệt • Hiếu • Triều
             </span>
             <span class="text-[9.5px] text-slate-500 font-mono mt-0.5 block">Học phần: Phân tích & Thiết kế HT</span>
         </div>
@@ -334,7 +334,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         </div>
         <div class="text-right">
             <span class="text-[10.5px] font-mono font-bold bg-emerald-50 text-emerald-800 px-3 py-1 rounded-full border border-emerald-200 block">
-                NHÓM 3 (VNUK): Kiệt • Hiếu • Triệu
+                NHÓM 3 (VNUK): Kiệt • Hiếu • Triều
             </span>
             <span class="text-[9.5px] text-slate-500 font-mono mt-0.5 block">Học phần: Phân tích & Thiết kế HT</span>
         </div>
@@ -524,7 +524,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         </div>
         <div class="text-right">
             <span class="text-[10.5px] font-mono font-bold bg-sky-50 text-sky-800 px-3 py-1 rounded-full border border-sky-200 block">
-                NHÓM 3 (VNUK): Kiệt • Hiếu • Triệu
+                NHÓM 3 (VNUK): Kiệt • Hiếu • Triều
             </span>
             <span class="text-[9.5px] text-slate-500 font-mono mt-0.5 block">Học phần: Phân tích & Thiết kế HT</span>
         </div>

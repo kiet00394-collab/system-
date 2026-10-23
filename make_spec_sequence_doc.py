@@ -117,7 +117,7 @@ def build_document():
     tbl_meta.alignment = WD_TABLE_ALIGNMENT.CENTER
     meta_info = [
         ("Đề tài dự án:", "Hệ thống Quản trị & Ghép Bạn Cùng Phòng KTX (KTX Smart Match)"),
-        ("Nhóm sinh viên thực hiện:", "Nhóm 3 (Châu Tuấn Kiệt, Bùi Đình Hiếu, Lê Hoàng Triệu)"),
+        ("Nhóm sinh viên thực hiện:", "Nhóm 3 (Châu Tuấn Kiệt, Bùi Đình Hiếu, Lê Hoàng Triều)"),
         ("Căn cứ thiết kế:", "Slide Use Case Specification + File KTX_Smart_Match_UseCase.drawio"),
         ("Nội dung báo cáo:", "Business Rules, NFRs, Bảng 26 Use Cases, Đặc tả chi tiết, Sequence Diagram, Wireframe")
     ]
