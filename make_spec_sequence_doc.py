@@ -764,6 +764,29 @@ def build_document():
                 run.font.bold = True
                 run.font.color.rgb = RGBColor(0x16, 0x65, 0x34)
 
+    # ==================== PHẦN V: BỘ DIAGRAM (SEQUENCE, ACTIVITY, COMPONENT) ====================
+    doc.add_page_break()
+    add_heading_1(doc, "PHẦN V: BỘ DIAGRAM THEO CHỈ ĐẠO CỦA GIẢNG VIÊN (SEQUENCE, ACTIVITY, COMPONENT)")
+    add_body(doc, "Căn cứ theo ghi chú trên bảng lớp của Giảng viên: 'Bộ diagram -> Sequence (1), Activity (2), Component (3)', hệ thống KTX Smart Match được phân tích và thiết kế hoàn chỉnh qua ba tầng biểu đồ chuẩn mực:")
+
+    add_heading_2(doc, "1. Biểu Đồ Tuần Tự (Sequence Diagram - 1)")
+    add_body(doc, "Toàn bộ 6 Use Case (UC-01, UC-04, UC-05, UC-13, UC-18, UC-24) đã được mô hình hóa bằng Sequence Diagram chi tiết ở Phần III, đánh số thứ tự thông điệp khớp 1-to-1 với từng Step ID trong Bảng Three Types of Flows (BF-1..n, AF-A..n, EF-A..n), có đầy đủ khối điều kiện rẽ nhánh alt và tùy chọn opt.")
+
+    add_heading_2(doc, "2. Biểu Đồ Hoạt Động Tổng Thể (Activity Diagram - 2)")
+    add_body(doc, "Activity Diagram thể hiện luồng nghiệp vụ end-to-end xuyên suốt toàn bộ vòng đời đăng ký và phân phòng KTX:")
+    add_body(doc, "• Bước 1 (Khởi tạo): Sinh viên đăng nhập qua cổng trường A (BR-01) -> Mở form chọn loại phòng 2/4/6 người (BR-05) -> Khai báo 8 chỉ số thói quen -> Chọn tiêu chí top x1.5 (BR-06) -> Tích cam kết tối thiểu 1 kỳ (BR-02) -> Nộp đơn (UC-04).")
+    add_body(doc, "• Bước 2 (Thẩm định Nghiệp vụ): Hồ sơ ở trạng thái Pending_Approval -> Cán bộ KTX thẩm định kỷ luật & quỹ phòng (UC-18) -> Nếu không đạt: Từ chối đơn và gửi email lý do -> Nếu đạt chuẩn: Phê duyệt Business Approve (BR-03), chuyển sang trạng thái Approved_For_Matching.")
+    add_body(doc, "• Bước 3 (Ghép phòng Tự động): Động cơ Gale-Shapley tính ma trận tương thích 2 chiều -> Chạy thuật toán Gale-Shapley (< 1.0s, NFR-01) -> Gộp cặp lấp đầy 100% giường (BR-05) -> Kiểm chứng triệt tiêu cặp chặn Blocking Pairs = 0 (BR-07, NFR-02) -> Lưu kết quả và công bố.")
+    add_body(doc, "• Bước 4 (Thanh toán 72h): Hệ thống kích hoạt đồng hồ đếm ngược 72 giờ (BR-04) -> Sinh viên quét mã VNPay-QR nộp 8.000.000 VNĐ (7tr tiền phòng + 1tr cọc) (UC-13) -> Nếu thành công: Cấp hợp đồng số & mã thẻ phòng -> Nếu quá hạn 72h: Tự động hủy kết quả, chuyển sinh viên sang danh sách chờ Waitlist (UC-26).")
+
+    add_heading_2(doc, "3. Biểu Đồ Thành Phần Hệ Thống (Component Diagram - 3)")
+    add_body(doc, "Component Diagram mô tả kiến trúc phân rã 5 tầng module phần mềm và giao thức kết nối:")
+    add_body(doc, "• Tầng 1 (Presentation Layer): Student Web Portal (giao diện sinh viên Next.js/Tailwind) & Admin Dashboard (giao diện cán bộ thẩm định, điều hành).")
+    add_body(doc, "• Tầng 2 (Security & Gateway Component): API Gateway, Authentication Service (JWT / HttpOnly Cookie / RBAC), School A Connector (kết nối LDAP/REST đối soát MSSV theo BR-01).")
+    add_body(doc, "• Tầng 3 (Core Business Services): Application & Approval Service (thẩm định đơn BR-02, BR-03), Scoring & Ranking Service (ma trận 2 chiều BR-06), Gale-Shapley Matching Engine (BP=0, BR-07, NFR-01), Room Occupancy Optimizer (lấp đầy 100% giường BR-05), Timer & Cleanup Scheduler (đếm ngược 72h BR-04, UC-26).")
+    add_body(doc, "• Tầng 4 (External Integration Component): VNPay Payment Adapter (tạo QR động, xử lý Webhook IPN, đối soát chữ ký băm SHA-256 theo NFR-03), E-Contract & Receipt Generator (sinh hợp đồng điện tử & biên lai có mã QR).")
+    add_body(doc, "• Tầng 5 (Persistence Layer): Relational Database KTX (PostgreSQL/SQLite lưu sinh viên, phòng, hồ sơ, giao dịch) & Audit Log (lưu vết bảo mật và chứng chỉ cặp chặn).")
+
     # Save to Downloads and docs/
     p_downloads = r"C:\Users\LENOVO\Downloads\Tai_Lieu_Dac_Ta_UseCase_Va_Sequence_Diagram_KTX.docx"
     p_docs = os.path.join(os.path.dirname(__file__), "docs", "Tai_Lieu_Dac_Ta_UseCase_Va_Sequence_Diagram_KTX.docx")

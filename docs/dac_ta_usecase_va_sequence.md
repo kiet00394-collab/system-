@@ -487,7 +487,131 @@ sequenceDiagram
 
 ---
 
-## 10. THIẾT KẾ WIREFRAME UI KHỚP 1-1 VỚI BẢNG ĐẶC TẢ
+## 10. BỘ DIAGRAM HOÀN CHỈNH THEO CHỈ ĐẠO CỦA GIẢNG VIÊN (SEQUENCE, ACTIVITY, COMPONENT)
+
+> Căn cứ theo ghi chú trên bảng của Giảng viên:  
+> **`Bộ diagram -> Sequence (1) -> Activity (2) -> Component (3)`**  
+> Dưới đây là bộ ba biểu đồ phân tích & thiết kế hệ thống tương ứng:
+
+### 10.1 Biểu Đồ Tuần Tự (Sequence Diagram - 1)
+*(Đã được đặc tả chi tiết 1-to-1 theo từng `Step ID` ở các Mục 4.3, 5.3, 6.3, 7.3, 8.3, 9.3 cho cả 6 Use Case).*
+
+---
+
+### 10.2 Biểu Đồ Hoạt Động Tổng Thể (Activity Diagram - 2)
+Biểu đồ hoạt động mô tả toàn bộ luồng quy trình nghiệp vụ nội trú từ lúc sinh viên đăng nhập, nộp đơn, thẩm định, chạy Gale-Shapley, đến khi hoàn tất thanh toán 72 giờ và bàn giao phòng:
+
+```mermaid
+stateDiagram-v2
+    [*] --> DangNhap: 1. SV Đăng nhập Cổng KTX (UC-01)
+    DangNhap --> ChonPhongVaKhaiBao: Xác thực thành công (BR-01)
+    
+    state ChonPhongVaKhaiBao {
+        [*] --> ChonLoaiPhong: Chọn loại phòng 2, 4, 6 người (BR-05)
+        ChonLoaiPhong --> KhaiBaoThoiQuen: Khai báo 8 chỉ số thói quen
+        KhaiBaoThoiQuen --> ChonTop1: Chọn tiêu chí ưu tiên 1.5x (BR-06)
+        ChonTop1 --> TichCamKetKy: Bắt buộc cam kết >= 1 kỳ (BR-02)
+        TichCamKetKy --> NopDon: Nộp đơn KTX (UC-04)
+        NopDon --> [*]
+    }
+
+    ChonPhongVaKhaiBao --> ThamDinhHoSo: Hồ sơ chuyển trạng thái Pending_Approval
+    
+    state ThamDinhHoSo {
+        [*] --> KiemTraHoSo: Cán bộ KTX thẩm định (MSSV, kỷ luật, diện chính sách)
+        KiemTraHoSo --> BusinessApprove: Đạt điều kiện (BR-01, BR-02, BR-03)
+        KiemTraHoSo --> TuChoi: Vi phạm kỷ luật / nợ phí (BR-03)
+        TuChoi --> [*]
+        BusinessApprove --> [*]
+    }
+
+    TuChoi --> ThongBaoTuChoi: Gửi thông báo kèm lý do từ chối
+    ThongBaoTuChoi --> [*]
+
+    ThamDinhHoSo --> GhepPhongGaleShapley: Hồ sơ chuyển trạng thái Approved_For_Matching (UC-24)
+    
+    state GhepPhongGaleShapley {
+        [*] --> TinhDiemTuongThich: Tính ma trận tương thích 2 chiều (BR-06)
+        TinhDiemTuongThich --> ThuatToanGS: Khởi chạy Gale-Shapley (< 1s, NFR-01)
+        ThuatToanGS --> LopDayPhong: Gộp cặp lấp đầy 100% giường (BR-05)
+        LopDayPhong --> KiemTraCacCapChan: Kiểm chứng Blocking Pairs = 0 (BR-07, NFR-02)
+        KiemTraCacCapChan --> [*]
+    }
+
+    GhepPhongGaleShapley --> CongBoKetQua: Công bố danh sách & kích hoạt đồng hồ 72h (BR-04)
+
+    state "Thời hạn 72 Giờ Giữ Chỗ (BR-04)" as ThoiHan72h {
+        CongBoKetQua --> ThanhToanVNPay: SV quét mã VNPAY-QR nộp tiền (UC-13)
+        ThanhToanVNPay --> NhanPhongChinhThuc: Thanh toán thành công 8.000.000 VNĐ
+        ThanhToanVNPay --> QuaHan72h: Hết 72h không thanh toán
+        QuaHan72h --> ChuyenVaoWaitlist: Tự động hủy chỗ, chuyển SV sang Waitlist (UC-26)
+    }
+
+    NhanPhongChinhThuc --> BanGiaoGiuong: Cấp mã thẻ phòng, hợp đồng & biên lai QR (BF-9)
+    ChuyenVaoWaitlist --> [*]
+    BanGiaoGiuong --> [*]
+```
+
+---
+
+### 10.3 Biểu Đồ Thành Phần Hệ Thống (Component Diagram - 3)
+Biểu đồ thành phần mô tả kiến trúc phân rã module phần mềm, giao thức tích hợp bên ngoài và tầng lưu trữ dữ liệu của hệ thống KTX Smart Match:
+
+```mermaid
+graph TD
+    subgraph ClientLayer ["1. Presentation Layer (Tầng Giao Diện Người Dùng)"]
+        UI_Student["💻 Student Web Portal<br>(Next.js / Tailwind CSS / Mobile Friendly)"]
+        UI_Admin["🖥️ Admin / Staff Dashboard<br>(Quản trị, Thẩm định & Giám sát Hệ thống)"]
+    end
+
+    subgraph GatewayAuth ["2. Security & Gateway Component"]
+        APIGateway["🛡️ API Gateway & Session Guard<br>(Reverse Proxy / Rate Limiting)"]
+        AuthService["🔑 Authentication Component<br>(JWT / HttpOnly Cookie / Role RBAC)"]
+        SchoolA_Connector["🏫 School A LDAP / REST Connector<br>(Đối soát MSSV & Tình trạng SV BR-01)"]
+    end
+
+    subgraph CoreBusiness ["3. Core Business Services (Tầng Nghiệp Vụ Cốt Lõi)"]
+        AppService["📋 Application & Approval Component<br>(Thẩm định đơn, Xét duyệt BR-02, BR-03)"]
+        ScoringService["📊 Scoring & Ranking Component<br>(Tính ma trận tương thích 2 chiều, Top 1.5x BR-06)"]
+        GSEngine["🧠 Gale-Shapley Matching Engine<br>(Thuật toán ghép cặp ổn định BP=0, BR-07, NFR-01, NFR-02)"]
+        RoomOptimizer["🏢 Room Occupancy Optimizer<br>(Tối ưu hóa lấp đầy 100% giường, BR-05, NFR-05)"]
+        SchedulerService["⏱️ Timer & Cleanup Scheduler<br>(Đếm ngược 72h, Tự động hủy & Waitlist, BR-04, UC-26)"]
+    end
+
+    subgraph IntegrationLayer ["4. External Integration Component"]
+        VNPayAdapter["💳 VNPay Payment Adapter<br>(Tạo QR động, Webhook IPN, Đối soát SHA-256, NFR-03)"]
+        ContractGenerator["📄 E-Contract & Receipt Engine<br>(Tự động sinh Hợp đồng số & Biên lai QR)"]
+    end
+
+    subgraph DataLayer ["5. Persistence Layer (Tầng Lưu Trữ Dữ Liệu)"]
+        KTX_DB[("🗄️ Relational Database (PostgreSQL / SQLite)<br>Sinh viên, Hồ sơ, Phòng KTX, Giao dịch")]
+        AuditLog[("📜 Audit Trail & Security Log<br>Lịch sử thẩm định, Giao dịch, Đối soát cặp chặn")]
+    end
+
+    UI_Student --> APIGateway
+    UI_Admin --> APIGateway
+    APIGateway --> AuthService
+    AuthService --> SchoolA_Connector
+    APIGateway --> AppService
+    APIGateway --> ScoringService
+    AppService --> SchedulerService
+    SchedulerService --> GSEngine
+    GSEngine --> ScoringService
+    GSEngine --> RoomOptimizer
+    APIGateway --> VNPayAdapter
+    VNPayAdapter --> ContractGenerator
+    
+    AppService --> KTX_DB
+    GSEngine --> KTX_DB
+    RoomOptimizer --> KTX_DB
+    VNPayAdapter --> KTX_DB
+    AuthService --> AuditLog
+    SchedulerService --> AuditLog
+```
+
+---
+
+## 11. THIẾT KẾ WIREFRAME UI KHỚP 1-1 VỚI BẢNG ĐẶC TẢ
 
 > *"Thầy lấy ra 1 use case rồi so với design coi có khớp nhau không. Làm design có gì thì đặc tả phải có cái nớ. Đặc tả trước, design sau."* (Lời dặn của Giảng viên)
 

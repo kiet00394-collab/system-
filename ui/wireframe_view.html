@@ -628,6 +628,142 @@ sequenceDiagram
                 </div>
             </div>
 
+            
+            <!-- ==================== BỘ DIAGRAM: ACTIVITY & COMPONENT ==================== -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <!-- Activity Diagram (2) -->
+                <div class="bg-white border border-slate-300 rounded-2xl p-6 shadow-sm space-y-4">
+                    <div class="border-b border-slate-200 pb-3 flex justify-between items-center">
+                        <div class="flex items-center gap-2">
+                            <span class="w-8 h-8 rounded-lg bg-indigo-100 text-indigo-700 flex items-center justify-center font-bold text-sm">🔄</span>
+                            <div>
+                                <h3 class="font-extrabold text-slate-900 text-sm">BIỂU ĐỒ HOẠT ĐỘNG (ACTIVITY DIAGRAM - 2)</h3>
+                                <p class="text-[11px] text-slate-500">Quy trình nghiệp vụ phân phòng KTX Smart Match từ A-Z</p>
+                            </div>
+                        </div>
+                        <span class="px-2.5 py-1 bg-indigo-50 text-indigo-700 rounded text-[10px] font-bold">Chuẩn UML</span>
+                    </div>
+                    <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 overflow-x-auto">
+                        <pre class="mermaid text-center">
+stateDiagram-v2
+    [*] --> DangNhap: 1. Đăng nhập (UC-01)
+    DangNhap --> ChonPhong: Hợp lệ (BR-01)
+    
+    state ChonPhong {
+        [*] --> LoaiPhong: Chọn 2, 4, 6 người
+        LoaiPhong --> ThoiQuen: 8 Tiêu chí
+        ThoiQuen --> Top1: Top 1.5x (BR-06)
+        Top1 --> CamKet: Cam kết >= 1 kỳ (BR-02)
+        CamKet --> NopDon: Nộp đơn KTX (UC-04)
+        NopDon --> [*]
+    }
+
+    ChonPhong --> ThamDinh: Trạng thái Pending
+    
+    state ThamDinh {
+        [*] --> KiemTra: Cán bộ KTX duyệt (UC-18)
+        KiemTra --> Approve: Đạt chuẩn (BR-01, BR-02, BR-03)
+        KiemTra --> Reject: Vi phạm / nợ phí (BR-03)
+        Reject --> [*]
+        Approve --> [*]
+    }
+
+    Reject --> ThongBaoReject: Email từ chối
+    ThongBaoReject --> [*]
+
+    ThamDinh --> GaleShapley: Trạng thái Approved (UC-24)
+    
+    state GaleShapley {
+        [*] --> MaTran: Ma trận 2 chiều (BR-06)
+        MaTran --> Matching: Gale-Shapley (< 1s, NFR-01)
+        Matching --> LapDay: Lấp đầy 100% giường (BR-05)
+        LapDay --> KiemTraBP: Blocking Pairs = 0 (BR-07, NFR-02)
+        KiemTraBP --> [*]
+    }
+
+    GaleShapley --> CongBo: Kích hoạt hạn 72h (BR-04)
+
+    state "Hạn 72 Giờ (BR-04)" as ThoiHan72h {
+        CongBo --> VNPay: SV quét VNPay-QR (UC-13)
+        VNPay --> ThanhCong: Đóng 8.000.000đ
+        VNPay --> QuaHan: Quá 72h chưa nộp
+        QuaHan --> Waitlist: Chuyển sang Waitlist (UC-26)
+    }
+
+    ThanhCong --> BanGiao: Cấp thẻ phòng & Hợp đồng QR
+    Waitlist --> [*]
+    BanGiao --> [*]
+                        </pre>
+                    </div>
+                </div>
+
+                <!-- Component Diagram (3) -->
+                <div class="bg-white border border-slate-300 rounded-2xl p-6 shadow-sm space-y-4">
+                    <div class="border-b border-slate-200 pb-3 flex justify-between items-center">
+                        <div class="flex items-center gap-2">
+                            <span class="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-sm">🧩</span>
+                            <div>
+                                <h3 class="font-extrabold text-slate-900 text-sm">BIỂU ĐỒ THÀNH PHẦN (COMPONENT DIAGRAM - 3)</h3>
+                                <p class="text-[11px] text-slate-500">Kiến trúc 5 phân tầng module phần mềm & giao thức</p>
+                            </div>
+                        </div>
+                        <span class="px-2.5 py-1 bg-emerald-50 text-emerald-700 rounded text-[10px] font-bold">Chuẩn UML</span>
+                    </div>
+                    <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 overflow-x-auto">
+                        <pre class="mermaid text-center">
+graph TD
+    subgraph Layer1 ["1. Presentation Layer"]
+        UI_SV["💻 Student Portal (Next.js/Tailwind)"]
+        UI_Ad["🖥️ Admin Dashboard (Cán bộ KTX)"]
+    end
+
+    subgraph Layer2 ["2. Security & Gateway"]
+        GW["🛡️ API Gateway & Session Guard"]
+        Auth["🔑 Auth Service (JWT / HttpOnly)"]
+        Connector["🏫 School A LDAP Connector (BR-01)"]
+    end
+
+    subgraph Layer3 ["3. Core Business Services"]
+        AppSvc["📋 Application & Approval (BR-02, BR-03)"]
+        Scorer["📊 Scoring Engine (Top 1.5x, BR-06)"]
+        GS["🧠 Gale-Shapley Matching (BP=0, BR-07, NFR-01)"]
+        Occupancy["🏢 Room Occupancy Optimizer (BR-05)"]
+        Timer["⏱️ 72h Timer & Waitlist Cleanup (BR-04, UC-26)"]
+    end
+
+    subgraph Layer4 ["4. Integration Layer"]
+        VNPayAd["💳 VNPay QR Adapter (SHA-256, NFR-03)"]
+        Contract["📄 E-Contract & Receipt QR Generator"]
+    end
+
+    subgraph Layer5 ["5. Persistence Layer"]
+        DB[("🗄️ Database (Sinh viên, Phòng, Hồ sơ)")]
+        Log[("📜 Audit Log & Cặp chặn Proof")]
+    end
+
+    UI_SV --> GW
+    UI_Ad --> GW
+    GW --> Auth
+    Auth --> Connector
+    GW --> AppSvc
+    GW --> Scorer
+    AppSvc --> Timer
+    Timer --> GS
+    GS --> Scorer
+    GS --> Occupancy
+    GW --> VNPayAd
+    VNPayAd --> Contract
+    AppSvc --> DB
+    GS --> DB
+    Occupancy --> DB
+    VNPayAd --> DB
+    Auth --> Log
+    Timer --> Log
+                        </pre>
+                    </div>
+                </div>
+            </div>
+
             <!-- BẢNG TỔNG HỢP ÁNH XẠ 1-1 VỚI WIREFRAME -->
             <div class="bg-white border border-slate-300 rounded-2xl p-6 shadow-sm space-y-4">
                 <div class="flex items-center justify-between border-b border-slate-200 pb-3">
