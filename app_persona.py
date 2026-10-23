@@ -436,6 +436,32 @@ def download_slides_pdf():
         )
     raise HTTPException(status_code=404, detail="File Slide thuyết trình PDF chưa được tạo.")
 
+@app.get("/download-3-diagrams-pdf")
+def download_3_diagrams_pdf():
+    pdf_path = os.path.join(os.path.dirname(__file__), "docs", "Bo_3_Diagram_KTX_Smart_Match_VNUK.pdf")
+    if os.path.exists(pdf_path):
+        return FileResponse(
+            pdf_path,
+            media_type="application/pdf",
+            filename="Bo_3_Diagram_KTX_Smart_Match_VNUK.pdf"
+        )
+    downloads_path = os.path.join(r"C:\Users\LENOVO\Downloads", "Bo_3_Diagram_KTX_Smart_Match_VNUK.pdf")
+    if os.path.exists(downloads_path):
+        return FileResponse(
+            downloads_path,
+            media_type="application/pdf",
+            filename="Bo_3_Diagram_KTX_Smart_Match_VNUK.pdf"
+        )
+    raise HTTPException(status_code=404, detail="File Bo_3_Diagram_KTX_Smart_Match_VNUK.pdf chưa được tạo.")
+
+@app.get("/diagrams-3", response_class=HTMLResponse)
+def view_3_diagrams_page():
+    html_path = os.path.join(os.path.dirname(__file__), "ui", "three_diagrams_export.html")
+    if os.path.exists(html_path):
+        with open(html_path, "r", encoding="utf-8") as f:
+            return HTMLResponse(content=f.read())
+    raise HTTPException(status_code=404, detail="File three_diagrams_export.html chưa được tạo.")
+
 @app.get("/download-wireframe-pdf")
 def download_wireframe_pdf():
     pdf_path = os.path.join(os.path.dirname(__file__), "docs", "Tai_Lieu_Wireframe_Chi_Tiet_He_Thong_KTX.pdf")
