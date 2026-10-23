@@ -63,6 +63,9 @@
                 <a href="/download-spec-docx" class="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold shadow transition flex items-center gap-1">
                     📄 Tải Word (.docx)
                 </a>
+                <a href="/download-usecase-drawio" class="px-3 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold shadow transition flex items-center gap-1">
+                    📊 Tải Draw.io
+                </a>
             </div>
         </div>
 
@@ -75,16 +78,16 @@
                 <span>📐 WF-01</span> Đăng nhập (UC-01)
             </button>
             <button onclick="switchTab('tab-wf2')" id="btn-tab-wf2" class="tab-btn px-3 py-1.5 rounded-lg bg-slate-200 text-slate-700 hover:bg-slate-300 transition flex items-center gap-1">
-                <span>📐 WF-02</span> Đăng ký & Khảo sát (UC-02)
+                <span>📐 WF-02</span> Chọn phòng & Nộp đơn (UC-04)
             </button>
             <button onclick="switchTab('tab-wf3')" id="btn-tab-wf3" class="tab-btn px-3 py-1.5 rounded-lg bg-slate-200 text-slate-700 hover:bg-slate-300 transition flex items-center gap-1">
-                <span>📐 WF-03</span> Thẩm định Duyệt đơn (UC-03)
+                <span>📐 WF-03</span> Thẩm định Duyệt đơn (UC-18)
             </button>
             <button onclick="switchTab('tab-wf4')" id="btn-tab-wf4" class="tab-btn px-3 py-1.5 rounded-lg bg-slate-200 text-slate-700 hover:bg-slate-300 transition flex items-center gap-1">
-                <span>📐 WF-04</span> Ghép phòng Gale-Shapley (UC-04)
+                <span>📐 WF-04</span> Ghép phòng Gale-Shapley (UC-24)
             </button>
             <button onclick="switchTab('tab-wf5')" id="btn-tab-wf5" class="tab-btn px-3 py-1.5 rounded-lg bg-slate-200 text-slate-700 hover:bg-slate-300 transition flex items-center gap-1">
-                <span>📐 WF-05</span> Thanh toán & Cọc 72h (UC-05)
+                <span>📐 WF-05</span> Thanh toán & Cọc 72h (UC-13)
             </button>
         </div>
     </header>
@@ -323,7 +326,7 @@ sequenceDiagram
                 <div class="border-b border-slate-200 pb-3 flex flex-wrap justify-between items-center gap-2">
                     <div>
                         <span class="text-[11px] font-mono font-bold px-2.5 py-1 rounded bg-amber-100 text-amber-800 uppercase">Use Case Nghiệp Vụ Quan Trọng</span>
-                        <h3 class="text-lg font-bold text-slate-900 mt-1">UC-02: Đăng ký Phòng, Chọn Loại phòng & Khai báo Thói quen</h3>
+                        <h3 class="text-lg font-bold text-slate-900 mt-1">UC-04: Chọn Loại Phòng, Tiện Ích & Nộp Đơn KTX (Ràng buộc BR-02, BR-05, BR-06)</h3>
                         <p class="text-xs text-slate-500">Ràng buộc: Cam kết &ge; 1 Kỳ (BR-02), Ưu tiên 1.5x (BR-06)</p>
                     </div>
                     <span class="px-3 py-1 bg-emerald-50 text-emerald-700 border border-emerald-200 rounded-lg text-xs font-bold">
@@ -402,7 +405,7 @@ sequenceDiagram
                 <div class="border-b border-slate-200 pb-3 flex flex-wrap justify-between items-center gap-2">
                     <div>
                         <span class="text-[11px] font-mono font-bold px-2.5 py-1 rounded bg-amber-100 text-amber-800 uppercase">Use Case Nghiệp Vụ Quan Trọng</span>
-                        <h3 class="text-lg font-bold text-slate-900 mt-1">UC-03: Thẩm định & Phê duyệt Nghiệp vụ (Business Approve)</h3>
+                        <h3 class="text-lg font-bold text-slate-900 mt-1">UC-18: Thẩm Định & Phê Duyệt Hồ Sơ KTX (Business Approve - BR-01, BR-02, BR-03)</h3>
                         <p class="text-xs text-slate-500">Tác nhân: Hệ thống Quản trị / Cán bộ KTX (Chính) | Quy định: BR-01, BR-02, BR-03</p>
                     </div>
                     <span class="px-3 py-1 bg-emerald-50 text-emerald-700 border border-emerald-200 rounded-lg text-xs font-bold">
@@ -477,7 +480,7 @@ sequenceDiagram
                 <div class="border-b border-slate-200 pb-3 flex flex-wrap justify-between items-center gap-2">
                     <div>
                         <span class="text-[11px] font-mono font-bold px-2.5 py-1 rounded bg-amber-100 text-amber-800 uppercase">Use Case Nghiệp Vụ Quan Trọng</span>
-                        <h3 class="text-lg font-bold text-slate-900 mt-1">UC-04: Ghép phòng Tự động Gale-Shapley & Tối ưu Lấp đầy Phòng</h3>
+                        <h3 class="text-lg font-bold text-slate-900 mt-1">UC-24: Ghép Phòng Tự Động Gale-Shapley & Tối Ưu Lấp Đầy Phòng (BR-05, BR-07)</h3>
                         <p class="text-xs text-slate-500">Ràng buộc: Triệt tiêu Cặp chặn = 0 (BR-07, NFR-02) | Lấp đầy 100% (BR-05) | Thời gian &lt; 1s (NFR-01)</p>
                     </div>
                     <span class="px-3 py-1 bg-emerald-50 text-emerald-700 border border-emerald-200 rounded-lg text-xs font-bold">
@@ -546,7 +549,7 @@ sequenceDiagram
                 <div class="border-b border-slate-200 pb-3 flex flex-wrap justify-between items-center gap-2">
                     <div>
                         <span class="text-[11px] font-mono font-bold px-2.5 py-1 rounded bg-amber-100 text-amber-800 uppercase">Use Case Nghiệp Vụ Quan Trọng</span>
-                        <h3 class="text-lg font-bold text-slate-900 mt-1">UC-05: Thanh toán Tiền phòng Học kỳ 1 & Đặt cọc trong Hạn 72 Giờ</h3>
+                        <h3 class="text-lg font-bold text-slate-900 mt-1">UC-13: Thanh Toán Tiền Phòng & Đặt Cọc 72 Giờ Qua VNPay (BR-04, NFR-03)</h3>
                         <p class="text-xs text-slate-500">Tác nhân: Sinh viên (Chính) | Cổng VNPay / Ngân hàng (Hỗ trợ) | Ràng buộc: BR-04, NFR-03</p>
                     </div>
                     <span class="px-3 py-1 bg-emerald-50 text-emerald-700 border border-emerald-200 rounded-lg text-xs font-bold">

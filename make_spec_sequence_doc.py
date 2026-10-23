@@ -1,3 +1,13 @@
+# -*- coding: utf-8 -*-
+"""
+make_spec_sequence_doc.py
+Generates the official Word document (.docx) strictly adhering to:
+1. Google Slide Use Case Specification template
+2. KTX_Smart_Match_UseCase.drawio (26 Use Cases, 8 Actors)
+3. Whiteboard teacher rules
+Outputs to Downloads and docs/
+"""
+
 import os
 import sys
 import docx
@@ -15,7 +25,7 @@ def set_cell_background(cell, hex_color):
     shd.set(qn('w:fill'), hex_color)
     tcPr.append(shd)
 
-def set_cell_margins(cell, top=100, bottom=100, left=140, right=140):
+def set_cell_margins(cell, top=80, bottom=80, left=100, right=100):
     tcPr = cell._tc.get_or_add_tcPr()
     tcMar = OxmlElement('w:tcMar')
     for m, val in [('top', top), ('bottom', bottom), ('left', left), ('right', right)]:
@@ -31,16 +41,16 @@ def set_cell_border(cell, **kwargs):
     for edge in ('top', 'left', 'bottom', 'right', 'insideH', 'insideV'):
         edge_data = kwargs.get(edge)
         if edge_data:
-            tag = 'w:{}'.format(edge)
+            tag = f'w:{edge}'
             element = OxmlElement(tag)
             element.set(qn('w:val'), edge_data.get('val', 'single'))
             element.set(qn('w:sz'), str(edge_data.get('sz', 4)))
             element.set(qn('w:space'), '0')
-            element.set(qn('w:color'), edge_data.get('color', 'CCCCCC'))
+            element.set(qn('w:color'), edge_data.get('color', 'D1D5DB'))
             tcBorders.append(element)
     tcPr.append(tcBorders)
 
-def add_styled_paragraph(doc, text="", style='Normal', space_before=0, space_after=5, line_spacing=1.15, align=WD_ALIGN_PARAGRAPH.LEFT):
+def add_styled_paragraph(doc, text="", style='Normal', space_before=0, space_after=4, line_spacing=1.15, align=WD_ALIGN_PARAGRAPH.LEFT):
     p = doc.add_paragraph(text, style=style)
     p.alignment = align
     p.paragraph_format.space_before = Pt(space_before)
@@ -49,10 +59,10 @@ def add_styled_paragraph(doc, text="", style='Normal', space_before=0, space_aft
     return p
 
 def add_heading_1(doc, text):
-    p = add_styled_paragraph(doc, space_before=14, space_after=5)
+    p = add_styled_paragraph(doc, space_before=14, space_after=4)
     run = p.add_run(text)
     run.font.name = 'Times New Roman'
-    run.font.size = Pt(13.5)
+    run.font.size = Pt(13)
     run.font.bold = True
     run.font.color.rgb = RGBColor(0x1B, 0x36, 0x5D)
     return p
@@ -61,48 +71,19 @@ def add_heading_2(doc, text):
     p = add_styled_paragraph(doc, space_before=9, space_after=3)
     run = p.add_run(text)
     run.font.name = 'Times New Roman'
-    run.font.size = Pt(12)
+    run.font.size = Pt(11.5)
     run.font.bold = True
     run.font.color.rgb = RGBColor(0x2C, 0x52, 0x82)
-    return p
-
-def add_heading_3(doc, text):
-    p = add_styled_paragraph(doc, space_before=6, space_after=2)
-    run = p.add_run(text)
-    run.font.name = 'Times New Roman'
-    run.font.size = Pt(11)
-    run.font.bold = True
-    run.font.color.rgb = RGBColor(0x33, 0x41, 0x55)
     return p
 
 def add_body(doc, text, bold=False, italic=False):
     p = add_styled_paragraph(doc, space_before=0, space_after=4, line_spacing=1.15)
     run = p.add_run(text)
     run.font.name = 'Times New Roman'
-    run.font.size = Pt(11)
+    run.font.size = Pt(10.5)
     run.font.bold = bold
     run.font.italic = italic
     run.font.color.rgb = RGBColor(0x1F, 0x29, 0x37)
-    return p
-
-def add_bullet(doc, text, bold_prefix="", level=0):
-    p = doc.add_paragraph(style='List Bullet')
-    p.paragraph_format.space_before = Pt(0)
-    p.paragraph_format.space_after = Pt(2.5)
-    p.paragraph_format.line_spacing = 1.15
-    p.paragraph_format.left_indent = Inches(0.25 * (level + 1))
-    
-    if bold_prefix:
-        r_pre = p.add_run(bold_prefix)
-        r_pre.font.name = 'Times New Roman'
-        r_pre.font.size = Pt(11)
-        r_pre.font.bold = True
-        r_pre.font.color.rgb = RGBColor(0x11, 0x18, 0x27)
-        
-    run = p.add_run(text)
-    run.font.name = 'Times New Roman'
-    run.font.size = Pt(11)
-    run.font.color.rgb = RGBColor(0x37, 0x41, 0x51)
     return p
 
 def build_document():
@@ -111,7 +92,7 @@ def build_document():
     for s in doc.sections:
         s.top_margin = Inches(0.8)
         s.bottom_margin = Inches(0.8)
-        s.left_margin = Inches(0.9)
+        s.left_margin = Inches(0.85)
         s.right_margin = Inches(0.85)
         s.page_width = Inches(8.27)
         s.page_height = Inches(11.69)
@@ -122,28 +103,23 @@ def build_document():
     r_inst.font.name, r_inst.font.size, r_inst.font.bold = 'Times New Roman', Pt(11), True
     r_inst.font.color.rgb = RGBColor(0x1B, 0x36, 0x5D)
 
-    p_sub = add_styled_paragraph(doc, align=WD_ALIGN_PARAGRAPH.CENTER, space_after=14)
-    r_sub = p_sub.add_run("KHOA CÔNG NGHỆ THÔNG TIN & TRÍ TUỆ NHÂN TẠO")
-    r_sub.font.name, r_sub.font.size = 'Times New Roman', Pt(10)
-    r_sub.font.color.rgb = RGBColor(0x4B, 0x55, 0x63)
-
-    p_title = add_styled_paragraph(doc, align=WD_ALIGN_PARAGRAPH.CENTER, space_before=14, space_after=6)
-    r_title = p_title.add_run("HỒ SƠ ĐẶC TẢ USE CASE VÀ BỘ SEQUENCE DIAGRAM ĐỒNG BỘ\n(HỆ THỐNG QUẢN TRỊ & GHÉP PHÒNG KÝ TÚC XÁ THÔNG MINH)")
+    p_title = add_styled_paragraph(doc, align=WD_ALIGN_PARAGRAPH.CENTER, space_before=16, space_after=6)
+    r_title = p_title.add_run("HỒ SƠ ĐẶC TẢ USE CASE VÀ BỘ SEQUENCE DIAGRAM ĐỒNG BỘ\n(HỆ THỐNG QUẢN TRỊ & GHÉP BẠN CÙNG PHÒNG KTX THÔNG MINH)")
     r_title.font.name, r_title.font.size, r_title.font.bold = 'Times New Roman', Pt(15), True
     r_title.font.color.rgb = RGBColor(0x1B, 0x36, 0x5D)
 
     p_desc = add_styled_paragraph(doc, align=WD_ALIGN_PARAGRAPH.CENTER, space_after=16)
-    r_desc = p_desc.add_run("Hoàn thành trọn vẹn yêu cầu tuần học: Phân loại 1 Dễ + 1-n Nghiệp vụ, Bảng đặc tả BF/AF/EF có References, Sequence Diagram khớp 1-1, và Ánh xạ thiết kế Wireframe")
-    r_desc.font.name, r_desc.font.size, r_desc.font.italic = 'Times New Roman', Pt(10.5), True
+    r_desc = p_desc.add_run("Chuẩn hóa cấu trúc theo Slide bài giảng (Summary + Three Types of Flows) và Sơ đồ Use Case mới nhất (KTX_Smart_Match_UseCase.drawio)")
+    r_desc.font.name, r_desc.font.size, r_desc.font.italic = 'Times New Roman', Pt(10), True
     r_desc.font.color.rgb = RGBColor(0x4B, 0x55, 0x63)
 
     tbl_meta = doc.add_table(rows=4, cols=2)
     tbl_meta.alignment = WD_TABLE_ALIGNMENT.CENTER
     meta_info = [
-        ("Đề tài nghiên cứu:", "Hệ thống Quản trị & Ghép phòng KTX theo Thói quen và Tối ưu Lợi nhuận"),
-        ("Nhóm sinh viên thực hiện:", "Nhóm 3 (Đại diện khối các trường ĐH Đà Nẵng)"),
-        ("Thành viên nhóm:", "Nguyễn Duy Thái Bảo (VNUK), Lê Văn Việt (SPKT), Lê Minh Quân (DUE)"),
-        ("Nội dung báo cáo:", "Đặc tả Use Case chi tiết, Bộ Sequence Diagram chuẩn, Wireframe mapping")
+        ("Đề tài dự án:", "Hệ thống Quản trị & Ghép Bạn Cùng Phòng KTX (KTX Smart Match)"),
+        ("Nhóm sinh viên thực hiện:", "Nhóm 3 (Châu Tuấn Kiệt, Bùi Đình Hiếu, Lê Hoàng Triệu)"),
+        ("Căn cứ thiết kế:", "Slide Use Case Specification + File KTX_Smart_Match_UseCase.drawio"),
+        ("Nội dung báo cáo:", "Business Rules, NFRs, Bảng 26 Use Cases, Đặc tả chi tiết, Sequence Diagram, Wireframe")
     ]
     for i, (k, v) in enumerate(meta_info):
         r = tbl_meta.rows[i]
@@ -151,51 +127,51 @@ def build_document():
         c0.width, c1.width = Inches(2.2), Inches(4.3)
         set_cell_background(c0, "F3F4F6")
         set_cell_background(c1, "FFFFFF")
-        set_cell_margins(c0, top=60, bottom=60, left=100, right=100)
-        set_cell_margins(c1, top=60, bottom=60, left=100, right=100)
+        set_cell_margins(c0, top=50, bottom=50, left=80, right=80)
+        set_cell_margins(c1, top=50, bottom=50, left=80, right=80)
         set_cell_border(c0, top={'val': 'single', 'sz': 4, 'color': 'E5E7EB'}, bottom={'val': 'single', 'sz': 4, 'color': 'E5E7EB'})
         set_cell_border(c1, top={'val': 'single', 'sz': 4, 'color': 'E5E7EB'}, bottom={'val': 'single', 'sz': 4, 'color': 'E5E7EB'})
         
         p0 = c0.paragraphs[0]
         r0 = p0.add_run(k)
-        r0.font.name, r0.font.size, r0.font.bold = 'Times New Roman', Pt(10), True
+        r0.font.name, r0.font.size, r0.font.bold = 'Times New Roman', Pt(9.5), True
         r0.font.color.rgb = RGBColor(0x1B, 0x36, 0x5D)
         
         p1 = c1.paragraphs[0]
         r1 = p1.add_run(v)
-        r1.font.name, r1.font.size = 'Times New Roman', Pt(10)
+        r1.font.name, r1.font.size = 'Times New Roman', Pt(9.5)
         r1.font.color.rgb = RGBColor(0x1F, 0x29, 0x37)
 
-    add_styled_paragraph(doc, space_after=12)
+    add_styled_paragraph(doc, space_after=10)
 
     # ==================== MỤC 1: BUSINESS RULES ====================
     add_heading_1(doc, "1. HỆ THỐNG 7 QUY TẮC NGHIỆP VỤ (BUSINESS RULES - BR)")
-    add_body(doc, "Theo đúng yêu cầu của Giảng viên: 'Sai cơ bản là điền references, làm mà không hiểu BR1 là gì, BR-2 là gì, AF là gì phải hiểu để note, không được note đại'. Dưới đây là bảng định nghĩa tường minh các Quy tắc nghiệp vụ được tham chiếu xuyên suốt trong các bảng đặc tả:")
+    add_body(doc, "Theo đúng yêu cầu của Giảng viên: 'Sai cơ bản là điền references, làm mà không hiểu BR1 là gì, BR-2 là gì, AF là gì phải hiểu để note, không được note đại'. Dưới đây là bảng định nghĩa tường minh 7 Quy tắc nghiệp vụ được tham chiếu trong toàn bộ use case:")
 
     br_table = doc.add_table(rows=8, cols=4)
     br_table.alignment = WD_TABLE_ALIGNMENT.CENTER
     br_heads = ["Mã BR", "Tên Quy tắc Nghiệp vụ", "Nội dung Chi tiết & Điều kiện Áp dụng", "Ý nghĩa Vận hành & Module"]
-    br_widths = [Inches(0.8), Inches(1.8), Inches(2.7), Inches(1.8)]
+    br_widths = [Inches(0.8), Inches(1.8), Inches(2.7), Inches(1.7)]
 
     for j, h in enumerate(br_heads):
         cell = br_table.rows[0].cells[j]
         cell.width = br_widths[j]
         set_cell_background(cell, "1B365D")
-        set_cell_margins(cell, top=80, bottom=80, left=60, right=60)
+        set_cell_margins(cell, top=70, bottom=70, left=50, right=50)
         p = cell.paragraphs[0]
         p.alignment = WD_ALIGN_PARAGRAPH.CENTER
         run = p.add_run(h)
-        run.font.name, run.font.size, run.font.bold = 'Times New Roman', Pt(9.5), True
+        run.font.name, run.font.size, run.font.bold = 'Times New Roman', Pt(9), True
         run.font.color.rgb = RGBColor(0xFF, 0xFF, 0xFF)
 
     br_data = [
-        ("BR-01", "Đối tượng Tiếp nhận (SV Trường A)", "KTX A phục vụ riêng cho sinh viên trường Đại học A (hoặc khối thành viên). Phải có MSSV và email trường cấp (@edu.vn). Đúng đối tượng mới được kích hoạt ghép tự động.", "Bảo đảm an ninh, phục vụ đúng đối tượng (Áp dụng tại Form Đăng ký, Cổng xác thực)."),
+        ("BR-01", "Đối tượng Tiếp nhận (SV Trường A)", "KTX A phục vụ riêng cho sinh viên trường Đại học A (hoặc khối thành viên). Phải có MSSV và email trường cấp (@edu.vn). Đúng đối tượng mới được kích hoạt ghép tự động.", "Bảo đảm an ninh, phục vụ đúng đối tượng (Cổng đăng nhập, Xác thực SV Trường A)."),
         ("BR-02", "Thời hạn Lưu trú Tối thiểu 1 Kỳ", "Bắt buộc cam kết lưu trú tối thiểu 01 học kỳ (5 tháng) hoặc trọn năm học. Hệ thống kiên quyết từ chối hợp đồng ngắn hạn theo ngày/tuần.", "Ổn định nề nếp văn hóa phòng, bảo toàn kế hoạch dòng tiền KTX (Form Đăng ký, Hợp đồng)."),
-        ("BR-03", "Phê duyệt Nghiệp vụ (Business Approve)", "Hồ sơ đăng ký KTX phải qua bước BQL thẩm định tư cách, kiểm tra lịch sử kỷ luật và diện ưu tiên. Chỉ hồ sơ 'Approved' mới được phân phòng.", "Kiểm soát an ninh cửa ngõ, không cho đối tượng vi phạm vào ở (Dashboard Quản trị KTX)."),
+        ("BR-03", "Phê duyệt Nghiệp vụ (Business Approve)", "Hồ sơ đăng ký KTX phải qua bước BQL thẩm định tư cách, kiểm tra lịch sử kỷ luật và diện ưu tiên. Chỉ hồ sơ 'Approved' mới được phân phòng.", "Kiểm soát an ninh cửa ngõ, không cho đối tượng vi phạm vào ở (Dashboard Quản trị Thẩm định Đơn)."),
         ("BR-04", "Đặt cọc & Hạn Thanh toán 72h", "Trong vòng 72 giờ từ khi có kết quả, sinh viên phải nộp tiền phòng kỳ 1 + Tiền cọc tài sản (1.000.000 VNĐ) qua VNPay. Quá hạn tự động hủy giữ chỗ, chuyển cho Waitlist.", "Tránh giữ chỗ ảo, bảo đảm thu hồi vốn KTX (Màn hình Thanh toán, Cổng VNPay)."),
-        ("BR-05", "Tối ưu Lợi nhuận & Lấp đầy Phòng", "Phân nhóm theo loại phòng (2, 4, 6 người) trước, sau đó ghép Gale-Shapley. Ưu tiên lấp đầy 100% số giường từng phòng trước khi mở phòng mới để tiết kiệm chi phí.", "Tối đa hóa biên lợi nhuận ròng KTX (Thuật toán matching.py, Báo cáo Doanh thu)."),
+        ("BR-05", "Tối ưu Lợi nhuận & Lấp đầy Phòng", "Phân nhóm theo loại phòng (2, 4, 6 người) trước, sau đó ghép Gale-Shapley. Ưu tiên lấp đầy 100% số giường từng phòng trước khi mở phòng mới để tiết kiệm chi phí.", "Tối đa hóa biên lợi nhuận ròng KTX (Thuật toán matching, Báo cáo Doanh thu)."),
         ("BR-06", "Trọng số Ưu tiên Cá nhân (Top 1.5x)", "Tiêu chí sinh viên coi trọng nhất (top) được nhân trọng số 1.5x, tạo ma trận điểm bất đối xứng M[a][b] khác M[b][a].", "Mô phỏng tâm lý con người trong thực tế (Module scoring.py)."),
-        ("BR-07", "Triệt tiêu Cặp chặn (Stability)", "Kết quả phân phòng bắt buộc phải đạt độ ổn định tuyệt đối (Blocking Pairs = 0).", "Không sinh viên nào có động cơ tự ý đổi phòng (Thuật toán gale_shapley).")
+        ("BR-07", "Triệt tiêu Cặp chặn (Stability)", "Kết quả phân phòng bắt buộc phải đạt độ ổn định tuyệt đối (Blocking Pairs = 0).", "Không sinh viên nào có động cơ tự ý đổi phòng (Thuật toán Gale-Shapley).")
     ]
 
     for i, row_data in enumerate(br_data):
@@ -205,20 +181,19 @@ def build_document():
             cell = row.cells[j]
             cell.width = br_widths[j]
             set_cell_background(cell, bg)
-            set_cell_margins(cell, top=50, bottom=50, left=60, right=60)
+            set_cell_margins(cell, top=45, bottom=45, left=50, right=50)
             set_cell_border(cell, top={'val': 'single', 'sz': 4, 'color': 'E5E7EB'}, bottom={'val': 'single', 'sz': 4, 'color': 'E5E7EB'})
             p = cell.paragraphs[0]
             p.alignment = WD_ALIGN_PARAGRAPH.LEFT if j != 0 else WD_ALIGN_PARAGRAPH.CENTER
             run = p.add_run(val)
-            run.font.name, run.font.size = 'Times New Roman', Pt(9)
+            run.font.name, run.font.size = 'Times New Roman', Pt(8.5)
             if j == 0:
                 run.font.bold = True
                 run.font.color.rgb = RGBColor(0x1B, 0x36, 0x5D)
             elif j == 1:
                 run.font.bold = True
-                run.font.color.rgb = RGBColor(0x0F, 0x17, 0x2A)
 
-    add_styled_paragraph(doc, space_after=10)
+    add_styled_paragraph(doc, space_after=8)
 
     # ==================== MỤC 2: NON-FUNCTIONAL REQUIREMENTS ====================
     add_heading_1(doc, "2. HỆ THỐNG YÊU CẦU PHI CHỨC NĂNG (NON-FUNCTIONAL REQUIREMENTS - NFR)")
@@ -226,17 +201,17 @@ def build_document():
     nfr_table = doc.add_table(rows=7, cols=4)
     nfr_table.alignment = WD_TABLE_ALIGNMENT.CENTER
     nfr_heads = ["Mã NFR", "Tên Yêu cầu Phi chức năng", "Tiêu chuẩn Định lượng Đo lường", "Phương pháp Kiểm chứng"]
-    nfr_widths = [Inches(0.9), Inches(1.8), Inches(2.6), Inches(1.8)]
+    nfr_widths = [Inches(0.9), Inches(1.8), Inches(2.5), Inches(1.8)]
 
     for j, h in enumerate(nfr_heads):
         cell = nfr_table.rows[0].cells[j]
         cell.width = nfr_widths[j]
         set_cell_background(cell, "1B365D")
-        set_cell_margins(cell, top=80, bottom=80, left=60, right=60)
+        set_cell_margins(cell, top=70, bottom=70, left=50, right=50)
         p = cell.paragraphs[0]
         p.alignment = WD_ALIGN_PARAGRAPH.CENTER
         run = p.add_run(h)
-        run.font.name, run.font.size, run.font.bold = 'Times New Roman', Pt(9.5), True
+        run.font.name, run.font.size, run.font.bold = 'Times New Roman', Pt(9), True
         run.font.color.rgb = RGBColor(0xFF, 0xFF, 0xFF)
 
     nfr_data = [
@@ -255,60 +230,163 @@ def build_document():
             cell = row.cells[j]
             cell.width = nfr_widths[j]
             set_cell_background(cell, bg)
-            set_cell_margins(cell, top=50, bottom=50, left=60, right=60)
+            set_cell_margins(cell, top=45, bottom=45, left=50, right=50)
             set_cell_border(cell, top={'val': 'single', 'sz': 4, 'color': 'E5E7EB'}, bottom={'val': 'single', 'sz': 4, 'color': 'E5E7EB'})
             p = cell.paragraphs[0]
             p.alignment = WD_ALIGN_PARAGRAPH.LEFT if j != 0 else WD_ALIGN_PARAGRAPH.CENTER
             run = p.add_run(val)
-            run.font.name, run.font.size = 'Times New Roman', Pt(9)
+            run.font.name, run.font.size = 'Times New Roman', Pt(8.5)
             if j == 0:
                 run.font.bold = True
                 run.font.color.rgb = RGBColor(0x16, 0x65, 0x34)
             elif j == 1:
                 run.font.bold = True
 
-    add_styled_paragraph(doc, space_after=12)
+    add_styled_paragraph(doc, space_after=8)
 
-    # Helper function to add a full Use Case Section
-    def render_usecase_section(uc_num, uc_code, uc_name, uc_type, actor, precondition, postcondition, flow_data, seq_desc, wf_code, wf_name, wf_components):
-        add_heading_1(doc, f"{uc_num}. ĐẶC TẢ CHI TIẾT USE CASE {uc_code}: {uc_name.upper()}")
+    # ==================== MỤC 3: BẢNG DANH MỤC 26 USE CASE ====================
+    add_heading_1(doc, "3. DANH MỤC TOÀN BỘ 26 USE CASE (CHUẨN HÓA THEO KTX_SMART_MATCH_USECASE.DRAWIO)")
+    add_body(doc, "Sơ đồ Use Case hoàn thiện bao gồm 8 Tác nhân (Sinh viên, Quản trị viên, Cán bộ KTX, Hệ thống SV Trường A, Cổng VNPay, Kế toán, Kỹ thuật, Scheduler) và 26 Use Case phân bổ đồng đều:")
+
+    tbl_catalog = doc.add_table(rows=27, cols=5)
+    tbl_catalog.alignment = WD_TABLE_ALIGNMENT.CENTER
+    cat_heads = ["Mã UC", "Tên Use Case", "Tác nhân (Actor)", "Phân hệ", "Mối quan hệ UML / Ghi chú"]
+    cat_widths = [Inches(0.7), Inches(2.3), Inches(1.4), Inches(1.3), Inches(1.3)]
+
+    for j, h in enumerate(cat_heads):
+        cell = tbl_catalog.rows[0].cells[j]
+        cell.width = cat_widths[j]
+        set_cell_background(cell, "1B365D")
+        set_cell_margins(cell, top=60, bottom=60, left=40, right=40)
+        p = cell.paragraphs[0]
+        p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        run = p.add_run(h)
+        run.font.name, run.font.size, run.font.bold = 'Times New Roman', Pt(8.5), True
+        run.font.color.rgb = RGBColor(0xFF, 0xFF, 0xFF)
+
+    usecases_list = [
+        ("UC-01", "Đăng nhập / Quên mật khẩu", "Sinh viên", "Sinh viên", "include: Xác thực SV (BR-01)"),
+        ("UC-02", "Đăng ký tài khoản & khai báo thói quen", "Sinh viên", "Sinh viên", "include: Xác thực SV (BR-01)"),
+        ("UC-03", "Cập nhật hồ sơ & thói quen", "Sinh viên", "Sinh viên", "extend: Nạp mẫu Persona"),
+        ("UC-04", "Chọn loại phòng, tiện ích & nộp đơn KTX", "Sinh viên", "Sinh viên", "Cam kết >= 1 kỳ (BR-02, BR-05)"),
+        ("UC-05", "Xem bảng xếp hạng bạn cùng phòng", "Sinh viên", "Sinh viên", "include: Tính điểm tương thích"),
+        ("UC-06", "Gửi / phản hồi lời mời ghép nhóm bạn", "Sinh viên", "Sinh viên", "Kết nối sinh viên quen"),
+        ("UC-07", "Xem kết quả phân phòng & thông tin", "Sinh viên", "Sinh viên", "Tra cứu kết quả phân phòng"),
+        ("UC-08", "Yêu cầu đổi phòng / đổi bạn cùng phòng", "Sinh viên", "Sinh viên", "extend: Đính kèm lý do & minh chứng"),
+        ("UC-09", "Gửi phản ánh & báo sự cố", "Sinh viên", "Sinh viên", "Hỗ trợ nội trú"),
+        ("UC-10", "Xem thông báo", "Sinh viên", "Sinh viên", "Nhận tin tức KTX"),
+        ("UC-11", "Đánh giá bạn cùng phòng cuối kỳ", "Sinh viên", "Sinh viên", "extend: Báo cáo vi phạm"),
+        ("UC-12", "Gia hạn / Trả phòng", "Sinh viên", "Sinh viên", "include: Tính phí & hoàn cọc"),
+        ("UC-13", "Thanh toán tiền phòng & cọc (72h)", "Sinh viên", "Sinh viên", "include: Cổng VNPay (BR-04)"),
+        ("UC-14", "Quản lý danh mục tòa, phòng & giá", "Quản trị viên", "Quản trị", "Cấu hình cơ sở vật chất"),
+        ("UC-15", "Quản lý tài khoản & phân quyền", "Quản trị viên", "Quản trị", "Phân quyền cán bộ"),
+        ("UC-16", "Quản lý dữ liệu sinh viên KTX", "Quản trị viên", "Quản trị", "extend: Nạp CSV, Sinh Seed"),
+        ("UC-17", "Cấu hình trọng số tiêu chí & luật ghép", "Quản trị viên", "Quản trị", "Thiết lập trọng số BR-06"),
+        ("UC-18", "Phê duyệt đơn KTX (Business Approve)", "Cán bộ KTX", "Quản trị", "Thẩm định điều kiện BR-03"),
+        ("UC-19", "Điều chỉnh phân phòng thủ công", "Cán bộ KTX", "Quản trị", "Override thủ công"),
+        ("UC-20", "Xử lý yêu cầu đổi phòng / đổi bạn", "Cán bộ KTX", "Quản trị", "Giải quyết khiếu nại"),
+        ("UC-21", "Quản lý phản ánh & sự cố", "Cán bộ, Kỹ thuật", "Quản trị", "Tiếp nhận sửa chữa"),
+        ("UC-22", "Theo dõi & đối soát thanh toán", "Kế toán", "Quản trị", "extend: Hoàn tiền / cọc"),
+        ("UC-23", "Báo cáo doanh thu & lợi nhuận", "Kế toán, Admin", "Quản trị", "extend: Xuất báo cáo CSV"),
+        ("UC-24", "Thực hiện ghép phòng tự động", "Hệ thống (Scheduler)", "Quản trị", "include: Gale-Shapley, BP=0"),
+        ("UC-25", "Gửi thông báo & nhắc hạn thanh toán", "Hệ thống (Scheduler)", "Quản trị", "Tự động gửi email/app"),
+        ("UC-26", "Tự động hủy đơn quá 72h & xếp hàng chờ", "Hệ thống (Scheduler)", "Quản trị", "Quét hạn chót BR-04")
+    ]
+
+    for i, udata in enumerate(usecases_list):
+        row = tbl_catalog.rows[i + 1]
+        bg = "F9FAFB" if i % 2 == 1 else "FFFFFF"
+        for j, val in enumerate(udata):
+            cell = row.cells[j]
+            cell.width = cat_widths[j]
+            set_cell_background(cell, bg)
+            set_cell_margins(cell, top=35, bottom=35, left=40, right=40)
+            set_cell_border(cell, top={'val': 'single', 'sz': 4, 'color': 'E5E7EB'}, bottom={'val': 'single', 'sz': 4, 'color': 'E5E7EB'})
+            p = cell.paragraphs[0]
+            p.alignment = WD_ALIGN_PARAGRAPH.LEFT if j != 0 else WD_ALIGN_PARAGRAPH.CENTER
+            run = p.add_run(val)
+            run.font.name, run.font.size = 'Times New Roman', Pt(8)
+            if j == 0:
+                run.font.bold = True
+                run.font.color.rgb = RGBColor(0x1B, 0x36, 0x5D)
+            elif j == 1:
+                run.font.bold = True
+
+    add_styled_paragraph(doc, space_after=10)
+
+    # ==================== HÀM RENDER ĐẶC TẢ CHI TIẾT THEO SLIDE ====================
+    def render_detailed_usecase(sec_num, uc_id, uc_title, uc_desc, actors, precond, postcond, trigger, flow_rows, seq_messages, wf_id, wf_name, wf_elements):
+        add_heading_1(doc, f"{sec_num}. ĐẶC TẢ CHI TIẾT USE CASE {uc_id}: {uc_title.upper()}")
         
-        # Summary Box
-        add_body(doc, f"• Phân loại Use Case: {uc_type} | Tác nhân chính: {actor}")
-        add_body(doc, f"• Tiền điều kiện (Preconditions): {precondition}")
-        add_body(doc, f"• Hậu điều kiện (Postconditions): {postcondition}")
-
-        add_heading_2(doc, f"{uc_num}.1 Bảng Đặc tả Luồng sự kiện (BF, AF, EF) có References")
+        # 1. SUMMARY TABLE (Theo Slide)
+        add_heading_2(doc, f"{sec_num}.1 Summary Table (Tóm tắt thông tin Use Case theo Slide)")
         
-        t = doc.add_table(rows=len(flow_data) + 1, cols=5)
-        t.alignment = WD_TABLE_ALIGNMENT.CENTER
-        t_heads = ["Khối", "ID", "Tác nhân (Actor)", "Hành động chi tiết (Action)", "Tham chiếu (Ref)"]
-        t_widths = [Inches(0.6), Inches(0.7), Inches(1.3), Inches(3.2), Inches(1.3)]
+        t_sum = doc.add_table(rows=7, cols=2)
+        t_sum.alignment = WD_TABLE_ALIGNMENT.CENTER
+        sum_rows = [
+            ("ID", uc_id),
+            ("Title", uc_title),
+            ("Description", uc_desc),
+            ("Actors", actors),
+            ("Preconditions", precond),
+            ("Post conditions", postcond),
+            ("Trigger", trigger)
+        ]
+        for i, (k, v) in enumerate(sum_rows):
+            row = t_sum.rows[i]
+            c0, c1 = row.cells[0], row.cells[1]
+            c0.width, c1.width = Inches(1.8), Inches(5.2)
+            set_cell_background(c0, "F3F4F6")
+            set_cell_background(c1, "FFFFFF")
+            set_cell_margins(c0, top=45, bottom=45, left=60, right=60)
+            set_cell_margins(c1, top=45, bottom=45, left=60, right=60)
+            set_cell_border(c0, top={'val': 'single', 'sz': 4, 'color': 'E5E7EB'}, bottom={'val': 'single', 'sz': 4, 'color': 'E5E7EB'})
+            set_cell_border(c1, top={'val': 'single', 'sz': 4, 'color': 'E5E7EB'}, bottom={'val': 'single', 'sz': 4, 'color': 'E5E7EB'})
+            
+            p0 = c0.paragraphs[0]
+            r0 = p0.add_run(k)
+            r0.font.name, r0.font.size, r0.font.bold = 'Times New Roman', Pt(9), True
+            r0.font.color.rgb = RGBColor(0x1B, 0x36, 0x5D)
+            
+            p1 = c1.paragraphs[0]
+            r1 = p1.add_run(v)
+            r1.font.name, r1.font.size = 'Times New Roman', Pt(9)
+            r1.font.color.rgb = RGBColor(0x1F, 0x29, 0x37)
 
-        for j, h in enumerate(t_heads):
-            cell = t.rows[0].cells[j]
-            cell.width = t_widths[j]
+        add_styled_paragraph(doc, space_after=6)
+
+        # 2. THREE TYPES OF FLOWS TABLE (Theo Slide: Step ID, Actor, Action, Notes/references)
+        add_heading_2(doc, f"{sec_num}.2 Three Types of Flows Table (Luồng sự kiện BF, AF, EF)")
+        
+        t_flow = doc.add_table(rows=len(flow_rows) + 1, cols=4)
+        t_flow.alignment = WD_TABLE_ALIGNMENT.CENTER
+        flow_heads = ["Step ID", "Actor", "Action", "Notes/references"]
+        flow_widths = [Inches(1.0), Inches(1.5), Inches(3.2), Inches(1.3)]
+
+        for j, h in enumerate(flow_heads):
+            cell = t_flow.rows[0].cells[j]
+            cell.width = flow_widths[j]
             set_cell_background(cell, "1B365D")
-            set_cell_margins(cell, top=70, bottom=70, left=50, right=50)
+            set_cell_margins(cell, top=60, bottom=60, left=50, right=50)
             p = cell.paragraphs[0]
             p.alignment = WD_ALIGN_PARAGRAPH.CENTER
             run = p.add_run(h)
             run.font.name, run.font.size, run.font.bold = 'Times New Roman', Pt(9), True
             run.font.color.rgb = RGBColor(0xFF, 0xFF, 0xFF)
 
-        for i, (khoi, fid, fact, faction, fref) in enumerate(flow_data):
-            row = t.rows[i + 1]
+        for i, (sid, sact, saction, snotes) in enumerate(flow_rows):
+            row = t_flow.rows[i + 1]
             bg = "FFFFFF"
-            if khoi == "BF":
+            if sid.startswith("BF"):
                 bg = "F0FDF4" if i % 2 == 1 else "FFFFFF"
-            elif khoi == "AF":
+            elif sid.startswith("AF"):
                 bg = "FAF5FF"
-            elif khoi == "EF":
+            elif sid.startswith("EF"):
                 bg = "FEF2F2"
 
-            for j, val in enumerate([khoi, fid, fact, faction, fref]):
+            for j, val in enumerate([sid, sact, saction, snotes]):
                 cell = row.cells[j]
-                cell.width = t_widths[j]
+                cell.width = flow_widths[j]
                 set_cell_background(cell, bg)
                 set_cell_margins(cell, top=45, bottom=45, left=50, right=50)
                 set_cell_border(cell, top={'val': 'single', 'sz': 4, 'color': 'E5E7EB'}, bottom={'val': 'single', 'sz': 4, 'color': 'E5E7EB'})
@@ -318,299 +396,383 @@ def build_document():
                 run.font.name, run.font.size = 'Times New Roman', Pt(8.5)
                 if j == 0:
                     run.font.bold = True
-                    if khoi == "BF": run.font.color.rgb = RGBColor(0x16, 0x65, 0x34)
-                    elif khoi == "AF": run.font.color.rgb = RGBColor(0x7E, 0x22, 0xCE)
+                    if sid.startswith("BF"): run.font.color.rgb = RGBColor(0x16, 0x65, 0x34)
+                    elif sid.startswith("AF"): run.font.color.rgb = RGBColor(0x7E, 0x22, 0xCE)
                     else: run.font.color.rgb = RGBColor(0x99, 0x1B, 0x1B)
-                elif j == 1:
-                    run.font.bold = True
-                    run.font.color.rgb = RGBColor(0x0F, 0x17, 0x2A)
-                elif j == 4:
+                elif j == 3:
                     run.font.bold = True
                     run.font.color.rgb = RGBColor(0x1E, 0x40, 0xAF)
 
-        add_heading_2(doc, f"{uc_num}.2 Biểu đồ Tuần tự (Sequence Diagram) - Khớp 1-1 từng bước")
-        add_body(doc, seq_desc, italic=True)
+        add_styled_paragraph(doc, space_after=6)
 
-        add_heading_2(doc, f"{uc_num}.3 Đặc tả Bản vẽ Wireframe {wf_code}: {wf_name}")
-        add_bullet(doc, "Mọi thành phần giao diện trên Wireframe đều có trường dữ liệu tương ứng trong bảng đặc tả (Đặc tả trước, Design sau).", "Nguyên tắc thiết kế: ")
-        
-        twf = doc.add_table(rows=len(wf_components) + 1, cols=3)
+        # 3. SEQUENCE DIAGRAM MESSAGES
+        add_heading_2(doc, f"{sec_num}.3 Biểu đồ Tuần tự (Sequence Diagram) - Khớp 1-1 từng bước")
+        for smsg in seq_messages:
+            add_body(doc, smsg)
+
+        # 4. WIREFRAME MAPPING
+        add_heading_2(doc, f"{sec_num}.4 Thiết kế Wireframe UI ({wf_id}: {wf_name})")
+        twf = doc.add_table(rows=len(wf_elements) + 1, cols=3)
         twf.alignment = WD_TABLE_ALIGNMENT.CENTER
-        twf_heads = ["Mã Thành phần", "Tên Phần tử trên Wireframe", "Ánh xạ Bước trong Bảng Đặc tả (Khớp 1-1)"]
-        twf_widths = [Inches(1.2), Inches(3.0), Inches(2.9)]
+        twf_heads = ["Mã Callout", "Thành phần Giao diện Wireframe", "Ánh xạ Bước Đặc tả (Khớp 1-1)"]
+        twf_widths = [Inches(1.2), Inches(3.2), Inches(2.6)]
 
         for j, h in enumerate(twf_heads):
             cell = twf.rows[0].cells[j]
             cell.width = twf_widths[j]
             set_cell_background(cell, "2C5282")
-            set_cell_margins(cell, top=60, bottom=60, left=50, right=50)
+            set_cell_margins(cell, top=50, bottom=50, left=50, right=50)
             p = cell.paragraphs[0]
             p.alignment = WD_ALIGN_PARAGRAPH.CENTER
             run = p.add_run(h)
-            run.font.name, run.font.size, run.font.bold = 'Times New Roman', Pt(9), True
+            run.font.name, run.font.size, run.font.bold = 'Times New Roman', Pt(8.5), True
             run.font.color.rgb = RGBColor(0xFF, 0xFF, 0xFF)
 
-        for i, (cid, cname, cmap) in enumerate(wf_components):
+        for i, (wfid, wfname, wfmap) in enumerate(wf_elements):
             row = twf.rows[i + 1]
             bg = "F9FAFB" if i % 2 == 1 else "FFFFFF"
-            for j, val in enumerate([cid, cname, cmap]):
+            for j, val in enumerate([wfid, wfname, wfmap]):
                 cell = row.cells[j]
                 cell.width = twf_widths[j]
                 set_cell_background(cell, bg)
-                set_cell_margins(cell, top=45, bottom=45, left=50, right=50)
+                set_cell_margins(cell, top=40, bottom=40, left=50, right=50)
                 set_cell_border(cell, top={'val': 'single', 'sz': 4, 'color': 'E5E7EB'}, bottom={'val': 'single', 'sz': 4, 'color': 'E5E7EB'})
                 p = cell.paragraphs[0]
                 p.alignment = WD_ALIGN_PARAGRAPH.LEFT if j != 0 else WD_ALIGN_PARAGRAPH.CENTER
                 run = p.add_run(val)
-                run.font.name, run.font.size = 'Times New Roman', Pt(8.5)
+                run.font.name, run.font.size = 'Times New Roman', Pt(8)
                 if j == 0:
                     run.font.bold = True
                     run.font.color.rgb = RGBColor(0x1B, 0x36, 0x5D)
-                elif j == 2:
-                    run.font.bold = True
-                    run.font.color.rgb = RGBColor(0x15, 0x80, 0x3D)
 
         add_styled_paragraph(doc, space_after=10)
 
-    # ==================== USE CASE 1 (ĐƠN GIẢN) ====================
-    uc1_flows = [
-        ("BF", "BF-01", "Sinh viên", "Truy cập cổng thông tin KTX và chọn Đăng nhập.", "Màn hình WF-01, NFR-06"),
-        ("BF", "BF-02", "Hệ thống", "Hiển thị form đăng nhập (MSSV, Mật khẩu).", "Form LoginForm"),
-        ("BF", "BF-03", "Sinh viên", "Nhập MSSV trường A và Mật khẩu, nhấn 'Đăng nhập'.", "Input Validation"),
-        ("BF", "BF-04", "Hệ thống", "Gửi credentials sang Authentication Service để xác thực.", "Include UC-03, BR-01"),
-        ("BF", "BF-05", "Hệ thống", "Xác nhận đúng tài khoản trường A, cấp Session Token.", "BR-01, NFR-03"),
-        ("BF", "BF-06", "Hệ thống", "Chuyển hướng vào Dashboard cá nhân của sinh viên.", "Điều hướng /dashboard"),
-        ("AF", "AF-01", "Sinh viên", "Tại bước BF-03, tích chọn 'Ghi nhớ đăng nhập 30 ngày'.", "Lưu Cookie HttpOnly"),
-        ("AF", "AF-02", "Hệ thống", "Gia hạn thời hạn lưu phiên làm việc lên 30 ngày.", "NFR-06"),
-        ("EF", "EF-01", "Hệ thống", "Nhập sai mật khẩu quá 5 lần: Khóa tạm tài khoản 15 phút.", "Mã ERR_AUTH_01, NFR-03"),
-        ("EF", "EF-02", "Hệ thống", "MSSV không thuộc diện Trường A: Từ chối đăng nhập.", "Mã ERR_NOT_AFFILIATED, BR-01")
-    ]
-    uc1_seq = """Sequence Flow Khớp 1-1:
-1. (BF-01) Sinh viên -> UI Login: Yêu cầu mở trang đăng nhập
-2. (BF-02) UI Login -> Sinh viên: Hiển thị form đăng nhập
-3. (BF-03) Sinh viên -> UI Login: Nhập MSSV & Mật khẩu
-4. (BF-04) UI Login -> Auth Service: Gửi credentials xác thực (Ref: BR-01)
-5. (BF-04) Auth Service -> Database: Truy vấn thông tin tài khoản
-6. (BF-05) Database -> Auth Service: Trả về bản ghi tài khoản hợp lệ
-[alt Thành công]: 7. (BF-05) Auth Service -> UI: Cấp Session Token -> 8. (BF-06) UI -> Sinh viên: Vào Dashboard
-[alt Sai quá 5 lần]: 9. (EF-01) Auth Service -> UI: Báo lỗi ERR_AUTH_01 -> 10. (EF-01) UI -> Sinh viên: Khóa tạm 15 phút
-[alt Không thuộc trường A]: 11. (EF-02) Auth Service -> UI: Báo lỗi ERR_NOT_AFFILIATED -> 12. (EF-02) UI -> Sinh viên: Cảnh báo vi phạm BR-01"""
+    # ==================== ĐẶC TẢ 6 USE CASES ĐẠI DIỆN ====================
+    # UC-01
+    render_detailed_usecase(
+        sec_num="4",
+        uc_id="UC-01",
+        uc_title="Đăng nhập và Quên mật khẩu (Sign in and Reset Password)",
+        uc_desc="Mô tả cách sinh viên đăng nhập vào Cổng thông tin KTX bằng MSSV trường A và mật khẩu, xác thực với hệ thống trường liên kết theo BR-01 hoặc khôi phục mật khẩu.",
+        actors="Sinh viên (Primary Actor), Hệ thống SV Trường A (Secondary Actor)",
+        precond="Sinh viên thuộc danh sách tiếp nhận của Trường Đại học A (hoặc khối thành viên liên kết).",
+        postcond="Hệ thống cấp token phiên làm việc bảo mật (Session HttpOnly), chuyển hướng vào Dashboard Sinh viên.",
+        trigger="Sinh viên truy cập Cổng KTX và chọn chức năng 'Đăng nhập'.",
+        flow_rows=[
+            ("BF-1", "Sinh viên", "Truy cập Cổng thông tin KTX và chọn chức năng Đăng nhập.", "WF-01, NFR-06"),
+            ("BF-2", "Hệ thống", "Hiển thị biểu mẫu đăng nhập gồm ô nhập MSSV và Mật khẩu.", "WF-01 Form"),
+            ("BF-3", "Sinh viên", "Nhập MSSV trường A (VD: 22VNUK0101) và mật khẩu, nhấn Đăng nhập.", "Kiểm tra cú pháp"),
+            ("BF-4", "Hệ thống", "Gửi credentials sang Dịch vụ xác thực sinh viên Trường A.", "Include: Xác thực SV, BR-01"),
+            ("BF-5", "Hệ thống SV Trường A", "Xác nhận đúng sinh viên trường A, mật khẩu hợp lệ và gửi tín hiệu chấp thuận.", "BR-01 (Đúng trường A)"),
+            ("BF-6", "Hệ thống", "Khởi tạo phiên bảo mật (Session HttpOnly), chuyển hướng vào Dashboard.", "Hoàn tất UC-01, NFR-03"),
+            ("AF-A", "Sinh viên", "Tại bước BF-3, tích chọn 'Ghi nhớ đăng nhập 30 ngày'.", "Lưu Cookie an toàn"),
+            ("AF-B", "Sinh viên", "Tại bước BF-2, nhấn 'Quên mật khẩu', nhập email trường cấp để nhận mã OTP.", "Khôi phục mật khẩu"),
+            ("EF-A", "Hệ thống", "Tại bước BF-4, nếu nhập sai mật khẩu quá 5 lần: Khóa tạm tài khoản 15 phút.", "ERR_AUTH_MAX, NFR-03"),
+            ("EF-B", "Hệ thống", "Tại bước BF-5, nếu MSSV không thuộc trường A: Từ chối đăng nhập và báo lỗi BR-01.", "ERR_NOT_AFFILIATED, BR-01")
+        ],
+        seq_messages=[
+            "• Message 1 (BF-1): Sinh viên -> UI: Truy cập trang đăng nhập KTX",
+            "• Message 2 (BF-2): UI -> Sinh viên: Hiển thị form đăng nhập (MSSV, Mật khẩu)",
+            "• Message 3 (BF-3): Sinh viên -> UI: Nhập MSSV và Mật khẩu, nhấn Đăng nhập",
+            "• Message 4 (BF-4): UI -> Auth Service: Gửi yêu cầu xác thực credentials",
+            "• Message 5 (BF-4, BF-5): Auth Service -> Hệ thống Trường A: Đối soát MSSV (Ref: BR-01)",
+            "• Message 6 (BF-5): Hệ thống Trường A -> Auth Service: Xác nhận hợp lệ",
+            "• Message 7 (BF-6): Auth Service -> UI -> Sinh viên: Cấp Session Token, vào Dashboard",
+            "• Khối opt (AF-A): Sinh viên tích chọn ghi nhớ đăng nhập 30 ngày",
+            "• Khối alt 1 (EF-A): Sai mật khẩu quá 5 lần -> Khóa tạm tài khoản 15 phút",
+            "• Khối alt 2 (EF-B): MSSV không thuộc trường A -> Báo lỗi từ chối theo BR-01"
+        ],
+        wf_id="WF-01",
+        wf_name="Cổng Đăng Nhập & Xác Thực",
+        wf_elements=[
+            ("WF-01-C01", "3 Card Persona mẫu 1-click (Thái Bảo, Văn Việt, Minh Quân)", "Ánh xạ AF-A, NFR-06"),
+            ("WF-01-C02", "Form đăng nhập (Ô nhập MSSV trường A và Mật khẩu)", "Ánh xạ BF-2, BF-3"),
+            ("WF-01-C03", "Hộp kiểm 'Ghi nhớ đăng nhập 30 ngày'", "Ánh xạ AF-A"),
+            ("WF-01-C04", "Nút bấm 'ĐĂNG NHẬP VÀO HỆ THỐNG'", "Ánh xạ BF-3, BF-4"),
+            ("WF-01-C05", "Khung Alert đỏ cảnh báo lỗi vi phạm BR-01", "Ánh xạ EF-B (BR-01)")
+        ]
+    )
 
-    uc1_wf = [
-        ("WF01-1", "Ô nhập Mã số sinh viên (MSSV)", "Khớp bước BF-03 (Nhập MSSV trường A)"),
-        ("WF01-2", "Ô nhập Mật khẩu bảo mật", "Khớp bước BF-03 (Nhập mật khẩu)"),
-        ("WF01-3", "Checkbox 'Ghi nhớ đăng nhập 30 ngày'", "Khớp bước AF-01 (Lưu cookie an toàn)"),
-        ("WF01-4", "Nút bấm 'Đăng nhập'", "Khớp bước BF-03, kích hoạt bước BF-04"),
-        ("WF01-5", "Khung thông báo lỗi đỏ (Banner Alert)", "Khớp bước EF-01 (Sai pass) và EF-02 (Vi phạm BR-01)")
-    ]
-    render_usecase_section(3, "UC-01", "Đăng nhập & Xác thực Sinh viên KTX", "Use Case Đơn giản (1 dễ)", "Sinh viên nội trú", "Sinh viên đã có tài khoản KTX.", "Được cấp phiên làm việc vào Dashboard.", uc1_flows, uc1_seq, "WF-01", "Cổng Đăng nhập KTX", uc1_wf)
+    # UC-04
+    render_detailed_usecase(
+        sec_num="5",
+        uc_id="UC-04",
+        uc_title="Chọn Loại phòng, Tiện ích & Nộp đơn KTX (Select Room and Submit Application)",
+        uc_desc="Mô tả quy trình sinh viên chọn gói phòng nguyện vọng, khai báo 8 tiêu chí thói quen, chọn tiêu chí ưu tiên 1.5x và cam kết ở tối thiểu 1 kỳ theo BR-02 để nộp đơn xét duyệt.",
+        actors="Sinh viên (Primary Actor), Hệ thống KTX (Secondary Actor)",
+        precond="Sinh viên đã đăng nhập thành công vào hệ thống (UC-01).",
+        postcond="Hồ sơ được lưu ở trạng thái Pending_Approval, sẵn sàng chuyển cho cán bộ KTX thẩm định (UC-18).",
+        trigger="Sinh viên chọn 'Đăng ký Phòng & Khảo sát Thói quen' trên Dashboard.",
+        flow_rows=[
+            ("BF-1", "Sinh viên", "Mở biểu mẫu đăng ký phòng và khảo sát nếp sống KTX.", "WF-02"),
+            ("BF-2", "Hệ thống", "Hiển thị 3 gói phòng: VIP 2 người (1.4tr), Chuẩn 4 người (850k), Tiết kiệm 6 người (550k).", "BR-02, BR-05"),
+            ("BF-3", "Sinh viên", "Chọn loại phòng mong muốn (ví dụ: Phòng 2 người VIP).", "Thu thập nguyện vọng"),
+            ("BF-4", "Sinh viên", "Khai báo 8 thanh trượt thói quen sinh hoạt (ngủ, dậy, gọn gàng, học, tiếng ồn...).", "Vector 8 tiêu chí"),
+            ("BF-5", "Sinh viên", "Chọn 01 tiêu chí quan trọng nhất (nhân trọng số 1.5x).", "BR-06 (Top 1.5x)"),
+            ("BF-6", "Sinh viên", "Tích chọn cam kết bắt buộc: 'Tôi cam kết ở KTX tối thiểu 1 kỳ (5 tháng) theo BR-02'.", "BR-02 (Tối thiểu 1 kỳ)"),
+            ("BF-7", "Sinh viên", "Nhấn nút 'Nộp Hồ Sơ Đăng Ký Phòng'.", "Gửi dữ liệu lên máy chủ"),
+            ("BF-8", "Hệ thống", "Kiểm tra dữ liệu, lưu Database trạng thái Pending_Approval và cấp Mã hồ sơ.", "Hoàn tất UC-04"),
+            ("AF-A", "Sinh viên", "Tại bước BF-4, bấm 'Nạp hồ sơ mẫu Persona' để tự động điền 8 tiêu chí tức thì.", "Extend: Nạp mẫu Persona, NFR-06"),
+            ("EF-A", "Hệ thống", "Tại bước BF-7, nếu chưa tích cam kết ở tối thiểu 1 kỳ: Khóa nút nộp, báo vi phạm BR-02.", "ERR_TERM_MIN, BR-02"),
+            ("EF-B", "Hệ thống", "Tại bước BF-7, nếu chưa chọn tiêu chí ưu tiên top: Nhắc nhở chọn theo BR-06.", "ERR_TOP_EMPTY, BR-06")
+        ],
+        seq_messages=[
+            "• Message 1 (BF-1): Sinh viên -> UI: Mở biểu mẫu Đăng ký phòng & Thói quen",
+            "• Message 2 (BF-2): UI -> Sinh viên: Hiển thị 3 gói phòng và điều khoản cam kết (Ref: BR-02, BR-05)",
+            "• Message 3 (BF-3): Sinh viên -> UI: Chọn loại phòng 2 người / 4 người",
+            "• Message 4 (BF-4): Sinh viên -> UI: Điều chỉnh 8 thanh trượt thói quen sinh hoạt",
+            "• Message 5 (BF-5): Sinh viên -> UI: Chọn tiêu chí số 1 (nhân trọng số 1.5x) (Ref: BR-06)",
+            "• Message 6 (BF-6): Sinh viên -> UI: Tích chọn hộp kiểm cam kết tối thiểu 1 kỳ (Ref: BR-02)",
+            "• Message 7 (BF-7): Sinh viên -> UI: Nhấn nút Nộp Hồ Sơ",
+            "• Message 8 (BF-8): UI -> Survey Service -> DB: Lưu hồ sơ trạng thái Pending_Approval",
+            "• Khối opt (AF-A): Nạp nhanh Persona mẫu (Thái Bảo, Văn Việt, Minh Quân)",
+            "• Khối alt 1 (EF-A): Chưa tích cam kết 1 kỳ -> Khóa nút nộp và báo lỗi theo BR-02",
+            "• Khối alt 2 (EF-B): Bỏ trống tiêu chí ưu tiên -> Báo lỗi chọn tiêu chí top theo BR-06"
+        ],
+        wf_id="WF-02",
+        wf_name="Đăng Ký Loại Phòng & Khảo Sát Thói Quen",
+        wf_elements=[
+            ("WF-02-C01", "3 Card chọn loại phòng kèm đơn giá (VIP 2, Chuẩn 4, Tiết kiệm 6)", "Ánh xạ BF-2, BF-3, BR-05"),
+            ("WF-02-C02", "Dropdown chọn tiêu chí ưu tiên số 1 (nhân trọng số 1.5x)", "Ánh xạ BF-5, BR-06"),
+            ("WF-02-C03", "8 Thanh trượt thói quen sinh hoạt chuẩn hóa", "Ánh xạ BF-4"),
+            ("WF-02-C04", "Hộp kiểm cam kết bắt buộc lưu trú tối thiểu 1 kỳ (5 tháng)", "Ánh xạ BF-6, BR-02"),
+            ("WF-02-C05", "Nút bấm 'NỘP HỒ SƠ ĐĂNG KÝ PHÒNG'", "Ánh xạ BF-7, BF-8")
+        ]
+    )
 
-    # ==================== USE CASE 2 (NGHIỆP VỤ) ====================
-    uc2_flows = [
-        ("BF", "BF-01", "Sinh viên", "Chọn chức năng 'Đăng ký phòng mới & Khảo sát thói quen'.", "Màn hình WF-02"),
-        ("BF", "BF-02", "Hệ thống", "Tải danh mục loại phòng khả dụng: Phòng 2, 4, 6 người kèm đơn giá.", "BR-05 (Quản lý loại phòng)"),
-        ("BF", "BF-03", "Sinh viên", "Chọn loại phòng mong muốn (ví dụ Phòng 4 người máy lạnh).", "Đáp ứng góp ý của Thầy"),
-        ("BF", "BF-04", "Sinh viên", "Nhập 8 tiêu chí thói quen (ngủ, dậy, gọn gàng, tiếng ồn, hút thuốc...).", "8 tiêu chí trong models.py"),
-        ("BF", "BF-05", "Sinh viên", "Chỉ định tiêu chí quan trọng nhất (top) để nhận ưu tiên 1.5x.", "BR-06 (Top 1.5x)"),
-        ("BF", "BF-06", "Sinh viên", "Tích chọn cam kết: 'Cam kết ở tối thiểu 1 học kỳ (5 tháng)'.", "BR-02 (Tối thiểu 1 kỳ)"),
-        ("BF", "BF-07", "Sinh viên", "Nhấn nút 'Nộp hồ sơ xét duyệt KTX'.", "Gửi hồ sơ đăng ký"),
-        ("BF", "BF-08", "Hệ thống", "Lưu hồ sơ ở trạng thái Pending, gửi mã số hồ sơ cho SV.", "Tạo mã DK-xxxx, chờ duyệt"),
-        ("AF", "AF-01", "Sinh viên", "Bấm nút nạp nhanh Persona (Thái Bảo / Văn Việt / Minh Quân).", "Extend UC-06, NFR-06"),
-        ("AF", "AF-02", "Hệ thống", "Tự động điền nhanh 8 giá trị slider thói quen mẫu.", "Trải nghiệm người dùng"),
-        ("EF", "EF-01", "Hệ thống", "Chưa tích cam kết tối thiểu 1 kỳ: Khóa nút nộp, báo lỗi đỏ.", "Mã ERR_MIN_DURATION, BR-02"),
-        ("EF", "EF-02", "Hệ thống", "Giá trị slider vượt ngoài miền dữ liệu: Báo lỗi trường dữ liệu.", "Mã ERR_INVALID_RANGE, NFR-04")
-    ]
-    uc2_seq = """Sequence Flow Khớp 1-1:
-1. (BF-01) Sinh viên -> UI Survey: Chọn Đăng ký phòng & Khảo sát
-2. (BF-02) UI Survey -> Room Service: Yêu cầu danh mục loại phòng (2, 4, 6)
-3. (BF-02) Room Service -> UI Survey: Trả về danh mục phòng & giá thuê
-4. (BF-03) Sinh viên -> UI Survey: Chọn loại phòng 4 người máy lạnh
-[opt Nạp Persona]: 5. (AF-01) Sinh viên -> UI: Chọn Persona mẫu -> 6. (AF-02) UI: Điền nhanh slider
-7. (BF-04) Sinh viên -> UI Survey: Kéo thả 8 tiêu chí thói quen
-8. (BF-05) Sinh viên -> UI Survey: Chọn tiêu chí quan trọng nhất (Ref: BR-06, Top 1.5x)
-[alt Chưa tích cam kết]: 9. (EF-01) Sinh viên -> UI: Nhấn Nộp -> 10. (EF-01) UI -> SV: Báo lỗi vi phạm BR-02
-[alt Đủ cam kết >= 1 kỳ]: 11. (BF-06) SV -> UI: Tích cam kết -> 12. (BF-07) SV -> UI: Nhấn Nộp hồ sơ -> 13. (BF-08) UI -> Reg Service: Lưu Pending -> 14. (BF-08) UI -> SV: Cấp mã DK-xxxx"""
+    # UC-05
+    render_detailed_usecase(
+        sec_num="6",
+        uc_id="UC-05",
+        uc_title="Xem Bảng Xếp hạng Bạn cùng phòng (View Roommate Ranking)",
+        uc_desc="Mô tả cách sinh viên tra cứu danh sách bạn cùng phòng tương thích, sắp xếp giảm dần theo điểm hòa hợp 2 chiều và đối sánh chi tiết 8 tiêu chí.",
+        actors="Sinh viên (Primary Actor), Động cơ Chấm điểm KTX (Secondary Service)",
+        precond="Sinh viên đã hoàn thành khai báo thói quen sinh hoạt (UC-04).",
+        postcond="Sinh viên nắm rõ danh sách ứng viên hòa hợp nhất và có thể gửi lời mời ghép nhóm quen (UC-06).",
+        trigger="Sinh viên chọn tab 'Bảng Xếp Hạng Bạn Cùng Phòng'.",
+        flow_rows=[
+            ("BF-1", "Sinh viên", "Chọn tab 'Bảng Xếp Hạng Bạn Cùng Phòng' trên thanh menu.", "WF-03-Rank"),
+            ("BF-2", "Hệ thống", "Gửi vector thói quen của sinh viên đến Dịch vụ Chấm điểm tương thích.", "Include: Tính điểm 2 chiều"),
+            ("BF-3", "Động cơ Chấm điểm", "Tính điểm tương thích 2 chiều có nhân hệ số 1.5x cho tiêu chí top.", "BR-06, scoring.py"),
+            ("BF-4", "Hệ thống", "Sắp xếp danh sách ứng viên giảm dần theo điểm trung bình (Top 1 đến Top N).", "Xếp hạng tương thích"),
+            ("BF-5", "Hệ thống", "Hiển thị danh sách card ứng viên kèm điểm % và huy hiệu mức độ hòa hợp.", "Hoàn tất UC-05"),
+            ("AF-A", "Sinh viên", "Bấm 'Xem chi tiết tiêu chí' trên card ứng viên để đối sánh trực quan 8 thói quen.", "Extend: Xem chi tiết tiêu chí"),
+            ("EF-A", "Hệ thống", "Nếu chưa hoàn thành khảo sát: Hiển thị thông báo yêu cầu làm khảo sát trước.", "Bắt buộc dữ liệu đầu vào")
+        ],
+        seq_messages=[
+            "• Message 1 (BF-1): Sinh viên -> UI: Chọn chức năng Bảng xếp hạng bạn cùng phòng",
+            "• Message 2 (BF-2): UI -> Scoring Service: Yêu cầu tính điểm tương thích với pool ứng viên",
+            "• Message 3 (BF-2): Scoring Service -> DB: Truy vấn vector thói quen của các ứng viên",
+            "• Message 4 (BF-3): Scoring Service: Tính ma trận điểm 2 chiều & nhân trọng số 1.5x (Ref: BR-06)",
+            "• Message 5 (BF-4, BF-5): Scoring Service -> UI -> Sinh viên: Trả về danh sách Top ứng viên",
+            "• Khối opt (AF-A): Xem phân tích so sánh song song 8 tiêu chí thói quen",
+            "• Khối alt 1 (EF-A): Chưa làm khảo sát thói quen -> Báo lỗi yêu cầu hoàn thành khảo sát"
+        ],
+        wf_id="WF-03-Rank",
+        wf_name="Bảng Xếp Hạng Bạn Cùng Phòng",
+        wf_elements=[
+            ("WF-Rank-C01", "Thanh bộ lọc ứng viên theo khoa và trường thành viên", "Ánh xạ BF-1"),
+            ("WF-Rank-C02", "Card ứng viên Top 1 (Avatar, Tên, Trường, Điểm % hòa hợp, Huy hiệu)", "Ánh xạ BF-5"),
+            ("WF-Rank-C03", "Nút 'Xem chi tiết tiêu chí' mở modal đối sánh 8 thanh trượt", "Ánh xạ AF-A"),
+            ("WF-Rank-C04", "Nút 'Gửi lời mời ghép nhóm' kết nối bạn quen", "Ánh xạ liên kết UC-06")
+        ]
+    )
 
-    uc2_wf = [
-        ("WF02-1", "Bộ chọn 3 Card Loại phòng (2, 4, 6 người)", "Khớp bước BF-02, BF-03 (Chọn phòng & đơn giá)"),
-        ("WF02-2", "8 Thanh trượt Slider thói quen sinh hoạt", "Khớp bước BF-04 (Nhập 8 thông số)"),
-        ("WF02-3", "Dropdown chọn tiêu chí ưu tiên nhất (top)", "Khớp bước BF-05, BR-06 (Hệ số 1.5x)"),
-        ("WF02-4", "3 Nút bấm nạp Persona (Thái Bảo, Việt, Quân)", "Khớp bước AF-01, AF-02 (Nạp nhanh mẫu)"),
-        ("WF02-5", "Checkbox cam kết lưu trú tối thiểu 1 kỳ", "Khớp bước BF-06, BR-02 (Ràng buộc bắt buộc)"),
-        ("WF02-6", "Nút bấm 'Nộp hồ sơ xét duyệt KTX'", "Khớp bước BF-07, BF-08 (Lưu trạng thái Pending)")
-    ]
-    render_usecase_section(4, "UC-02", "Đăng ký Phòng & Khảo sát Thói quen (Cam kết >= 1 kỳ)", "Use Case Nghiệp vụ (1-n quan trọng)", "Sinh viên nội trú", "Sinh viên đã đăng nhập (UC-01).", "Hồ sơ đăng ký lưu trạng thái Pending chờ duyệt.", uc2_flows, uc2_seq, "WF-02", "Màn hình Khảo sát Thói quen & Chọn Phòng", uc2_wf)
+    # UC-13
+    render_detailed_usecase(
+        sec_num="7",
+        uc_id="UC-13",
+        uc_title="Thanh toán Tiền phòng & Đặt cọc 72h (Pay Dorm Fee and Deposit)",
+        uc_desc="Mô tả quy trình sinh viên thanh toán tiền phòng kỳ 1 kèm tiền đặt cọc tài sản trong hạn 72 giờ qua Cổng thanh toán VNPay để chốt giữ chỗ chính thức.",
+        actors="Sinh viên (Primary Actor), Cổng thanh toán VNPay (External Actor), Hệ thống KTX (Secondary Actor)",
+        precond="Sinh viên đã có kết quả phân phòng chính thức và thời hạn 72h đang hiệu lực (BR-04).",
+        postcond="Hợp đồng được chốt chính thức (Paid), sinh viên nhận Biên lai điện tử và Hợp đồng lưu trú có mã QR.",
+        trigger="Sinh viên nhận thông báo trúng tuyển và mở màn hình 'Thanh toán & Đặt cọc'.",
+        flow_rows=[
+            ("BF-1", "Sinh viên", "Mở màn hình Thanh toán Tiền phòng & Đặt cọc từ thông báo trúng tuyển.", "WF-05, BR-04"),
+            ("BF-2", "Hệ thống", "Hiển thị bảng kê: Tiền phòng Kỳ 1 (7tr) + Tiền cọc tài sản (1tr) = Tổng 8.000.000 VNĐ.", "BR-04 (Cọc 1tr, hạn 72h)"),
+            ("BF-3", "Hệ thống", "Kích hoạt và hiển thị đồng hồ đếm ngược thời hạn thanh toán chính xác 72 giờ.", "BR-04 (Ràng buộc 72h)"),
+            ("BF-4", "Sinh viên", "Chọn phương thức thanh toán: Cổng thanh toán VNPay (Quét mã VNPAY-QR).", "Include: Cổng VNPay"),
+            ("BF-5", "Hệ thống", "Tạo đơn hàng bảo mật (TLS 1.3), sinh mã giao dịch và hiển thị mã VNPAY-QR.", "NFR-03 (Bảo mật giao dịch)"),
+            ("BF-6", "Sinh viên", "Dùng Mobile Banking quét mã QR để xác nhận thanh toán số tiền 8.000.000 VNĐ.", "Thao tác thanh toán"),
+            ("BF-7", "Cổng VNPay", "Xử lý trừ tiền an toàn, gửi callback vnp_ResponseCode == '00' về máy chủ KTX.", "Xác thực thành công"),
+            ("BF-8", "Hệ thống", "Cập nhật trạng thái hợp đồng thành Paid, khóa vị trí giường chính thức.", "Chốt giữ chỗ 100%"),
+            ("BF-9", "Hệ thống", "Tự động phát hành Biên lai điện tử và Hợp đồng lưu trú KTX có mã QR.", "Extend: Tải biên lai điện tử"),
+            ("AF-A", "Sinh viên", "Tại bước BF-9, nhấn nút Tải biên lai điện tử và Tải hợp đồng số về thiết bị.", "Extend: Tải biên lai"),
+            ("EF-A", "Hệ thống", "Tại bước BF-3, nếu quá 72h chưa nộp: Tự động hủy kết quả, chuyển phòng cho Waitlist.", "ERR_PAYMENT_TIMEOUT, BR-04"),
+            ("EF-B", "Cổng VNPay", "Tại bước BF-7, nếu tài khoản không đủ số dư: Cổng báo FAILED, cho phép thử lại.", "ERR_INSUFFICIENT_FUNDS")
+        ],
+        seq_messages=[
+            "• Message 1 (BF-1): Sinh viên -> UI: Mở màn hình Thanh toán & Đặt cọc KTX",
+            "• Message 2 (BF-2, BF-3): UI <-> Pay Service: Hiển thị bảng kê 8tr & Đồng hồ 72h (Ref: BR-04)",
+            "• Message 3 (BF-4, BF-5): Sinh viên chọn VNPAY-QR -> UI gọi Payment Service tạo mã QR",
+            "• Message 4 (BF-5): Payment Service -> Cổng VNPay: Tạo phiên thanh toán bảo mật (Ref: NFR-03)",
+            "• Message 5 (BF-6): Sinh viên quét mã QR trên Mobile Banking",
+            "• Message 6 (BF-7): Cổng VNPay gửi callback SUCCESS (vnp_ResponseCode = 00)",
+            "• Message 7 (BF-8, BF-9): Cập nhật trạng thái Paid, khóa giường, phát hành Hợp đồng số",
+            "• Khối alt 1 (EF-A): Quá 72h không thanh toán -> Hủy kết quả, thu hồi phòng cho Waitlist (Ref: BR-04)",
+            "• Khối alt 2 (EF-B): Lỗi trừ tiền / Không đủ số dư -> Cổng báo FAILED, cho phép thử lại"
+        ],
+        wf_id="WF-05",
+        wf_name="Thanh Toán Tiền Phòng & Cọc 72h",
+        wf_elements=[
+            ("WF-05-C01", "Đồng hồ đếm ngược 72 giờ thời gian thực", "Ánh xạ BF-3, BR-04"),
+            ("WF-05-C02", "Bảng kê viện phí nội trú (7tr tiền phòng kỳ 1 + 1tr cọc cơ sở vật chất)", "Ánh xạ BF-2, BR-04"),
+            ("WF-05-C03", "Khung hiển thị mã VNPAY-QR động thanh toán bảo mật TLS 1.3", "Ánh xạ BF-4, BF-5, NFR-03"),
+            ("WF-05-C04", "Nút giả lập thanh toán thành công và nút Tải Hợp đồng KTX có mã QR", "Ánh xạ BF-7, BF-8, BF-9")
+        ]
+    )
 
-    # ==================== USE CASE 3 (BUSINESS APPROVE) ====================
-    uc3_flows = [
-        ("BF", "BF-01", "Cán bộ BQL", "Truy cập màn hình 'Phê duyệt Hồ sơ Đăng ký KTX'.", "Màn hình WF-03"),
-        ("BF", "BF-02", "Hệ thống", "Hiển thị danh sách hồ sơ Pending kèm huy hiệu đối soát BR-01, BR-02.", "BR-01, BR-02, BR-03"),
-        ("BF", "BF-03", "Cán bộ BQL", "Chọn xem chi tiết hồ sơ: SV trường A, diện chính sách, cam kết 1 kỳ.", "Thẩm định hồ sơ"),
-        ("BF", "BF-04", "Cán bộ BQL", "Kiểm tra số giường trống còn lại của loại phòng sinh viên chọn.", "Quỹ phòng KTX"),
-        ("BF", "BF-05", "Cán bộ BQL", "Nhấn nút 'Phê duyệt (Business Approve)'.", "BR-03 (Phê duyệt nghiệp vụ)"),
-        ("BF", "BF-06", "Hệ thống", "Cập nhật trạng thái thành 'Approved', nạp vào hàng đợi Gale-Shapley.", "Chuyển tiếp UC-04"),
-        ("BF", "BF-07", "Hệ thống", "Tự động gửi thông báo phê duyệt thành công qua email cho SV.", "Thông báo kết quả"),
-        ("AF", "AF-01", "Cán bộ BQL", "Chọn chức năng 'Duyệt hàng loạt (Batch Approve)' cho SV hợp lệ.", "Tiện ích quản trị NFR-06"),
-        ("AF", "AF-02", "Hệ thống", "Chuyển trạng thái Approved đồng loạt cho N hồ sơ chỉ 1 thao tác.", "Xử lý hàng loạt"),
-        ("EF", "EF-01", "Cán bộ BQL", "Phát hiện SV vi phạm kỷ luật cũ hoặc hết chỗ: Nhấn 'Từ chối (Reject)'.", "Xử lý vi phạm"),
-        ("EF", "EF-02", "Hệ thống", "Cập nhật hồ sơ thành 'Rejected', gửi email từ chối kèm lý do cho SV.", "Mã ERR_REG_REJECTED")
-    ]
-    uc3_seq = """Sequence Flow Khớp 1-1:
-1. (BF-01) BQL KTX -> UI Approve: Mở màn hình Duyệt đơn đăng ký
-2. (BF-02) UI Approve -> Approve Engine: Lấy danh sách hồ sơ Pending
-3. (BF-02) Approve Engine -> Database: Truy vấn đơn đăng ký
-4. (BF-02) Database -> Approve Engine: Trả về danh sách kèm đối soát tự động (BR-01, BR-02)
-5. (BF-02) Approve Engine -> UI Approve: Hiển thị bảng duyệt đơn
-6. (BF-03) BQL KTX -> UI Approve: Chọn hồ sơ cần thẩm định
-7. (BF-04) BQL KTX -> UI Approve: Kiểm tra hạn ngạch số giường trống
-[alt Phê duyệt hợp lệ]: 8. (BF-05) BQL -> UI: Nhấn Business Approve -> 9. (BF-06) UI -> Engine: Cập nhật Approved -> 10. (BF-06) Database: Lưu trạng thái Approved -> 11. (BF-07) Email Service: Báo email cho SV
-[alt Từ chối]: 12. (EF-01) BQL -> UI: Nhấn Reject kèm lý do -> 13. (EF-02) Database: Lưu Rejected -> 14. (EF-02) Email Service: Báo từ chối"""
+    # UC-18
+    render_detailed_usecase(
+        sec_num="8",
+        uc_id="UC-18",
+        uc_title="Phê duyệt đơn KTX - Business Approve (Approve Application)",
+        uc_desc="Mô tả quy trình Cán bộ KTX thẩm định tư cách lưu trú (MSSV trường A, kỷ luật, cam kết 1 kỳ) và phê duyệt đơn vào thuật toán phân phòng.",
+        actors="Cán bộ quản lý KTX (Primary Actor), Hệ thống KTX (Secondary Actor)",
+        precond="Hồ sơ đăng ký của sinh viên ở trạng thái Pending_Approval (UC-04).",
+        postcond="Hồ sơ chuyển sang Approved_For_Matching (đủ điều kiện chạy Gale-Shapley) hoặc Rejected.",
+        trigger="Cán bộ KTX đăng nhập Cổng Quản trị và mở module 'Thẩm định Đơn'.",
+        flow_rows=[
+            ("BF-1", "Cán bộ KTX", "Mở danh sách hồ sơ đăng ký KTX đang chờ thẩm định.", "WF-03"),
+            ("BF-2", "Hệ thống", "Hiển thị danh sách hồ sơ Pending kèm tích xanh đối soát tự động BR-01 & BR-02.", "BR-01, BR-02"),
+            ("BF-3", "Cán bộ KTX", "Chọn hồ sơ kiểm tra chi tiết nhân thân, điểm rèn luyện, lịch sử nội quy.", "Thẩm định nghiệp vụ"),
+            ("BF-4", "Hệ thống", "Kiểm tra quỹ giường trống khả dụng đối với loại phòng sinh viên đăng ký.", "BR-05 (Quỹ phòng)"),
+            ("BF-5", "Cán bộ KTX", "Nhấn nút 'Phê duyệt (Business Approve)'.", "BR-03 (Quyết định duyệt)"),
+            ("BF-6", "Hệ thống", "Cập nhật trạng thái Approved_For_Matching, nạp vào hàng đợi phân phòng.", "Hoàn tất UC-18"),
+            ("AF-A", "Cán bộ KTX", "Nhấn nút 'Duyệt hàng loạt (Batch Approve)' cho các hồ sơ đã có đủ tích xanh tự động.", "NFR-06 (Tối ưu vận hành)"),
+            ("EF-A", "Cán bộ KTX", "Nếu phát hiện sinh viên vi phạm kỷ luật hoặc nợ phí: Nhấn 'Từ chối đơn' kèm lý do.", "Extend: Từ chối đơn, BR-03"),
+            ("EF-B", "Cán bộ KTX", "Nếu thiếu minh chứng chính sách: Nhấn 'Yêu cầu bổ sung hồ sơ' để sinh viên cập nhật.", "Extend: Yêu cầu bổ sung")
+        ],
+        seq_messages=[
+            "• Message 1 (BF-1): Cán bộ KTX -> UI: Mở màn hình Thẩm định Hồ sơ",
+            "• Message 2 (BF-2): UI <-> Approval Service: Lấy danh sách đơn Pending & Đối soát tự động BR-01, BR-02",
+            "• Message 3 (BF-3, BF-4): Kiểm tra chi tiết hồ sơ & Hạn ngạch quỹ giường trống",
+            "• Message 4 (BF-5, BF-6): Cán bộ KTX bấm 'Phê duyệt' -> Cập nhật trạng thái Approved_For_Matching",
+            "• Khối opt (AF-A): Duyệt hàng loạt hồ sơ hợp lệ bằng 1 click",
+            "• Khối alt 1 (EF-A): Phát hiện vi phạm kỷ luật -> Bấm 'Từ chối đơn' kèm lý do gửi email sinh viên"
+        ],
+        wf_id="WF-03",
+        wf_name="Dashboard Thẩm Định Hồ Sơ KTX",
+        wf_elements=[
+            ("WF-03-C01", "KPI Bar: Tổng đơn, Đơn chờ duyệt (24 đơn), Quỹ phòng trống (120 giường)", "Ánh xạ BF-2, BF-4"),
+            ("WF-03-C02", "Bảng danh sách hồ sơ Pending có huy hiệu đối soát tự động BR-01 & BR-02", "Ánh xạ BF-2"),
+            ("WF-03-C03", "Nút bấm xanh 'Phê duyệt (Business Approve)'", "Ánh xạ BF-5, BR-03"),
+            ("WF-03-C04", "Nút bấm đỏ 'Từ chối đơn' kèm modal nhập lý do kỷ luật", "Ánh xạ EF-A, BR-03")
+        ]
+    )
 
-    uc3_wf = [
-        ("WF03-1", "Bảng danh sách hồ sơ đăng ký trạng thái Pending", "Khớp bước BF-02 (Hiển thị hồ sơ chờ duyệt)"),
-        ("WF03-2", "Huy hiệu xanh đối soát: Đúng trường A & Đủ cam kết", "Khớp bước BF-02, BR-01, BR-02 (Tự động kiểm tra)"),
-        ("WF03-3", "Khối thông tin số giường trống khả dụng", "Khớp bước BF-04 (Kiểm tra quỹ phòng)"),
-        ("WF03-4", "Nút bấm xanh 'Phê duyệt (Business Approve)'", "Khớp bước BF-05, BR-03 (Phê duyệt chính thức)"),
-        ("WF03-5", "Nút bấm đỏ 'Từ chối (Reject)' kèm ô nhập lý do", "Khớp bước EF-01, EF-02 (Từ chối vi phạm)")
-    ]
-    render_usecase_section(5, "UC-03", "Phê duyệt Nghiệp vụ Đơn Đăng ký (Business Approve)", "Use Case Nghiệp vụ (Theo ý Thầy)", "Ban quản lý KTX", "Có hồ sơ đăng ký trạng thái Pending (UC-02).", "Hồ sơ chuyển trạng thái Approved để chạy ghép phòng.", uc3_flows, uc3_seq, "WF-03", "Màn hình Quản trị Phê duyệt Đơn KTX", uc3_wf)
+    # UC-24
+    render_detailed_usecase(
+        sec_num="9",
+        uc_id="UC-24",
+        uc_title="Thực hiện Ghép phòng Tự động (Execute Automated Room Matching)",
+        uc_desc="Mô tả tiến trình hệ thống tự động chạy thuật toán Gale-Shapley kết hợp tối ưu lấp đầy 100% giường để phân phòng ổn định, triệt tiêu cặp chặn = 0 và tối đa hóa lợi nhuận KTX.",
+        actors="Hệ thống / Scheduler (Primary Actor), Quản trị viên KTX (Observer)",
+        precond="Kỳ đăng ký đã đóng, các hồ sơ tham gia đã được duyệt Approved_For_Matching (UC-18).",
+        postcond="Kết quả phân phòng chính thức được lưu, đảm bảo Blocking Pairs = 0 và kích hoạt đồng hồ 72h.",
+        trigger="Đến lịch tự động (Cron job) hoặc Quản trị viên KTX nhấn 'Khởi chạy Ghép phòng'.",
+        flow_rows=[
+            ("BF-1", "Hệ thống", "Kích hoạt tiến trình phân phòng tự động cho đợt tiếp nhận mới.", "WF-04, Scheduler"),
+            ("BF-2", "Hệ thống", "Phân nhóm hồ sơ theo cùng loại phòng (2, 4, 6 người).", "BR-05, NFR-05"),
+            ("BF-3", "Hệ thống", "Tính ma trận điểm tương thích 2 chiều, nhân trọng số 1.5x cho tiêu chí top.", "BR-06, scoring.py"),
+            ("BF-4", "Hệ thống", "Xây dựng bảng ưu tiên sở thích giảm dần cho từng ứng viên.", "Preference Lists"),
+            ("BF-5", "Hệ thống", "Thực thi giải thuật Gale-Shapley tìm các cặp ghép ổn định.", "Include: Gale-Shapley, NFR-01"),
+            ("BF-6", "Hệ thống", "Gộp các cặp ổn định vào từng phòng thực tế theo nguyên tắc lấp đầy 100% giường.", "Include: Lấp đầy phòng, BR-05"),
+            ("BF-7", "Hệ thống", "Kiểm chứng độ ổn định toán học: Xác nhận số cặp chặn bằng 0 (Blocking Pairs = 0).", "Include: Đếm BP, BR-07, NFR-02"),
+            ("BF-8", "Hệ thống", "Lưu kết quả phân phòng vào DB và hiển thị báo cáo lấp đầy, doanh thu dự kiến.", "Hoàn tất UC-24"),
+            ("BF-9", "Hệ thống", "Gửi thông báo trúng tuyển đến sinh viên và khởi động đồng hồ đếm ngược 72 giờ.", "Chuyển tiếp UC-13, BR-04"),
+            ("AF-A", "Cán bộ KTX", "Sau khi có kết quả, cán bộ KTX có thể điều chỉnh thủ công (override) trước khi công bố.", "Chức năng Override UC-19"),
+            ("EF-A", "Hệ thống", "Nếu số lượng sinh viên lẻ trong nhóm phòng: Ghép vào phòng dự phòng hoặc Waitlist đợt 2.", "Xử lý biên thuật toán")
+        ],
+        seq_messages=[
+            "• Message 1 (BF-1): Scheduler -> UI: Kích hoạt lệnh chạy ghép phòng tự động",
+            "• Message 2 (BF-2, BF-3): UI -> Gale-Shapley Engine: Truyền hồ sơ & Tính ma trận 2 chiều (Ref: BR-06)",
+            "• Message 3 (BF-4, BF-5): Thực thi giải thuật Gale-Shapley (Benchmark < 1.0s theo NFR-01)",
+            "• Message 4 (BF-6): Gộp cặp ổn định vào phòng theo nguyên tắc lấp đầy 100% giường (Ref: BR-05)",
+            "• Message 5 (BF-7): Kiểm chứng độ ổn định: Blocking Pairs = 0 (Ref: BR-07, NFR-02)",
+            "• Message 6 (BF-8, BF-9): Lưu kết quả, kích hoạt đồng hồ 72h & phát thông báo trúng tuyển (Ref: BR-04)",
+            "• Khối opt (AF-A): Cán bộ KTX điều chỉnh phân phòng thủ công (manual override) trước khi công bố"
+        ],
+        wf_id="WF-04",
+        wf_name="Phân Phòng Gale-Shapley & Lấp Đầy",
+        wf_elements=[
+            ("WF-04-C01", "Nút bấm '▶ KHỞI CHẠY GALE-SHAPLEY' (thời gian chạy < 1s)", "Ánh xạ BF-1, NFR-01"),
+            ("WF-04-C02", "Widget chứng chỉ ổn định toán học: 0 CẶP CHẶN (Blocking Pairs = 0)", "Ánh xạ BF-7, BR-07, NFR-02"),
+            ("WF-04-C03", "Widget tối ưu lấp đầy phòng: 100% LẤP ĐẦY GIƯỜNG", "Ánh xạ BF-6, BF-8, BR-05"),
+            ("WF-04-C04", "Sơ đồ mặt bằng phân phòng thực tế theo Tầng 2 & Tầng 3", "Ánh xạ BF-6, BF-8"),
+            ("WF-04-C05", "Nút 'Xuất file CSV' và nút 'Công bố kết quả & Kích hoạt 72h'", "Ánh xạ BF-9, BR-04")
+        ]
+    )
 
-    # ==================== USE CASE 4 (GHÉP PHÒNG & LỢI NHUẬN) ====================
-    uc4_flows = [
-        ("BF", "BF-01", "Quản trị viên", "Truy cập Tab Ghép phòng và nhấn 'Khởi chạy Phân phòng Tự động'.", "Màn hình WF-04"),
-        ("BF", "BF-02", "Hệ thống", "Lọc sinh viên Approved theo giới tính và nguyện vọng loại phòng (2, 4, 6).", "BR-05 (Phân nhóm theo loại phòng)"),
-        ("BF", "BF-03", "Hệ thống", "Tính toán ma trận điểm 2 chiều M[x][y] có xét tiêu chí top 1.5x.", "BR-06, NFR-01 (< 1.0s)"),
-        ("BF", "BF-04", "Hệ thống", "Sắp xếp danh sách ưu tiên pref_a, pref_b giảm dần theo điểm số.", "Chuẩn bị Gale-Shapley"),
-        ("BF", "BF-05", "Hệ thống", "Thực thi giải thuật gale_shapley hoãn chấp nhận (Deferred Acceptance).", "matching.py, NFR-01"),
-        ("BF", "BF-06", "Hệ thống", "Gộp các cặp tương thích cao thành phòng 4 qua merge_pairs_into_rooms.", "NFR-05 (Gộp phòng 4)"),
-        ("BF", "BF-07", "Hệ thống", "Quét kiểm tra toàn bộ phép ghép, chứng minh số cặp chặn bằng 0.", "BR-07, NFR-02 (0 Blocking Pairs)"),
-        ("BF", "BF-08", "Hệ thống", "Gán phòng: Ưu tiên lấp đầy 100% giường từng phòng để tối ưu chi phí.", "BR-05 (Tối ưu lợi nhuận KTX)"),
-        ("BF", "BF-09", "Hệ thống", "Hiển thị bảng kết quả phân phòng, chứng chỉ Blocking Pairs = 0.", "Hoàn tất phân phòng"),
-        ("AF", "AF-01", "Quản trị viên", "BQL nhấn nút 'Chạy Benchmark NFR-01' đo thời gian quy mô 100-1000 SV.", "NFR-01 Benchmark"),
-        ("EF", "EF-01", "Hệ thống", "Lệch sĩ số lẻ nhóm A/B: Ghép tối đa, SV dư được đưa vào Waitlist đợt 2.", "NFR-04 Xử lý lệch sĩ số")
-    ]
-    uc4_seq = """Sequence Flow Khớp 1-1:
-1. (BF-01) BQL KTX -> UI Match: Nhấn Khởi chạy Phân phòng
-2. (BF-02) UI Match -> Gale-Shapley Engine: Kích hoạt thuật toán cho SV Approved
-3. (BF-02) Gale-Shapley Engine -> Database: Lấy danh sách SV theo phân khúc loại phòng
-4. (BF-03) Gale-Shapley Engine -> Scoring Engine: Tính ma trận điểm M[i][j] (Ref: BR-06)
-5. (BF-03) Scoring Engine -> Gale-Shapley Engine: Trả về ma trận điểm (< 1s, NFR-01)
-6. (BF-04) Gale-Shapley Engine: Xây dựng pref_a, pref_b
-7. (BF-05) Gale-Shapley Engine: Chạy thuật toán Gale-Shapley
-[opt Phòng 4 người]: 8. (BF-06) Engine: Gộp phòng 4 người bằng merge_pairs_into_rooms (Ref: NFR-05)
-9. (BF-07) Engine: Quét kiểm chứng 0 Blocking Pairs (Ref: BR-07, NFR-02)
-10. (BF-08) Engine -> Room Allocator: Tối ưu lấp đầy 100% giường từng phòng (Ref: BR-05, Lợi nhuận KTX)
-11. (BF-08) Room Allocator -> Database: Lưu bảng phân phòng chính thức
-12. (BF-09) Engine -> UI Match: Trả về bảng kết quả (0 Cặp chặn, Tỷ lệ lấp đầy, Nút tải CSV)"""
+    # ==================== MỤC 10: MA TRẬN TRUY VẾT 1-TO-1 ====================
+    add_heading_1(doc, "10. BẢNG MA TRẬN TRUY VẾT 1-TO-1 (TRACEABILITY MATRIX)")
+    add_body(doc, "Bảng ma trận truy vết chứng minh sự liên kết nhất quán 100% giữa Bước đặc tả, Message Sequence, Thành phần Wireframe và Quy tắc nghiệp vụ:")
 
-    uc4_wf = [
-        ("WF04-1", "Nút bấm 'Khởi chạy Phân phòng Tự động'", "Khớp bước BF-01 (Kích hoạt thuật toán)"),
-        ("WF04-2", "Bảng danh sách phân phòng chính thức (Phòng 2 & 4)", "Khớp bước BF-06, BF-09 (Kết quả phân phòng)"),
-        ("WF04-3", "Huy hiệu Chứng chỉ Blocking Pairs = 0", "Khớp bước BF-07, BR-07, NFR-02 (Ổn định toán học)"),
-        ("WF04-4", "Widget thống kê Tỷ lệ Lấp đầy Phòng (Occupancy Rate)", "Khớp bước BF-08, BR-05 (Tối ưu lợi nhuận)"),
-        ("WF04-5", "Biểu đồ Doanh thu, Chi phí vận hành và Lợi nhuận ròng", "Khớp yêu cầu của Thầy về quản lý lợi nhuận"),
-        ("WF04-6", "Nút bấm 'Tải danh sách phân phòng (CSV)'", "Khớp bước BF-09, Extend UC-25")
-    ]
-    render_usecase_section(6, "UC-04", "Ghép phòng Gale-Shapley & Tối ưu Lợi nhuận KTX", "Use Case Nghiệp vụ Cốt lõi", "Ban quản lý KTX", "Danh sách SV đã Approved và danh mục phòng sẵn sàng.", "Sinh viên được phân phòng với 0 cặp chặn, lấp đầy tối đa.", uc4_flows, uc4_seq, "WF-04", "Bảng điều khiển Phân phòng & Quản trị Lợi nhuận", uc4_wf)
+    tbl_trace = doc.add_table(rows=17, cols=6)
+    tbl_trace.alignment = WD_TABLE_ALIGNMENT.CENTER
+    trace_heads = ["Mã UC", "Bước Đặc Tả (Step ID)", "Message Sequence", "Mã Thành Phần Wireframe", "Quy Tắc Nghiệp Vụ (BR)", "Khớp 1-1?"]
+    trace_widths = [Inches(0.7), Inches(1.1), Inches(1.6), Inches(1.5), Inches(1.4), Inches(0.7)]
 
-    # ==================== USE CASE 5 (THANH TOÁN 72H) ====================
-    uc5_flows = [
-        ("BF", "BF-01", "Sinh viên", "Nhận thông báo trúng tuyển phòng và mở màn hình 'Thanh toán & Đặt cọc'.", "Màn hình WF-05"),
-        ("BF", "BF-02", "Hệ thống", "Hiển thị bảng kê chi phí: Tiền phòng kỳ 1 (7tr) + Tiền cọc (1tr) = 8.000.000 đ.", "BR-04 (Cọc 1tr, hạn 72h)"),
-        ("BF", "BF-03", "Hệ thống", "Kích hoạt đồng hồ đếm ngược thời hạn thanh toán chính xác 72 giờ.", "Ràng buộc thời gian BR-04"),
-        ("BF", "BF-04", "Sinh viên", "Chọn phương thức thanh toán Cổng VNPay (quét mã VNPAY-QR).", "Include UC-20"),
-        ("BF", "BF-05", "Hệ thống", "Khởi tạo đơn hàng thanh toán bảo mật, chuyển hướng sang cổng VNPay.", "NFR-03 (Mã hóa TLS 1.3)"),
-        ("BF", "BF-06", "Sinh viên", "Quét mã QR trên App Mobile Banking và xác thực OTP chuyển tiền.", "Thao tác người dùng"),
-        ("BF", "BF-07", "Cổng VNPay", "Xử lý trừ tiền an toàn, gửi callback vnp_ResponseCode == 00 (SUCCESS).", "Xác thực giao dịch"),
-        ("BF", "BF-08", "Hệ thống", "Cập nhật trạng thái hợp đồng thành 'Paid', khóa phòng chính thức.", "Chốt giữ chỗ 100%"),
-        ("BF", "BF-09", "Hệ thống", "Tự động phát hành Biên lai điện tử và link tải Hợp đồng lưu trú có mã QR.", "Ký hợp đồng số UC-22"),
-        ("AF", "AF-01", "Sinh viên", "Chọn phương thức nộp tiền mặt trực tiếp tại Thu ngân KTX.", "Phương thức phụ"),
-        ("AF", "AF-02", "Cán bộ BQL", "Thu ngân nhận tiền, bấm nút xác nhận giao dịch trên hệ thống quản trị.", "Đối soát thủ công"),
-        ("EF", "EF-01", "Hệ thống", "Quá 72h không thanh toán: Quét tự động hủy giữ chỗ, chuyển sang Waitlist.", "Mã ERR_PAYMENT_TIMEOUT, BR-04"),
-        ("EF", "EF-02", "Cổng VNPay", "Tài khoản không đủ số dư: Báo lỗi FAILED, cho phép quét lại mã QR.", "Mã ERR_INSUFFICIENT_FUNDS")
-    ]
-    uc5_seq = """Sequence Flow Khớp 1-1:
-1. (BF-01) Sinh viên -> UI Payment: Mở trang Thanh toán & Đặt cọc
-2. (BF-02) UI Payment -> Payment Service: Lấy bảng kê chi phí nội trú kỳ 1
-3. (BF-02) Payment Service -> UI: Bảng kê chi phí (7tr tiền phòng + 1tr tiền cọc, Ref: BR-04)
-4. (BF-03) UI Payment: Kích hoạt đồng hồ đếm ngược 72 giờ (Ref: BR-04)
-5. (BF-04) Sinh viên -> UI Payment: Chọn thanh toán VNPAY-QR
-6. (BF-05) UI Payment -> Payment Service: Tạo phiên thanh toán bảo mật (NFR-03)
-7. (BF-05) Payment Service -> Cổng VNPay: Gửi đơn hàng 8.000.000 VNĐ
-8. (BF-05) Cổng VNPay -> UI: Trả về mã VNPAY-QR động
-9. (BF-06) Sinh viên -> Cổng VNPay: Quét mã QR và xác thực thanh toán
-[alt Thành công trong hạn 72h]: 10. (BF-07) VNPay -> Payment Service: Báo SUCCESS (vnp_ResponseCode = 00) -> 11. (BF-08) Payment Service -> Database: Cập nhật trạng thái 'Paid' -> 12. (BF-09) Contract Service: Sinh Biên lai điện tử & Hợp đồng KTX có mã QR -> 13. (BF-09) UI -> SV: Cấp thẻ phòng chính thức
-[alt Quá hạn 72h]: 14. (EF-01) Hệ thống -> Database: Quét quá hạn: Hủy phân phòng, thu hồi giường trống (Ref: BR-04) -> 15. (EF-01) UI -> SV: Thông báo hồ sơ bị hủy do quá hạn
-[alt Lỗi ngân hàng / Không đủ tiền]: 16. (EF-02) VNPay -> UI: Báo FAILED, cho phép thử lại phương thức khác"""
-
-    uc5_wf = [
-        ("WF05-1", "Bảng kê chi phí kỳ 1 (7tr tiền phòng + 1tr cọc = 8tr)", "Khớp bước BF-02, BR-04 (Chi phí minh bạch)"),
-        ("WF05-2", "Đồng hồ đếm ngược thời hạn thanh toán 72 giờ", "Khớp bước BF-03, BR-04 (Ràng buộc giữ chỗ)"),
-        ("WF05-3", "Khung hiển thị mã VNPAY-QR động", "Khớp bước BF-05, BF-07 (Thanh toán trực tuyến)"),
-        ("WF05-4", "Nút bấm 'Tải Biên lai điện tử có mã số thuế'", "Khớp bước BF-09 (Biên lai chứng từ hợp lệ)"),
-        ("WF05-5", "Nút bấm 'Ký & Tải Hợp đồng lưu trú KTX có mã QR'", "Khớp bước BF-09, UC-22 (Hợp đồng lưu trú số)"),
-        ("WF05-6", "Màn hình cảnh báo đỏ khi quá hạn 72h", "Khớp bước EF-01, BR-04 (Hủy giữ chỗ tự động)")
-    ]
-    render_usecase_section(7, "UC-05", "Thanh toán Tiền phòng Kỳ 1 & Đặt cọc Giữ chỗ (Hạn 72h)", "Use Case Nghiệp vụ (Theo ý Thầy)", "Sinh viên nội trú", "Sinh viên đã có kết quả phân phòng từ UC-04.", "Xác nhận Paid, cấp hợp đồng lưu trú và thẻ phòng chính thức.", uc5_flows, uc5_seq, "WF-05", "Màn hình Thanh toán Tiền phòng & Đặt cọc 72h", uc5_wf)
-
-    # ==================== MỤC 8: BẢNG TỔNG KẾT ĐỐI CHIẾU ====================
-    add_heading_1(doc, "8. BẢNG TỔNG HỢP KIỂM TRA ĐỘ ĐỒNG BỘ 100% TRƯỚC KHI BẢO VỆ")
-    add_body(doc, "Bảng kiểm tra đối chiếu chéo (Cross-verification Checklist) chứng minh sự ăn khớp hoàn hảo giữa Bảng đặc tả, Sequence Diagram và Thiết kế Wireframe:")
-
-    chk_table = doc.add_table(rows=6, cols=5)
-    chk_table.alignment = WD_TABLE_ALIGNMENT.CENTER
-    chk_heads = ["Mã UC", "Tên Use Case", "Số bước BF/AF/EF", "Sequence Messages", "Khớp 1-1 với Wireframe?"]
-    chk_widths = [Inches(0.8), Inches(2.2), Inches(1.3), Inches(1.4), Inches(1.5)]
-
-    for j, h in enumerate(chk_heads):
-        cell = chk_table.rows[0].cells[j]
-        cell.width = chk_widths[j]
+    for j, h in enumerate(trace_heads):
+        cell = tbl_trace.rows[0].cells[j]
+        cell.width = trace_widths[j]
         set_cell_background(cell, "1B365D")
-        set_cell_margins(cell, top=70, bottom=70, left=50, right=50)
+        set_cell_margins(cell, top=50, bottom=50, left=40, right=40)
         p = cell.paragraphs[0]
         p.alignment = WD_ALIGN_PARAGRAPH.CENTER
         run = p.add_run(h)
-        run.font.name, run.font.size, run.font.bold = 'Times New Roman', Pt(9), True
+        run.font.name, run.font.size, run.font.bold = 'Times New Roman', Pt(8.5), True
         run.font.color.rgb = RGBColor(0xFF, 0xFF, 0xFF)
 
-    chk_data = [
-        ("UC-01", "Đăng nhập & Xác thực SV", "6 BF / 2 AF / 2 EF", "12 Messages (3 alts)", "✅ Khớp 100% với WF-01"),
-        ("UC-02", "Đăng ký Phòng & Thói quen", "8 BF / 2 AF / 2 EF", "17 Messages (1 opt, 2 alts)", "✅ Khớp 100% với WF-02"),
-        ("UC-03", "Phê duyệt Business Approve", "7 BF / 2 AF / 2 EF", "17 Messages (2 alts)", "✅ Khớp 100% với WF-03"),
-        ("UC-04", "Ghép phòng & Tối ưu Lợi nhuận", "9 BF / 1 AF / 1 EF", "15 Messages (1 opt)", "✅ Khớp 100% với WF-04"),
-        ("UC-05", "Thanh toán Tiền phòng & Cọc 72h", "9 BF / 2 AF / 2 EF", "19 Messages (3 alts)", "✅ Khớp 100% với WF-05")
+    trace_data = [
+        ("UC-01", "BF-3", "Message 3 (SV -> UI)", "WF-01-C02 (Form MSSV/Pass)", "BR-01 (Đúng trường A)", "✅ 100%"),
+        ("UC-01", "AF-A", "Message opt (AF-A)", "WF-01-C03 (Ghi nhớ 30 ngày)", "NFR-06 (Tiện ích)", "✅ 100%"),
+        ("UC-01", "EF-B", "Message 16, 17 (EF-B)", "WF-01-C05 (Alert sai trường)", "BR-01 (Từ chối sai trường)", "✅ 100%"),
+        ("UC-04", "BF-2, BF-3", "Message 2, 3 (UI -> SV)", "WF-02-C01 (3 Gói phòng)", "BR-05 (Loại phòng)", "✅ 100%"),
+        ("UC-04", "BF-4", "Message 4 (SV -> UI)", "WF-02-C03 (8 Thanh trượt)", "8 Tiêu chí thói quen", "✅ 100%"),
+        ("UC-04", "BF-5", "Message 5 (SV -> UI)", "WF-02-C02 (Dropdown top)", "BR-06 (Trọng số 1.5x)", "✅ 100%"),
+        ("UC-04", "BF-6", "Message 6 (SV -> UI)", "WF-02-C04 (Hộp kiểm cam kết)", "BR-02 (Tối thiểu 1 kỳ)", "✅ 100%"),
+        ("UC-05", "BF-3", "Message 4 (Scoring)", "WF-Rank-C02 (Card Top 1)", "BR-06 (Ma trận 2 chiều)", "✅ 100%"),
+        ("UC-05", "AF-A", "Message opt (AF-A)", "WF-Rank-C03 (Xem chi tiết)", "NFR-06 (Minh bạch điểm)", "✅ 100%"),
+        ("UC-13", "BF-2", "Message 2 (Bảng kê)", "WF-05-C02 (Bảng kê 8tr)", "BR-04 (7tr phòng + 1tr cọc)", "✅ 100%"),
+        ("UC-13", "BF-3", "Message 2 (Đồng hồ 72h)", "WF-05-C01 (Đồng hồ đếm ngược)", "BR-04 (Hạn 72h)", "✅ 100%"),
+        ("UC-13", "BF-5", "Message 4 (Tạo QR)", "WF-05-C03 (Mã VNPAY-QR)", "NFR-03 (Bảo mật TLS 1.3)", "✅ 100%"),
+        ("UC-18", "BF-2", "Message 2 (Đối soát)", "WF-03-C02 (Tích xanh BR-01/02)", "BR-01, BR-02", "✅ 100%"),
+        ("UC-18", "BF-5", "Message 4 (Approve)", "WF-03-C03 (Nút Approve xanh)", "BR-03 (Business Approve)", "✅ 100%"),
+        ("UC-24", "BF-6", "Message 4 (Lấp đầy)", "WF-04-C03 (Widget 100% Lấp đầy)", "BR-05 (Occupancy 100%)", "✅ 100%"),
+        ("UC-24", "BF-7", "Message 5 (Đếm BP)", "WF-04-C02 (Widget 0 Cặp chặn)", "BR-07, NFR-02 (BP = 0)", "✅ 100%")
     ]
 
-    for i, row_data in enumerate(chk_data):
-        row = chk_table.rows[i + 1]
+    for i, rdata in enumerate(trace_data):
+        row = tbl_trace.rows[i + 1]
         bg = "F9FAFB" if i % 2 == 1 else "FFFFFF"
-        for j, val in enumerate(row_data):
+        for j, val in enumerate(rdata):
             cell = row.cells[j]
-            cell.width = chk_widths[j]
+            cell.width = trace_widths[j]
             set_cell_background(cell, bg)
-            set_cell_margins(cell, top=50, bottom=50, left=50, right=50)
+            set_cell_margins(cell, top=35, bottom=35, left=40, right=40)
             set_cell_border(cell, top={'val': 'single', 'sz': 4, 'color': 'E5E7EB'}, bottom={'val': 'single', 'sz': 4, 'color': 'E5E7EB'})
             p = cell.paragraphs[0]
-            p.alignment = WD_ALIGN_PARAGRAPH.LEFT if j == 1 else WD_ALIGN_PARAGRAPH.CENTER
+            p.alignment = WD_ALIGN_PARAGRAPH.LEFT if (1 <= j <= 4) else WD_ALIGN_PARAGRAPH.CENTER
             run = p.add_run(val)
-            run.font.name, run.font.size = 'Times New Roman', Pt(9)
+            run.font.name, run.font.size = 'Times New Roman', Pt(8)
             if j == 0:
                 run.font.bold = True
                 run.font.color.rgb = RGBColor(0x1B, 0x36, 0x5D)
-            elif j == 4:
+            elif j == 5:
                 run.font.bold = True
                 run.font.color.rgb = RGBColor(0x16, 0x65, 0x34)
 
-    add_styled_paragraph(doc, space_after=12)
-    add_heading_1(doc, "9. KẾT LUẬN")
-    add_body(doc, "Bộ hồ sơ đặc tả này là sản phẩm kỹ thuật phần mềm đạt chuẩn mực cao nhất, kết nối mạch lạc từ Quy định nghiệp vụ (BR) -> Yêu cầu phi chức năng (NFR) -> Bảng đặc tả chi tiết (BF/AF/EF) -> Sequence Diagram khớp 1-1 -> Bản vẽ Wireframe thiết kế. Nhóm sinh viên hoàn toàn tự tin mang tài liệu này trình bày trước Thầy giáo và Hội đồng chấm đồ án.")
+    # Save to Downloads and docs/
+    p_downloads = r"C:\Users\LENOVO\Downloads\Tai_Lieu_Dac_Ta_UseCase_Va_Sequence_Diagram_KTX.docx"
+    p_docs = os.path.join(os.path.dirname(__file__), "docs", "Tai_Lieu_Dac_Ta_UseCase_Va_Sequence_Diagram_KTX.docx")
 
-    out_dl = r"C:\Users\LENOVO\Downloads\Tai_Lieu_Dac_Ta_UseCase_Va_Sequence_Diagram_KTX.docx"
-    out_docs = r"C:\Users\LENOVO\.gemini\antigravity\scratch\system-\docs\Tai_Lieu_Dac_Ta_UseCase_Va_Sequence_Diagram_KTX.docx"
-
-    doc.save(out_dl)
-    doc.save(out_docs)
-    print(f"Successfully generated docx at:\n1. {out_dl}\n2. {out_docs}")
+    doc.save(p_downloads)
+    doc.save(p_docs)
+    print("SUCCESS: Generated docx at:")
+    print("1.", p_downloads)
+    print("2.", p_docs)
 
 if __name__ == "__main__":
     build_document()

@@ -429,6 +429,17 @@ def download_wireframe_pdf():
         )
     raise HTTPException(status_code=404, detail="File tài liệu PDF chưa được tạo.")
 
+@app.get("/download-usecase-drawio")
+def download_usecase_drawio():
+    drawio_path = os.path.join(os.path.dirname(__file__), "docs", "KTX_Smart_Match_UseCase.drawio")
+    if os.path.exists(drawio_path):
+        return FileResponse(
+            drawio_path,
+            media_type="application/xml",
+            filename="KTX_Smart_Match_UseCase.drawio"
+        )
+    raise HTTPException(status_code=404, detail="File drawio chưa được tạo.")
+
 @app.get("/wireframe-detail", response_class=HTMLResponse)
 def wireframe_detail_page():
     html_path = os.path.join(os.path.dirname(__file__), "ui", "wireframe_detail_export.html")

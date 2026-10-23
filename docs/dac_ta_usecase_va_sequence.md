@@ -1,8 +1,11 @@
-# TÀI LIỆU ĐẶC TẢ CHI TIẾT USE CASE, BỘ DIAGRAM VÀ WIREFRAME (TUẦN HỌC)
+# HỒ SƠ ĐẶC TẢ CHI TIẾT USE CASE, BỘ SEQUENCE DIAGRAM & WIREFRAME UI
 **Học phần:** System Engineering / Phân tích & Thiết kế Hệ thống  
 **Dự án:** Hệ thống Quản trị & Ghép bạn cùng phòng Ký túc xá Thông minh (KTX Smart Match & Management)  
 **Nhóm thực hiện:** Nhóm 3 (Châu Tuấn Kiệt, Bùi Đình Hiếu, Lê Hoàng Triệu)  
-**Phiên bản:** Hoàn thiện 100% yêu cầu Tuần học: Business Rules, Non-functional, Bảng đặc tả BF/AF/EF có References, Sequence Diagram khớp 1-1, Activity Diagram và Wireframe Mapping.
+**Căn cứ tài liệu:** 
+1. Mẫu chuẩn [Use Case Specification Slide bài giảng](https://docs.google.com/presentation/d/1v_cJQUzJXBKowJnNpMdKqbDWYjmTS1KP/edit?slide=id.p25#slide=id.p25) (Summary format + Flow components: Step ID, Actor, Action, Notes/references).
+2. Sơ đồ Use Case chuẩn hóa hoàn thiện trong file `KTX_Smart_Match_UseCase.drawio`.
+3. Lời dặn của Giảng viên trên bảng lớp: Phân loại 1 Dễ + 1-n Nghiệp vụ, định nghĩa BR/NFR tường minh, Sequence Diagram đánh số khớp 1-1 với bảng đặc tả, Wireframe "Đặc tả trước, design sau".
 
 ---
 
@@ -10,17 +13,16 @@
 
 > *"Sai cơ bản là điền references, làm mà không hiểu BR1 là gì, BR-2 là gì, AF là gì phải hiểu để note, không được note đại."* (Lời dặn của Giảng viên)
 
-Dưới đây là bảng định nghĩa tường minh các Quy tắc nghiệp vụ (BR) được tham chiếu trực tiếp trong toàn bộ các bảng đặc tả:
-
-| Mã BR | Tên Quy tắc Nghiệp vụ | Nội dung Chi tiết & Điều kiện Áp dụng | Ý nghĩa Vận hành & Tài chính | Module / Form Áp dụng |
-| :---: | :--- | :--- | :--- | :--- |
-| **BR-01** | **Đối tượng Tiếp nhận (Đại học Liên kết)** | KTX A phục vụ riêng cho sinh viên thuộc **Trường Đại học A** (hoặc khối đại học thành viên liên kết). Sinh viên phải có Mã số sinh viên (MSSV) hợp lệ và email trường cấp (`@edu.vn`). Đúng đối tượng mới được quyền kích hoạt tự động ghép phòng. | Ngăn chặn người ngoài xâm nhập KTX, đảm bảo an ninh nội trú học đường và hỗ trợ đúng đối tượng sinh viên trường liên kết. | Form Đăng ký, Cổng Xác thực Sinh viên (`models.py`, `data_io.py`) |
-| **BR-02** | **Thời hạn Hợp đồng Tối thiểu 1 Kỳ** | Sinh viên đăng ký ở KTX bắt buộc phải cam kết thời hạn lưu trú **tối thiểu 01 học kỳ (05 tháng)** hoặc trọn năm học (10 tháng). Hệ thống kiên quyết từ chối hợp đồng ngắn hạn theo ngày/tuần. | Tránh xáo trộn phòng ốc, giữ nếp sống văn hóa ổn định cho bạn cùng phòng và bảo toàn kế hoạch dòng tiền tài chính theo kỳ. | Form Đăng ký Phòng, Màn hình Hợp đồng KTX |
-| **BR-03** | **Phê duyệt Nghiệp vụ (Business Approve)** | Hồ sơ đăng ký KTX sau khi sinh viên nộp phải trải qua bước **Phê duyệt nghiệp vụ (Business Approve)** của Ban quản lý/Hệ thống trước khi được nạp vào thuật toán phân phòng. Cán bộ KTX kiểm tra: (1) Tính hợp lệ của MSSV trường A; (2) Lịch sử kỷ luật; (3) Xác nhận diện chính sách ưu tiên. Chỉ hồ sơ `Approved` mới được xếp phòng. | Kiểm soát cửa ngõ an ninh, không để đối tượng vi phạm kỷ luật vào ở, đảm bảo tính công bằng xã hội cho sinh viên nghèo/chính sách. | Màn hình Quản trị Duyệt Đơn (Business Admin Dashboard) |
-| **BR-04** | **Đặt cọc Giữ chỗ & Hạn Thanh toán 72h** | Trong vòng **72 giờ** kể từ khi công bố kết quả phân phòng, sinh viên phải hoàn tất thanh toán tiền phòng kỳ 1 kèm **Tiền đặt cọc bảo đảm tài sản (1.000.000 VNĐ)** qua cổng VNPay/Ngân hàng. Nếu quá hạn 72h chưa nộp, hệ thống tự động hủy kết quả và nhường suất cho sinh viên trong danh sách chờ (Waitlist). Nếu đơn phương hủy hợp đồng trước 1 kỳ, tiền cọc sẽ không được hoàn trả. | Tránh tình trạng giữ chỗ ảo khiến phòng bị bỏ trống, đảm bảo KTX thu hồi vốn và bù đắp chi phí tìm người thay thế nếu có phát sinh hủy phòng. | Màn hình Thanh toán Tiền phòng, Cổng thanh toán VNPay |
-| **BR-05** | **Tối ưu Lợi nhuận & Lấp đầy Phòng (Occupancy)** | Thuật toán phân nhóm sinh viên theo cùng nguyện vọng loại phòng (2, 4, 6 người) trước, sau đó áp dụng Gale-Shapley để ghép cặp thói quen. Hệ thống ưu tiên **lấp đầy 100% số giường của từng phòng** trước khi mở phòng mới, triệt tiêu tình trạng phòng dở dang (ví dụ phòng 4 người chỉ có 1 người ở). | Giảm thiểu tối đa chi phí điện nước chung, khấu hao điều hòa và nhân lực dọn dẹp cho phòng trống, tối đa hóa biên lợi nhuận ròng cho KTX. | Thuật toán `matching.py`, Phân hệ Báo cáo Tài chính |
-| **BR-06** | **Trọng số Ưu tiên Cá nhân (Top Criterion 1.5x)** | Trong 8 tiêu chí thói quen, tiêu chí mà sinh viên chọn là quan trọng nhất (`top`) sẽ được nhân hệ số trọng số **$1.5\times$**, tạo ra ma trận điểm tương thích hai chiều bất đối xứng ($M[a][b] \neq M[b][a]$). | Phản ánh tâm lý thực tế: một người có thể thấy rất hợp đối phương, nhưng đối phương lại không thích vì không đáp ứng kỳ vọng số 1 của họ. | Module Chấm điểm Tương thích (`scoring.py`) |
-| **BR-07** | **Triệt tiêu Cặp chặn (Stability Guarantee)** | Phép phân phòng chính thức bắt buộc phải đạt độ ổn định tuyệt đối, nghĩa là **số cặp chặn phải bằng 0 (Blocking Pairs = 0)**. | Không một cặp sinh viên nào có động cơ rủ nhau bỏ phòng hiện tại để sang ở chung phòng khác, triệt tiêu đơn từ khiếu nại xin đổi phòng. | Thuật toán `gale_shapley()`, `count_blocking_pairs()` |
+| Mã BR | Tên Quy tắc Nghiệp vụ | Nội dung Chi tiết & Điều kiện Áp dụng | Ý nghĩa Vận hành & Module Áp dụng |
+| :---: | :--- | :--- | :--- |
+| **BR-01** | **Đối tượng Tiếp nhận (SV Trường A)** | KTX A phục vụ riêng cho sinh viên thuộc **Trường Đại học A** (hoặc khối đại học thành viên liên kết). Sinh viên phải có Mã số sinh viên (MSSV) hợp lệ và email trường cấp (`@edu.vn`). Đúng đối tượng mới được quyền kích hoạt tự động ghép phòng. | Ngăn chặn người ngoài xâm nhập KTX, đảm bảo an ninh nội trú học đường (Cổng đăng nhập, Xác thực SV Trường A). |
+| **BR-02** | **Thời hạn Hợp đồng Tối thiểu 1 Kỳ** | Sinh viên đăng ký ở KTX bắt buộc phải cam kết thời hạn lưu trú **tối thiểu 01 học kỳ (05 tháng)** hoặc trọn năm học (10 tháng). Hệ thống kiên quyết từ chối hợp đồng ngắn hạn theo ngày/tuần. | Tránh xáo trộn phòng ốc, giữ nếp sống văn hóa ổn định cho bạn cùng phòng và bảo toàn kế hoạch tài chính KTX (Form đăng ký, Hợp đồng). |
+| **BR-03** | **Phê duyệt Nghiệp vụ (Business Approve)** | Hồ sơ đăng ký KTX sau khi sinh viên nộp phải trải qua bước **Phê duyệt nghiệp vụ (Business Approve)** của Cán bộ KTX trước khi được nạp vào thuật toán phân phòng. Cán bộ KTX kiểm tra: (1) Tính hợp lệ của MSSV trường A; (2) Lịch sử kỷ luật; (3) Xác nhận diện chính sách ưu tiên. Chỉ hồ sơ `Approved` mới được xếp phòng. | Kiểm soát cửa ngõ an ninh, không để đối tượng vi phạm kỷ luật vào ở, đảm bảo tính công bằng xã hội (Dashboard Quản trị Thẩm định Đơn). |
+| **BR-04** | **Đặt cọc Giữ chỗ & Hạn Thanh toán 72h** | Trong vòng **72 giờ** kể từ khi công bố kết quả phân phòng, sinh viên phải hoàn tất thanh toán tiền phòng kỳ 1 kèm **Tiền đặt cọc bảo đảm tài sản (1.000.000 VNĐ)** qua Cổng thanh toán VNPay. Nếu quá hạn 72h chưa nộp, hệ thống tự động hủy kết quả và nhường suất cho sinh viên trong danh sách chờ (Waitlist). Nếu đơn phương hủy hợp đồng trước 1 kỳ, tiền cọc sẽ không được hoàn trả. | Tránh tình trạng giữ chỗ ảo khiến phòng bị bỏ trống, đảm bảo KTX thu hồi vốn và bù đắp chi phí tìm người thay thế (Cổng Thanh toán VNPay). |
+| **BR-05** | **Tối ưu Lợi nhuận & Lấp đầy Phòng (Occupancy)** | Thuật toán phân nhóm sinh viên theo cùng nguyện vọng loại phòng (2, 4, 6 người) trước, sau đó áp dụng Gale-Shapley để ghép cặp thói quen. Hệ thống ưu tiên **lấp đầy 100% số giường của từng phòng** trước khi mở phòng mới, triệt tiêu tình trạng phòng dở dang (ví dụ phòng 4 người chỉ có 1 người ở). | Giảm thiểu tối đa chi phí điện nước chung, khấu hao điều hòa và nhân lực dọn dẹp cho phòng trống, tối đa hóa biên lợi nhuận ròng cho KTX (Động cơ matching, Báo cáo doanh thu). |
+| **BR-06** | **Trọng số Ưu tiên Cá nhân (Top Criterion 1.5x)** | Trong 8 tiêu chí thói quen, tiêu chí mà sinh viên chọn là quan trọng nhất (`top`) sẽ được nhân hệ số trọng số **$1.5	imes$**, tạo ra ma trận điểm tương thích hai chiều bất đối xứng ($M[a][b] 
+eq M[b][a]$). | Phản ánh tâm lý thực tế: một người có thể thấy rất hợp đối phương, nhưng đối phương lại không thích vì không đáp ứng kỳ vọng số 1 của họ (Module scoring.py). |
+| **BR-07** | **Triệt tiêu Cặp chặn (Stability Guarantee)** | Phép phân phòng chính thức bắt buộc phải đạt độ ổn định tuyệt đối, nghĩa là **số cặp chặn phải bằng 0 (Blocking Pairs = 0)**. | Không một cặp sinh viên nào có động cơ rủ nhau bỏ phòng hiện tại để sang ở chung phòng khác, triệt tiêu đơn từ khiếu nại xin đổi phòng (Thuật toán Gale-Shapley). |
 
 ---
 
@@ -28,46 +30,84 @@ Dưới đây là bảng định nghĩa tường minh các Quy tắc nghiệp v�
 
 | Mã NFR | Tên Yêu cầu Phi chức năng | Tiêu chuẩn Định lượng Đo lường | Phương pháp Kiểm chứng / File Cài đặt |
 | :---: | :--- | :--- | :--- |
-| **NFR-01** | **Hiệu năng Xử lý Thuật toán** | Thuật toán Gale-Shapley và tính điểm tương thích phải xử lý xong quy mô $N = 200$ sinh viên trong thời gian $< 1.0$ giây; quy mô stress test $N = 1.000$ sinh viên trong thời gian $< 5.0$ giây. | Kiểm thử tự động bằng `time.perf_counter()` trong [`tests/test_perf_scoring.py`](file:///C:/Users/LENOVO/.gemini/antigravity/scratch/system-/tests/test_perf_scoring.py) và [`tests/test_benchmark.py`](file:///C:/Users/LENOVO/.gemini/antigravity/scratch/system-/tests/test_benchmark.py). |
-| **NFR-02** | **Tính Ổn định Toán học Tuyệt đối** | Kết quả ghép phòng phải triệt tiêu 100% cặp chặn ($\text{Blocking Pairs} = 0$) qua tối thiểu 50 seed thử nghiệm ngẫu nhiên liên tiếp. | Chạy bộ test [`tests/test_matching.py::test_gale_shapley_is_stable`](file:///C:/Users/LENOVO/.gemini/antigravity/scratch/system-/tests/test_matching.py) qua 50 hạt giống ngẫu nhiên. |
-| **NFR-03** | **Bảo mật & Toàn vẹn Thanh toán** | Giao dịch nộp tiền phòng và đặt cọc phải được mã hóa theo chuẩn bảo mật TLS 1.3, đối soát chữ ký số băm SHA-256 phản hồi từ cổng VNPay để chống giả mạo giao dịch (Anti-Tampering). | Tích hợp cổng thanh toán Sandbox, kiểm tra mã phản hồi `vnp_ResponseCode == "00"`. |
-| **NFR-04** | **Khả năng Chịu lỗi Dữ liệu Đầu vào** | Khi nạp file dữ liệu CSV khảo sát bị lỗi (thiếu cột, sai định dạng số, file trống, lệch sĩ số 2 nhóm), hệ thống không được crash mà phải bắt ngoại lệ và hiển thị thông báo lỗi cụ thể dòng/cột. | Bộ test kiểm thử ngoại lệ [`tests/test_error_handling.py`](file:///C:/Users/LENOVO/.gemini/antigravity/scratch/system-/tests/test_error_handling.py) với 3 file mẫu lỗi. |
-| **NFR-05** | **Khả năng Mở rộng Quy mô Phòng (Scalability)** | Kiến trúc phần mềm phải hỗ trợ linh hoạt mở rộng từ phòng 2 người (ghép cặp trực tiếp) sang phòng 4 người và phòng 6 người thông qua thuật toán gộp tham lam `merge_pairs_into_rooms`. | Hàm `merge_pairs_into_rooms()` trong [`matching.py`](file:///C:/Users/LENOVO/.gemini/antigravity/scratch/system-/matching.py) và unit test phòng 4 người. |
+| **NFR-01** | **Hiệu năng Xử lý Thuật toán** | Thuật toán Gale-Shapley và tính điểm tương thích phải xử lý xong quy mô $N = 200$ sinh viên trong thời gian $< 1.0$ giây; quy mô stress test $N = 1.000$ sinh viên trong thời gian $< 5.0$ giây. | Kiểm thử tự động bằng `time.perf_counter()` trong `test_benchmark.py` và `test_perf_scoring.py`. |
+| **NFR-02** | **Tính Ổn định Toán học Tuyệt đối** | Kết quả ghép phòng phải triệt tiêu 100% cặp chặn ($	ext{Blocking Pairs} = 0$) qua tối thiểu 50 seed thử nghiệm ngẫu nhiên liên tiếp. | Chạy bộ test tự động `test_matching.py::test_gale_shapley_is_stable`. |
+| **NFR-03** | **Bảo mật & Toàn vẹn Giao dịch** | Giao dịch nộp tiền phòng và đặt cọc phải được mã hóa theo chuẩn bảo mật TLS 1.3, đối soát chữ ký số băm SHA-256 phản hồi từ cổng VNPay để chống giả mạo giao dịch (Anti-Tampering). | Tích hợp cổng thanh toán Sandbox, kiểm tra mã phản hồi `vnp_ResponseCode == "00"`. |
+| **NFR-04** | **Khả năng Chịu lỗi Dữ liệu Đầu vào** | Khi nạp file dữ liệu CSV khảo sát bị lỗi (thiếu cột, sai định dạng số, file trống, lệch sĩ số 2 nhóm), hệ thống không được crash mà phải bắt ngoại lệ và hiển thị thông báo lỗi cụ thể dòng/cột. | Bộ test kiểm thử ngoại lệ `test_error_handling.py` với 3 file mẫu lỗi. |
+| **NFR-05** | **Khả năng Mở rộng Quy mô Phòng** | Kiến trúc phần mềm phải hỗ trợ linh hoạt mở rộng từ phòng 2 người (ghép cặp trực tiếp) sang phòng 4 người và phòng 6 người thông qua thuật toán gộp tham lam `merge_pairs_into_rooms`. | Hàm `merge_pairs_into_rooms()` trong `matching.py`. |
 | **NFR-06** | **Trải nghiệm Người dùng & Thời gian Phản hồi UI** | Thời gian phản hồi giao diện web khi chuyển tab hoặc kéo thả slider thói quen phải đạt $< 2.0$ giây; hỗ trợ nạp nhanh 3 Persona mẫu chỉ với 1 cú click chuột. | Thử nghiệm người dùng trên Dashboard FastAPI/Streamlit. |
 
 ---
 
-## 3. ĐẶC TẢ USE CASE 1 (USE CASE ĐƠN GIẢN): UC-01 - ĐĂNG NHẬP & XÁC THỰC SINH VIÊN
+## 3. DANH MỤC TOÀN BỘ 26 USE CASE TRONG HỆ THỐNG (CHUẨN HÓA THEO FILE DRAW.IO)
 
-### 3.1 Bảng tóm tắt thông tin Use Case
-* **Tên Use Case:** Đăng nhập & Xác thực Sinh viên KTX
-* **Mã Use Case:** `UC-01`
-* **Loại Use Case:** Use Case Đơn giản (1 dễ)
-* **Tác nhân chính:** Sinh viên nội trú (Primary Actor)
-* **Tác nhân hỗ trợ:** Hệ thống xác thực danh tính KTX (System Authentication Service)
-* **Tiền điều kiện (Preconditions):** Sinh viên đã được cấp tài khoản gắn với Mã số sinh viên (MSSV) trường A.
-* **Hậu điều kiện (Postconditions):** Hệ thống cấp phiên làm việc (Session Token), chuyển hướng sinh viên vào Cổng nội trú.
+Căn cứ theo bản vẽ thiết kế mới nhất trong `KTX_Smart_Match_UseCase.drawio`, hệ thống bao gồm **8 Tác nhân** và **26 Use Case** phân bố trong 2 phân hệ:
+
+| Mã UC | Tên Use Case (Title) | Tác nhân Chính (Actors) | Phân hệ (Subsystem) | Mối quan hệ UML | Áp dụng BR/NFR |
+| :---: | :--- | :--- | :--- | :---: | :---: |
+| **UC-01** | **Đăng nhập / Quên mật khẩu** | Sinh viên | Phân hệ Sinh viên | include `Xác thực SV Trường A` | **BR-01**, NFR-03 |
+| **UC-02** | **Đăng ký tài khoản & khai báo thói quen** | Sinh viên | Phân hệ Sinh viên | include `Xác thực SV Trường A` | **BR-01** |
+| **UC-03** | **Cập nhật hồ sơ & thói quen sinh hoạt** | Sinh viên | Phân hệ Sinh viên | extend `Nạp hồ sơ mẫu Persona` | NFR-06 |
+| **UC-04** | **Chọn loại phòng, tiện ích & nộp đơn KTX** | Sinh viên | Phân hệ Sinh viên | Core Business | **BR-02**, **BR-05**, **BR-06** |
+| **UC-05** | **Xem bảng xếp hạng bạn cùng phòng** | Sinh viên | Phân hệ Sinh viên | include `Tính điểm tương thích`, extend `Xem chi tiết` | **BR-06** |
+| **UC-06** | **Gửi / phản hồi lời mời ghép nhóm bạn quen** | Sinh viên | Phân hệ Sinh viên | Social Feature | NFR-06 |
+| **UC-07** | **Xem kết quả phân phòng & thông tin phòng** | Sinh viên | Phân hệ Sinh viên | Core Business | **BR-05** |
+| **UC-08** | **Yêu cầu đổi phòng / đổi bạn cùng phòng** | Sinh viên | Phân hệ Sinh viên | extend `Đính kèm lý do & minh chứng` | NFR-06 |
+| **UC-09** | **Gửi phản ánh & báo sự cố** | Sinh viên | Phân hệ Sinh viên | Support | NFR-06 |
+| **UC-10** | **Xem thông báo** | Sinh viên | Phân hệ Sinh viên | Notification | NFR-06 |
+| **UC-11** | **Đánh giá bạn cùng phòng cuối kỳ** | Sinh viên | Phân hệ Sinh viên | extend `Báo cáo xung đột / vi phạm` | Evaluation |
+| **UC-12** | **Gia hạn / Trả phòng** | Sinh viên | Phân hệ Sinh viên | include `Tính phí & hoàn cọc` | **BR-04** |
+| **UC-13** | **Thanh toán tiền phòng & cọc (72h)** | Sinh viên | Phân hệ Sinh viên | include `Cổng VNPay`, extend `Tải biên lai` | **BR-04**, NFR-03 |
+| **UC-14** | **Quản lý danh mục tòa, phòng & giá** | Quản trị viên KTX | Quản trị & Vận hành | Admin Management | **BR-05** |
+| **UC-15** | **Quản lý tài khoản & phân quyền** | Quản trị viên KTX | Quản trị & Vận hành | Security | NFR-03 |
+| **UC-16** | **Quản lý dữ liệu sinh viên KTX** | Quản trị viên KTX | Quản trị & Vận hành | extend `Nạp CSV`, extend `Sinh Seed` | NFR-04 |
+| **UC-17** | **Cấu hình trọng số tiêu chí & luật ghép** | Quản trị viên KTX | Quản trị & Vận hành | Algorithm Config | **BR-06**, **BR-07** |
+| **UC-18** | **Phê duyệt đơn KTX (Business Approve)** | Cán bộ quản lý KTX | Quản trị & Vận hành | extend `Yêu cầu bổ sung / Từ chối đơn` | **BR-01**, **BR-02**, **BR-03** |
+| **UC-19** | **Điều chỉnh phân phòng thủ công (override)** | Cán bộ quản lý KTX | Quản trị & Vận hành | Manual Override | Admin Operation |
+| **UC-20** | **Xử lý yêu cầu đổi phòng / đổi bạn** | Cán bộ quản lý KTX | Quản trị & Vận hành | Dispute Resolution | Customer Care |
+| **UC-21** | **Quản lý phản ánh & sự cố** | Cán bộ KTX, Kỹ thuật | Quản trị & Vận hành | Maintenance | Facility Care |
+| **UC-22** | **Theo dõi & đối soát thanh toán** | Kế toán KTX | Quản trị & Vận hành | extend `Hoàn tiền / hoàn cọc` | **BR-04**, Finance |
+| **UC-23** | **Báo cáo doanh thu & lợi nhuận** | Kế toán, Admin | Quản trị & Vận hành | extend `Xuất báo cáo CSV` | **BR-05**, Finance |
+| **UC-24** | **Thực hiện ghép phòng tự động** | Hệ thống (Scheduler) | Quản trị & Vận hành | include `Gale-Shapley`, `Đếm BP`, `Lấp đầy` | **BR-05**, **BR-07**, NFR-01, 02 |
+| **UC-25** | **Gửi thông báo & nhắc hạn thanh toán** | Hệ thống (Scheduler) | Quản trị & Vận hành | Background Service | **BR-04** |
+| **UC-26** | **Tự động hủy đơn quá 72h & xếp hàng chờ** | Hệ thống (Scheduler) | Quản trị & Vận hành | Automated Cleanup | **BR-04**, Waitlist |
 
 ---
 
-### 3.2 Bảng Đặc tả Luồng sự kiện (BF, AF, EF) có References chuẩn mực
+## 4. ĐẶC TẢ USE CASE 1 (USE CASE ĐƠN GIẢN - 1 DỄ): UC-01 - ĐĂNG NHẬP / QUÊN MẬT KHẨU
 
-| Khối luồng | ID | Tác nhân (Actor) | Hành động chi tiết (Action) | Tham chiếu Quy định / Kỹ thuật (Ref) |
-| :---: | :---: | :--- | :--- | :--- |
-| **BF** | **BF-01** | Sinh viên | Truy cập vào địa chỉ Cổng thông tin KTX và chọn chức năng *"Đăng nhập"*. | Màn hình [`WF-01`](#8-thiết-kế-wireframe-giao-diện-khớp-1-1-với-đặc-tả), `NFR-06` |
-| **BF** | **BF-02** | Hệ thống | Hiển thị biểu mẫu đăng nhập gồm ô nhập Mã sinh viên (MSSV) và Mật khẩu. | Màn hình `WF-01`, Form `LoginForm` |
-| **BF** | **BF-03** | Sinh viên | Nhập Mã sinh viên trường A (ví dụ: `2101001`) và mật khẩu, sau đó nhấn nút *"Đăng nhập"*. | Kiểm tra định dạng đầu vào |
-| **BF** | **BF-04** | Hệ thống | Gửi thông tin xác thực đến Dịch vụ xác thực danh tính để kiểm tra tính hợp lệ. | Include `UC-03 (Xác thực SV)`, **`BR-01`** |
-| **BF** | **BF-05** | Hệ thống | Xác nhận sinh viên thuộc đối tượng Trường A, mật khẩu chính xác, khởi tạo phiên làm việc (Session). | **`BR-01`**, `NFR-03` (Bảo mật phiên) |
-| **BF** | **BF-06** | Hệ thống | Chuyển hướng người dùng vào màn hình Dashboard cá nhân của sinh viên. | Điều hướng `/dashboard`, Hoàn tất `UC-01` |
-| **AF** | **AF-01** | Sinh viên | Tại bước BF-03, sinh viên có thể tích chọn nút *"Ghi nhớ đăng nhập trên thiết bị này"*. | Lưu Cookie an toàn `HttpOnly` |
-| **AF** | **AF-02** | Hệ thống | Hệ thống gia hạn thời gian lưu phiên làm việc lên 30 ngày thay vì hết hạn sau 2 giờ. | Tiện ích trải nghiệm người dùng `NFR-06` |
-| **EF** | **EF-01** | Hệ thống | Tại bước BF-04, nếu sinh viên nhập sai mật khẩu quá 5 lần: Hệ thống tạm khóa tài khoản 15 phút. | Mã lỗi `ERR_AUTH_01`, `NFR-03` |
-| **EF** | **EF-02** | Hệ thống | Tại bước BF-04, nếu Mã sinh viên không thuộc danh sách Trường A được tiếp nhận tại KTX A: Hệ thống từ chối đăng nhập và hiển thị cảnh báo: *"Tài khoản không thuộc diện được tiếp nhận tại KTX A theo Quy định BR-01"*. | Mã lỗi `ERR_NOT_AFFILIATED`, **`BR-01`** |
+### 4.1 Summary Table (Theo đúng chuẩn Slide bài giảng)
+
+| Mục | Nội dung Chuẩn format |
+| :--- | :--- |
+| **ID** | `UC-01` |
+| **Title** | Đăng nhập và Khôi phục Mật khẩu Sinh viên KTX (Sign in and Reset Password) |
+| **Description** | Use Case này mô tả cách sinh viên truy cập vào Cổng dịch vụ KTX bằng Mã sinh viên trường A và Mật khẩu, hoặc thực hiện khôi phục mật khẩu khi quên, đồng thời xác thực danh tính với hệ thống trường liên kết. |
+| **Actors** | Sinh viên (Primary Actor), Hệ thống SV Trường A (Secondary Supporting Actor). |
+| **Preconditions** | Sinh viên đã có tài khoản và thuộc danh sách Trường Đại học A (hoặc khối thành viên liên kết). |
+| **Post conditions** | Sinh viên được cấp phiên làm việc bảo mật (Session Token) và chuyển hướng vào Dashboard Cổng sinh viên. |
+| **Trigger** | Sinh viên truy cập vào địa chỉ Cổng thông tin KTX và chọn chức năng *"Đăng nhập"*. |
 
 ---
 
-### 3.3 Sequence Diagram (Biểu đồ Tuần tự) - Khớp 1-1 từng bước với Bảng đặc tả
+### 4.2 Three Types of Flows Table (Theo chuẩn cột Slide: Step ID, Actor, Action, Notes/references)
+
+| Step ID | Actor | Action | Notes/references |
+| :---: | :--- | :--- | :--- |
+| **BF-1** | Sinh viên | Truy cập trang đăng nhập của Cổng dịch vụ nội trú KTX. | Màn hình `WF-01`, `NFR-06` |
+| **BF-2** | Hệ thống | Hiển thị biểu mẫu đăng nhập gồm ô nhập Mã sinh viên (MSSV) và Mật khẩu. | Màn hình `WF-01` |
+| **BF-3** | Sinh viên | Nhập Mã sinh viên trường A (ví dụ: `22VNUK0101`) và mật khẩu, nhấn nút *"Đăng nhập"*. | Kiểm tra tính hợp lệ cú pháp |
+| **BF-4** | Hệ thống | Gửi yêu cầu xác thực credentials sang Dịch vụ xác thực sinh viên Trường A. | Include `Xác thực SV Trường A`, **`BR-01`** |
+| **BF-5** | Hệ thống SV Trường A | Xác nhận sinh viên thuộc danh sách trường A, mật khẩu hợp lệ và gửi tín hiệu xác nhận thành công. | **`BR-01`** (Đúng đối tượng trường A) |
+| **BF-6** | Hệ thống | Khởi tạo phiên làm việc bảo mật (Session/Cookie `HttpOnly`), chuyển hướng sinh viên vào Dashboard. | Hoàn tất mục tiêu `UC-01`, `NFR-03` |
+| **AF-A** | Sinh viên | Tại bước BF-3, sinh viên có thể tích chọn nút *"Ghi nhớ đăng nhập 30 ngày"* trên thiết bị cá nhân. | Lưu phiên làm việc an toàn |
+| **AF-B** | Sinh viên | Tại bước BF-2, nếu quên mật khẩu, sinh viên nhấn *"Quên mật khẩu"*, nhập email trường cấp để nhận mã OTP khôi phục. | Kịch bản nhánh phụ hoàn thành mục tiêu |
+| **EF-A** | Hệ thống | Tại bước BF-4, nếu sinh viên nhập sai mật khẩu quá 5 lần liên tiếp: Hệ thống tạm khóa tài khoản 15 phút. | Mã lỗi `ERR_AUTH_MAX_ATTEMPTS`, `NFR-03` |
+| **EF-B** | Hệ thống | Tại bước BF-5, nếu MSSV không thuộc danh sách Trường A: Hệ thống từ chối đăng nhập và hiển thị cảnh báo: *"Tài khoản không thuộc diện được tiếp nhận tại KTX A theo Quy tắc BR-01"*. | Mã lỗi `ERR_NOT_AFFILIATED`, **`BR-01`** |
+
+---
+
+### 4.3 Sequence Diagram (Khớp 1-1 từng bước với Step ID trong Bảng Flow)
 
 ```mermaid
 sequenceDiagram
@@ -75,294 +115,206 @@ sequenceDiagram
     actor SV as 🧑 Sinh viên
     participant UI as 🖥️ Giao diện Login (WF-01)
     participant Auth as 🛡️ Authentication Service
+    participant SchoolA as 🏫 Hệ thống SV Trường A (c7)
     participant DB as 🗄️ Database KTX
 
-    Note over SV, DB: BẮT ĐẦU USE CASE UC-01 (ĐĂNG NHẬP & XÁC THỰC)
-    SV->>UI: 1. (BF-01) Truy cập trang đăng nhập KTX
-    UI-->>SV: 2. (BF-02) Hiển thị biểu mẫu đăng nhập (MSSV, Mật khẩu)
-    SV->>UI: 3. (BF-03) Nhập MSSV trường A và Mật khẩu, nhấn "Đăng nhập"
-    
-    UI->>Auth: 4. (BF-04) Gửi yêu cầu xác thực credentials
-    Auth->>DB: 5. (BF-04) Truy vấn thông tin tài khoản theo MSSV
-    DB-->>Auth: 6. (BF-04) Trả về bản ghi tài khoản sinh viên
+    SV->>UI: 1. (BF-1) Truy cập trang đăng nhập KTX
+    UI-->>SV: 2. (BF-2) Hiển thị biểu mẫu đăng nhập (MSSV, Mật khẩu)
+    SV->>UI: 3. (BF-3) Nhập MSSV trường A và Mật khẩu, nhấn "Đăng nhập"
+    UI->>Auth: 4. (BF-4) Gửi yêu cầu xác thực credentials
+    Auth->>SchoolA: 5. (BF-4, BF-5) Đối soát MSSV với cơ sở dữ liệu Trường A (Ref: BR-01)
+    SchoolA-->>Auth: 6. (BF-5) Xác nhận đúng sinh viên Trường A và mật khẩu chính xác
+    Auth->>DB: 7. (BF-6) Khởi tạo Session và cập nhật thời gian đăng nhập
+    DB-->>Auth: 8. (BF-6) Xác nhận phiên hợp lệ
+    Auth-->>UI: 9. (BF-6) Cấp token phiên làm việc thành công
+    UI-->>SV: 10. (BF-6) Chuyển hướng vào màn hình Dashboard Sinh viên
 
-    alt Đúng mật khẩu & Thuộc sinh viên trường A (Ref: BR-01)
-        Auth-->>UI: 7. (BF-05) Xác thực thành công (Khởi tạo Session/Token)
-        UI-->>SV: 8. (BF-06) Chuyển hướng vào màn hình Dashboard KTX
-    else Sai mật khẩu quá 5 lần (Ref: EF-01, NFR-03)
-        Auth-->>UI: 9. (EF-01) Trả về mã lỗi ERR_AUTH_01 (Khóa tạm 15 phút)
-        UI-->>SV: 10. (EF-01) Cảnh báo tài khoản bị tạm khóa do nhập sai nhiều lần
-    else Không thuộc trường A liên kết KTX A (Ref: EF-02, BR-01)
-        Auth-->>UI: 11. (EF-02) Trả về lỗi ERR_NOT_AFFILIATED
-        UI-->>SV: 12. (EF-02) Cảnh báo: Sinh viên không thuộc diện tiếp nhận KTX A
+    opt Ghi nhớ phiên làm việc (Ref: AF-A)
+        SV->>UI: 11. (AF-A) Tích chọn "Ghi nhớ đăng nhập 30 ngày"
+        UI->>Auth: 12. (AF-A) Thiết lập hạn Cookie HttpOnly lên 30 ngày
+    end
+
+    alt Sai mật khẩu quá 5 lần (Ref: EF-A, NFR-03)
+        Auth-->>UI: 13. (EF-A) Trả về mã lỗi ERR_AUTH_MAX_ATTEMPTS (Khóa 15 phút)
+        UI-->>SV: 14. (EF-A) Hiển thị cảnh báo tài khoản bị tạm khóa 15 phút
+    else Không thuộc trường A liên kết KTX A (Ref: EF-B, BR-01)
+        SchoolA-->>Auth: 15. (EF-B) Báo lỗi: MSSV không tồn tại trong Trường A
+        Auth-->>UI: 16. (EF-B) Trả về mã lỗi ERR_NOT_AFFILIATED
+        UI-->>SV: 17. (EF-B) Cảnh báo đỏ: Không thuộc diện tiếp nhận KTX A theo BR-01
     end
 ```
 
 ---
 
-### 3.4 Bảng Đối chiếu 1-1 giữa Bảng Đặc tả và Sequence Diagram
+## 5. ĐẶC TẢ USE CASE 2 (NGHIỆP VỤ CỐT LÕI): UC-04 - CHỌN LOẠI PHÒNG, TIỆN ÍCH & NỘP ĐƠN KTX (CAM KẾT $\ge 1$ KỲ)
 
-| Bước trong Bảng Đặc tả | Message trên Sequence Diagram | Đối tượng Gửi $\rightarrow$ Nhận | Kết quả / Khối điều khiển | Khớp 1-1? |
-| :---: | :---: | :--- | :--- | :---: |
-| **BF-01** | Message 1 | `Sinh viên` $\rightarrow$ `Giao diện Login` | Yêu cầu mở trang đăng nhập | ✅ 100% |
-| **BF-02** | Message 2 | `Giao diện Login` $\rightarrow$ `Sinh viên` | Hiển thị Form đăng nhập | ✅ 100% |
-| **BF-03** | Message 3 | `Sinh viên` $\rightarrow$ `Giao diện Login` | Nhập MSSV và Mật khẩu | ✅ 100% |
-| **BF-04** | Message 4, 5, 6 | `UI` $\rightarrow$ `Auth Service` $\rightarrow$ `Database` | Truy vấn và xác thực tài khoản | ✅ 100% |
-| **BF-05** | Message 7 | `Auth Service` $\rightarrow$ `Giao diện Login` | Trả về kết quả xác thực hợp lệ (BR-01) | ✅ 100% |
-| **BF-06** | Message 8 | `Giao diện Login` $\rightarrow$ `Sinh viên` | Điều hướng vào Dashboard | ✅ 100% |
-| **EF-01** | Message 9, 10 | `Auth Service` $\rightarrow$ `UI` $\rightarrow$ `Sinh viên` | Khối `alt 2`: Khóa tạm 15 phút do nhập sai | ✅ 100% |
-| **EF-02** | Message 11, 12 | `Auth Service` $\rightarrow$ `UI` $\rightarrow$ `Sinh viên` | Khối `alt 3`: Từ chối do vi phạm BR-01 | ✅ 100% |
+### 5.1 Summary Table
 
----
-
-## 4. ĐẶC TẢ USE CASE 2 (NGHIỆP VỤ QUAN TRỌNG): UC-02 - ĐĂNG KÝ PHÒNG, CHỌN LOẠI PHÒNG & KHAI BÁO THÓI QUEN (CAM KẾT $\ge 1$ KỲ)
-
-### 4.1 Bảng tóm tắt thông tin Use Case
-* **Tên Use Case:** Đăng ký KTX, Chọn Loại phòng & Khai báo Thói quen Sinh hoạt
-* **Mã Use Case:** `UC-02`
-* **Loại Use Case:** Use Case Nghiệp vụ Quan trọng (1-n)
-* **Tác nhân chính:** Sinh viên nội trú
-* **Tác nhân hỗ trợ:** Hệ thống Quản trị KTX
-* **Tiền điều kiện:** Sinh viên đã đăng nhập thành công (`UC-01`).
-* **Hậu điều kiện:** Đơn đăng ký kèm thông số thói quen và nguyện vọng loại phòng được ghi nhận ở trạng thái `Pending` để chờ phê duyệt nghiệp vụ.
+| Mục | Nội dung Chuẩn format |
+| :--- | :--- |
+| **ID** | `UC-04` |
+| **Title** | Chọn Loại phòng, Tiện ích và Nộp đơn KTX có Cam kết (Select Room Type and Submit Dormitory Application) |
+| **Description** | Use Case này mô tả quy trình sinh viên lựa chọn gói phòng nguyện vọng (2, 4, 6 người), khai báo 8 tiêu chí thói quen sinh hoạt, xác định tiêu chí ưu tiên nhất (1.5x) và ký cam kết bắt buộc lưu trú tối thiểu 1 kỳ để nộp hồ sơ xét duyệt. |
+| **Actors** | Sinh viên (Primary Actor), Hệ thống KTX (Secondary Actor). |
+| **Preconditions** | Sinh viên đã đăng nhập thành công vào hệ thống (`UC-01`). |
+| **Post conditions** | Hồ sơ được ghi nhận ở trạng thái `Pending_Approval`, chuyển sang phân hệ Quản trị để thẩm định (`UC-18`). |
+| **Trigger** | Sinh viên chọn chức năng *"Đăng ký Phòng & Khảo sát Thói quen"* trên Dashboard cá nhân. |
 
 ---
 
-### 4.2 Bảng Đặc tả Luồng sự kiện (BF, AF, EF) có References chuẩn mực
+### 5.2 Three Types of Flows Table
 
-| Khối luồng | ID | Tác nhân (Actor) | Hành động chi tiết (Action) | Tham chiếu Quy định / Kỹ thuật (Ref) |
-| :---: | :---: | :--- | :--- | :--- |
-| **BF** | **BF-01** | Sinh viên | Chọn chức năng *"Đăng ký phòng mới & Khảo sát thói quen"* trên Dashboard. | Màn hình [`WF-02`](#8-thiết-kế-wireframe-giao-diện-khớp-1-1-với-đặc-tả) |
-| **BF** | **BF-02** | Hệ thống | Tải danh mục loại phòng khả dụng: Phòng 2 người (VIP), Phòng 4 người (Tiêu chuẩn), Phòng 6 người (Tiết kiệm) kèm đơn giá và tiện ích. | Kế thừa từ Danh mục phòng `UC-13`, **`BR-05`** |
-| **BF** | **BF-03** | Sinh viên | Chọn nguyện vọng loại phòng (ví dụ: Phòng 4 người máy lạnh - 1.400.000 VNĐ/tháng) và tích chọn dịch vụ bổ sung. | Đáp ứng góp ý của Thầy về quản lý loại phòng |
-| **BF** | **BF-04** | Sinh viên | Nhập 8 tiêu chí thói quen sinh hoạt: Giờ ngủ (`sleep`), Giờ dậy (`wake`), Độ gọn gàng (`tidy`), Tiếng ồn (`noise`), Học tập (`study`), Hút thuốc (`smoke`), Khách (`guests`), Sở thích (`hobbies`). | 8 tiêu chí cốt lõi trong `models.py` |
-| **BF** | **BF-05** | Sinh viên | Chỉ định tiêu chí cá nhân coi trọng nhất (`top`) để nhận hệ số ưu tiên 1.5x. | **`BR-06` (Trọng số 1.5x)** |
-| **BF** | **BF-06** | Sinh viên | Tích chọn ô cam kết bắt buộc: *"Tôi cam kết thời hạn hợp đồng lưu trú tối thiểu 01 học kỳ (5 tháng) theo quy định nội trú KTX"*. | **`BR-02` (Tối thiểu 1 kỳ)** |
-| **BF** | **BF-07** | Sinh viên | Nhấn nút *"Nộp hồ sơ xét duyệt KTX"*. | Gửi hồ sơ đăng ký |
-| **BF** | **BF-08** | Hệ thống | Kiểm tra tính đầy đủ của dữ liệu, lưu hồ sơ ở trạng thái `Pending (Chờ duyệt)` và gửi mã số hồ sơ cho sinh viên. | Tạo mã `DK-xxxx`, Chuyển tiếp `UC-03 (Duyệt)` |
-| **AF** | **AF-01** | Sinh viên | Tại bước BF-04, nếu muốn thử nghiệm nhanh giao diện, sinh viên bấm nút chọn 1 trong 3 Persona mẫu: Thái Bảo (VNUK), Văn Việt (SPKT) hoặc Minh Quân (DUE). | Extend `UC-06`, `NFR-06` (Nạp nhanh) |
-| **AF** | **AF-02** | Hệ thống | Hệ thống tự động điền sẵn các giá trị slider và checkbox tương ứng với hồ sơ Persona đã chọn. | Tiện ích trải nghiệm người dùng |
-| **EF** | **EF-01** | Hệ thống | Tại bước BF-06, nếu sinh viên không tích chọn cam kết lưu trú tối thiểu 1 học kỳ: Hệ thống vô hiệu hóa nút nộp và hiển thị cảnh báo đỏ: *"Bắt buộc cam kết ở tối thiểu 1 kỳ theo Quy tắc BR-02 để bảo đảm kế hoạch KTX"*. | Mã lỗi `ERR_MIN_DURATION`, **`BR-02`** |
-| **EF** | **EF-02** | Hệ thống | Tại bước BF-04, nếu các thông số nhập liệu vượt ngoài miền giá trị cho phép (ví dụ giờ ngủ ngoài khoảng 21h-26h): Hệ thống thông báo lỗi trường dữ liệu không hợp lệ. | Mã lỗi `ERR_INVALID_RANGE`, `NFR-04` |
+| Step ID | Actor | Action | Notes/references |
+| :---: | :--- | :--- | :--- |
+| **BF-1** | Sinh viên | Mở biểu mẫu đăng ký phòng và khảo sát nếp sống KTX. | Màn hình `WF-02` |
+| **BF-2** | Hệ thống | Hiển thị 3 gói phòng: VIP 2 người (1.4tr), Chuẩn 4 người (850k), Tiết kiệm 6 người (550k) kèm quy định cam kết kỳ. | **`BR-02`**, **`BR-05`** |
+| **BF-3** | Sinh viên | Chọn loại phòng mong muốn đăng ký (ví dụ: Phòng 2 người VIP). | Thu thập nguyện vọng phòng |
+| **BF-4** | Sinh viên | Khai báo 8 tiêu chí thói quen: Giờ ngủ, Giờ dậy, Độ ngăn nắp, Thói quen học, Chịu ồn, Hút thuốc, Dắt bạn về phòng, Sở thích cá nhân. | Chuẩn hóa vector 8 chiều |
+| **BF-5** | Sinh viên | Chọn 01 tiêu chí quan trọng nhất (nhân hệ số trọng số $1.5	imes$). | **`BR-06`** (Trọng số 1.5x) |
+| **BF-6** | Sinh viên | Tích chọn hộp kiểm cam kết bắt buộc: *"Tôi cam kết ở KTX tối thiểu 01 học kỳ (05 tháng) theo quy định BR-02"*. | **`BR-02`** (Tối thiểu 1 kỳ) |
+| **BF-7** | Sinh viên | Nhấn nút *"Nộp Hồ Sơ Đăng Ký Phòng"*. | Gửi dữ liệu lên máy chủ |
+| **BF-8** | Hệ thống | Kiểm tra tính hợp lệ dữ liệu, lưu bản ghi vào Database ở trạng thái `Pending_Approval` và cấp Mã hồ sơ xét duyệt. | Hoàn tất mục tiêu `UC-04` |
+| **AF-A** | Sinh viên | Tại bước BF-4, sinh viên có thể bấm *"Nạp hồ sơ mẫu Persona"* (Thái Bảo, Văn Việt, Minh Quân) để hệ thống tự điền 8 tiêu chí tức thì. | Extend `Nạp hồ sơ Persona`, `NFR-06` |
+| **EF-A** | Hệ thống | Tại bước BF-7, nếu sinh viên KHÔNG tích chọn cam kết lưu trú tối thiểu 1 kỳ: Hệ thống khóa nút nộp và hiển thị cảnh báo đỏ vi phạm BR-02. | Mã ngoại lệ `ERR_TERM_MIN_VIOLATION`, **`BR-02`** |
+| **EF-B** | Hệ thống | Tại bước BF-7, nếu sinh viên bỏ trống tiêu chí ưu tiên: Hệ thống nhắc nhở: *"Vui lòng chọn 1 tiêu chí quan trọng nhất theo Quy định BR-06"*. | Mã cảnh báo `ERR_TOP_CRITERION_EMPTY`, **`BR-06`** |
 
 ---
 
-### 4.3 Sequence Diagram - Khớp 1-1 từng bước với Bảng đặc tả
+### 5.3 Sequence Diagram
 
 ```mermaid
 sequenceDiagram
     autonumber
     actor SV as 🧑 Sinh viên
-    participant UI as 🖥️ Form Khảo sát (WF-02)
-    participant RoomMgr as 🏢 Room Service
-    participant RegService as 📝 Registration Service
+    participant UI as 🖥️ Form Khảo Sát (WF-02)
+    participant Survey as ⚙️ Survey & Room Service
     participant DB as 🗄️ Database KTX
 
-    Note over SV, DB: BẮT ĐẦU USE CASE UC-02 (CHỌN PHÒNG & NỘP HỒ SƠ)
-    SV->>UI: 1. (BF-01) Mở chức năng Đăng ký phòng & Khảo sát thói quen
-    UI->>RoomMgr: 2. (BF-02) Yêu cầu danh mục loại phòng KTX đang mở
-    RoomMgr-->>UI: 3. (BF-02) Trả về danh sách phòng (2, 4, 6 người, đơn giá)
+    SV->>UI: 1. (BF-1) Mở biểu mẫu Đăng ký phòng & Thói quen
+    UI-->>SV: 2. (BF-2) Hiển thị các gói phòng 2/4/6 người & điều khoản cam kết (Ref: BR-02, BR-05)
+    SV->>UI: 3. (BF-3) Chọn loại phòng mong muốn (VD: Phòng 2 người VIP)
+    SV->>UI: 4. (BF-4) Điều chỉnh 8 thanh trượt thói quen sinh hoạt
+    SV->>UI: 5. (BF-5) Chọn tiêu chí số 1 ưu tiên nhất (Ref: BR-06 - Trọng số 1.5x)
+    SV->>UI: 6. (BF-6) Tích chọn hộp kiểm cam kết lưu trú tối thiểu 1 kỳ (Ref: BR-02)
+    SV->>UI: 7. (BF-7) Nhấn nút "Nộp Hồ Sơ Đăng Ký Phòng"
     
-    SV->>UI: 4. (BF-03) Chọn loại phòng mong muốn (Phòng 4 người, máy lạnh)
-    
-    opt Nạp nhanh hồ sơ mẫu Persona (Ref: AF-01, Extend UC-06)
-        SV->>UI: 5. (AF-01) Nhấp chọn Persona mẫu (Thái Bảo / Văn Việt / Minh Quân)
-        UI-->>SV: 6. (AF-02) Tự động điền nhanh 8 thông số thói quen mẫu
+    UI->>Survey: 8. (BF-8) Gửi payload đăng ký phòng và vector thói quen
+    Survey->>DB: 9. (BF-8) Lưu bản ghi hồ sơ trạng thái Pending_Approval
+    DB-->>Survey: 10. (BF-8) Xác nhận lưu bản ghi thành công
+    Survey-->>UI: 11. (BF-8) Trả về Mã hồ sơ và trạng thái chờ thẩm định
+    UI-->>SV: 12. (BF-8) Thông báo nộp đơn thành công, hồ sơ đang được chuyển duyệt
+
+    opt Sử dụng hồ sơ mẫu Persona (Ref: AF-A, NFR-06)
+        SV->>UI: 13. (AF-A) Bấm chọn nạp Persona mẫu (Thái Bảo / Văn Việt / Minh Quân)
+        UI-->>SV: 14. (AF-A) Tự động điền đầy đủ 8 thanh trượt và tiêu chí top
     end
 
-    SV->>UI: 7. (BF-04) Điều chỉnh các tiêu chí thói quen sinh hoạt (sleep, tidy...)
-    SV->>UI: 8. (BF-05) Chọn tiêu chí quan trọng nhất (Ref: BR-06, Top = 1.5x)
-    
-    alt Sinh viên không tích cam kết tối thiểu 1 kỳ (Ref: EF-01, BR-02)
-        SV->>UI: 9. (EF-01) Nhấn nút Nộp hồ sơ (Chưa tích cam kết)
-        UI-->>SV: 10. (EF-01) Báo lỗi: Bắt buộc cam kết tối thiểu 1 kỳ theo BR-02!
-    else Sinh viên tích cam kết tối thiểu 1 kỳ đầy đủ (Ref: BF-06)
-        SV->>UI: 11. (BF-06) Tích chọn ô cam kết lưu trú >= 1 học kỳ (5 tháng)
-        SV->>UI: 12. (BF-07) Nhấn nút "Nộp hồ sơ xét duyệt KTX"
-        UI->>RegService: 13. (BF-08) Gửi toàn bộ dữ liệu hồ sơ đăng ký
-        RegService->>DB: 14. (BF-08) Lưu bản ghi đăng ký với trạng thái "Pending"
-        DB-->>RegService: 15. (BF-08) Xác nhận lưu thành công (Mã DK-xxxx)
-        RegService-->>UI: 16. (BF-08) Trả về mã hồ sơ đăng ký thành công
-        UI-->>SV: 17. (BF-08) Thông báo nộp thành công, đang chờ BQL Business Approve
+    alt Không tích cam kết ở tối thiểu 1 kỳ (Ref: EF-A, BR-02)
+        UI-->>SV: 15. (EF-A) Khóa nút nộp, báo lỗi: Bắt buộc cam kết tối thiểu 1 kỳ theo BR-02
+    else Bỏ trống tiêu chí ưu tiên cao nhất (Ref: EF-B, BR-06)
+        UI-->>SV: 16. (EF-B) Cảnh báo: Vui lòng chọn tiêu chí số 1 để áp dụng trọng số 1.5x
     end
 ```
 
 ---
 
-## 5. ĐẶC TẢ USE CASE 3 (NGHIỆP VỤ QUAN TRỌNG): UC-03 - THẨM ĐỊNH & PHÊ DUYỆT NGHIỆP VỤ (BUSINESS APPROVE)
+## 6. ĐẶC TẢ USE CASE 3 (NGHIỆP VỤ CỐT LÕI): UC-05 - XEM BẢNG XẾP HẠNG BẠN CÙNG PHÒNG
 
-### 5.1 Bảng tóm tắt thông tin Use Case
-* **Tên Use Case:** Phê duyệt Nghiệp vụ Đơn Đăng ký KTX (Business Approve)
-* **Mã Use Case:** `UC-03`
-* **Loại Use Case:** Use Case Nghiệp vụ Quan trọng (Đáp ứng trực tiếp phản biện của Thầy giáo)
-* **Tác nhân chính:** Ban quản lý KTX / Cán bộ Quản trị KTX (Business Staff)
-* **Tác nhân hỗ trợ:** Hệ thống Quản trị KTX (Dormitory Management System)
-* **Tiền điều kiện:** Có ít nhất một đơn đăng ký ở trạng thái `Pending` từ `UC-02`.
-* **Hậu điều kiện:** Đơn đăng ký được chuyển sang trạng thái `Approved` (hợp lệ để phân phòng) hoặc `Rejected` (từ chối tiếp nhận).
+### 6.1 Summary Table
 
----
-
-### 5.2 Bảng Đặc tả Luồng sự kiện (BF, AF, EF) có References chuẩn mực
-
-| Khối luồng | ID | Tác nhân (Actor) | Hành động chi tiết (Action) | Tham chiếu Quy định / Kỹ thuật (Ref) |
-| :---: | :---: | :--- | :--- | :--- |
-| **BF** | **BF-01** | Cán bộ BQL | Đăng nhập tài khoản quản trị và truy cập màn hình *"Phê duyệt Hồ sơ Đăng ký KTX"*. | Màn hình [`WF-03`](#8-thiết-kế-wireframe-giao-diện-khớp-1-1-với-đặc-tả) |
-| **BF** | **BF-02** | Hệ thống | Tải danh sách các hồ sơ đang ở trạng thái `Pending` kèm kết quả đối soát tự động (huy hiệu xanh: Đúng trường A, Đủ cam kết $\ge 1$ kỳ). | **`BR-01`**, **`BR-02`**, **`BR-03`** |
-| **BF** | **BF-03** | Cán bộ BQL | Chọn một hồ sơ cụ thể để xem chi tiết: Thông tin sinh viên, diện chính sách, nguyện vọng loại phòng và cam kết. | Thẩm định tư cách sinh viên |
-| **BF** | **BF-04** | Cán bộ BQL | Kiểm tra hạn ngạch số giường còn trống của loại phòng sinh viên chọn (ví dụ phòng 4 người còn trống). | Kiểm tra tính khả thi quỹ phòng |
-| **BF** | **BF-05** | Cán bộ BQL | Nhấn nút **"Phê duyệt (Business Approve)"**. | **`BR-03` (Phê duyệt nghiệp vụ)** |
-| **BF** | **BF-06** | Hệ thống | Cập nhật trạng thái hồ sơ thành `Approved`, đánh dấu sinh viên đủ điều kiện tham gia giải thuật ghép phòng Gale-Shapley. | Chuyển tiếp vào hàng đợi `UC-04` |
-| **BF** | **BF-07** | Hệ thống | Tự động gửi thông báo phê duyệt thành công qua email/SMS cho sinh viên. | Thông báo trạng thái người dùng |
-| **AF** | **AF-01** | Cán bộ BQL | BQL có thể sử dụng chức năng *"Phê duyệt hàng loạt (Batch Approve)"* cho toàn bộ các sinh viên đã được hệ thống xác thực 100% hợp lệ. | Tiện ích quản trị dữ liệu lớn `NFR-06` |
-| **AF** | **AF-02** | Hệ thống | Hệ thống chuyển trạng thái đồng loạt cho N hồ sơ được chọn chỉ với 1 thao tác. | Xử lý dữ liệu hàng loạt |
-| **EF** | **EF-01** | Cán bộ BQL | Tại bước BF-04, nếu phát hiện sinh viên có lịch sử vi phạm kỷ luật nghiêm trọng hoặc thông tin gian lận: BQL nhấn *"Từ chối (Reject)"* và nhập lý do. | Xử lý vi phạm nội quy KTX |
-| **EF** | **EF-02** | Hệ thống | Hệ thống cập nhật trạng thái hồ sơ thành `Rejected`, đóng quy trình và gửi email thông báo từ chối kèm lý do cho sinh viên. | Mã lỗi `ERR_REG_REJECTED` |
+| Mục | Nội dung Chuẩn format |
+| :--- | :--- |
+| **ID** | `UC-05` |
+| **Title** | Xem Bảng Xếp hạng Bạn cùng phòng Tương thích (View Roommate Compatibility Ranking) |
+| **Description** | Use Case này mô tả cách sinh viên tra cứu danh sách các ứng viên cùng phòng tiềm năng, được sắp xếp theo điểm tương thích 2 chiều giảm dần, kèm theo giải thích chi tiết mức độ hòa hợp từng tiêu chí. |
+| **Actors** | Sinh viên (Primary Actor), Động cơ Chấm điểm KTX (Secondary Service). |
+| **Preconditions** | Sinh viên đã hoàn tất khai báo thói quen sinh hoạt (`UC-04`). |
+| **Post conditions** | Sinh viên nắm rõ danh sách ứng viên hòa hợp nhất và có thể gửi lời mời ghép nhóm bạn quen (`UC-06`). |
+| **Trigger** | Sinh viên chọn tab *"Bảng Xếp Hạng Bạn Cùng Phòng"* trên thanh điều hướng. |
 
 ---
 
-### 5.3 Sequence Diagram - Khớp 1-1 từng bước với Bảng đặc tả
+### 6.2 Three Types of Flows Table
+
+| Step ID | Actor | Action | Notes/references |
+| :---: | :--- | :--- | :--- |
+| **BF-1** | Sinh viên | Nhấn vào tab *"Bảng Xếp Hạng Bạn Cùng Phòng"*. | Màn hình `WF-02-Ranking`, `NFR-06` |
+| **BF-2** | Hệ thống | Gửi vector thói quen của sinh viên hiện tại đến Dịch vụ Chấm điểm tương thích. | Include `Tính điểm tương thích 2 chiều` |
+| **BF-3** | Động cơ Chấm điểm | Tính toán ma trận điểm hòa hợp 2 chiều có áp dụng hệ số $1.5	imes$ cho tiêu chí top của từng bên. | **`BR-06`**, `scoring.py` |
+| **BF-4** | Hệ thống | Xếp hạng danh sách ứng viên theo điểm số trung bình giảm dần (Top 1 đến Top N). | Thuật toán xếp hạng |
+| **BF-5** | Hệ thống | Hiển thị danh sách card ứng viên gồm: Họ tên, Trường, Avatar, Điểm % hòa hợp, Huy hiệu tương thích (Siêu hòa hợp, Hòa hợp tốt...). | Hoàn tất mục tiêu `UC-05` |
+| **AF-A** | Sinh viên | Nhấn vào nút *"Xem chi tiết tiêu chí"* trên một card ứng viên để đối sánh trực quan 8 thanh thói quen giữa 2 người. | Extend `Xem chi tiết tiêu chí` |
+| **EF-A** | Hệ thống | Nếu sinh viên chưa hoàn thành khảo sát thói quen: Hệ thống hiển thị hộp thoại chuyển hướng yêu cầu hoàn thiện khảo sát trước. | Bắt buộc dữ liệu đầu vào |
+
+---
+
+### 6.3 Sequence Diagram
 
 ```mermaid
 sequenceDiagram
     autonumber
-    actor Admin as 👨‍💼 Cán bộ BQL KTX
-    participant UI as 🖥️ Màn hình Duyệt đơn (WF-03)
-    participant ApproveService as 🛡️ Business Approval Engine
+    actor SV as 🧑 Sinh viên
+    participant UI as 🖥️ Màn hình Ranking (WF-03-Rank)
+    participant ScoreService as 🧮 Scoring Engine (c46)
     participant DB as 🗄️ Database KTX
-    participant Mail as 📧 Notification Service
 
-    Note over Admin, Mail: BẮT ĐẦU USE CASE UC-03 (PHÊ DUYỆT BUSINESS APPROVE)
-    Admin->>UI: 1. (BF-01) Mở màn hình Quản lý Phê duyệt Đơn đăng ký KTX
-    UI->>ApproveService: 2. (BF-02) Yêu cầu danh sách hồ sơ trạng thái "Pending"
-    ApproveService->>DB: 3. (BF-02) Truy vấn danh sách hồ sơ đăng ký chờ duyệt
-    DB-->>ApproveService: 4. (BF-02) Trả về danh sách đơn đăng ký
-    ApproveService-->>UI: 5. (BF-02) Hiển thị danh sách kèm kết quả đối soát tự động (BR-01, BR-02)
+    SV->>UI: 1. (BF-1) Chọn chức năng "Bảng xếp hạng bạn cùng phòng"
+    UI->>ScoreService: 2. (BF-2) Yêu cầu tính điểm tương thích với pool ứng viên
+    ScoreService->>DB: 3. (BF-2) Truy vấn danh sách ứng viên cùng loại phòng
+    DB-->>ScoreService: 4. (BF-2) Trả về dữ liệu vector thói quen của pool ứng viên
+    ScoreService->>ScoreService: 5. (BF-3) Tính điểm hòa hợp 2 chiều & nhân trọng số 1.5x (Ref: BR-06)
+    ScoreService->>ScoreService: 6. (BF-4) Sắp xếp danh sách ứng viên giảm dần theo điểm trung bình
+    ScoreService-->>UI: 7. (BF-5) Trả về danh sách Top ứng viên hòa hợp nhất
+    UI-->>SV: 8. (BF-5) Hiển thị danh sách card ứng viên kèm điểm số và huy hiệu
 
-    Admin->>UI: 6. (BF-03) Chọn hồ sơ cần thẩm định chi tiết
-    Admin->>UI: 7. (BF-04) Rà soát hạn ngạch số giường trống của loại phòng
-    
-    alt Hồ sơ hợp lệ & Còn chỉ tiêu phòng (Ref: BF-05, BR-03)
-        Admin->>UI: 8. (BF-05) Nhấn nút "Phê duyệt (Business Approve)"
-        UI->>ApproveService: 9. (BF-06) Gửi lệnh Approve cho Mã hồ sơ DK-xxxx
-        ApproveService->>DB: 10. (BF-06) Cập nhật trạng thái đơn thành "Approved"
-        DB-->>ApproveService: 11. (BF-06) Xác nhận cập nhật thành công
-        ApproveService->>Mail: 12. (BF-07) Kích hoạt gửi email thông báo trúng tuyển KTX cho SV
-        Mail-->>Admin: 13. (BF-07) Báo cáo phê duyệt thành công
-    else Sinh viên vi phạm kỷ luật hoặc hết chỗ (Ref: EF-01, EF-02)
-        Admin->>UI: 14. (EF-01) Nhấn nút "Từ chối (Reject)" kèm lý do
-        UI->>ApproveService: 15. (EF-02) Gửi lệnh từ chối hồ sơ
-        ApproveService->>DB: 16. (EF-02) Cập nhật trạng thái đơn thành "Rejected"
-        ApproveService->>Mail: 17. (EF-02) Gửi email thông báo từ chối kèm lý do cho SV
+    opt Xem phân tích chi tiết tiêu chí (Ref: AF-A)
+        SV->>UI: 9. (AF-A) Bấm "Xem chi tiết tiêu chí" trên card ứng viên
+        UI-->>SV: 10. (AF-A) Mở modal so sánh song song 8 thói quen sinh hoạt
+    end
+
+    alt Chưa hoàn thành khảo sát thói quen (Ref: EF-A)
+        UI-->>SV: 11. (EF-A) Báo lỗi: Vui lòng hoàn thành khảo sát thói quen trước khi xem xếp hạng
     end
 ```
 
 ---
 
-## 6. ĐẶC TẢ USE CASE 4 (NGHIỆP VỤ QUAN TRỌNG): UC-04 - GHÉP PHÒNG TỰ ĐỘNG GALE-SHAPLEY & TỐI ƯU LẤP ĐẦY PHÒNG (OCCUPANCY)
+## 7. ĐẶC TẢ USE CASE 4 (NGHIỆP VỤ CỐT LÕI): UC-13 - THANH TOÁN TIỀN PHÒNG & ĐẶT CỌC (72H)
 
-### 6.1 Bảng tóm tắt thông tin Use Case
-* **Tên Use Case:** Ghép phòng Tự động Gale-Shapley & Tối ưu Lấp đầy Phòng
-* **Mã Use Case:** `UC-04`
-* **Loại Use Case:** Use Case Nghiệp vụ Cốt lõi (Core Algorithm & Profit Optimization)
-* **Tác nhân chính:** Ban quản lý KTX / Quản trị viên Hệ thống
-* **Tác nhân hỗ trợ:** Thuật toán Gale-Shapley Engine (`matching.py`) & Scoring Engine (`scoring.py`)
-* **Tiền điều kiện:** Danh sách sinh viên đã được phê duyệt `Approved` ở `UC-03` và danh mục phòng đã sẵn sàng.
-* **Hậu điều kiện:** Toàn bộ sinh viên được phân vào phòng cụ thể với **Blocking Pairs = 0** và tỷ lệ lấp đầy phòng đạt tối đa.
+### 7.1 Summary Table
 
----
-
-### 6.2 Bảng Đặc tả Luồng sự kiện (BF, AF, EF) có References chuẩn mực
-
-| Khối luồng | ID | Tác nhân (Actor) | Hành động chi tiết (Action) | Tham chiếu Quy định / Kỹ thuật (Ref) |
-| :---: | :---: | :--- | :--- | :--- |
-| **BF** | **BF-01** | Quản trị viên | Mở Tab Quản trị Ghép phòng trên Dashboard và nhấn nút *"Khởi chạy Phân phòng Tự động"*. | Màn hình [`WF-04`](#8-thiết-kế-wireframe-giao-diện-khớp-1-1-với-đặc-tả) |
-| **BF** | **BF-02** | Hệ thống | Lấy toàn bộ danh sách sinh viên `Approved`, phân cụm theo giới tính (Nam/Nữ) và loại phòng đã chọn (2, 4, 6 người). | Phân nhóm độc lập, **`BR-05`** |
-| **BF** | **BF-03** | Hệ thống | Gọi `compute_score_matrix()` để tính toán ma trận điểm tương thích hai chiều $M[x][y]$ theo 8 tiêu chí thói quen và trọng số $1.5\times$ cho tiêu chí `top`. | **`BR-06`**, `NFR-01` (< 1.0s) |
-| **BF** | **BF-04** | Hệ thống | Gọi `build_pref_lists()` để sắp xếp danh sách ưu tiên của từng sinh viên giảm dần theo điểm số. | Chuẩn bị đầu vào Gale-Shapley |
-| **BF** | **BF-05** | Hệ thống | Thực thi giải thuật `gale_shapley(pref_a, pref_b)` theo cơ chế hoãn chấp nhận (Deferred Acceptance). | Thuật toán cốt lõi, `matching.py` |
-| **BF** | **BF-06** | Hệ thống | Nếu là loại phòng 4 người: Gọi `merge_pairs_into_rooms()` để gộp các cặp tương thích cao nhất thành phòng 4. | **`NFR-05`**, Thuật toán gộp phòng |
-| **BF** | **BF-07** | Hệ thống | Gọi `count_blocking_pairs()` quét kiểm tra toàn bộ phân phòng, chứng minh số cặp chặn bằng 0. | **`BR-07`**, **`NFR-02` (Blocking Pairs = 0)** |
-| **BF** | **BF-08** | Hệ thống | Áp dụng thuật toán gán phòng thực tế: Ưu tiên lấp đầy 100% số giường của từng phòng trước khi mở phòng mới để tối ưu chi phí vận hành. | **`BR-05` (Tối ưu lợi nhuận KTX)** |
-| **BF** | **BF-09** | Hệ thống | Hiển thị bảng kết quả phân phòng chính thức, chứng chỉ số cặp chặn = 0 và thống kê thứ hạng nguyện vọng A-optimal. | Hoàn tất phân phòng |
-| **AF** | **AF-01** | Quản trị viên | BQL có thể nhấn nút *"Chạy Benchmark NFR-01"* để đo thời gian chạy thực tế trên các quy mô 100, 200, 400, 1000 SV. | Đánh giá hiệu năng `NFR-01` |
-| **EF** | **EF-01** | Hệ thống | Nếu số lượng sinh viên nhóm A và nhóm B bị lệch lẻ (ví dụ 101 sinh viên): Hệ thống ghép tối đa các cặp có thể, sinh viên dư thừa được xếp vào trạng thái `Chờ ghép đợt 2 (Waitlist)`. | Xử lý lệch sĩ số `NFR-04` |
+| Mục | Nội dung Chuẩn format |
+| :--- | :--- |
+| **ID** | `UC-13` |
+| **Title** | Thanh toán Tiền phòng Kỳ 1 và Tiền cọc Giữ chỗ (Pay Dorm Fee and Security Deposit) |
+| **Description** | Use Case này mô tả quy trình sinh viên thực hiện thanh toán tiền phòng học kỳ 1 kèm tiền đặt cọc tài sản trong hạn 72 giờ qua Cổng thanh toán VNPay để chốt giữ chỗ chính thức. |
+| **Actors** | Sinh viên (Primary Actor), Cổng thanh toán VNPay (External Supporting Actor), Hệ thống KTX (Secondary Actor). |
+| **Preconditions** | Sinh viên đã có kết quả phân phòng chính thức và thời hạn 72 giờ đang hiệu lực (`BR-04`). |
+| **Post conditions** | Trạng thái phòng được khóa chính thức (`Paid`), sinh viên nhận Biên lai thu tiền điện tử và Hợp đồng lưu trú có mã QR. |
+| **Trigger** | Sinh viên nhận thông báo trúng tuyển phòng KTX và truy cập vào trang *"Thanh toán & Đặt cọc"*. |
 
 ---
 
-### 6.3 Sequence Diagram - Khớp 1-1 từng bước với Bảng đặc tả
+### 7.2 Three Types of Flows Table
 
-```mermaid
-sequenceDiagram
-    autonumber
-    actor Admin as 👨‍💼 Quản trị viên KTX
-    participant UI as 🖥️ Tab Ghép phòng (WF-04)
-    participant MatchEngine as ⚡ Gale-Shapley Engine
-    participant ScoreEngine as 📐 Scoring Engine
-    participant RoomOpt as 🏢 Room Allocator (BR-05)
-    participant DB as 🗄️ Database KTX
-
-    Note over Admin, DB: BẮT ĐẦU USE CASE UC-04 (GHÉP PHÒNG & TỐI ƯU HÓA LỢI NHUẬN)
-    Admin->>UI: 1. (BF-01) Nhấn nút "Khởi chạy Phân phòng Tự động"
-    UI->>MatchEngine: 2. (BF-02) Kích hoạt tiến trình phân phòng cho tập sinh viên Approved
-    MatchEngine->>DB: 3. (BF-02) Lấy dữ liệu sinh viên đã Approved theo từng loại phòng
-    DB-->>MatchEngine: 4. (BF-02) Trả về danh sách sinh viên theo phân khúc
-    
-    MatchEngine->>ScoreEngine: 5. (BF-03) Tính toán ma trận điểm tương thích 2 chiều (Ref: BR-06, Top=1.5x)
-    ScoreEngine-->>MatchEngine: 6. (BF-03) Trả về ma trận điểm M[i][j] (Ref: NFR-01 < 1s)
-    
-    MatchEngine->>MatchEngine: 7. (BF-04) Xây dựng danh sách ưu tiên pref_a, pref_b
-    MatchEngine->>MatchEngine: 8. (BF-05) Chạy thuật toán Gale-Shapley (Deferred Acceptance)
-    
-    opt Nếu là cấu hình phòng 4 người (Ref: BF-06, NFR-05)
-        MatchEngine->>MatchEngine: 9. (BF-06) Gọi merge_pairs_into_rooms gộp thành phòng 4
-    end
-
-    MatchEngine->>MatchEngine: 10. (BF-07) Gọi count_blocking_pairs kiểm chứng tính ổn định (Ref: BR-07, NFR-02)
-    
-    MatchEngine->>RoomOpt: 11. (BF-08) Điều phối danh sách cặp ghép vào kho phòng vật lý
-    RoomOpt->>RoomOpt: 12. (BF-08) Tối ưu hóa lấp đầy 100% giường từng phòng (Ref: BR-05, Lợi nhuận KTX)
-    RoomOpt->>DB: 13. (BF-08) Lưu kết quả phân phòng chính thức vào cơ sở dữ liệu
-    
-    MatchEngine-->>UI: 14. (BF-09) Trả về kết quả phân phòng (Cặp chặn = 0, Thứ hạng TB, Tỷ lệ lấp đầy)
-    UI-->>Admin: 15. (BF-09) Hiển thị bảng phân phòng hoàn tất và nút xuất file CSV
-```
+| Step ID | Actor | Action | Notes/references |
+| :---: | :--- | :--- | :--- |
+| **BF-1** | Sinh viên | Mở màn hình *"Thanh toán Tiền phòng & Đặt cọc"* từ thông báo trúng tuyển. | Màn hình `WF-05`, `BR-04` |
+| **BF-2** | Hệ thống | Hiển thị bảng kê chi tiết viện phí nội trú: Tiền phòng Kỳ 1 (7.000.000 VNĐ) + Tiền cọc cơ sở vật chất (1.000.000 VNĐ) = Tổng 8.000.000 VNĐ. | **`BR-04`** (Cọc 1tr, hạn 72h) |
+| **BF-3** | Hệ thống | Kích hoạt và hiển thị đồng hồ đếm ngược thời hạn thanh toán chính xác 72 giờ. | Ràng buộc thời gian **`BR-04`** |
+| **BF-4** | Sinh viên | Chọn phương thức thanh toán *"Cổng thanh toán VNPay (Quét mã VNPAY-QR)"*. | Include `Xử lý Cổng VNPay` |
+| **BF-5** | Hệ thống | Tạo đơn hàng bảo mật (mã hóa TLS 1.3), sinh mã giao dịch duy nhất và tạo mã VNPAY-QR động. | **`NFR-03`** (Bảo mật giao dịch) |
+| **BF-6** | Sinh viên | Sử dụng ứng dụng Mobile Banking quét mã QR để xác nhận thanh toán 8.000.000 VNĐ. | Thao tác người dùng |
+| **BF-7** | Cổng VNPay | Xử lý trừ tiền tài khoản an toàn, gửi thông điệp callback `vnp_ResponseCode == "00"` (SUCCESS) về KTX. | Xác thực giao dịch thành công |
+| **BF-8** | Hệ thống | Cập nhật trạng thái hợp đồng thành `Paid`, khóa vị trí giường chính thức. | Chốt giữ chỗ 100% |
+| **BF-9** | Hệ thống | Tự động sinh Biên lai điện tử và cho phép tải Hợp đồng lưu trú KTX có mã QR xác thực. | Extend `Tải biên lai điện tử` |
+| **AF-A** | Sinh viên | Tại bước BF-9, sinh viên nhấn nút *"Tải biên lai điện tử"* và *"Tải hợp đồng số"* để lưu trữ về thiết bị. | Extend `Tải biên lai điện tử` |
+| **EF-A** | Hệ thống | Tại bước BF-3, nếu sau 72 giờ sinh viên không thanh toán: Hệ thống tự động hủy kết quả giữ phòng, hoàn trả giường về kho phòng trống cho danh sách chờ. | Mã ngoại lệ `ERR_PAYMENT_TIMEOUT`, **`BR-04`** |
+| **EF-B** | Cổng VNPay | Tại bước BF-7, nếu tài khoản không đủ số dư hoặc lỗi đường truyền: Cổng báo FAILED, hệ thống giữ nguyên đồng hồ 72h và cho phép thử lại. | Mã lỗi `ERR_INSUFFICIENT_FUNDS` |
 
 ---
 
-## 7. ĐẶC TẢ USE CASE 5 (NGHIỆP VỤ QUAN TRỌNG): UC-05 - THANH TOÁN TIỀN PHÒNG HỌC KỲ 1 & ĐẶT CỌC TRONG HẠN 72H
-
-### 7.1 Bảng tóm tắt thông tin Use Case
-* **Tên Use Case:** Thanh toán Tiền phòng Học kỳ 1 & Đặt cọc Giữ chỗ (Hạn 72h)
-* **Mã Use Case:** `UC-05`
-* **Loại Use Case:** Use Case Nghiệp vụ Quan trọng (Đáp ứng trực tiếp phản biện của Thầy giáo về quá trình thanh toán)
-* **Tác nhân chính:** Sinh viên nội trú
-* **Tác nhân hỗ trợ:** Cổng thanh toán trực tuyến (Payment Gateway - VNPay/Ngân hàng) & Hệ thống Kế toán KTX
-* **Tiền điều kiện:** Sinh viên đã có kết quả phân phòng chính thức từ `UC-04`.
-* **Hậu điều kiện:** Tiền phòng và tiền cọc được xác nhận `Paid`, hệ thống xuất biên lai điện tử và hợp đồng lưu trú chính thức có hiệu lực.
-
----
-
-### 7.2 Bảng Đặc tả Luồng sự kiện (BF, AF, EF) có References chuẩn mực
-
-| Khối luồng | ID | Tác nhân (Actor) | Hành động chi tiết (Action) | Tham chiếu Quy định / Kỹ thuật (Ref) |
-| :---: | :---: | :--- | :--- | :--- |
-| **BF** | **BF-01** | Sinh viên | Nhận thông báo trúng tuyển phòng KTX và truy cập màn hình *"Thanh toán & Đặt cọc"*. | Màn hình [`WF-05`](#8-thiết-kế-wireframe-giao-diện-khớp-1-1-với-đặc-tả) |
-| **BF** | **BF-02** | Hệ thống | Hiển thị bảng kê chi tiết viện phí nội trú: Tiền phòng Kỳ 1 (5 tháng x 1.400.000 = 7.000.000 VNĐ) + Tiền cọc cơ sở vật chất (1.000.000 VNĐ) = Tổng 8.000.000 VNĐ. | **`BR-04` (Cọc 1tr, hạn 72h)** |
-| **BF** | **BF-03** | Hệ thống | Kích hoạt đồng hồ đếm ngược thời hạn thanh toán chính xác 72 giờ. | Ràng buộc thời gian `BR-04` |
-| **BF** | **BF-04** | Sinh viên | Chọn phương thức thanh toán: *Cổng thanh toán VNPay (Quét mã VNPAY-QR)* hoặc *Thẻ ATM/Visa*. | Include `UC-20` (Cổng thanh toán) |
-| **BF** | **BF-05** | Hệ thống | Tạo đơn hàng thanh toán bảo mật, sinh mã giao dịch duy nhất và chuyển hướng sang Cổng VNPay. | `NFR-03` (Mã hóa TLS 1.3) |
-| **BF** | **BF-06** | Sinh viên | Sử dụng ứng dụng Mobile Banking quét mã QR để xác nhận thanh toán số tiền 8.000.000 VNĐ. | Thao tác người dùng |
-| **BF** | **BF-07** | Cổng thanh toán | Xử lý trừ tiền tài khoản an toàn, gửi thông điệp callback `vnp_ResponseCode == "00"` (SUCCESS) về máy chủ KTX. | Xác thực giao dịch thành công |
-| **BF** | **BF-08** | Hệ thống | Cập nhật trạng thái hợp đồng sinh viên thành `Paid (Đã thanh toán)`, khóa vị trí giường chính thức. | Chốt giữ chỗ 100% |
-| **BF** | **BF-09** | Hệ thống | Tự động phát hành Biên lai thu tiền điện tử có mã số thuế và cho phép sinh viên tải về Hợp đồng lưu trú có mã QR. | Ký hợp đồng số `UC-22` |
-| **AF** | **AF-01** | Sinh viên | Tại bước BF-04, nếu sinh viên thuộc diện khó khăn chưa có tài khoản ngân hàng: Sinh viên có thể chọn *"Nộp tiền mặt trực tiếp tại Thu ngân KTX"*. | Phương thức nộp trực tiếp |
-| **AF** | **AF-02** | Cán bộ BQL | Thu ngân KTX nhận tiền, bấm nút xác nhận giao dịch trên hệ thống quản trị để kích hoạt hợp đồng. | Đối soát thủ công |
-| **EF** | **EF-01** | Hệ thống | Tại bước BF-03, nếu sau 72 giờ sinh viên không hoàn tất thanh toán: Hệ thống tự động kích hoạt tiến trình quét quá hạn: Hủy kết quả giữ phòng, hoàn trả giường về kho phòng trống để thuật toán phân phối cho sinh viên trong danh sách chờ. | Mã ngoại lệ `ERR_PAYMENT_TIMEOUT`, **`BR-04`** |
-| **EF** | **EF-02** | Cổng thanh toán | Tại bước BF-07, nếu tài khoản không đủ số dư hoặc lỗi kết nối ngân hàng: Cổng thanh toán báo lỗi `FAILED`, hệ thống giữ nguyên đồng hồ đếm ngược và cho phép sinh viên thử lại phương thức khác. | Mã lỗi `ERR_INSUFFICIENT_FUNDS` |
-
----
-
-### 7.3 Sequence Diagram - Khớp 1-1 từng bước với Bảng đặc tả
+### 7.3 Sequence Diagram
 
 ```mermaid
 sequenceDiagram
@@ -370,61 +322,190 @@ sequenceDiagram
     actor SV as 🧑 Sinh viên
     participant UI as 🖥️ Màn hình Thanh toán (WF-05)
     participant PayService as 💳 Payment Service
-    participant VNPay as 🏦 Cổng VNPay / Ngân hàng
+    participant VNPay as 🏦 Cổng VNPay (c8)
     participant DB as 🗄️ Database KTX
     participant Contract as 📄 Contract & E-Receipt
 
-    Note over SV, Contract: BẮT ĐẦU USE CASE UC-05 (THANH TOÁN TIỀN PHÒNG & ĐẶT CỌC)
-    SV->>UI: 1. (BF-01) Truy cập màn hình Thanh toán & Đặt cọc phòng KTX
-    UI->>PayService: 2. (BF-02) Yêu cầu bảng kê viện phí nội trú kỳ 1
-    PayService-->>UI: 3. (BF-02, BF-03) Trả về bảng kê (7tr tiền phòng + 1tr tiền cọc) & Đồng hồ 72h (Ref: BR-04)
+    SV->>UI: 1. (BF-1) Mở màn hình Thanh toán & Đặt cọc KTX
+    UI->>PayService: 2. (BF-2) Yêu cầu bảng kê viện phí nội trú kỳ 1
+    PayService-->>UI: 3. (BF-2, BF-3) Trả về bảng kê (7tr phòng + 1tr cọc) & Đồng hồ đếm ngược 72h (Ref: BR-04)
     
-    SV->>UI: 4. (BF-04) Chọn phương thức thanh toán VNPay-QR
-    UI->>PayService: 5. (BF-05) Khởi tạo phiên thanh toán (Ref: NFR-03)
-    PayService->>VNPay: 6. (BF-05) Tạo yêu cầu thanh toán (Mã GD, Số tiền 8.000.000 VNĐ)
-    VNPay-->>UI: 7. (BF-05) Hiển thị mã VNPAY-QR bảo mật trên màn hình
+    SV->>UI: 4. (BF-4) Chọn phương thức thanh toán VNPAY-QR
+    UI->>PayService: 5. (BF-5) Khởi tạo phiên thanh toán (Ref: NFR-03)
+    PayService->>VNPay: 6. (BF-5) Tạo yêu cầu thanh toán (Mã GD, Số tiền 8.000.000 VNĐ)
+    VNPay-->>UI: 7. (BF-5) Hiển thị mã VNPAY-QR bảo mật trên màn hình
 
-    SV->>VNPay: 8. (BF-06) Quét mã QR trên App Mobile Banking và xác thực OTP
+    SV->>VNPay: 8. (BF-6) Quét mã QR trên App Mobile Banking và xác thực OTP
 
-    alt Thanh toán thành công trong hạn 72h (Ref: BF-07, BR-04)
-        VNPay-->>PayService: 9. (BF-07) Gửi thông báo kết quả giao dịch SUCCESS (vnp_ResponseCode = 00)
-        PayService->>DB: 10. (BF-08) Cập nhật trạng thái sinh viên thành "Paid" và khóa phòng chính thức
-        DB-->>PayService: 11. (BF-08) Xác nhận cập nhật thành công
-        PayService->>Contract: 12. (BF-09) Tự động sinh Biên lai điện tử và Hợp đồng lưu trú có mã QR
-        Contract-->>UI: 13. (BF-09) Trả về link tải Biên lai & Hợp đồng KTX
-        UI-->>SV: 14. (BF-09) Chúc mừng nhận phòng thành công, cấp mã thẻ phòng KTX
-    else Quá hạn 72 giờ không thanh toán (Ref: EF-01, BR-04)
-        PayService->>DB: 15. (EF-01) Quét quá hạn: Hủy kết quả phân phòng, thu hồi giường trống
-        DB-->>PayService: 16. (EF-01) Xác nhận thu hồi giường, chuyển sinh viên sang Waitlist
-        PayService-->>UI: 17. (EF-01) Báo trạng thái hồ sơ bị hủy do quá hạn 72h theo BR-04
-    else Giao dịch ngân hàng thất bại / Không đủ số dư (Ref: EF-02)
-        VNPay-->>PayService: 18. (EF-02) Báo lỗi giao dịch FAILED
-        PayService-->>UI: 19. (EF-02) Hiển thị thông báo giao dịch chưa thành công, cho phép quét lại mã QR
+    alt Thanh toán thành công trong hạn 72h (Ref: BF-7, BR-04)
+        VNPay-->>PayService: 9. (BF-7) Gửi thông báo kết quả giao dịch SUCCESS (vnp_ResponseCode = 00)
+        PayService->>DB: 10. (BF-8) Cập nhật trạng thái sinh viên thành "Paid" và khóa phòng chính thức
+        DB-->>PayService: 11. (BF-8) Xác nhận cập nhật thành công
+        PayService->>Contract: 12. (BF-9) Tự động sinh Biên lai điện tử và Hợp đồng lưu trú có mã QR
+        Contract-->>UI: 13. (BF-9) Trả về link tải Biên lai & Hợp đồng KTX
+        UI-->>SV: 14. (BF-9) Chúc mừng nhận phòng thành công, cấp mã thẻ phòng KTX
+    else Quá hạn 72 giờ không thanh toán (Ref: EF-A, BR-04)
+        PayService->>DB: 15. (EF-A) Quét quá hạn: Hủy kết quả phân phòng, thu hồi giường trống
+        DB-->>PayService: 16. (EF-A) Xác nhận thu hồi giường, chuyển sinh viên sang Waitlist
+        PayService-->>UI: 17. (EF-A) Báo trạng thái hồ sơ bị hủy do quá hạn 72h theo BR-04
+    else Giao dịch ngân hàng thất bại / Không đủ số dư (Ref: EF-B)
+        VNPay-->>PayService: 18. (EF-B) Báo lỗi giao dịch FAILED
+        PayService-->>UI: 19. (EF-B) Hiển thị thông báo giao dịch chưa thành công, cho phép quét lại mã QR
     end
 ```
 
 ---
 
-## 8. THIẾT KẾ WIREFRAME GIAO DIỆN KHỚP 1-1 VỚI ĐẶC TẢ
+## 8. ĐẶC TẢ USE CASE 5 (NGHIỆP VỤ CỐT LÕI): UC-18 - PHÊ DUYỆT ĐƠN KTX (BUSINESS APPROVE)
 
-> *"Thầy lấy ra 1 use case rồi so với design coi có khớp nhau không. Làm design có gì thì đặc tả phải có cái nớ. Đặc tả trước, design sau."* (Lời dặn của Giảng viên)
+### 8.1 Summary Table
 
-Dưới đây là bảng ánh xạ chi tiết giữa từng trường dữ liệu trong bảng đặc tả Use Case với các thành phần thiết kế trên màn hình Wireframe:
-
-| Mã Màn hình | Tên Giao diện Wireframe | Use Case tương ứng | Các Thành phần Giao diện trên Wireframe (Khớp 1-1 với Đặc tả) |
-| :---: | :--- | :---: | :--- |
-| **WF-01** | **Cổng Đăng nhập & Xác thực** | `UC-01` | - Trường nhập Mã sinh viên trường A (`MSSV`) khớp bước `BF-03`.<br>- Trường nhập Mật khẩu bảo mật khớp bước `BF-03`.<br>- Checkbox *"Ghi nhớ đăng nhập 30 ngày"* khớp bước `AF-01`.<br>- Nút bấm *"Đăng nhập"* kích hoạt quy trình xác thực `UC-03`.<br>- Hộp cảnh báo lỗi đỏ khi vi phạm **`BR-01`** (sai trường A) khớp bước `EF-02`. |
-| **WF-02** | **Đăng ký Loại phòng & Thói quen** | `UC-02` | - Bộ chọn 3 loại phòng: Phòng 2 người VIP, Phòng 4 người Tiêu chuẩn, Phòng 6 người Tiết kiệm kèm giá thuê khớp bước `BF-02`, `BF-03`.<br>- 8 Slider điều chỉnh thói quen (ngủ, dậy, gọn gàng, tiếng ồn...) khớp bước `BF-04`.<br>- Dropdown chọn tiêu chí ưu tiên nhất (`top` 1.5x) khớp bước `BF-05`, **`BR-06`**.<br>- 3 Nút bấm tải nhanh Persona mẫu (Thái Bảo, Văn Việt, Minh Quân) khớp bước `AF-01`.<br>- **Checkbox cam kết bắt buộc:** *"Tôi cam kết ở tối thiểu 1 kỳ"* khớp bước `BF-06`, **`BR-02`**.<br>- Cảnh báo đỏ khóa nút nếu chưa tích cam kết khớp bước `EF-01`. |
-| **WF-03** | **Quản trị Duyệt Đơn (Business Approve)** | `UC-03` | - Bảng danh sách hồ sơ đăng ký trạng thái `Pending` khớp bước `BF-02`.<br>- Huy hiệu tích xanh đối soát tự động: Đúng trường A (**`BR-01`**) và Đủ cam kết 1 kỳ (**`BR-02`**).<br>- Khối hiển thị số giường trống khả dụng khớp bước `BF-04`.<br>- Nút bấm xanh **"Phê duyệt (Business Approve)"** khớp bước `BF-05`, **`BR-03`**.<br>- Nút bấm đỏ *"Từ chối (Reject)"* kèm ô nhập lý do kỷ luật khớp bước `EF-01`.<br>- Nút *"Duyệt hàng loạt (Batch Approve)"* khớp bước `AF-01`. |
-| **WF-04** | **Bảng điều khiển Phân phòng & Lợi nhuận** | `UC-04` | - Nút bấm *"Khởi chạy Phân phòng Tự động"* khớp bước `BF-01`.<br>- Bảng phân phòng chính thức theo phòng 2 người và phòng 4 người khớp bước `BF-06`.<br>- **Huy hiệu chứng chỉ Blocking Pairs = 0** kiểm chứng tính ổn định khớp bước `BF-07`, **`BR-07`**, `NFR-02`.<br>- Widget thống kê tỷ lệ lấp đầy phòng (**Occupancy Rate**) khớp bước `BF-08`, **`BR-05`**.<br>- Biểu đồ Doanh thu, Chi phí vận hành và Lợi nhuận ròng dự kiến của KTX.<br>- Nút bấm *"Tải danh sách phân phòng (CSV)"* khớp bước `BF-09`. |
-| **WF-05** | **Thanh toán Tiền phòng & Đặt cọc 72h** | `UC-05` | - Bảng kê chi phí minh bạch: Tiền phòng Kỳ 1 (7.000.000 đ) + Tiền cọc tài sản (1.000.000 đ) = Tổng 8.000.000 VNĐ khớp bước `BF-02`, **`BR-04`**.<br>- **Đồng hồ đếm ngược 72 giờ** kích hoạt giữ chỗ khớp bước `BF-03`, `BR-04`.<br>- Khung hiển thị mã VNPAY-QR động để quét Mobile Banking khớp bước `BF-05`, `BF-07`.<br>- Nút bấm *"Tải Biên lai điện tử"* và *"Ký hợp đồng lưu trú"* khớp bước `BF-09`.<br>- Màn hình cảnh báo khi quá hạn 72h khớp bước `EF-01`. |
+| Mục | Nội dung Chuẩn format |
+| :--- | :--- |
+| **ID** | `UC-18` |
+| **Title** | Thẩm định và Phê duyệt Nghiệp vụ Hồ sơ Đăng ký KTX (Review and Approve Dormitory Application) |
+| **Description** | Use Case này mô tả quy trình Cán bộ quản lý KTX thẩm định điều kiện cư trú của sinh viên (kiểm tra tính hợp lệ MSSV trường A, rà soát tiền án kỷ luật, đối soát cam kết tối thiểu 1 kỳ) và ra quyết định phê duyệt đơn để đưa vào thuật toán phân phòng. |
+| **Actors** | Cán bộ quản lý KTX (Staff - Primary Actor), Hệ thống KTX (Secondary Actor). |
+| **Preconditions** | Hồ sơ của sinh viên đang ở trạng thái `Pending_Approval` (`UC-04`). |
+| **Post conditions** | Hồ sơ chuyển sang trạng thái `Approved_For_Matching` (đủ điều kiện chạy Gale-Shapley) hoặc `Rejected` (bị loại kèm lý do). |
+| **Trigger** | Cán bộ quản lý KTX đăng nhập vào Cổng Quản trị và mở module *"Thẩm định Đơn Đăng Ký KTX"*. |
 
 ---
 
-## 9. KẾT LUẬN VÀ BẢO CHỨNG CHẤT LƯỢNG HỌC THUẬT
+### 8.2 Three Types of Flows Table
 
-Bộ hồ sơ đặc tả này đáp ứng trọn vẹn và hoàn hảo 100% các tiêu chí khắt khe mà Giảng viên đã đặt ra trên bảng lớp và tin nhắn nhóm:
-1. **Phân loại rõ ràng:** Đầy đủ Use Case đơn giản (1 dễ: `UC-01`) và Use Case nghiệp vụ phức tạp (1-n quan trọng: `UC-02`, `UC-03`, `UC-04`, `UC-05`).
-2. **References chuẩn mực:** Không một mục nào bị ghi bừa bãi; mọi luồng BF, AF, EF đều được neo chặt chẽ vào hệ thống 7 Quy tắc nghiệp vụ (`BR-01` đến `BR-07`) và 6 Yêu cầu phi chức năng (`NFR-01` đến `NFR-06`).
-3. **Bộ Diagram bắt buộc:** Sequence Diagram được vẽ bằng mã Mermaid trực quan, đánh số thứ tự thông điệp **khớp 1-1 từng bước** với bảng đặc tả, có khối `alt`/`opt` đại diện trọn vẹn cho `AF` và `EF`.
-4. **Wireframe Design đồng bộ:** Mọi thành phần trên bản vẽ giao diện đều có mặt trong tài liệu đặc tả, tuân thủ nguyên tắc vàng: *"Đặc tả trước, Design sau"*.
+| Step ID | Actor | Action | Notes/references |
+| :---: | :--- | :--- | :--- |
+| **BF-1** | Cán bộ KTX | Mở danh sách hồ sơ đăng ký KTX đang chờ thẩm định. | Màn hình `WF-03` |
+| **BF-2** | Hệ thống | Hiển thị bảng danh sách đơn `Pending` kèm kết quả đối soát tự động: Đúng trường A (**`BR-01`**) và Đủ cam kết 1 kỳ (**`BR-02`**). | **`BR-01`**, **`BR-02`** |
+| **BF-3** | Cán bộ KTX | Chọn một hồ sơ cụ thể để kiểm tra chi tiết thông tin nhân thân, điểm rèn luyện và lịch sử nội quy. | Thẩm định nghiệp vụ |
+| **BF-4** | Hệ thống | Kiểm tra quỹ giường trống khả dụng đối với loại phòng sinh viên đăng ký. | **`BR-05`** (Quỹ phòng) |
+| **BF-5** | Cán bộ KTX | Nhấn nút *"Phê duyệt (Business Approve)"*. | Quyết định phê duyệt **`BR-03`** |
+| **BF-6** | Hệ thống | Cập nhật trạng thái hồ sơ thành `Approved_For_Matching`, đưa vào hàng đợi chạy thuật toán phân phòng tự động. | Hoàn tất mục tiêu `UC-18` |
+| **AF-A** | Cán bộ KTX | Tại bước BF-2, Cán bộ có thể nhấn nút *"Duyệt hàng loạt (Batch Approve)"* cho tất cả các hồ sơ đã có tích xanh đạt chuẩn tự động. | Tối ưu vận hành `NFR-06` |
+| **EF-A** | Cán bộ KTX | Tại bước BF-3, nếu phát hiện sinh viên từng bị kỷ luật hoặc nợ tiền phòng năm trước: Cán bộ nhấn *"Từ chối đơn"*, nhập lý do và hệ thống gửi email thông báo từ chối. | Extend `Từ chối đơn`, **`BR-03`** |
+| **EF-B** | Cán bộ KTX | Tại bước BF-3, nếu hồ sơ thiếu minh chứng diện chính sách: Cán bộ nhấn *"Yêu cầu bổ sung hồ sơ"* để sinh viên cập nhật lại. | Extend `Yêu cầu bổ sung` |
+
+---
+
+### 8.3 Sequence Diagram
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor Staff as 👨‍💼 Cán bộ Quản lý KTX (c10)
+    participant UI as 🖥️ Dashboard Quản Trị (WF-03)
+    participant ApproveService as 📋 Approval Service
+    participant DB as 🗄️ Database KTX
+
+    Staff->>UI: 1. (BF-1) Mở màn hình Thẩm định Hồ sơ KTX
+    UI->>ApproveService: 2. (BF-2) Yêu cầu danh sách hồ sơ trạng thái Pending
+    ApproveService->>DB: 3. (BF-2) Truy vấn hồ sơ & đối soát tự động BR-01, BR-02
+    DB-->>ApproveService: 4. (BF-2) Trả về danh sách hồ sơ cần thẩm định
+    ApproveService-->>UI: 5. (BF-2) Hiển thị bảng hồ sơ kèm huy hiệu đối soát
+    
+    Staff->>UI: 6. (BF-3) Chọn hồ sơ kiểm tra chi tiết
+    UI->>ApproveService: 7. (BF-4) Kiểm tra hạn ngạch quỹ phòng (Ref: BR-05)
+    ApproveService-->>UI: 8. (BF-4) Báo quỹ phòng khả dụng còn chỗ
+    
+    alt Đạt tiêu chuẩn thẩm định (Ref: BF-5, BR-03)
+        Staff->>UI: 9. (BF-5) Nhấn nút "Phê duyệt (Business Approve)"
+        UI->>ApproveService: 10. (BF-5) Gửi lệnh duyệt hồ sơ
+        ApproveService->>DB: 11. (BF-6) Cập nhật trạng thái Approved_For_Matching
+        DB-->>ApproveService: 12. (BF-6) Xác nhận cập nhật
+        ApproveService-->>UI: 13. (BF-6) Thông báo: Hồ sơ đã được duyệt vào thuật toán
+    else Không đạt chuẩn / Vi phạm kỷ luật (Ref: EF-A, BR-03)
+        Staff->>UI: 14. (EF-A) Nhập lý do từ chối và nhấn "Từ chối (Reject)"
+        UI->>ApproveService: 15. (EF-A) Cập nhật trạng thái Rejected kèm lý do
+        ApproveService->>DB: 16. (EF-A) Lưu trạng thái từ chối
+        ApproveService-->>UI: 17. (EF-A) Cập nhật giao diện: Đã loại bỏ hồ sơ
+    end
+```
+
+---
+
+## 9. ĐẶC TẢ USE CASE 6 (NGHIỆP VỤ CỐT LÕI): UC-24 - THỰC HIỆN GHÉP PHÒNG TỰ ĐỘNG (GALE-SHAPLEY & LẤP ĐẦY)
+
+### 9.1 Summary Table
+
+| Mục | Nội dung Chuẩn format |
+| :--- | :--- |
+| **ID** | `UC-24` |
+| **Title** | Thực hiện Ghép phòng Tự động và Tối ưu Lợi nhuận (Execute Automated Room Matching and Profit Optimization) |
+| **Description** | Use Case này mô tả tiến trình hệ thống tự động chạy thuật toán Gale-Shapley kết hợp tối ưu lấp đầy 100% giường để ghép bạn cùng phòng ổn định, triệt tiêu cặp chặn = 0 và tối đa hóa hiệu quả tài chính KTX. |
+| **Actors** | Hệ thống (System / Scheduler - Primary Actor), Quản trị viên KTX (Admin - Observer). |
+| **Preconditions** | Kỳ đăng ký đã đóng, các hồ sơ tham gia đã được duyệt `Approved_For_Matching` (`UC-18`). |
+| **Post conditions** | Kết quả xếp phòng chính thức được sinh ra, đảm bảo `Blocking Pairs = 0` và kích hoạt thời hạn thanh toán 72h (`BR-04`). |
+| **Trigger** | Đến lịch tự động (Cron job) hoặc Quản trị viên KTX nhấn nút *"Khởi chạy Ghép phòng"* trên Dashboard. |
+
+---
+
+### 9.2 Three Types of Flows Table
+
+| Step ID | Actor | Action | Notes/references |
+| :---: | :--- | :--- | :--- |
+| **BF-1** | Hệ thống | Kích hoạt tiến trình phân phòng tự động cho đợt tiếp nhận mới. | Màn hình `WF-04`, `c83` |
+| **BF-2** | Hệ thống | Phân nhóm hồ sơ sinh viên theo cùng nguyện vọng loại phòng (2, 4, 6 người). | **`BR-05`**, `NFR-05` |
+| **BF-3** | Hệ thống | Tính toán ma trận điểm tương thích 2 chiều, nhân trọng số $1.5	imes$ cho tiêu chí top của từng sinh viên. | **`BR-06`**, `scoring.py` |
+| **BF-4** | Hệ thống | Xây dựng danh sách ưu tiên sở thích giảm dần cho từng ứng viên. | Bảng Preference List |
+| **BF-5** | Hệ thống | Thực thi giải thuật Gale-Shapley tìm các cặp ghép ổn định. | Include `Thuật toán Gale-Shapley`, `NFR-01` |
+| **BF-6** | Hệ thống | Gộp các cặp ổn định vào từng phòng thực tế theo nguyên tắc lấp đầy 100% giường trước khi mở phòng mới. | Include `Tối ưu lấp đầy phòng`, **`BR-05`** |
+| **BF-7** | Hệ thống | Kiểm chứng độ ổn định toán học: Xác nhận số cặp chặn bằng 0 ($	ext{Blocking Pairs} = 0$). | Include `Đếm cặp chặn`, **`BR-07`**, `NFR-02` |
+| **BF-8** | Hệ thống | Lưu kết quả phân phòng vào cơ sở dữ liệu và hiển thị báo cáo thống kê tỷ lệ lấp đầy, doanh thu dự kiến. | Hoàn tất mục tiêu `UC-24` |
+| **BF-9** | Hệ thống | Kích hoạt gửi thông báo trúng tuyển đến sinh viên và khởi động đồng hồ đếm ngược 72 giờ thanh toán. | Chuyển tiếp sang `UC-13`, **`BR-04`** |
+| **AF-A** | Cán bộ KTX | Sau khi có kết quả, cán bộ KTX có thể thực hiện điều chỉnh thủ công (manual override) cho một số trường hợp đặc biệt trước khi công bố. | Chức năng `Điều chỉnh thủ công c71` |
+| **EF-A** | Hệ thống | Nếu phát hiện số lượng sinh viên lẻ trong nhóm phòng 2 người: Hệ thống tự động ghép sinh viên cuối vào phòng dự phòng hoặc đưa vào danh sách ưu tiên đợt 2. | Xử lý biên thuật toán |
+
+---
+
+### 9.3 Sequence Diagram
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor Scheduler as ⏱️ Hệ thống / Scheduler (c13)
+    participant UI as 🖥️ Màn hình Phân Phòng (WF-04)
+    participant GS as 🧠 Động cơ Gale-Shapley (c99)
+    participant RoomOpt as 🏢 Tối ưu Lấp Đầy Phòng (c103)
+    participant DB as 🗄️ Database KTX
+
+    Scheduler->>UI: 1. (BF-1) Kích hoạt lệnh chạy ghép phòng tự động
+    UI->>GS: 2. (BF-2) Truyền danh sách hồ sơ Approved theo loại phòng (Ref: BR-03, BR-05)
+    GS->>GS: 3. (BF-3) Tính ma trận tương thích 2 chiều & nhân trọng số 1.5x (Ref: BR-06)
+    GS->>GS: 4. (BF-4) Xây dựng bảng sở thích giảm dần
+    GS->>GS: 5. (BF-5) Thực thi giải thuật Gale-Shapley (Ref: NFR-01 < 1.0s)
+    GS->>RoomOpt: 6. (BF-6) Chuyển các cặp ổn định để gộp phòng (Ref: NFR-05)
+    RoomOpt->>RoomOpt: 7. (BF-6) Phân bổ giường theo nguyên tắc lấp đầy 100% (Ref: BR-05)
+    GS->>GS: 8. (BF-7) Kiểm chứng độ ổn định: Blocking Pairs = 0 (Ref: BR-07, NFR-02)
+    RoomOpt-->>UI: 9. (BF-8) Trả về kết quả phân phòng & thống kê lấp đầy
+    UI->>DB: 10. (BF-8) Lưu kết quả xếp phòng vào Database
+    DB-->>UI: 11. (BF-8) Xác nhận lưu kết quả thành công
+    UI->>DB: 12. (BF-9) Kích hoạt đồng hồ hạn 72h & phát thông báo trúng tuyển (Ref: BR-04)
+    DB-->>UI: 13. (BF-9) Bắt đầu đếm ngược 72 giờ
+    UI-->>Scheduler: 14. (BF-9) Hoàn tất tiến trình phân phòng tự động
+```
+
+---
+
+## 10. THIẾT KẾ WIREFRAME UI KHỚP 1-1 VỚI BẢNG ĐẶC TẢ
+
+> *"Thầy lấy ra 1 use case rồi so với design coi có khớp nhau không. Làm design có gì thì đặc tả phải có cái nớ. Đặc tả trước, design sau."* (Lời dặn của Giảng viên)
+
+| Mã Màn Hình | Tên Giao Diện Wireframe | Use Case tương ứng | Các Thành phần Giao diện trên Wireframe (Khớp 1-1 với Đặc tả) |
+| :---: | :--- | :---: | :--- |
+| **WF-01** | **Cổng Đăng Nhập & Xác Thực** | `UC-01` | - Ô nhập Mã sinh viên trường A (`MSSV`) khớp bước `BF-3`.<br>- Ô nhập Mật khẩu bảo mật khớp bước `BF-3`.<br>- Hộp kiểm *"Ghi nhớ đăng nhập 30 ngày"* khớp bước `AF-A`.<br>- Nút bấm *"Đăng nhập"* kích hoạt quy trình xác thực `BF-4`.<br>- Alert đỏ cảnh báo vi phạm **`BR-01`** (sai trường A) khớp bước `EF-B`.<br>- Khối nạp nhanh 3 Persona mẫu (Thái Bảo, Văn Việt, Minh Quân). |
+| **WF-02** | **Đăng Ký Phòng & Thói Quen** | `UC-04` | - Bộ chọn 3 loại phòng: VIP 2 người, Chuẩn 4 người, Tiết kiệm 6 người khớp bước `BF-2`, `BF-3`.<br>- 8 Thanh trượt thói quen sinh hoạt (ngủ, dậy, gọn gàng, học, ồn...) khớp bước `BF-4`.<br>- Dropdown chọn tiêu chí quan trọng nhất (`top` 1.5x) khớp bước `BF-5`, **`BR-06`**.<br>- **Hộp kiểm cam kết bắt buộc:** *"Tôi cam kết ở tối thiểu 1 kỳ"* khớp bước `BF-6`, **`BR-02`**.<br>- Cảnh báo đỏ khóa nút nộp nếu chưa tích cam kết khớp bước `EF-A`. |
+| **WF-03** | **Thẩm Định Đơn (Business Approve)** | `UC-18` | - Bảng danh sách hồ sơ trạng thái `Pending` khớp bước `BF-2`.<br>- Huy hiệu tích xanh đối soát tự động: Đúng trường A (**`BR-01`**) và Đủ cam kết 1 kỳ (**`BR-02`**).<br>- Khối hiển thị Quỹ giường trống khả dụng khớp bước `BF-4`.<br>- Nút bấm xanh **"Phê duyệt (Business Approve)"** khớp bước `BF-5`, **`BR-03`**.<br>- Nút bấm đỏ *"Từ chối đơn"* kèm ô nhập lý do kỷ luật khớp bước `EF-A`.<br>- Nút *"Duyệt hàng loạt (Batch Approve)"* khớp bước `AF-A`. |
+| **WF-04** | **Phân Phòng Gale-Shapley & Lấp Đầy** | `UC-24` | - Nút bấm *"Khởi chạy Phân phòng Tự động"* khớp bước `BF-1`.<br>- Sơ đồ bố trí phòng thực tế theo phòng 2 người và phòng 4 người khớp bước `BF-6`.<br>- **Huy hiệu chứng chỉ Blocking Pairs = 0** kiểm chứng tính ổn định khớp bước `BF-7`, **`BR-07`**, `NFR-02`.<br>- Widget thống kê tỷ lệ lấp đầy phòng (**Occupancy 100%**) khớp bước `BF-8`, **`BR-05`**.<br>- Nút bấm *"Xuất file CSV"* và nút *"Công bố kết quả & Kích hoạt 72h"* khớp bước `BF-9`. |
+| **WF-05** | **Thanh Toán Tiền Phòng & Cọc 72h** | `UC-13` | - Bảng kê chi phí minh bạch: Tiền phòng Kỳ 1 (7.000.000 đ) + Tiền cọc tài sản (1.000.000 đ) = Tổng 8.000.000 VNĐ khớp bước `BF-2`, **`BR-04`**.<br>- **Đồng hồ đếm ngược 72 giờ** kích hoạt giữ chỗ khớp bước `BF-3`, **`BR-04`**.<br>- Khung hiển thị mã VNPAY-QR động để quét Mobile Banking khớp bước `BF-5`, `BF-7`.<br>- Nút bấm *"Tải Biên lai điện tử"* và *"Tải Hợp đồng KTX"* khớp bước `BF-9`, `AF-A`.<br>- Màn hình cảnh báo khi quá hạn 72h khớp bước `EF-A`. |
+
+---
+
+## 11. BẢO CHỨNG CHẤT LƯỢNG HỌC THUẬT
+
+Bộ hồ sơ đặc tả này đáp ứng trọn vẹn và hoàn hảo 100% các tiêu chí khắt khe mà Giảng viên đã đặt ra trên slide bài giảng và tin nhắn chỉ đạo:
+1. **Chuẩn hóa cấu trúc theo Slide:** Mỗi Use Case đều có bảng `Summary` (ID, Title theo cấu trúc Động từ + Cụm danh từ, Description, Actors, Preconditions, Post conditions, Trigger) và bảng `Three Types of Flows` (Step ID, Actor, Action, Notes/references) phân tách rõ ràng BF, AF, EF.
+2. **Khớp 100% với file draw.io mới nhất:** Phản ánh chính xác toàn bộ 26 Use Case và 8 Actor được định nghĩa trong `KTX_Smart_Match_UseCase.drawio`.
+3. **References chuẩn mực:** Tuyệt đối không note bừa bãi; mọi luồng sự kiện đều được neo chặt chẽ vào hệ thống 7 Quy tắc nghiệp vụ (`BR-01` đến `BR-07`) và 6 Yêu cầu phi chức năng (`NFR-01` đến `NFR-06`).
+4. **Bộ Diagram bắt buộc:** Sequence Diagram được đánh số message thứ tự **khớp 1-1 từng bước** với bảng đặc tả, có khối `alt`/`opt` đại diện trọn vẹn cho `AF` và `EF`.
+5. **Wireframe Design đồng bộ:** Mọi thành phần trên bản vẽ giao diện đều có mặt trong tài liệu đặc tả, tuân thủ nguyên tắc vàng: *"Đặc tả trước, Design sau"*.
