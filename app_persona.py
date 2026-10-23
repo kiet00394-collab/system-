@@ -444,6 +444,24 @@ def view_master_deck_page():
             return HTMLResponse(content=f.read())
     raise HTTPException(status_code=404, detail="File master_presentation_deck.html chưa được tạo.")
 
+@app.get("/download-br-nfr-docx")
+def download_br_nfr_docx():
+    docx_path = os.path.join(os.path.dirname(__file__), "docs", "Tai_Lieu_Business_Rules_Va_Non_Functional_KTX_VNUK.docx")
+    if os.path.exists(docx_path):
+        return FileResponse(
+            docx_path,
+            media_type="application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+            filename="Tai_Lieu_Business_Rules_Va_Non_Functional_KTX_VNUK.docx"
+        )
+    downloads_path = os.path.join(r"C:\Users\LENOVO\Downloads", "Tai_Lieu_Business_Rules_Va_Non_Functional_KTX_VNUK.docx")
+    if os.path.exists(downloads_path):
+        return FileResponse(
+            downloads_path,
+            media_type="application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+            filename="Tai_Lieu_Business_Rules_Va_Non_Functional_KTX_VNUK.docx"
+        )
+    raise HTTPException(status_code=404, detail="File Tai_Lieu_Business_Rules_Va_Non_Functional_KTX_VNUK.docx chưa được tạo.")
+
 @app.get("/download-slides-pdf")
 def download_slides_pdf():
     pdf_path = os.path.join(os.path.dirname(__file__), "docs", "Slide_Thuyet_Trinh_KTX_Smart_Match_VNUK.pdf")
