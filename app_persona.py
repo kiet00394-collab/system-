@@ -418,6 +418,24 @@ def download_spec_docx():
         )
     raise HTTPException(status_code=404, detail="File tài liệu Word chưa được tạo.")
 
+@app.get("/download-slides-pdf")
+def download_slides_pdf():
+    pdf_path = os.path.join(os.path.dirname(__file__), "docs", "Slide_Thuyet_Trinh_KTX_Smart_Match_VNUK.pdf")
+    if os.path.exists(pdf_path):
+        return FileResponse(
+            pdf_path,
+            media_type="application/pdf",
+            filename="Slide_Thuyet_Trinh_KTX_Smart_Match_VNUK.pdf"
+        )
+    downloads_path = os.path.join(r"C:\Users\LENOVO\Downloads", "Slide_Thuyet_Trinh_KTX_Smart_Match_VNUK.pdf")
+    if os.path.exists(downloads_path):
+        return FileResponse(
+            downloads_path,
+            media_type="application/pdf",
+            filename="Slide_Thuyet_Trinh_KTX_Smart_Match_VNUK.pdf"
+        )
+    raise HTTPException(status_code=404, detail="File Slide thuyết trình PDF chưa được tạo.")
+
 @app.get("/download-wireframe-pdf")
 def download_wireframe_pdf():
     pdf_path = os.path.join(os.path.dirname(__file__), "docs", "Tai_Lieu_Wireframe_Chi_Tiet_He_Thong_KTX.pdf")
@@ -439,6 +457,15 @@ def download_usecase_drawio():
             filename="KTX_Smart_Match_UseCase.drawio"
         )
     raise HTTPException(status_code=404, detail="File drawio chưa được tạo.")
+
+@app.get("/slides", response_class=HTMLResponse)
+@app.get("/presentation-slides", response_class=HTMLResponse)
+def presentation_slides_page():
+    html_path = os.path.join(os.path.dirname(__file__), "ui", "presentation_slides.html")
+    if os.path.exists(html_path):
+        with open(html_path, "r", encoding="utf-8") as f:
+            return HTMLResponse(content=f.read())
+    raise HTTPException(status_code=404, detail="File presentation_slides.html chưa được tạo.")
 
 @app.get("/wireframe-detail", response_class=HTMLResponse)
 def wireframe_detail_page():
