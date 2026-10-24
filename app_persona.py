@@ -550,6 +550,50 @@ def view_sequence_diagrams_page():
             return HTMLResponse(content=f.read())
     raise HTTPException(status_code=404, detail="File figma_sequence_diagrams.html chưa được tạo.")
 
+@app.get("/usecase-spec", response_class=HTMLResponse)
+def view_usecase_spec_page():
+    html_path = os.path.join(os.path.dirname(__file__), "ui", "usecase_spec_export.html")
+    if os.path.exists(html_path):
+        with open(html_path, "r", encoding="utf-8") as f:
+            return HTMLResponse(content=f.read())
+    raise HTTPException(status_code=404, detail="File usecase_spec_export.html chưa được tạo.")
+
+@app.get("/download-usecase-spec-docx")
+def download_usecase_spec_docx():
+    docx_path = os.path.join(os.path.dirname(__file__), "docs", "Dac_Ta_Use_Case_Chuan_Slide_Thay_KTX_VNUK.docx")
+    if os.path.exists(docx_path):
+        return FileResponse(
+            docx_path,
+            media_type="application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+            filename="Dac_Ta_Use_Case_Chuan_Slide_Thay_KTX_VNUK.docx"
+        )
+    downloads_path = os.path.join(r"C:\Users\LENOVO\Downloads", "Dac_Ta_Use_Case_Chuan_Slide_Thay_KTX_VNUK.docx")
+    if os.path.exists(downloads_path):
+        return FileResponse(
+            downloads_path,
+            media_type="application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+            filename="Dac_Ta_Use_Case_Chuan_Slide_Thay_KTX_VNUK.docx"
+        )
+    raise HTTPException(status_code=404, detail="File Dac_Ta_Use_Case_Chuan_Slide_Thay_KTX_VNUK.docx chưa được tạo.")
+
+@app.get("/download-usecase-spec-pdf")
+def download_usecase_spec_pdf():
+    pdf_path = os.path.join(os.path.dirname(__file__), "docs", "Dac_Ta_Use_Case_Chuan_Slide_Thay_KTX_VNUK.pdf")
+    if os.path.exists(pdf_path):
+        return FileResponse(
+            pdf_path,
+            media_type="application/pdf",
+            filename="Dac_Ta_Use_Case_Chuan_Slide_Thay_KTX_VNUK.pdf"
+        )
+    downloads_path = os.path.join(r"C:\Users\LENOVO\Downloads", "Dac_Ta_Use_Case_Chuan_Slide_Thay_KTX_VNUK.pdf")
+    if os.path.exists(downloads_path):
+        return FileResponse(
+            downloads_path,
+            media_type="application/pdf",
+            filename="Dac_Ta_Use_Case_Chuan_Slide_Thay_KTX_VNUK.pdf"
+        )
+    raise HTTPException(status_code=404, detail="File Dac_Ta_Use_Case_Chuan_Slide_Thay_KTX_VNUK.pdf chưa được tạo.")
+
 @app.get("/diagrams-3", response_class=HTMLResponse)
 def view_3_diagrams_page():
     html_path = os.path.join(os.path.dirname(__file__), "ui", "three_diagrams_export.html")
