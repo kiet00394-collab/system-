@@ -524,6 +524,32 @@ def download_3_diagrams_pdf():
         )
     raise HTTPException(status_code=404, detail="File Bo_3_Diagram_KTX_Smart_Match_VNUK.pdf chưa được tạo.")
 
+@app.get("/download-sequence-pdf")
+def download_sequence_pdf():
+    pdf_path = os.path.join(os.path.dirname(__file__), "docs", "Bo_Sequence_Diagram_Chi_Tiet_Cac_Chuc_Nang_KTX_VNUK.pdf")
+    if os.path.exists(pdf_path):
+        return FileResponse(
+            pdf_path,
+            media_type="application/pdf",
+            filename="Bo_Sequence_Diagram_Chi_Tiet_Cac_Chuc_Nang_KTX_VNUK.pdf"
+        )
+    downloads_path = os.path.join(r"C:\Users\LENOVO\Downloads", "Bo_Sequence_Diagram_Chi_Tiet_Cac_Chuc_Nang_KTX_VNUK.pdf")
+    if os.path.exists(downloads_path):
+        return FileResponse(
+            downloads_path,
+            media_type="application/pdf",
+            filename="Bo_Sequence_Diagram_Chi_Tiet_Cac_Chuc_Nang_KTX_VNUK.pdf"
+        )
+    raise HTTPException(status_code=404, detail="File Bo_Sequence_Diagram_Chi_Tiet_Cac_Chuc_Nang_KTX_VNUK.pdf chưa được tạo.")
+
+@app.get("/sequence-diagrams", response_class=HTMLResponse)
+def view_sequence_diagrams_page():
+    html_path = os.path.join(os.path.dirname(__file__), "ui", "figma_sequence_diagrams.html")
+    if os.path.exists(html_path):
+        with open(html_path, "r", encoding="utf-8") as f:
+            return HTMLResponse(content=f.read())
+    raise HTTPException(status_code=404, detail="File figma_sequence_diagrams.html chưa được tạo.")
+
 @app.get("/diagrams-3", response_class=HTMLResponse)
 def view_3_diagrams_page():
     html_path = os.path.join(os.path.dirname(__file__), "ui", "three_diagrams_export.html")
