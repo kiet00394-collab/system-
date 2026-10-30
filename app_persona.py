@@ -594,6 +594,72 @@ def download_usecase_spec_pdf():
         )
     raise HTTPException(status_code=404, detail="File Dac_Ta_Use_Case_Chuan_Slide_Thay_KTX_VNUK.pdf chưa được tạo.")
 
+@app.get("/br-doc", response_class=HTMLResponse)
+def view_br_doc_page():
+    html_path = os.path.join(os.path.dirname(__file__), "ui", "br_export_single.html")
+    if os.path.exists(html_path):
+        with open(html_path, "r", encoding="utf-8") as f:
+            return HTMLResponse(content=f.read())
+    raise HTTPException(status_code=404, detail="File br_export_single.html chưa được tạo.")
+
+@app.get("/download-br-docx")
+def download_br_docx_file():
+    p = os.path.join(r"C:\Users\LENOVO\Downloads", "BR_KTX_Smart_Match_VNUK.docx")
+    if os.path.exists(p):
+        return FileResponse(p, media_type="application/vnd.openxmlformats-officedocument.wordprocessingml.document", filename="BR_KTX_Smart_Match_VNUK.docx")
+    raise HTTPException(status_code=404, detail="File BR docx chưa được tạo.")
+
+@app.get("/download-br-pdf")
+def download_br_pdf_file():
+    p = os.path.join(r"C:\Users\LENOVO\Downloads", "BR_KTX_Smart_Match_VNUK.pdf")
+    if os.path.exists(p):
+        return FileResponse(p, media_type="application/pdf", filename="BR_KTX_Smart_Match_VNUK.pdf")
+    raise HTTPException(status_code=404, detail="File BR pdf chưa được tạo.")
+
+@app.get("/spec-doc", response_class=HTMLResponse)
+def view_spec_doc_page():
+    html_path = os.path.join(os.path.dirname(__file__), "ui", "spec_export_single.html")
+    if os.path.exists(html_path):
+        with open(html_path, "r", encoding="utf-8") as f:
+            return HTMLResponse(content=f.read())
+    raise HTTPException(status_code=404, detail="File spec_export_single.html chưa được tạo.")
+
+@app.get("/download-spec-docx")
+def download_spec_docx_file():
+    p = os.path.join(r"C:\Users\LENOVO\Downloads", "Dac_Ta_Use_Case_KTX_Smart_Match_VNUK.docx")
+    if os.path.exists(p):
+        return FileResponse(p, media_type="application/vnd.openxmlformats-officedocument.wordprocessingml.document", filename="Dac_Ta_Use_Case_KTX_Smart_Match_VNUK.docx")
+    raise HTTPException(status_code=404, detail="File Spec docx chưa được tạo.")
+
+@app.get("/download-spec-pdf")
+def download_spec_pdf_file():
+    p = os.path.join(r"C:\Users\LENOVO\Downloads", "Dac_Ta_Use_Case_KTX_Smart_Match_VNUK.pdf")
+    if os.path.exists(p):
+        return FileResponse(p, media_type="application/pdf", filename="Dac_Ta_Use_Case_KTX_Smart_Match_VNUK.pdf")
+    raise HTTPException(status_code=404, detail="File Spec pdf chưa được tạo.")
+
+@app.get("/diagram-doc", response_class=HTMLResponse)
+def view_diagram_doc_page():
+    html_path = os.path.join(os.path.dirname(__file__), "ui", "diagram_export_single.html")
+    if os.path.exists(html_path):
+        with open(html_path, "r", encoding="utf-8") as f:
+            return HTMLResponse(content=f.read())
+    raise HTTPException(status_code=404, detail="File diagram_export_single.html chưa được tạo.")
+
+@app.get("/download-diagram-docx")
+def download_diagram_docx_file():
+    p = os.path.join(r"C:\Users\LENOVO\Downloads", "Bo_Diagram_Va_Sequence_KTX_Smart_Match_VNUK.docx")
+    if os.path.exists(p):
+        return FileResponse(p, media_type="application/vnd.openxmlformats-officedocument.wordprocessingml.document", filename="Bo_Diagram_Va_Sequence_KTX_Smart_Match_VNUK.docx")
+    raise HTTPException(status_code=404, detail="File Diagram docx chưa được tạo.")
+
+@app.get("/download-diagram-pdf")
+def download_diagram_pdf_file():
+    p = os.path.join(r"C:\Users\LENOVO\Downloads", "Bo_Diagram_Va_Sequence_KTX_Smart_Match_VNUK.pdf")
+    if os.path.exists(p):
+        return FileResponse(p, media_type="application/pdf", filename="Bo_Diagram_Va_Sequence_KTX_Smart_Match_VNUK.pdf")
+    raise HTTPException(status_code=404, detail="File Diagram pdf chưa được tạo.")
+
 @app.get("/diagrams-3", response_class=HTMLResponse)
 def view_3_diagrams_page():
     html_path = os.path.join(os.path.dirname(__file__), "ui", "three_diagrams_export.html")

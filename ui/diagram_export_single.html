@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Biểu đồ Use Case & Sequence Diagrams - KTX Smart Match</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true, theme: 'neutral' });
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background: #0f172a; color: #1e293b; }
+        .page { width: 210mm; min-height: 297mm; padding: 14mm 16mm; margin: 20px auto; background: #fff; box-shadow: 0 10px 25px rgba(0,0,0,0.3); page-break-after: always; }
+        @media print { body { background: transparent; padding: 0; } .page { width: 100%; min-height: 100vh; margin: 0; padding: 12mm 14mm; box-shadow: none; page-break-after: always; } }
+    </style>
+</head>
+<body class="py-6">
+
+    <!-- Trang 1: Sơ đồ Use Case tổng thể vẽ lại & Sequence Diagram 1 -->
+    <div class="page flex flex-col justify-between">
+        <div>
+            <div class="border-b-2 border-indigo-900 pb-2 mb-3 flex justify-between items-start">
+                <div>
+                    <div class="text-[11px] font-extrabold uppercase tracking-wider text-indigo-950">Viện Nghiên cứu và Đào tạo Việt - Anh (VNUK) – Đại học Đà Nẵng</div>
+                    <div class="text-[10px] font-bold text-slate-500 uppercase tracking-wide">Khoa Công nghệ Thông tin & Trí tuệ Nhân tạo • System Engineering</div>
+                </div>
+                <div class="text-right">
+                    <span class="text-[10px] font-mono font-bold bg-purple-50 text-purple-700 border border-purple-200 px-2 py-0.5 rounded">DIAGRAM SPECIFICATION</span>
+                </div>
+            </div>
+
+            <div class="text-center my-2">
+                <span class="text-[10px] font-mono font-extrabold px-3 py-1 rounded-full bg-slate-100 text-slate-800 border border-slate-300 uppercase tracking-widest">TÀI LIỆU BIỂU ĐỒ RIÊNG BIỆT</span>
+                <h1 class="text-xl font-black text-slate-900 mt-1.5 mb-1 tracking-tight uppercase">Sơ Đồ Use Case & Sequence Diagram Chuẩn Vòng Đời</h1>
+                <p class="text-xs italic text-slate-600">Chuẩn hóa thanh kích hoạt vòng đời (Activation Bars) & Khớp 1-1 với Bảng đặc tả</p>
+            </div>
+
+            <!-- Sequence Diagram UC-05 Matching by Request -->
+            <div class="mb-2">
+                <h2 class="text-xs font-black text-slate-900 uppercase mb-1 flex items-center gap-1.5">
+                    <span>📐</span> Sequence Diagram: Ghép bạn cùng phòng theo yêu cầu (UC-05: Matching by Request)
+                </h2>
+                <p class="text-[9.5px] text-slate-500 italic mb-1.5">
+                    Phân định 2 tác nhân con người SV A và SV B; thanh kích hoạt (Activation Bars) mở khi nhận thông điệp và đóng khi trả kết quả (deactivate).
+                </p>
+                <div class="bg-slate-50 border border-slate-200 rounded-lg p-2">
+                    <div class="mermaid text-xs">
+sequenceDiagram
+    autonumber
+    actor SVA as 🧑 Sinh viên A (Gửi Request)
+    participant UI as 🖥️ Giao diện KTX Web
+    participant MatchSvc as ⚙️ Matching Service
+    participant DB as 🗄️ Database KTX
+    actor SVB as 🧑 Sinh viên B (Nhận Request)
+
+    Note over SVA, SVB: GIAI ĐOẠN 1: SINH VIÊN A GỬI YÊU CẦU GHÉP PHÒNG
+    SVA->>UI: 1. (BF-1) Chọn ứng viên B & Bấm "Gửi yêu cầu ghép bạn"
+    activate UI
+    UI->>MatchSvc: 2. (BF-2) Kiểm tra điều kiện (giới tính, loại phòng, BR-05)
+    activate MatchSvc
+    MatchSvc->>DB: 3. (BF-2) Truy vấn hồ sơ B & Kiểm tra cờ nhóm
+    activate DB
+    DB-->>MatchSvc: 4. (BF-2) Xác nhận B hợp lệ & chưa thuộc nhóm nào
+    deactivate DB
+    
+    MatchSvc->>DB: 5. (BF-3) Lưu yêu cầu trạng thái "Pending" (Hạn 48h)
+    activate DB
+    DB-->>MatchSvc: 6. (BF-3) Xác nhận lưu bản ghi thành công
+    deactivate DB
+
+    MatchSvc->>SVB: 7. (BF-3) Đẩy thông báo Push: "Bạn có lời mời ghép phòng từ SV A"
+    MatchSvc-->>UI: 8. (BF-3) Phản hồi: Đã gửi lời mời thành công
+    deactivate MatchSvc
+    UI-->>SVA: 9. (BF-3) Thông báo gửi request thành công, chờ B phản hồi
+    deactivate UI
+
+    Note over SVA, SVB: GIAI ĐOẠN 2: SINH VIÊN B ĐỐI SOÁT & PHẢN HỒI (BẤT ĐỒNG BỘ)
+    SVB->>UI: 10. (BF-4) Đăng nhập, mở xem chi tiết hồ sơ 8 thói quen của A
+    activate UI
+    UI->>MatchSvc: 11. (BF-4) Lấy thông tin so sánh đối soát nếp sống
+    activate MatchSvc
+    MatchSvc-->>UI: 12. (BF-4) Trả về bảng đối chiếu tiêu chí (Ref: BR-09)
+    deactivate MatchSvc
+    UI-->>SVB: 13. (BF-4) Hiển thị giao diện so sánh hòa hợp & 2 nút lựa chọn
+    deactivate UI
+
+    alt Trường hợp B Đồng ý (Accept - Luồng cơ bản BF-5, BF-6)
+        SVB->>UI: 14. (BF-5) Nhấn nút "Đồng ý ghép phòng"
+        activate UI
+        UI->>MatchSvc: 15. (BF-5) Gửi lệnh chấp thuận kết bạn
+        activate MatchSvc
+        MatchSvc->>DB: 16. (BF-6) Cập nhật trạng thái nhóm thành "Matched Pair"
+        activate DB
+        DB-->>MatchSvc: 17. (BF-6) Xác nhận liên kết thành công
+        deactivate DB
+        MatchSvc->>SVA: 18. (BF-6) Gửi thông báo chúc mừng tới A: "SV B đã đồng ý!"
+        MatchSvc-->>UI: 19. (BF-6) Thông báo thành công tới B
+        deactivate MatchSvc
+        UI-->>SVB: 20. (BF-7) Hiển thị thông báo hoàn tất ghép đôi
+        deactivate UI
+    else Trường hợp B Từ chối (Decline - Luồng thay thế AF-A)
+        SVB->>UI: 21. (AF-A-1) Nhấn nút "Từ chối ghép bạn"
+        activate UI
+        UI->>MatchSvc: 22. (AF-A-2) Hủy yêu cầu, cập nhật trạng thái "Declined"
+        activate MatchSvc
+        MatchSvc->>DB: 23. (AF-A-2) Giải phóng cờ chờ của A và B
+        activate DB
+        DB-->>MatchSvc: 24. (AF-A-2) Xác nhận hủy
+        deactivate DB
+        MatchSvc->>SVA: 25. (AF-A-3) Thông báo tới A: "Lời mời chưa được chấp thuận"
+        deactivate MatchSvc
+        UI-->>SVB: 26. (AF-A-3) Xác nhận đóng yêu cầu thành công
+        deactivate UI
+    end
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="border-t border-slate-200 pt-1.5 flex justify-between items-center text-[9px] text-slate-400 font-mono">
+            <span>Dự án KTX Smart Match • Viện VNUK</span>
+            <span>Trang 01 / 02 - Sequence Diagram UC-05</span>
+        </div>
+    </div>
+
+    <!-- Trang 2: Sequence Diagrams UC-07 Thanh toán & UC-08 Trả phòng -->
+    <div class="page flex flex-col justify-between">
+        <div>
+            <!-- Sequence Diagram UC-07 -->
+            <div class="border-b border-slate-200 pb-2 mb-2">
+                <h2 class="text-xs font-black text-slate-900 uppercase mb-0.5 flex items-center gap-1.5">
+                    <span>💳</span> Sequence Diagram: Thanh toán viện phí & Tạo/In biên lai trực tiếp (UC-07)
+                </h2>
+                <div class="bg-slate-50 border border-slate-200 rounded-lg p-1.5">
+                    <div class="mermaid text-xs">
+sequenceDiagram
+    autonumber
+    actor SV as 🧑 Sinh viên
+    participant UI as 🖥️ Màn hình Thanh toán
+    participant PaySvc as 💳 Payment Service
+    participant VNPay as 🏦 Cổng VNPay
+    participant DB as 🗄️ Database KTX
+
+    SV->>UI: 1. (BF-1) Mở màn hình thanh toán tiền phòng & cọc 72h
+    activate UI
+    UI->>PaySvc: 2. (BF-2) Lấy bảng kê viện phí & đồng hồ đếm ngược 72h (BR-04)
+    activate PaySvc
+    PaySvc-->>UI: 3. (BF-2) Trả về bảng kê chi tiết (Tiền phòng + Cọc 2tr)
+    deactivate PaySvc
+
+    SV->>UI: 4. (BF-3) Xác nhận thanh toán qua VNPAY-QR
+    UI->>PaySvc: 5. (BF-4) Khởi tạo phiên giao dịch bảo mật (TLS 1.3)
+    activate PaySvc
+    PaySvc->>VNPay: 6. (BF-4) Tạo đơn hàng thanh toán & yêu cầu mã QR
+    activate VNPay
+    VNPay-->>UI: 7. (BF-4) Hiển thị mã VNPAY-QR động trên màn hình
+    deactivate VNPay
+    deactivate PaySvc
+
+    SV->>VNPay: 8. (BF-5) Quét mã QR trên App Mobile Banking & Nhập OTP trừ tiền
+    activate VNPay
+    VNPay-->>PaySvc: 9. (BF-5) Gửi webhook callback thanh toán thành công (vnp_ResponseCode = 00)
+    deactivate VNPay
+    activate PaySvc
+    
+    PaySvc->>DB: 10. (BF-6) Cập nhật trạng thái hợp đồng thành "Paid" & Khóa giường
+    activate DB
+    DB-->>PaySvc: 11. (BF-6) Xác nhận khóa chỗ thành công
+    deactivate DB
+
+    Note over PaySvc, UI: TẠO VÀ IN BIÊN LAI ĐIỆN TỬ TRỰC TIẾP TRONG LUỒNG CHÍNH (BF-7)
+    PaySvc->>PaySvc: 12. (BF-7) Sinh mã hóa đơn điện tử & Tạo file PDF Biên lai thu tiền
+    PaySvc-->>UI: 13. (BF-7) Trả về dữ liệu biên lai kèm nút "In biên lai" / "Tải PDF"
+    deactivate PaySvc
+
+    UI-->>SV: 14. (BF-8) Hiển thị thông báo nhận phòng thành công & cho phép In/Tải biên lai
+    deactivate UI
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sequence Diagram UC-08 -->
+            <div>
+                <h2 class="text-xs font-black text-slate-900 uppercase mb-0.5 flex items-center gap-1.5">
+                    <span>🚪</span> Sequence Diagram: Thủ tục Trả phòng & Quyết toán cọc Check-out (UC-08)
+                </h2>
+                <div class="bg-slate-50 border border-slate-200 rounded-lg p-1.5">
+                    <div class="mermaid text-xs">
+sequenceDiagram
+    autonumber
+    actor SV as 🧑 Sinh viên
+    actor Staff as 👨‍💼 Cán bộ KTX
+    participant UI as 🖥️ Cổng Quản trị / App KTX
+    participant CheckOutSvc as 📋 Check-out Service
+    participant DB as 🗄️ Database KTX
+    actor Fin as 👩‍💼 Kế toán KTX
+
+    SV->>UI: 1. (BF-1) Đăng ký lịch kiểm kê trả phòng trên cổng dịch vụ
+    activate UI
+    UI->>DB: 2. (BF-1) Lưu lịch hẹn kiểm tra phòng
+    deactivate UI
+
+    Staff->>UI: 3. (BF-2) Kiểm kê hiện trạng tài sản, nhập chỉ số điện nước & chi phí hư hại
+    activate UI
+    UI->>CheckOutSvc: 4. (BF-3, BF-4) Tính toán công nợ & Quyết toán hoàn cọc (Ref: BR-07)
+    activate CheckOutSvc
+    CheckOutSvc->>CheckOutSvc: 5. (BF-4) Tiền cọc hoàn = 2.000.000đ - (Nợ dịch vụ + Phí hư hại)
+    CheckOutSvc-->>UI: 6. (BF-5) Xuất bảng kê thanh lý hợp đồng điện tử
+    deactivate CheckOutSvc
+
+    UI-->>SV: 7. (BF-5) Hiển thị bảng kê số liệu quyết toán cọc
+    deactivate UI
+
+    SV->>Staff: 8. (BF-6) Bàn giao chìa khóa/thẻ từ phòng & Ký xác nhận thanh lý
+    Staff->>UI: 9. (BF-7) Nhấn "Xác nhận hoàn tất bàn giao phòng"
+    activate UI
+    UI->>DB: 10. (BF-8) Cập nhật hợp đồng "Closed" & Chuyển trạng thái giường thành "Vacant" (Trống)
+    activate DB
+    DB-->>UI: 11. (BF-8) Xác nhận giải phóng phòng thành công
+    deactivate DB
+    deactivate UI
+
+    Fin->>UI: 12. (BF-9) Duyệt lệnh chuyển tiền hoàn cọc về tài khoản ngân hàng của sinh viên
+    activate UI
+    UI-->>SV: 13. (BF-10) Gửi thông báo & email biên lai hoàn tiền cọc thành công
+    deactivate UI
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="border-t border-slate-200 pt-1.5 flex justify-between items-center text-[9px] text-slate-400 font-mono">
+            <span>Dự án KTX Smart Match • Viện VNUK</span>
+            <span>Trang 02 / 02 - Sequence Diagram UC-07 & UC-08</span>
+        </div>
+    </div>
+
+</body>
+</html>
