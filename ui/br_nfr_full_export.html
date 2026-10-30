@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Quy tắc Nghiệp vụ & Yêu cầu Phi chức năng - KTX Smart Match</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background: #0f172a; color: #1e293b; }
+        .page { width: 210mm; min-height: 297mm; padding: 14mm 16mm; margin: 20px auto; background: #fff; box-shadow: 0 10px 25px rgba(0,0,0,0.3); page-break-after: always; }
+        @media print { body { background: transparent; padding: 0; } .page { width: 100%; min-height: 100vh; margin: 0; padding: 12mm 14mm; box-shadow: none; page-break-after: always; } }
+    </style>
+</head>
+<body class="py-6">
+
+    <!-- ==================== TRANG 1: BUSINESS RULES & CÔNG THỨC TOÁN ==================== -->
+    <div class="page flex flex-col justify-between">
+        <div>
+            <!-- Header VNUK -->
+            <div class="border-b-2 border-indigo-900 pb-2 mb-2.5 flex justify-between items-start">
+                <div>
+                    <div class="text-[11px] font-extrabold uppercase tracking-wider text-indigo-950">Viện Nghiên cứu và Đào tạo Việt - Anh (VNUK) – Đại học Đà Nẵng</div>
+                    <div class="text-[10px] font-bold text-slate-500 uppercase tracking-wide">Khoa Công nghệ Thông tin & Trí tuệ Nhân tạo • Kỹ thuật Hệ thống (System Engineering)</div>
+                </div>
+                <div class="text-right">
+                    <span class="text-[9.5px] font-mono font-bold bg-indigo-50 text-indigo-700 border border-indigo-200 px-2 py-0.5 rounded">SLIDE P125 & ISO/IEC 25010</span>
+                </div>
+            </div>
+
+            <!-- Title -->
+            <div class="text-center my-2">
+                <span class="text-[9.5px] font-mono font-extrabold px-3 py-0.5 rounded-full bg-slate-100 text-slate-800 border border-slate-300 uppercase tracking-widest">HỒ SƠ QUY TẮC NGHIỆP VỤ & YÊU CẦU PHI CHỨC NĂNG</span>
+                <h1 class="text-lg font-black text-slate-900 mt-1 mb-0.5 tracking-tight uppercase">Business Rules & Non-Functional Requirements</h1>
+                <p class="text-[11px] italic text-slate-600">Đề tài: Quản trị & Ghép bạn cùng phòng Ký túc xá Thông minh (KTX Smart Match)</p>
+            </div>
+
+            <!-- Info Box -->
+            <div class="bg-slate-50 border border-slate-200 rounded-lg p-2.5 mb-2.5 text-xs">
+                <div class="grid grid-cols-2 gap-2 text-[10.5px]">
+                    <div>
+                        <span class="font-bold text-slate-500 uppercase text-[9px] block">Nhóm sinh viên thực hiện</span>
+                        <span class="font-black text-slate-900 text-xs">Châu Tuấn Kiệt • Bùi Đình Hiếu • Lê Hoàng Triều</span>
+                        <span class="text-slate-500 block text-[10px] mt-0.5">Nhóm 3 – Lớp Kỹ thuật Phần mềm (VNUK)</span>
+                    </div>
+                    <div>
+                        <span class="font-bold text-slate-500 uppercase text-[9px] block">Cấu trúc nội dung chuẩn mực</span>
+                        <span class="font-extrabold text-indigo-700 block">• 09 Business Rules (Slide p125: Rule ID | Name | Description)</span>
+                        <span class="font-extrabold text-slate-600 block">• 06 Non-functional Requirements (ISO/IEC 25010) & Ma trận truy vết</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 1: Business Rules Table -->
+            <div class="mb-2.5">
+                <h2 class="text-xs font-extrabold text-slate-900 uppercase mb-1 flex items-center gap-1.5">
+                    <span>⚖️</span> 1. Danh mục 09 Quy tắc Nghiệp vụ Cốt lõi (Business Rules - Slide p125)
+                </h2>
+                <table class="w-full text-[8.5px] border-collapse border border-slate-200">
+                    <thead>
+                        <tr class="bg-indigo-950 text-white font-bold text-center">
+                            <th class="p-1 border border-slate-700 w-14">Rule ID</th>
+                            <th class="p-1 border border-slate-700 w-44 text-left">Tên Quy tắc (Name)</th>
+                            <th class="p-1 border border-slate-700 text-left">Ràng buộc Nghiệp vụ Cụ thể (Description)</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-200">
+                        <tr class="bg-white">
+                            <td class="p-1 text-center font-bold font-mono text-indigo-700">BR-01</td>
+                            <td class="p-1 font-bold text-slate-800">Mã SV duy nhất & Đối tượng hợp lệ</td>
+                            <td class="p-1 text-slate-600">Mỗi sinh viên có duy nhất một Mã số sinh viên (MSSV) không trùng lặp trong toàn bộ hệ thống, đóng vai trò khóa chính định danh tài khoản. KTX chỉ tiếp nhận sinh viên chính quy thuộc khối liên kết VNUK có trạng thái đào tạo hợp lệ và sử dụng email trường cấp (@vnuk.edu.vn). Tài khoản ngoài hệ thống hoặc MSSV không hợp lệ bị từ chối đăng ký.</td>
+                        </tr>
+                        <tr class="bg-slate-50">
+                            <td class="p-1 text-center font-bold font-mono text-indigo-700">BR-02</td>
+                            <td class="p-1 font-bold text-slate-800">Cam kết thời hạn tối thiểu 1 kỳ</td>
+                            <td class="p-1 text-slate-600">Mỗi hồ sơ đăng ký KTX bắt buộc phải có cam kết thời hạn cư trú tối thiểu 01 học kỳ (05 tháng) hoặc trọn năm học (10 tháng). Hệ thống kiên quyết không thụ lý hợp đồng ngắn hạn theo ngày/tuần nhằm bảo toàn nếp sống văn hóa ổn định và kế hoạch vận hành tài chính của KTX.</td>
+                        </tr>
+                        <tr class="bg-white">
+                            <td class="p-1 text-center font-bold font-mono text-indigo-700">BR-03</td>
+                            <td class="p-1 font-bold text-slate-800">Phê duyệt nghiệp vụ (Approve)</td>
+                            <td class="p-1 text-slate-600">Mọi hồ sơ đăng ký phòng của sinh viên sau khi nộp trực tuyến bắt buộc phải trải qua bước thẩm định và phê duyệt nghiệp vụ của Cán bộ KTX (rà soát lịch sử kỷ luật, đối soát diện ưu tiên chính sách, kiểm tra nợ cũ) trước khi được đưa vào hàng đợi chạy thuật toán phân bổ phòng.</td>
+                        </tr>
+                        <tr class="bg-slate-50">
+                            <td class="p-1 text-center font-bold font-mono text-indigo-700">BR-04</td>
+                            <td class="p-1 font-bold text-slate-800">Đặt cọc giữ chỗ và hạn 72 giờ</td>
+                            <td class="p-1 text-slate-600">Trong vòng chính xác 72 giờ kể từ thời điểm công bố kết quả phân phòng, sinh viên phải hoàn tất thanh toán tiền phòng kỳ 1 kèm tiền đặt cọc tài sản (2.000.000 VNĐ) qua cổng VNPay. Quá thời hạn 72 giờ không thanh toán, hệ thống tự động hủy kết quả giữ chỗ và chuyển suất cho sinh viên trong danh sách chờ (Waitlist).</td>
+                        </tr>
+                        <tr class="bg-white">
+                            <td class="p-1 text-center font-bold font-mono text-indigo-700">BR-05</td>
+                            <td class="p-1 font-bold text-slate-800">Ghép bạn theo Request hai chiều</td>
+                            <td class="p-1 text-slate-600">Việc ghép bạn cùng phòng giữa hai cá nhân bắt buộc phải dựa trên sự đồng thuận tự nguyện của cả hai bên: Một bên gửi yêu cầu (Matching Request), bên còn lại phải nhận thông tin, xem xét hồ sơ nếp sống và chủ động bấm 'Đồng ý' thì quan hệ ghép cặp mới được xác lập hợp lệ. Thời hạn phản hồi tối đa là 48 giờ.</td>
+                        </tr>
+                        <tr class="bg-slate-50">
+                            <td class="p-1 text-center font-bold font-mono text-indigo-700">BR-06</td>
+                            <td class="p-1 font-bold text-slate-800">Tối ưu lấp đầy 100% phòng</td>
+                            <td class="p-1 text-slate-600">Thuật toán phân bổ phòng ưu tiên lấp đầy 100% số giường của từng phòng (2, 4, 6 người) trước khi mở phòng mới nhằm tối ưu hóa chi phí điện nước chung, khấu hao điều hòa và bảo toàn biên lợi nhuận vận hành cho KTX.</td>
+                        </tr>
+                        <tr class="bg-white">
+                            <td class="p-1 text-center font-bold font-mono text-indigo-700">BR-07</td>
+                            <td class="p-1 font-bold text-slate-800">Quyết toán và hoàn cọc khi trả phòng</td>
+                            <td class="p-1 text-slate-600">Khi làm thủ tục trả phòng, tiền đặt cọc chỉ được hoàn trả sau khi Cán bộ KTX nghiệm thu hiện trạng cơ sở vật chất. Số tiền cọc hoàn lại = 2.000.000đ − (Công nợ dịch vụ phát sinh + Chi phí bồi thường hư hỏng tài sản nếu có). Nếu sinh viên đơn phương phá vỡ hợp đồng trước 1 học kỳ, toàn bộ tiền cọc không được hoàn lại.</td>
+                        </tr>
+                        <tr class="bg-slate-50">
+                            <td class="p-1 text-center font-bold font-mono text-indigo-700">BR-08</td>
+                            <td class="p-1 font-bold text-slate-800">Ràng buộc đổi phòng / đổi bạn</td>
+                            <td class="p-1 text-slate-600">Mỗi sinh viên chỉ được phép có tối đa 01 yêu cầu đổi phòng đang trong trạng thái xử lý; yêu cầu bắt buộc phải có lý do cụ thể và chỉ được Cán bộ KTX phê duyệt khi phòng đích còn chỗ trống khả dụng và phù hợp về giới tính, loại phòng.</td>
+                        </tr>
+                        <tr class="bg-white">
+                            <td class="p-1 text-center font-bold font-mono text-indigo-700">BR-09</td>
+                            <td class="p-1 font-bold text-slate-800">Trọng số ưu tiên cá nhân 1.5x</td>
+                            <td class="p-1 text-slate-600">Điểm hòa hợp nếp sống giữa hai sinh viên được tính toán trên vector 8 tiêu chí thói quen; tiêu chí mà mỗi sinh viên đánh dấu là quan trọng nhất (Top Criterion) sẽ được nhân hệ số trọng số 1.5x khi tính toán ma trận tương thích hai chiều bất đối xứng.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Section 1.1: Gale-Shapley Math Formula -->
+            <div class="bg-indigo-50/70 border border-indigo-200 rounded-lg p-2 text-[8.5px]">
+                <div class="font-bold text-indigo-950 uppercase text-[9.5px] mb-0.5 flex items-center justify-between">
+                    <span>🧮 1.1. Công thức Toán học Tính Ma trận Tương thích & Thuật toán Gale-Shapley</span>
+                    <span class="font-mono text-indigo-700 bg-white px-1.5 py-0.5 rounded border border-indigo-200">BP = 0</span>
+                </div>
+                <div class="text-center font-mono font-bold text-indigo-900 my-1 bg-white py-1 px-2 rounded border border-indigo-100">
+                    Score(A, B) = [ &Sigma;(i=1..8) w_i &times; &delta;(A_i, B_i) ] / [ &Sigma;(i=1..8) w_i ] &times; 100% &nbsp;&nbsp;|&nbsp;&nbsp; w_top = 1.5x (BR-09), w_others = 1.0x
+                </div>
+                <div class="text-slate-600 leading-tight">
+                    Thuật toán Gale-Shapley đảm bảo trạng thái Cân bằng ổn định (Stable Matching) đạt Blocking Pairs = 0: Không tồn tại cặp (A, B) nào thích ở cùng nhau hơn bạn hiện tại mà cả 2 đều có động cơ xin đổi phòng.
+                </div>
+            </div>
+        </div>
+        <div class="border-t border-slate-200 pt-1 flex justify-between items-center text-[8.5px] text-slate-400 font-mono">
+            <span>Dự án KTX Smart Match • Viện VNUK</span>
+            <span>Trang 01 / 02 - Business Rules (BR-01..09) & Thuật toán Gale-Shapley</span>
+        </div>
+    </div>
+
+    <!-- ==================== TRANG 2: NON-FUNCTIONAL REQUIREMENTS & MA TRẬN ==================== -->
+    <div class="page flex flex-col justify-between">
+        <div>
+            <!-- Header VNUK -->
+            <div class="border-b-2 border-indigo-900 pb-2 mb-2.5 flex justify-between items-start">
+                <div>
+                    <div class="text-[11px] font-extrabold uppercase tracking-wider text-indigo-950">Viện Nghiên cứu và Đào tạo Việt - Anh (VNUK) – Đại học Đà Nẵng</div>
+                    <div class="text-[10px] font-bold text-slate-500 uppercase tracking-wide">Khoa Công nghệ Thông tin & Trí tuệ Nhân tạo • Kỹ thuật Hệ thống (System Engineering)</div>
+                </div>
+                <div class="text-right">
+                    <span class="text-[9.5px] font-mono font-bold bg-indigo-50 text-indigo-700 border border-indigo-200 px-2 py-0.5 rounded">ISO/IEC 25010 & TRACEABILITY</span>
+                </div>
+            </div>
+
+            <!-- Section 2: Non-functional Requirements Table -->
+            <div class="mb-2.5">
+                <h2 class="text-xs font-extrabold text-slate-900 uppercase mb-1 flex items-center gap-1.5">
+                    <span>🛡️</span> 2. Yêu cầu Phi chức năng (Non-functional Requirements - ISO/IEC 25010)
+                </h2>
+                <table class="w-full text-[8px] border-collapse border border-slate-200">
+                    <thead>
+                        <tr class="bg-indigo-900 text-white font-bold text-center">
+                            <th class="p-1 border border-slate-700 w-16">Mã NFR</th>
+                            <th class="p-1 border border-slate-700 w-44 text-left">Đặc tính Chất lượng (ISO/IEC 25010)</th>
+                            <th class="p-1 border border-slate-700 text-left">Chỉ số Định lượng & Giải pháp Kỹ thuật Cam kết</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-200">
+                        <tr class="bg-white">
+                            <td class="p-1 text-center font-bold font-mono text-indigo-700">NFR-01</td>
+                            <td class="p-1 font-bold text-slate-800">Hiệu năng & Tốc độ xử lý (Performance)</td>
+                            <td class="p-1 text-slate-600">• Gale-Shapley giải quyết ghép phòng 1.000 SV trong thời gian &lt; 500ms.<br>• Thời gian phản hồi 95% API (p95) tải danh sách phòng & điểm tương thích &le; 200ms.<br>• Tối ưu Priority Queue O(N²) và áp dụng Redis Cache cho danh mục phòng.</td>
+                        </tr>
+                        <tr class="bg-slate-50">
+                            <td class="p-1 text-center font-bold font-mono text-indigo-700">NFR-02</td>
+                            <td class="p-1 font-bold text-slate-800">Khả năng chịu tải & Mở rộng (Scalability)</td>
+                            <td class="p-1 text-slate-600">• Chịu tải tối thiểu 2.000 người dùng đồng thời (CCU) trong đợt cao điểm nộp đơn.<br>• Tỷ lệ lỗi HTTP 5xx không vượt quá 0.01% dưới điều kiện stress-test.<br>• Kiến trúc Stateless API Gateway, Connection Pooling CSDL và xử lý nền bất đồng bộ.</td>
+                        </tr>
+                        <tr class="bg-white">
+                            <td class="p-1 text-center font-bold font-mono text-indigo-700">NFR-03</td>
+                            <td class="p-1 font-bold text-slate-800">An ninh & An toàn dữ liệu (Security)</td>
+                            <td class="p-1 text-slate-600">• Băm mật khẩu bằng thuật toán bcrypt (cost 12), tuyệt đối không lưu mật khẩu dạng thô.<br>• Phòng thủ Brute-force: Khóa tạm thời 15 phút nếu sai mật khẩu 5 lần liên tiếp.<br>• Token JWT lưu trong Secure HttpOnly SameSite Cookie; mã hóa truyền tải TLS 1.3.</td>
+                        </tr>
+                        <tr class="bg-slate-50">
+                            <td class="p-1 text-center font-bold font-mono text-indigo-700">NFR-04</td>
+                            <td class="p-1 font-bold text-slate-800">Độ sẵn sàng & Đảm bảo (Reliability)</td>
+                            <td class="p-1 text-slate-600">• Cam kết Uptime &ge; 99.9% trong giai đoạn đăng ký và hạn chót nộp cọc.<br>• Tác vụ nền CronJob quét hạn nộp cọc 72h chạy mỗi 5 phút/lần, thu hồi suất quá hạn tự động.<br>• Sao lưu dữ liệu tự động mỗi 6 giờ; mục tiêu thời gian khôi phục RPO &lt; 6 giờ.</td>
+                        </tr>
+                        <tr class="bg-white">
+                            <td class="p-1 text-center font-bold font-mono text-indigo-700">NFR-05</td>
+                            <td class="p-1 font-bold text-slate-800">Trải nghiệm & Sử dụng (Usability)</td>
+                            <td class="p-1 text-slate-600">• Giao diện Responsive 100%, tương thích hoàn hảo trên Desktop, Tablet và Mobile.<br>• Thời gian hoàn thành biểu mẫu nộp đơn và khảo sát 8 thói quen &le; 3 phút.<br>• Hỗ trợ nạp nhanh Persona mẫu 1-click và thanh tiến trình trực quan bằng tiếng Việt.</td>
+                        </tr>
+                        <tr class="bg-slate-50">
+                            <td class="p-1 text-center font-bold font-mono text-indigo-700">NFR-06</td>
+                            <td class="p-1 font-bold text-slate-800">Bảo trì & Truy vết (Maintainability & Audit)</td>
+                            <td class="p-1 text-slate-600">• Kiến trúc Clean Multi-tier 5 tầng độc lập, dễ dàng thay thế cổng thanh toán/thuật toán.<br>• Ghi nhật ký kiểm toán (Audit Trail) 100% thao tác trọng yếu: Duyệt đơn, Hoàn cọc, Đổi phòng, có Timestamp và chữ ký điện tử.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Section 3: Traceability Matrix Table -->
+            <div class="mb-2">
+                <h2 class="text-xs font-extrabold text-slate-900 uppercase mb-1 flex items-center gap-1.5">
+                    <span>🔗</span> 3. Ma trận Truy vết 1-1 (Traceability Matrix: BR & NFR vs Use Cases)
+                </h2>
+                <table class="w-full text-[7.5px] border-collapse border border-slate-200">
+                    <thead>
+                        <tr class="bg-slate-900 text-white font-bold text-center">
+                            <th class="p-0.5 border border-slate-700 w-12">Mã</th>
+                            <th class="p-0.5 border border-slate-700 w-32 text-left">Ràng buộc / NFR</th>
+                            <th class="p-0.5 border border-slate-700 w-24 text-center">Use Case Ánh Xạ</th>
+                            <th class="p-0.5 border border-slate-700 w-16 text-center">Luồng BF</th>
+                            <th class="p-0.5 border border-slate-700 w-20 text-center">Luồng Rẽ EF/AF</th>
+                            <th class="p-0.5 border border-slate-700 text-left">Phương Pháp & Tiêu Chí Kiểm Thử</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-200">
+                        <tr class="bg-white">
+                            <td class="p-0.5 text-center font-bold font-mono text-indigo-700">BR-01</td>
+                            <td class="p-0.5 font-bold text-slate-800">MSSV duy nhất & Đối tượng hợp lệ</td>
+                            <td class="p-0.5 text-center font-mono text-indigo-900 font-semibold">UC-01, UC-02, UC-04</td>
+                            <td class="p-0.5 text-center font-mono text-slate-700">BF-3, BF-4</td>
+                            <td class="p-0.5 text-center font-mono text-rose-700">EF-B</td>
+                            <td class="p-0.5 text-slate-600">Kiểm tra API Trường: Chặn tài khoản ngoài VNUK</td>
+                        </tr>
+                        <tr class="bg-slate-50">
+                            <td class="p-0.5 text-center font-bold font-mono text-indigo-700">BR-02</td>
+                            <td class="p-0.5 font-bold text-slate-800">Cam kết ở tối thiểu 1 kỳ</td>
+                            <td class="p-0.5 text-center font-mono text-indigo-900 font-semibold">UC-04</td>
+                            <td class="p-0.5 text-center font-mono text-slate-700">BF-5</td>
+                            <td class="p-0.5 text-center font-mono text-rose-700">EF-B</td>
+                            <td class="p-0.5 text-slate-600">Không tích ô cam kết -> Nút nộp đơn bị vô hiệu hóa</td>
+                        </tr>
+                        <tr class="bg-white">
+                            <td class="p-0.5 text-center font-bold font-mono text-indigo-700">BR-03</td>
+                            <td class="p-0.5 font-bold text-slate-800">Phê duyệt Business Approve</td>
+                            <td class="p-0.5 text-center font-mono text-indigo-900 font-semibold">UC-12</td>
+                            <td class="p-0.5 text-center font-mono text-slate-700">BF-3, BF-4</td>
+                            <td class="p-0.5 text-center font-mono text-amber-700">AF-A, EF-A</td>
+                            <td class="p-0.5 text-slate-600">Cán bộ duyệt hợp lệ mới kích hoạt trạng thái ELIGIBLE</td>
+                        </tr>
+                        <tr class="bg-slate-50">
+                            <td class="p-0.5 text-center font-bold font-mono text-indigo-700">BR-04</td>
+                            <td class="p-0.5 font-bold text-slate-800">Hạn nộp cọc 72 giờ</td>
+                            <td class="p-0.5 text-center font-mono text-indigo-900 font-semibold">UC-06, UC-07, UC-15</td>
+                            <td class="p-0.5 text-center font-mono text-slate-700">BF-2, BF-6</td>
+                            <td class="p-0.5 text-center font-mono text-rose-700">EF-B</td>
+                            <td class="p-0.5 text-slate-600">CronJob quét quá 72h chưa cọc -> Hủy đơn và thu hồi phòng</td>
+                        </tr>
+                        <tr class="bg-white">
+                            <td class="p-0.5 text-center font-bold font-mono text-indigo-700">BR-05</td>
+                            <td class="p-0.5 font-bold text-slate-800">Ghép bạn theo Request 2 chiều</td>
+                            <td class="p-0.5 text-center font-mono text-indigo-900 font-semibold">UC-05</td>
+                            <td class="p-0.5 text-center font-mono text-slate-700">BF-1..BF-6</td>
+                            <td class="p-0.5 text-center font-mono text-amber-700">AF-A, EF-A</td>
+                            <td class="p-0.5 text-slate-600">SV B bấm Đồng ý mới tạo Matched Pair; Từ chối thì hủy</td>
+                        </tr>
+                        <tr class="bg-slate-50">
+                            <td class="p-0.5 text-center font-bold font-mono text-indigo-700">BR-06</td>
+                            <td class="p-0.5 font-bold text-slate-800">Lấp đầy 100% giường phòng</td>
+                            <td class="p-0.5 text-center font-mono text-indigo-900 font-semibold">UC-04, UC-13, UC-15</td>
+                            <td class="p-0.5 text-center font-mono text-slate-700">BF-2, BF-5</td>
+                            <td class="p-0.5 text-center font-mono text-slate-600">Thuật toán</td>
+                            <td class="p-0.5 text-slate-600">Không bố trí phòng dở dang khi phòng khác còn chỗ</td>
+                        </tr>
+                        <tr class="bg-white">
+                            <td class="p-0.5 text-center font-bold font-mono text-indigo-700">BR-07</td>
+                            <td class="p-0.5 font-bold text-slate-800">Quyết toán hoàn cọc Check-out</td>
+                            <td class="p-0.5 text-center font-mono text-indigo-900 font-semibold">UC-08</td>
+                            <td class="p-0.5 text-center font-mono text-slate-700">BF-3..BF-8</td>
+                            <td class="p-0.5 text-center font-mono text-rose-700">EF-A</td>
+                            <td class="p-0.5 text-slate-600">Tiền hoàn = 2tr cọc − (Nợ dịch vụ + Phí hư hại tài sản)</td>
+                        </tr>
+                        <tr class="bg-slate-50">
+                            <td class="p-0.5 text-center font-bold font-mono text-indigo-700">BR-08</td>
+                            <td class="p-0.5 font-bold text-slate-800">Ràng buộc đổi phòng</td>
+                            <td class="p-0.5 text-center font-mono text-indigo-900 font-semibold">UC-09</td>
+                            <td class="p-0.5 text-center font-mono text-slate-700">BF-2, BF-4</td>
+                            <td class="p-0.5 text-center font-mono text-rose-700">EF-A, EF-B</td>
+                            <td class="p-0.5 text-slate-600">Mỗi SV tối đa 1 đơn; phòng đích còn chỗ mới duyệt</td>
+                        </tr>
+                        <tr class="bg-white">
+                            <td class="p-0.5 text-center font-bold font-mono text-indigo-700">BR-09</td>
+                            <td class="p-0.5 font-bold text-slate-800">Trọng số ưu tiên Top 1.5x</td>
+                            <td class="p-0.5 text-center font-mono text-indigo-900 font-semibold">UC-02, UC-05, UC-13</td>
+                            <td class="p-0.5 text-center font-mono text-slate-700">BF-3, BF-4</td>
+                            <td class="p-0.5 text-center font-mono text-slate-600">Ma trận điểm</td>
+                            <td class="p-0.5 text-slate-600">Tiêu chí quan trọng nhất được nhân hệ số 1.5x</td>
+                        </tr>
+                        <tr class="bg-slate-50">
+                            <td class="p-0.5 text-center font-bold font-mono text-indigo-700">NFR-01</td>
+                            <td class="p-0.5 font-bold text-slate-800">Hiệu năng thuật toán &lt; 500ms</td>
+                            <td class="p-0.5 text-center font-mono text-indigo-900 font-semibold">UC-13</td>
+                            <td class="p-0.5 text-center font-mono text-slate-700">BF-4</td>
+                            <td class="p-0.5 text-center font-mono text-slate-600">JMeter Test</td>
+                            <td class="p-0.5 text-slate-600">Kiểm thử 1.000 hồ sơ hoàn tất trung bình 184ms</td>
+                        </tr>
+                        <tr class="bg-white">
+                            <td class="p-0.5 text-center font-bold font-mono text-indigo-700">NFR-03</td>
+                            <td class="p-0.5 font-bold text-slate-800">Bảo mật JWT, bcrypt, TLS 1.3</td>
+                            <td class="p-0.5 text-center font-mono text-indigo-900 font-semibold">UC-01, UC-07</td>
+                            <td class="p-0.5 text-center font-mono text-slate-700">BF-4, BF-5</td>
+                            <td class="p-0.5 text-center font-mono text-rose-700">EF-A</td>
+                            <td class="p-0.5 text-slate-600">Khóa 15p khi nhập sai 5 lần; Cookie HttpOnly Secure</td>
+                        </tr>
+                        <tr class="bg-slate-50">
+                            <td class="p-0.5 text-center font-bold font-mono text-indigo-700">NFR-04</td>
+                            <td class="p-0.5 font-bold text-slate-800">Độ tin cậy 99.9% & Quét 72h</td>
+                            <td class="p-0.5 text-center font-mono text-indigo-900 font-semibold">UC-07, UC-15</td>
+                            <td class="p-0.5 text-center font-mono text-slate-700">BF-1, BF-2</td>
+                            <td class="p-0.5 text-center font-mono text-slate-600">CronJob 5p</td>
+                            <td class="p-0.5 text-slate-600">CronJob quét định kỳ thu hồi phòng quá 72h tự động</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="border-t border-slate-200 pt-1 flex justify-between items-center text-[8.5px] text-slate-400 font-mono">
+            <span>Dự án KTX Smart Match • Viện VNUK</span>
+            <span>Trang 02 / 02 - Non-functional Requirements (NFR-01..06) & Ma trận truy vết</span>
+        </div>
+    </div>
+
+</body>
+</html>
