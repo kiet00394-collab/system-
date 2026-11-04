@@ -1,1 +1,247 @@
-<mxfile host="app.diagrams.net"><diagram name="Use Case KTX Smart Match" id="ktx-uc"><mxGraphModel dx="1600" dy="1000" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1900" pageHeight="1800" math="0" shadow="0"><root><mxCell id="0"/><mxCell id="1" parent="0"/><mxCell id="c2" value="" style="rounded=1;arcSize=2;whiteSpace=wrap;html=1;fillColor=#fcfcfc;strokeColor=#555555;strokeWidth=2;" vertex="1" parent="1"><mxGeometry x="170" y="140" width="1390" height="1400" as="geometry"/></mxCell><mxCell id="c3" value="Hệ thống Quản trị &amp; Ghép Bạn Cùng Phòng KTX (KTX Smart Match)" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;fontSize=18;fontStyle=1;align=right;" vertex="1" parent="1"><mxGeometry x="900" y="60" width="650" height="40" as="geometry"/></mxCell><mxCell id="c4" value="PHÂN HỆ SINH VIÊN" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;fontSize=13;fontStyle=1;fontColor=#1a73e8;" vertex="1" parent="1"><mxGeometry x="210" y="150" width="300" height="30" as="geometry"/></mxCell><mxCell id="c5" value="PHÂN HỆ QUẢN TRỊ &amp; VẬN HÀNH" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;fontSize=13;fontStyle=1;fontColor=#b45f06;" vertex="1" parent="1"><mxGeometry x="980" y="150" width="400" height="30" as="geometry"/></mxCell><mxCell id="c6" value="Sinh viên&lt;br&gt;(Người dùng)" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fontSize=12;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="60" y="790" width="40" height="80" as="geometry"/></mxCell><mxCell id="c7" value="Hệ thống SV Trường A&lt;br&gt;(Xác thực)" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fontSize=12;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="660" y="25" width="40" height="80" as="geometry"/></mxCell><mxCell id="c8" value="Cổng thanh toán VNPay&lt;br&gt;(Hệ thống ngoài)" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fontSize=12;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="660" y="1565" width="40" height="80" as="geometry"/></mxCell><mxCell id="c9" value="Quản trị viên KTX&lt;br&gt;(Admin)" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fontSize=12;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="1660" y="330" width="40" height="80" as="geometry"/></mxCell><mxCell id="c10" value="Cán bộ quản lý KTX&lt;br&gt;(Staff)" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fontSize=12;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="1660" y="690" width="40" height="80" as="geometry"/></mxCell><mxCell id="c11" value="Bộ phận kỹ thuật&lt;br&gt;/ Bảo trì" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fontSize=12;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="1660" y="860" width="40" height="80" as="geometry"/></mxCell><mxCell id="c12" value="Kế toán&lt;br&gt;(Tài chính)" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fontSize=12;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="1660" y="1010" width="40" height="80" as="geometry"/></mxCell><mxCell id="c13" value="Hệ thống&lt;br&gt;(System / Scheduler)" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fontSize=12;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="1660" y="1330" width="40" height="80" as="geometry"/></mxCell><mxCell id="c14" value="Đăng ký tài khoản &amp; khai báo thói quen sinh hoạt" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#1a73e8;fontSize=12;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="210" y="200" width="290" height="60" as="geometry"/></mxCell><mxCell id="c15" value="" style="endArrow=none;html=1;strokeColor=#444444;" edge="1" parent="1" source="c6" target="c14"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="c16" value="Đăng nhập / Quên mật khẩu" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#1a73e8;fontSize=12;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="210" y="300" width="290" height="60" as="geometry"/></mxCell><mxCell id="c17" value="" style="endArrow=none;html=1;strokeColor=#444444;" edge="1" parent="1" source="c6" target="c16"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="c18" value="Cập nhật hồ sơ &amp; thói quen sinh hoạt" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#1a73e8;fontSize=12;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="210" y="400" width="290" height="60" as="geometry"/></mxCell><mxCell id="c19" value="" style="endArrow=none;html=1;strokeColor=#444444;" edge="1" parent="1" source="c6" target="c18"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="c20" value="Chọn loại phòng, tiện ích &amp; nộp đơn KTX (cam kết ≥ 1 kỳ)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#1a73e8;fontSize=12;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="210" y="500" width="290" height="60" as="geometry"/></mxCell><mxCell id="c21" value="" style="endArrow=none;html=1;strokeColor=#444444;" edge="1" parent="1" source="c6" target="c20"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="c22" value="Xem bảng xếp hạng bạn cùng phòng" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#1a73e8;fontSize=12;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="210" y="600" width="290" height="60" as="geometry"/></mxCell><mxCell id="c23" value="" style="endArrow=none;html=1;strokeColor=#444444;" edge="1" parent="1" source="c6" target="c22"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="c24" value="Gửi / phản hồi lời mời ghép nhóm bạn quen" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#1a73e8;fontSize=12;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="210" y="700" width="290" height="60" as="geometry"/></mxCell><mxCell id="c25" value="" style="endArrow=none;html=1;strokeColor=#444444;" edge="1" parent="1" source="c6" target="c24"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="c26" value="Xem kết quả phân phòng &amp; thông tin phòng" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#1a73e8;fontSize=12;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="210" y="800" width="290" height="60" as="geometry"/></mxCell><mxCell id="c27" value="" style="endArrow=none;html=1;strokeColor=#444444;" edge="1" parent="1" source="c6" target="c26"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="c28" value="Yêu cầu đổi phòng / đổi bạn cùng phòng" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#1a73e8;fontSize=12;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="210" y="900" width="290" height="60" as="geometry"/></mxCell><mxCell id="c29" value="" style="endArrow=none;html=1;strokeColor=#444444;" edge="1" parent="1" source="c6" target="c28"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="c30" value="Gửi phản ánh &amp; báo sự cố" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#1a73e8;fontSize=12;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="210" y="1000" width="290" height="60" as="geometry"/></mxCell><mxCell id="c31" value="" style="endArrow=none;html=1;strokeColor=#444444;" edge="1" parent="1" source="c6" target="c30"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="c32" value="Xem thông báo" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#1a73e8;fontSize=12;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="210" y="1100" width="290" height="60" as="geometry"/></mxCell><mxCell id="c33" value="" style="endArrow=none;html=1;strokeColor=#444444;" edge="1" parent="1" source="c6" target="c32"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="c34" value="Đánh giá bạn cùng phòng cuối kỳ" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#1a73e8;fontSize=12;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="210" y="1200" width="290" height="60" as="geometry"/></mxCell><mxCell id="c35" value="" style="endArrow=none;html=1;strokeColor=#444444;" edge="1" parent="1" source="c6" target="c34"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="c36" value="Gia hạn / Trả phòng" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#1a73e8;fontSize=12;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="210" y="1300" width="290" height="60" as="geometry"/></mxCell><mxCell id="c37" value="" style="endArrow=none;html=1;strokeColor=#444444;" edge="1" parent="1" source="c6" target="c36"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="c38" value="Thanh toán tiền phòng &amp; cọc (72h)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#1a73e8;fontSize=12;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="210" y="1400" width="290" height="60" as="geometry"/></mxCell><mxCell id="c39" value="" style="endArrow=none;html=1;strokeColor=#444444;" edge="1" parent="1" source="c6" target="c38"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="c40" value="Xác thực SV Trường A (BR-01)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5f5e3;strokeColor=#2e9d57;dashed=1;fontSize=11;" vertex="1" parent="1"><mxGeometry x="570" y="250" width="235" height="46" as="geometry"/></mxCell><mxCell id="c41" value="«include»" style="endArrow=open;endFill=0;dashed=1;html=1;strokeColor=#0277bd;fontColor=#0277bd;fontSize=10;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="c14" target="c40"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="c42" value="«include»" style="endArrow=open;endFill=0;dashed=1;html=1;strokeColor=#0277bd;fontColor=#0277bd;fontSize=10;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="c16" target="c40"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="c43" value="" style="endArrow=none;html=1;strokeColor=#444444;" edge="1" parent="1" source="c7" target="c40"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="c44" value="Nạp hồ sơ mẫu Persona" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ead7fb;strokeColor=#8e44ad;dashed=1;fontSize=11;" vertex="1" parent="1"><mxGeometry x="570" y="405" width="235" height="46" as="geometry"/></mxCell><mxCell id="c45" value="«extend»" style="endArrow=open;endFill=0;dashed=1;html=1;strokeColor=#d6336c;fontColor=#d6336c;fontSize=10;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="c44" target="c18"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="c46" value="Tính điểm tương thích 2 chiều" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5f5e3;strokeColor=#2e9d57;dashed=1;fontSize=11;" vertex="1" parent="1"><mxGeometry x="570" y="570" width="235" height="46" as="geometry"/></mxCell><mxCell id="c47" value="«include»" style="endArrow=open;endFill=0;dashed=1;html=1;strokeColor=#0277bd;fontColor=#0277bd;fontSize=10;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="c22" target="c46"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="c48" value="Xem chi tiết tiêu chí" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ead7fb;strokeColor=#8e44ad;dashed=1;fontSize=11;" vertex="1" parent="1"><mxGeometry x="570" y="650" width="235" height="46" as="geometry"/></mxCell><mxCell id="c49" value="«extend»" style="endArrow=open;endFill=0;dashed=1;html=1;strokeColor=#d6336c;fontColor=#d6336c;fontSize=10;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="c48" target="c22"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="c50" value="Đính kèm lý do &amp; minh chứng" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ead7fb;strokeColor=#8e44ad;dashed=1;fontSize=11;" vertex="1" parent="1"><mxGeometry x="570" y="905" width="235" height="46" as="geometry"/></mxCell><mxCell id="c51" value="«extend»" style="endArrow=open;endFill=0;dashed=1;html=1;strokeColor=#d6336c;fontColor=#d6336c;fontSize=10;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="c50" target="c28"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="c52" value="Báo cáo xung đột / vi phạm nội quy" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ead7fb;strokeColor=#8e44ad;dashed=1;fontSize=11;" vertex="1" parent="1"><mxGeometry x="570" y="1205" width="235" height="46" as="geometry"/></mxCell><mxCell id="c53" value="«extend»" style="endArrow=open;endFill=0;dashed=1;html=1;strokeColor=#d6336c;fontColor=#d6336c;fontSize=10;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="c52" target="c34"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="c54" value="Tính phí &amp; hoàn cọc theo quy định" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5f5e3;strokeColor=#2e9d57;dashed=1;fontSize=11;" vertex="1" parent="1"><mxGeometry x="570" y="1305" width="235" height="46" as="geometry"/></mxCell><mxCell id="c55" value="«include»" style="endArrow=open;endFill=0;dashed=1;html=1;strokeColor=#0277bd;fontColor=#0277bd;fontSize=10;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="c36" target="c54"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="c56" value="Xử lý qua Cổng thanh toán VNPay" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5f5e3;strokeColor=#2e9d57;dashed=1;fontSize=11;" vertex="1" parent="1"><mxGeometry x="570" y="1395" width="235" height="46" as="geometry"/></mxCell><mxCell id="c57" value="«include»" style="endArrow=open;endFill=0;dashed=1;html=1;strokeColor=#0277bd;fontColor=#0277bd;fontSize=10;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="c38" target="c56"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="c58" value="" style="endArrow=none;html=1;strokeColor=#444444;" edge="1" parent="1" source="c8" target="c56"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="c59" value="Tải biên lai điện tử" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ead7fb;strokeColor=#8e44ad;dashed=1;fontSize=11;" vertex="1" parent="1"><mxGeometry x="570" y="1465" width="235" height="46" as="geometry"/></mxCell><mxCell id="c60" value="«extend»" style="endArrow=open;endFill=0;dashed=1;html=1;strokeColor=#d6336c;fontColor=#d6336c;fontSize=10;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="c59" target="c38"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="c61" value="Quản lý danh mục tòa, phòng &amp; giá" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#1a73e8;fontSize=12;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="980" y="200" width="300" height="60" as="geometry"/></mxCell><mxCell id="c62" value="" style="endArrow=none;html=1;strokeColor=#444444;" edge="1" parent="1" source="c9" target="c61"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="c63" value="Quản lý tài khoản &amp; phân quyền" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#1a73e8;fontSize=12;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="980" y="290" width="300" height="60" as="geometry"/></mxCell><mxCell id="c64" value="" style="endArrow=none;html=1;strokeColor=#444444;" edge="1" parent="1" source="c9" target="c63"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="c65" value="Quản lý dữ liệu sinh viên KTX" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#1a73e8;fontSize=12;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="980" y="380" width="300" height="60" as="geometry"/></mxCell><mxCell id="c66" value="" style="endArrow=none;html=1;strokeColor=#444444;" edge="1" parent="1" source="c9" target="c65"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="c67" value="Cấu hình trọng số tiêu chí &amp; luật ghép (BR)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#1a73e8;fontSize=12;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="980" y="490" width="300" height="60" as="geometry"/></mxCell><mxCell id="c68" value="" style="endArrow=none;html=1;strokeColor=#444444;" edge="1" parent="1" source="c9" target="c67"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="c69" value="Phê duyệt đơn KTX (Business Approve)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#1a73e8;fontSize=12;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="980" y="590" width="300" height="60" as="geometry"/></mxCell><mxCell id="c70" value="" style="endArrow=none;html=1;strokeColor=#444444;" edge="1" parent="1" source="c10" target="c69"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="c71" value="Điều chỉnh phân phòng thủ công (override)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#1a73e8;fontSize=12;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="980" y="690" width="300" height="60" as="geometry"/></mxCell><mxCell id="c72" value="" style="endArrow=none;html=1;strokeColor=#444444;" edge="1" parent="1" source="c10" target="c71"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="c73" value="Xử lý yêu cầu đổi phòng / đổi bạn" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#1a73e8;fontSize=12;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="980" y="780" width="300" height="60" as="geometry"/></mxCell><mxCell id="c74" value="" style="endArrow=none;html=1;strokeColor=#444444;" edge="1" parent="1" source="c10" target="c73"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="c75" value="Quản lý phản ánh &amp; sự cố" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#1a73e8;fontSize=12;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="980" y="870" width="300" height="60" as="geometry"/></mxCell><mxCell id="c76" value="" style="endArrow=none;html=1;strokeColor=#444444;" edge="1" parent="1" source="c10" target="c75"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="c77" value="" style="endArrow=none;html=1;strokeColor=#444444;" edge="1" parent="1" source="c11" target="c75"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="c78" value="Theo dõi &amp; đối soát thanh toán" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#1a73e8;fontSize=12;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="980" y="960" width="300" height="60" as="geometry"/></mxCell><mxCell id="c79" value="" style="endArrow=none;html=1;strokeColor=#444444;" edge="1" parent="1" source="c12" target="c78"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="c80" value="Báo cáo doanh thu &amp; lợi nhuận" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#1a73e8;fontSize=12;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="980" y="1060" width="300" height="60" as="geometry"/></mxCell><mxCell id="c81" value="" style="endArrow=none;html=1;strokeColor=#444444;" edge="1" parent="1" source="c12" target="c80"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="c82" value="" style="endArrow=none;html=1;strokeColor=#444444;" edge="1" parent="1" source="c9" target="c80"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="c83" value="Thực hiện ghép phòng tự động" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#1a73e8;fontSize=12;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="980" y="1190" width="300" height="60" as="geometry"/></mxCell><mxCell id="c84" value="" style="endArrow=none;html=1;strokeColor=#444444;" edge="1" parent="1" source="c13" target="c83"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="c85" value="Gửi thông báo &amp; nhắc hạn thanh toán" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#1a73e8;fontSize=12;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="980" y="1330" width="300" height="60" as="geometry"/></mxCell><mxCell id="c86" value="" style="endArrow=none;html=1;strokeColor=#444444;" edge="1" parent="1" source="c13" target="c85"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="c87" value="Tự động hủy đơn quá 72h &amp; xếp hàng chờ" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#1a73e8;fontSize=12;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="980" y="1430" width="300" height="60" as="geometry"/></mxCell><mxCell id="c88" value="" style="endArrow=none;html=1;strokeColor=#444444;" edge="1" parent="1" source="c13" target="c87"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="c89" value="Nạp dữ liệu từ file CSV" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ead7fb;strokeColor=#8e44ad;dashed=1;fontSize=11;" vertex="1" parent="1"><mxGeometry x="1330" y="350" width="200" height="46" as="geometry"/></mxCell><mxCell id="c90" value="«extend»" style="endArrow=open;endFill=0;dashed=1;html=1;strokeColor=#d6336c;fontColor=#d6336c;fontSize=10;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="c89" target="c65"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="c91" value="Sinh dữ liệu giả lập (Seed)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ead7fb;strokeColor=#8e44ad;dashed=1;fontSize=11;" vertex="1" parent="1"><mxGeometry x="1330" y="415" width="200" height="46" as="geometry"/></mxCell><mxCell id="c92" value="«extend»" style="endArrow=open;endFill=0;dashed=1;html=1;strokeColor=#d6336c;fontColor=#d6336c;fontSize=10;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="c91" target="c65"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="c93" value="Yêu cầu bổ sung hồ sơ / Từ chối đơn" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ead7fb;strokeColor=#8e44ad;dashed=1;fontSize=11;" vertex="1" parent="1"><mxGeometry x="1330" y="597" width="200" height="46" as="geometry"/></mxCell><mxCell id="c94" value="«extend»" style="endArrow=open;endFill=0;dashed=1;html=1;strokeColor=#d6336c;fontColor=#d6336c;fontSize=10;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="c93" target="c69"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="c95" value="Hoàn tiền / hoàn cọc" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ead7fb;strokeColor=#8e44ad;dashed=1;fontSize=11;" vertex="1" parent="1"><mxGeometry x="1330" y="967" width="200" height="46" as="geometry"/></mxCell><mxCell id="c96" value="«extend»" style="endArrow=open;endFill=0;dashed=1;html=1;strokeColor=#d6336c;fontColor=#d6336c;fontSize=10;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="c95" target="c78"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="c97" value="Xuất kết quả / báo cáo CSV" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ead7fb;strokeColor=#8e44ad;dashed=1;fontSize=11;" vertex="1" parent="1"><mxGeometry x="1330" y="1067" width="200" height="46" as="geometry"/></mxCell><mxCell id="c98" value="«extend»" style="endArrow=open;endFill=0;dashed=1;html=1;strokeColor=#d6336c;fontColor=#d6336c;fontSize=10;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="c97" target="c80"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="c99" value="Thuật toán Gale–Shapley" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5f5e3;strokeColor=#2e9d57;dashed=1;fontSize=11;" vertex="1" parent="1"><mxGeometry x="1330" y="1135" width="200" height="46" as="geometry"/></mxCell><mxCell id="c100" value="«include»" style="endArrow=open;endFill=0;dashed=1;html=1;strokeColor=#0277bd;fontColor=#0277bd;fontSize=10;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="c83" target="c99"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="c101" value="Đếm cặp chặn (Blocking Pairs)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5f5e3;strokeColor=#2e9d57;dashed=1;fontSize=11;" vertex="1" parent="1"><mxGeometry x="1330" y="1195" width="200" height="46" as="geometry"/></mxCell><mxCell id="c102" value="«include»" style="endArrow=open;endFill=0;dashed=1;html=1;strokeColor=#0277bd;fontColor=#0277bd;fontSize=10;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="c83" target="c101"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="c103" value="Tối ưu lấp đầy phòng (BR-05)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5f5e3;strokeColor=#2e9d57;dashed=1;fontSize=11;" vertex="1" parent="1"><mxGeometry x="1330" y="1255" width="200" height="46" as="geometry"/></mxCell><mxCell id="c104" value="«include»" style="endArrow=open;endFill=0;dashed=1;html=1;strokeColor=#0277bd;fontColor=#0277bd;fontSize=10;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="c83" target="c103"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="c105" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#999999;" vertex="1" parent="1"><mxGeometry x="170" y="1690" width="760" height="50" as="geometry"/></mxCell><mxCell id="c106" value="&lt;b&gt;Chú thích:&lt;/b&gt;" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;fontSize=11;" vertex="1" parent="1"><mxGeometry x="180" y="1700" width="80" height="30" as="geometry"/></mxCell><mxCell id="c107" value="Use case chính" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#1a73e8;fontSize=9;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="265" y="1702" width="100" height="26" as="geometry"/></mxCell><mxCell id="c108" value="Include" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5f5e3;strokeColor=#2e9d57;dashed=1;fontSize=9;" vertex="1" parent="1"><mxGeometry x="385" y="1702" width="70" height="26" as="geometry"/></mxCell><mxCell id="c109" value="Extend" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ead7fb;strokeColor=#8e44ad;dashed=1;fontSize=9;" vertex="1" parent="1"><mxGeometry x="475" y="1702" width="70" height="26" as="geometry"/></mxCell><mxCell id="c110" value="&lt;font color='#0277bd'&gt;- - ▷ «include» (bắt buộc)&lt;/font&gt;" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;fontSize=10;" vertex="1" parent="1"><mxGeometry x="565" y="1700" width="160" height="30" as="geometry"/></mxCell><mxCell id="c111" value="&lt;font color='#d6336c'&gt;- - ▷ «extend» (tùy điều kiện)&lt;/font&gt;" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;fontSize=10;" vertex="1" parent="1"><mxGeometry x="735" y="1700" width="190" height="30" as="geometry"/></mxCell></root></mxGraphModel></diagram></mxfile>
+<mxfile host="app.diagrams.net" modified="2026-11-04T20:30:00.000Z" agent="Antigravity" version="21.6.8" type="device">
+  <diagram id="KTX_Smart_Match_Clean" name="KTX Smart Match - Sơ đồ Use Case chuẩn 18 UC">
+    <mxGraphModel dx="1600" dy="1100" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1500" pageHeight="1150" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- ========================================== -->
+        <!-- PHÂN HỆ 1: PHÂN HỆ SINH VIÊN (TOP BOX)      -->
+        <!-- ========================================== -->
+        <mxCell id="box_student" value="HỆ THỐNG KTX SMART MATCH — PHÂN HỆ SINH VIÊN (11 USE CASES)" style="shape=rect;rounded=1;arcSize=3;fillColor=#F8FAFC;strokeColor=#0CA678;strokeWidth=2.5;fontStyle=1;fontSize=13;fontColor=#087F5B;align=center;verticalAlign=top;spacingTop=10;" vertex="1" parent="1">
+          <mxGeometry x="210" y="35" width="900" height="440" as="geometry" />
+        </mxCell>
+
+        <!-- CỘT 1: TÀI KHOẢN, NẾP SỐNG & NỘP ĐƠN (x=240) -->
+        <mxCell id="uc01" value="UC-01: Đăng nhập &amp; Xác thực hệ thống&#xa;(Tên/Email hoặc MSSV + Mật khẩu)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#E6FCF5;strokeColor=#0CA678;strokeWidth=1.5;fontStyle=1;fontSize=10.5;fontColor=#087F5B;" vertex="1" parent="1">
+          <mxGeometry x="240" y="75" width="260" height="65" as="geometry" />
+        </mxCell>
+
+        <mxCell id="uc02" value="UC-02: Đăng ký tài khoản &amp;&#xa;Khai báo nếp sống 8 tiêu chí" style="ellipse;whiteSpace=wrap;html=1;fillColor=#E6FCF5;strokeColor=#0CA678;strokeWidth=1.5;fontStyle=1;fontSize=10.5;fontColor=#087F5B;" vertex="1" parent="1">
+          <mxGeometry x="240" y="165" width="260" height="65" as="geometry" />
+        </mxCell>
+
+        <mxCell id="uc03" value="UC-03: Cập nhật hồ sơ &amp;&#xa;nếp sống sinh hoạt (hỗ trợ Persona)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#E6FCF5;strokeColor=#0CA678;strokeWidth=1.5;fontStyle=1;fontSize=10.5;fontColor=#087F5B;" vertex="1" parent="1">
+          <mxGeometry x="240" y="255" width="260" height="65" as="geometry" />
+        </mxCell>
+
+        <mxCell id="uc04" value="UC-04: Chọn loại phòng &amp;&#xa;Nộp đơn KTX (cam kết ≥ 1 kỳ)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#E6FCF5;strokeColor=#0CA678;strokeWidth=1.5;fontStyle=1;fontSize=10.5;fontColor=#087F5B;" vertex="1" parent="1">
+          <mxGeometry x="240" y="345" width="260" height="65" as="geometry" />
+        </mxCell>
+
+        <!-- CỘT 2: GHÉP BẠN HAI CHIỀU & PHÂN PHÒNG (x=530) -->
+        <mxCell id="uc05a" value="UC-05A: Gửi yêu cầu ghép bạn&#xa;cùng phòng (Send Matching Request)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#D3F9D8;strokeColor=#2B8A3E;strokeWidth=2;fontStyle=1;fontSize=10.5;fontColor=#2B8A3E;" vertex="1" parent="1">
+          <mxGeometry x="530" y="75" width="260" height="65" as="geometry" />
+        </mxCell>
+
+        <mxCell id="uc05c" value="UC-05C: Xem chi tiết hồ sơ &amp;&#xa;đối sánh nếp sống (Radar 8 thói quen)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#E7F5FF;strokeColor=#1C7ED6;strokeWidth=2;fontStyle=1;fontSize=10.5;fontColor=#1971C2;" vertex="1" parent="1">
+          <mxGeometry x="530" y="165" width="260" height="65" as="geometry" />
+        </mxCell>
+
+        <mxCell id="uc05b" value="UC-05B: Phản hồi yêu cầu ghép bạn&#xa;(Chỉ Đồng ý/Từ chối &amp; Gửi KTX)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#D3F9D8;strokeColor=#2B8A3E;strokeWidth=2;fontStyle=1;fontSize=10.5;fontColor=#2B8A3E;" vertex="1" parent="1">
+          <mxGeometry x="530" y="255" width="260" height="65" as="geometry" />
+        </mxCell>
+
+        <mxCell id="uc06" value="UC-06: Xem kết quả phân phòng &amp;&#xa;Thông tin viện phí lưu trú" style="ellipse;whiteSpace=wrap;html=1;fillColor=#E6FCF5;strokeColor=#0CA678;strokeWidth=1.5;fontStyle=1;fontSize=10.5;fontColor=#087F5B;" vertex="1" parent="1">
+          <mxGeometry x="530" y="345" width="260" height="65" as="geometry" />
+        </mxCell>
+
+        <!-- CỘT 3: TÀI CHÍNH, TRẢ PHÒNG & ĐỜI SỐNG (x=820) -->
+        <mxCell id="uc07" value="UC-07: Thanh toán tiền phòng &amp;&#xa;Đặt cọc 72h (Tạo &amp; In biên lai)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFF3BF;strokeColor=#F59F00;strokeWidth=2;fontStyle=1;fontSize=10.5;fontColor=#D9480F;" vertex="1" parent="1">
+          <mxGeometry x="820" y="75" width="260" height="65" as="geometry" />
+        </mxCell>
+
+        <mxCell id="uc08" value="UC-08: Thủ tục Trả phòng &amp;&#xa;Quyết toán cọc Check-out" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFE3E3;strokeColor=#E03131;strokeWidth=2;fontStyle=1;fontSize=10.5;fontColor=#C92A2A;" vertex="1" parent="1">
+          <mxGeometry x="820" y="165" width="260" height="65" as="geometry" />
+        </mxCell>
+
+        <mxCell id="uc09" value="UC-09: Yêu cầu chuyển phòng /&#xa;Chuyển bạn cùng phòng" style="ellipse;whiteSpace=wrap;html=1;fillColor=#E6FCF5;strokeColor=#0CA678;strokeWidth=1.5;fontStyle=1;fontSize=10.5;fontColor=#087F5B;" vertex="1" parent="1">
+          <mxGeometry x="820" y="255" width="260" height="65" as="geometry" />
+        </mxCell>
+
+        <mxCell id="uc10" value="UC-10: Gửi phản ánh dịch vụ &amp;&#xa;Báo hỏng cơ sở vật chất" style="ellipse;whiteSpace=wrap;html=1;fillColor=#E6FCF5;strokeColor=#0CA678;strokeWidth=1.5;fontStyle=1;fontSize=10.5;fontColor=#087F5B;" vertex="1" parent="1">
+          <mxGeometry x="820" y="345" width="260" height="65" as="geometry" />
+        </mxCell>
+
+        <!-- ========================================== -->
+        <!-- PHÂN HỆ 2: QUẢN TRỊ & VẬN HÀNH (BOTTOM BOX) -->
+        <!-- ========================================== -->
+        <mxCell id="box_admin" value="HỆ THỐNG KTX SMART MATCH — PHÂN HỆ QUẢN TRỊ &amp; VẬN HÀNH (7 USE CASES)" style="shape=rect;rounded=1;arcSize=3;fillColor=#F8FAFC;strokeColor=#1864AB;strokeWidth=2.5;fontStyle=1;fontSize=13;fontColor=#1864AB;align=center;verticalAlign=top;spacingTop=10;" vertex="1" parent="1">
+          <mxGeometry x="210" y="510" width="900" height="360" as="geometry" />
+        </mxCell>
+
+        <!-- CỘT 1: QUẢN TRỊ & XẾP PHÒNG (x=240) -->
+        <mxCell id="uc11" value="UC-11: Quản lý danh mục&#xa;tòa, phòng &amp; bảng giá" style="ellipse;whiteSpace=wrap;html=1;fillColor=#E7F5FF;strokeColor=#1C7ED6;strokeWidth=1.5;fontStyle=1;fontSize=10.5;fontColor=#1971C2;" vertex="1" parent="1">
+          <mxGeometry x="240" y="550" width="260" height="65" as="geometry" />
+        </mxCell>
+
+        <mxCell id="uc12" value="UC-12: Thẩm định &amp; Phê duyệt&#xa;đơn KTX (Business Approve +15đ)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFE3E3;strokeColor=#FA5252;strokeWidth=2;fontStyle=1;fontSize=10.5;fontColor=#C92A2A;" vertex="1" parent="1">
+          <mxGeometry x="240" y="645" width="260" height="65" as="geometry" />
+        </mxCell>
+
+        <mxCell id="uc13" value="UC-13: Khởi chạy Phân bổ phòng&#xa;Gale-Shapley (BP=0 &amp; Lấp đầy 100%)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#F3D9FA;strokeColor=#AE3EC9;strokeWidth=2.5;fontStyle=1;fontSize=10.5;fontColor=#862E9C;" vertex="1" parent="1">
+          <mxGeometry x="240" y="740" width="260" height="65" as="geometry" />
+        </mxCell>
+
+        <!-- CỘT 2: TÀI CHÍNH & THU HỒI 72H (x=530) -->
+        <mxCell id="uc14" value="UC-14: Theo dõi, đối soát&#xa;thanh toán &amp; Hoàn cọc" style="ellipse;whiteSpace=wrap;html=1;fillColor=#E7F5FF;strokeColor=#1C7ED6;strokeWidth=1.5;fontStyle=1;fontSize=10.5;fontColor=#1971C2;" vertex="1" parent="1">
+          <mxGeometry x="530" y="550" width="260" height="65" as="geometry" />
+        </mxCell>
+
+        <mxCell id="uc15" value="UC-15: Tự động hủy đơn quá 72h&#xa;&amp; Xếp hàng chờ Waitlist" style="ellipse;whiteSpace=wrap;html=1;fillColor=#E7F5FF;strokeColor=#1C7ED6;strokeWidth=1.5;fontStyle=1;fontSize=10.5;fontColor=#1971C2;" vertex="1" parent="1">
+          <mxGeometry x="530" y="645" width="260" height="65" as="geometry" />
+        </mxCell>
+
+        <mxCell id="uc16" value="UC-16: Báo cáo doanh thu, chi phí&#xa;&amp; Công suất lấp đầy phòng KTX" style="ellipse;whiteSpace=wrap;html=1;fillColor=#E7F5FF;strokeColor=#1C7ED6;strokeWidth=1.5;fontStyle=1;fontSize=10.5;fontColor=#1971C2;" vertex="1" parent="1">
+          <mxGeometry x="530" y="740" width="260" height="65" as="geometry" />
+        </mxCell>
+
+        <!-- CỘT 3: TÁC VỤ NỀN SCHEDULER GHÉP PHÒNG 48H (x=820) -->
+        <mxCell id="uc17" value="UC-17: Tự động hủy yêu cầu ghép quá 48h&#xa;&amp; Giải phóng cờ chờ (Scheduler)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFE3E3;strokeColor=#E03131;strokeWidth=2;fontStyle=1;fontSize=10.5;fontColor=#C92A2A;" vertex="1" parent="1">
+          <mxGeometry x="820" y="645" width="260" height="65" as="geometry" />
+        </mxCell>
+
+        <!-- ========================================== -->
+        <!-- ACTORS                                     -->
+        <!-- ========================================== -->
+        <!-- Sinh viên -->
+        <mxCell id="act_sv" value="Sinh viên&#xa;(Student)" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#D3F9D8;strokeColor=#2B8A3E;strokeWidth=2;fontStyle=1;fontSize=12;fontColor=#2B8A3E;" vertex="1" parent="1">
+          <mxGeometry x="60" y="200" width="60" height="110" as="geometry" />
+        </mxCell>
+
+        <!-- Quản trị viên -->
+        <mxCell id="act_admin" value="Quản trị viên&#xa;(Admin)" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#E7F5FF;strokeColor=#1971C2;strokeWidth=2;fontStyle=1;fontSize=12;fontColor=#1864AB;" vertex="1" parent="1">
+          <mxGeometry x="60" y="550" width="60" height="100" as="geometry" />
+        </mxCell>
+
+        <!-- Cán bộ KTX -->
+        <mxCell id="act_staff" value="Cán bộ KTX&#xa;(Staff)" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#FFE3E3;strokeColor=#E03131;strokeWidth=2;fontStyle=1;fontSize=12;fontColor=#C92A2A;" vertex="1" parent="1">
+          <mxGeometry x="60" y="710" width="60" height="100" as="geometry" />
+        </mxCell>
+
+        <!-- Cổng thanh toán VNPay -->
+        <mxCell id="act_vnpay" value="Cổng thanh toán&#xa;VNPay" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#FFF3BF;strokeColor=#F59F00;strokeWidth=2;fontStyle=1;fontSize=12;fontColor=#D9480F;" vertex="1" parent="1">
+          <mxGeometry x="1150" y="180" width="60" height="100" as="geometry" />
+        </mxCell>
+
+        <!-- Kế toán -->
+        <mxCell id="act_fin" value="Kế toán KTX&#xa;(Finance)" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#E7F5FF;strokeColor=#1971C2;strokeWidth=2;fontStyle=1;fontSize=12;fontColor=#1864AB;" vertex="1" parent="1">
+          <mxGeometry x="1150" y="550" width="60" height="100" as="geometry" />
+        </mxCell>
+
+        <!-- Hệ thống Scheduler -->
+        <mxCell id="act_sys" value="Hệ thống&#xa;(Scheduler Daemon)" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#F3D9FA;strokeColor=#AE3EC9;strokeWidth=2;fontStyle=1;fontSize=12;fontColor=#862E9C;" vertex="1" parent="1">
+          <mxGeometry x="1150" y="700" width="60" height="100" as="geometry" />
+        </mxCell>
+
+        <!-- ========================================== -->
+        <!-- EDGES / ASSOCIATIONS                       -->
+        <!-- ========================================== -->
+
+        <!-- Sinh viên -> Use cases phân hệ SV -->
+        <mxCell id="edge_sv_01" style="endArrow=none;html=1;strokeColor=#1971C2;strokeWidth=1.5;" edge="1" parent="1" source="act_sv" target="uc01">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_sv_02" style="endArrow=none;html=1;strokeColor=#1971C2;strokeWidth=1.5;" edge="1" parent="1" source="act_sv" target="uc02">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_sv_03" style="endArrow=none;html=1;strokeColor=#1971C2;strokeWidth=1.5;" edge="1" parent="1" source="act_sv" target="uc03">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_sv_04" style="endArrow=none;html=1;strokeColor=#1971C2;strokeWidth=1.5;" edge="1" parent="1" source="act_sv" target="uc04">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_sv_05a" style="endArrow=none;html=1;strokeColor=#2B8A3E;strokeWidth=2;" edge="1" parent="1" source="act_sv" target="uc05a">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_sv_05c" style="endArrow=none;html=1;strokeColor=#1C7ED6;strokeWidth=2;" edge="1" parent="1" source="act_sv" target="uc05c">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_sv_05b" style="endArrow=none;html=1;strokeColor=#2B8A3E;strokeWidth=2;" edge="1" parent="1" source="act_sv" target="uc05b">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_sv_06" style="endArrow=none;html=1;strokeColor=#1971C2;strokeWidth=1.5;" edge="1" parent="1" source="act_sv" target="uc06">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_sv_07" style="endArrow=none;html=1;strokeColor=#F59F00;strokeWidth=2;" edge="1" parent="1" source="act_sv" target="uc07">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_sv_08" style="endArrow=none;html=1;strokeColor=#E03131;strokeWidth=1.5;" edge="1" parent="1" source="act_sv" target="uc08">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_sv_09" style="endArrow=none;html=1;strokeColor=#1971C2;strokeWidth=1.5;" edge="1" parent="1" source="act_sv" target="uc09">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_sv_10" style="endArrow=none;html=1;strokeColor=#1971C2;strokeWidth=1.5;" edge="1" parent="1" source="act_sv" target="uc10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- VNPay -> UC-07, 14 -->
+        <mxCell id="edge_vnpay_07" style="endArrow=none;html=1;strokeColor=#F59F00;strokeWidth=2;" edge="1" parent="1" source="act_vnpay" target="uc07">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_vnpay_14" style="endArrow=none;html=1;strokeColor=#F59F00;strokeWidth=1.5;" edge="1" parent="1" source="act_vnpay" target="uc14">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Admin -> UC-11, 13, 16 -->
+        <mxCell id="edge_admin_11" style="endArrow=none;html=1;strokeColor=#495057;strokeWidth=1.5;" edge="1" parent="1" source="act_admin" target="uc11">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_admin_13" style="endArrow=none;html=1;strokeColor=#495057;strokeWidth=1.5;" edge="1" parent="1" source="act_admin" target="uc13">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_admin_16" style="endArrow=none;html=1;strokeColor=#495057;strokeWidth=1.5;" edge="1" parent="1" source="act_admin" target="uc16">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Staff -> UC-08, 09, 10, 12 -->
+        <mxCell id="edge_staff_08" style="endArrow=none;html=1;strokeColor=#E03131;strokeWidth=1.5;" edge="1" parent="1" source="act_staff" target="uc08">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_staff_09" style="endArrow=none;html=1;strokeColor=#E03131;strokeWidth=1.5;" edge="1" parent="1" source="act_staff" target="uc09">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_staff_10" style="endArrow=none;html=1;strokeColor=#E03131;strokeWidth=1.5;" edge="1" parent="1" source="act_staff" target="uc10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_staff_12" style="endArrow=none;html=1;strokeColor=#FA5252;strokeWidth=2;" edge="1" parent="1" source="act_staff" target="uc12">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Finance -> UC-08, 14, 16 -->
+        <mxCell id="edge_fin_08" style="endArrow=none;html=1;strokeColor=#2B8A3E;strokeWidth=1.5;" edge="1" parent="1" source="act_fin" target="uc08">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_fin_14" style="endArrow=none;html=1;strokeColor=#2B8A3E;strokeWidth=1.5;" edge="1" parent="1" source="act_fin" target="uc14">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_fin_16" style="endArrow=none;html=1;strokeColor=#2B8A3E;strokeWidth=1.5;" edge="1" parent="1" source="act_fin" target="uc16">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Scheduler -> UC-13, 15, 17 -->
+        <mxCell id="edge_sys_13" style="endArrow=none;html=1;strokeColor=#AE3EC9;strokeWidth=2;" edge="1" parent="1" source="act_sys" target="uc13">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_sys_15" style="endArrow=none;html=1;strokeColor=#AE3EC9;strokeWidth=1.5;" edge="1" parent="1" source="act_sys" target="uc15">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_sys_17" style="endArrow=none;html=1;strokeColor=#AE3EC9;strokeWidth=2;" edge="1" parent="1" source="act_sys" target="uc17">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- KHÉP KÍN VÒNG ĐỜI: Khi UC-05B Matched -> Chuyển dữ liệu sang Phân hệ Quản trị KTX -->
+        <mxCell id="edge_pair_to_ktx" value="&lt;&lt;include&gt;&gt;&#xa;Gửi dữ liệu cặp đôi sang KTX" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;strokeColor=#B45309;strokeWidth=2;fontColor=#B45309;fontSize=10;fontStyle=1;" edge="1" parent="1" source="uc05b" target="box_admin">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="660" y="475" />
+              <mxPoint x="660" y="510" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
